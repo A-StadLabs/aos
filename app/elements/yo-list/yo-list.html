@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="yo-list" attributes="firsttoken">
+  <template>
+    <h1 on-tap="{{getXHR}}">{{firsttoken}}</h1>
+    <core-ajax id="getProfile"></core-ajax>
+    <link rel="stylesheet" href="yo-list.css">
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        getXHR: function() {
+
+          console.log('clicked');
+
+          this.firsttoken = 'ce8caf54c10c878c4a88040cb5b22a3';
+
+          var ajax = this.$.getProfile;
+
+          ajax.url = 'http://172.19.2.178:8400/user/0.0.1/me';
+          ajax.headers = '{"Authorization": "Bearer ce8caf54c10c878c4a88040cb5b22a3"}';
+          ajax.method = 'get';
+          ajax.handleAs = 'JSON';
+          ajax.go();
+          console.log(resp);
+
+          
+          //ajax.headers = '{"Authorization": "Bearer "'+this.firsttoken+'"}';
+
+          // Dus ik doe een core-ajax call naar http://172.19.2.178:8400/user/0.0.1/me
+          // Header: Authorization: Bearer {{firsttoken}}
+          // Ik krijg terug? /me useroject beperkt userobject
+        },
+
+        handleResponse: function(){
+          console.log('dit doet iets>');
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>
