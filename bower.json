@@ -6,7 +6,9 @@
     "paper-elements": "Polymer/paper-elements#^0.4.0",
     "polymer": "Polymer/polymer#^0.4.0",
     "jso": "~2.0.0",
-    "app-router": "~2.0.2"
+    "app-router": "~2.0.2",
+    "flag-icon": "~0.7.1",
+    "notification-elements": "*"
   },
   "devDependencies": {
     "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.0"

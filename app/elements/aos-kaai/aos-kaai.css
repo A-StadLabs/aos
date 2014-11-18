@@ -82,6 +82,15 @@ h1 {
 	background-color: #333333;
 }
 
+#localisationpane {
+	display: block;
+	margin-left:auto; 
+	margin-right:18vw;
+	padding: 10px;
+	width: 5vw;
+	background-color: #333333;
+}
+
 #searchpane {
 	display: block;
 	margin-left:25vw; 

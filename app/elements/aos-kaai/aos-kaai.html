@@ -4,20 +4,11 @@
 <link rel="import" href="../../bower_components/core-dropdown/core-dropdown.html">
 <link rel="import" href="../../bower_components/core-input/core-input.html">
 <link rel="import" href="../../bower_components/core-field/core-field.html">
-<link rel="import" href="../../bower_components/core-menu/core-menu.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/flag-icon/flag-icon.html">
+<link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
-<!--
-Element providing solution to no problem in particular.
 
-##### Example
-
-    <aos-kaai bgcolor="transparent" environment="Gate 15"></aos-kaai>
-
-@element aos-kaai
-@blurb Element providing solution to no problem in particular.
-@status alpha
-@homepage http://polymerlabs.github.io/aos-kaai
--->
 <polymer-element name="aos-kaai" attributes="environment theme language">
 
   <template>
@@ -28,7 +19,7 @@ Element providing solution to no problem in particular.
 
     <core-toolbar horizontal start-justified layout>
       <core-icon-button icon="chevron-right"></core-icon-button>
-      <div class="environment">Stad Antwerpen</div>
+      <div class="environment">{{environment}}</div>
       <div horizontal center-justified layout>
         <core-field>
           <core-input placeholder="{{locplaceholder}}" autofocus flex class="searchclass"></core-input>
@@ -48,71 +39,63 @@ Element providing solution to no problem in particular.
 
     <template if="{{!userLoggedin}}">
 
+    <notification-elements id="notif" icon="http://www.daklozenhulpantwerpen.be/images/logos/antwerpen.gif" header="Antwerpen.be / E-Loket" body="Uw reispas ligt klaar aan de balie." duration="1"></notification-elements>
+
     <core-toolbar horizontal start-justified layout>
       <core-icon-button icon="chevron-right"></core-icon-button>
-      <div class="environment">Michael Thuy</div>
+      <div class="environment">{{environment}}</div>
       <div horizontal center-justified layout>
         <core-field>
           <core-input placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" autofocus flex class="searchclass"></core-input>
         </core-field>
       </div>
       <div class="tools" horizontal end-justified layout>
-        <core-icon-button icon="language" ></core-icon-button>
-        <core-icon-button icon="view-module"></core-icon-button>
-        <core-icon-button icon="account-circle" on-tap="{{toggleLogin}}"></core-icon-button>
-        <core-icon-button icon="help"></core-icon-button>
+      <core-selector id="toolsmenu" >
+        <core-icon-button id="btlang" icon="language"></core-icon-button>
+        <flag-icon key="Belgium"></flag-icon>
+        <core-icon-button id="btdock" icon="view-module"></core-icon-button>
+        <core-icon-button id="btaccount" icon="account-circle"></core-icon-button>
+        <core-icon-button id="bthelp" icon="help"></core-icon-button>
+      </core-selector>
       </div>
     </core-toolbar>
 
 
     <div id="paneBar">
 
-    <div id="aanmelden" hidden?="{{!loginPane}}">
-      <h1>{{locaanmelden}}</h1>
-      <core-input placeholder="{{locusername}}"></core-input>
-      <core-input placeholder="{{locpassword}}" type="password"></core-input>
-      <core-icon-button icon="done" flex>{{locaanmeldcta}}</core-icon-button><br />
-      <a href="#">{{locforgot}}</a><br />
-      <a href="#">{{locregister}}</a>
+      <div id="aanmelden" hidden?="{{!loginPane}}">
+        <h1>{{locaanmelden}}</h1>
+        <core-input placeholder="{{locusername}}"></core-input>
+        <core-input placeholder="{{locpassword}}" type="password"></core-input>
+        <core-icon-button icon="done" flex>{{locaanmeldcta}}</core-icon-button><br />
+        <a href="#">{{locforgot}}</a><br />
+        <a href="#">{{locregister}}</a>
+      </div>
+
+      <div id="searchpane" hidden?="{{!searchPane}}">
+        <h1>{{locsearchresult}} <i>{{searchValue}}</i>:</h1>
+      </div>
+
+      <div id="localisationpane" hidden?="{{!locPane}}">
+        <p>NL</p>
+        <p>EN</p>
+        <p>FR</p>
+        <p>DE</p>
+      </div>
+
     </div>
 
-    <div id="searchpane" hidden?="{{!searchPane}}">
-      <h1>{{locsearchresult}} <i>{{searchValue}}</i>:</h1>
-    </div>
-
-    </div>
-
-
-
-    
     </template>
 
   </template>
 
   <script>
 
-
     Polymer({
-      /**
-       * The `author` attribute sets an initial author
-       *
-       * @attribute author
-       * @type string
-       * @default 'Dimitri Glazkov'
-       */
-
-      author: 'King Flurkel',
-
-      /**
-       * `fancy` is a property that does something fancy.
-       *
-       * @property fancy
-       * @type bool
-       * @default false
-       */
-      fancy: false,
 
       ready: function() {
+
+        // Localisation voorlopig
         this.locusername = 'Gebruikersnaam';
         this.locsearch = 'Wat wil je vinden?';
         this.locpassword = 'Wachtwoord';
@@ -121,45 +104,41 @@ Element providing solution to no problem in particular.
         this.locforgot = 'Ik ben mijn gegevens vergeten';
         this.locregister = 'Ik heb nog geen A-profiel';
         this.locsearchresult = 'Zoekresultaten voor';
+
+        this.$.notif.notify();
+
+        // Toggle menu shit
+        this.$.toolsmenu.addEventListener('core-select', function(){
+          console.log('is selected');
+        });
       },
 
-      toggleLogin: function(){
+      closeAll: function(){
         this.loginPane = !this.loginPane;
-      },
-
-      toggleSearch: function(){
+        this.locPane = !this.locPane;
         this.searchPane = !this.searchPane;
       },
 
-      /**
-       * The `sayHello` method will return a greeting.
-       *
-       * @method sayHello
-       * @param {String} greeting Pass in a specific greeting.
-       * @return {String} Returns a string greeting.
-       */
-      sayHello: function(greeting) {
-        var response = greeting || 'Hello World!';
-        return 'aos-kaai says, ' + response;
+      toggleLogin: function(){
+        this.closeAll();
+        this.loginPane = !this.loginPane;
       },
 
-      /**
-       * The `aos-kaai-lasers-success` event is fired whenever we
-       * call fireLasers.
-       *
-       * @event aos-kaai-lasers-success
-       * @param {Object} detail
-       *   @param {string} detail.sound An amazing sound.
-       */
+      toggleLang: function(){
+        this.closeAll();
+        this.locPane = !this.locPane;
+      },
 
-      /**
-       * The `fireLasers` method will fire the lasers. At least
-       * it will dispatch an event that claims lasers were fired :)
-       *
-       * @method fireLasers
-       */
-      fireLasers: function() {
-        this.fire('aos-kaai-lasers-success', { sound: 'Pew pew pew!' });
+      toggleSearch: function(){
+        this.closeAll();
+        this.searchPane = !this.searchPane;
+      },
+
+      selectAction: function(e, detail) {
+        if (detail.isSelected) {
+          var selectedItem = detail.item;
+          console.log(selectedItem);
+        }
       }
 
     });
