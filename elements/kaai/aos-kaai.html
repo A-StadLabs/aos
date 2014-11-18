@@ -1,0 +1,100 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-toolbar/core-toolbar.html">
+<link rel="import" href="../core-icon-button/core-icon-button.html">
+<link rel="import" href="../core-dropdown/core-dropdown.html">
+<link rel="import" href="../core-input/core-input.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <aos-kaai></aos-kaai>
+
+@element aos-kaai
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage http://polymerlabs.github.io/aos-kaai
+-->
+<polymer-element name="aos-kaai" attributes="notitle author">
+
+  <template>
+
+    <link rel="stylesheet" href="aos-kaai.css" />
+
+    <core-toolbar>
+      <core-dropdown></core-dropdown>
+      <core-input flex></core-input>
+      <core-icon-button icon="arrow-forward"></core-icon-button>
+      <core-icon-button icon="menu"></core-icon-button>
+      <core-icon-button icon="search"></core-icon-button>
+    </core-toolbar>
+
+    <h1>Hello from aos-kaai</h1>
+    <content></content>
+
+  </template>
+
+  <script>
+
+    Polymer({
+      /**
+       * The `author` attribute sets an initial author
+       *
+       * @attribute author
+       * @type string
+       * @default 'Dimitri Glazkov'
+       */
+      author: 'King Flurkel',
+
+      /**
+       * `fancy` is a property that does something fancy.
+       *
+       * @property fancy
+       * @type bool
+       * @default false
+       */
+      fancy: false,
+
+      ready: function() {
+        // Ready is a lifecycle callback.
+        // You can do setup work in here.
+        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+      },
+
+      /**
+       * The `sayHello` method will return a greeting.
+       *
+       * @method sayHello
+       * @param {String} greeting Pass in a specific greeting.
+       * @return {String} Returns a string greeting.
+       */
+      sayHello: function(greeting) {
+        var response = greeting || 'Hello World!';
+        return 'aos-kaai says, ' + response;
+      },
+
+      /**
+       * The `aos-kaai-lasers-success` event is fired whenever we
+       * call fireLasers.
+       *
+       * @event aos-kaai-lasers-success
+       * @param {Object} detail
+       *   @param {string} detail.sound An amazing sound.
+       */
+
+      /**
+       * The `fireLasers` method will fire the lasers. At least
+       * it will dispatch an event that claims lasers were fired :)
+       *
+       * @method fireLasers
+       */
+      fireLasers: function() {
+        this.fire('aos-kaai-lasers-success', { sound: 'Pew pew pew!' });
+      }
+
+    });
+
+  </script>
+
+</polymer-element>
