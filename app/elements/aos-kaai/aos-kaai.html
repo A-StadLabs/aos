@@ -4,8 +4,14 @@
 <link rel="import" href="../../bower_components/core-dropdown/core-dropdown.html">
 <link rel="import" href="../../bower_components/core-input/core-input.html">
 <link rel="import" href="../../bower_components/core-field/core-field.html">
-<link rel="import" href="../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../bower_components/flag-icon/flag-icon.html">
+<link rel="import" href="../../bower_components/core-menu/core-menu.html">
+<link rel="import" href="../../bower_components/core-dropdown/core-dropdown.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/core-item/core-item.html">
+<link rel="import" href="../../bower_components/core-menu-button/core-menu-button.html">
+<link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../../bower_components/core-dropdown-menu/core-dropdown-menu.html">
 <link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
 
@@ -15,7 +21,7 @@
 
     <link rel="stylesheet" href="aos-kaai.css" />
 
-    <template if="{{userLoggedin}}">
+    <!-- <template if="{{userLoggedin}}">
 
     <core-toolbar horizontal start-justified layout>
       <core-icon-button icon="chevron-right"></core-icon-button>
@@ -35,28 +41,48 @@
       </div>
     </core-toolbar>
 
-    </template>
+    </template> -->
 
     <template if="{{!userLoggedin}}">
 
     <notification-elements id="notif" icon="http://www.daklozenhulpantwerpen.be/images/logos/antwerpen.gif" header="Antwerpen.be / E-Loket" body="Uw reispas ligt klaar aan de balie." duration="1"></notification-elements>
 
     <core-toolbar horizontal start-justified layout>
-      <core-icon-button icon="chevron-right"></core-icon-button>
-      <div class="environment">{{environment}}</div>
+      <div class="environment">
+      <core-dropdown-menu label="Environment">
+    <core-dropdown class="dropdown">
+        <core-selector selected="0">
+          <core-item label="Michael Thuy"></core-item>
+          <core-item label="Antwerpen.be"></core-item>
+          <core-item label="Wilrijk.be"></core-item>
+          <core-item label="Visit Antwerpen"></core-item>
+          <core-item label="Ondernemen"></core-item>
+        </core-selector>
+    </core-dropdown>
+</core-dropdown-menu></div>
       <div horizontal center-justified layout>
         <core-field>
           <core-input placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" autofocus flex class="searchclass"></core-input>
         </core-field>
       </div>
       <div class="tools" horizontal end-justified layout>
-      <core-selector id="toolsmenu" >
-        <core-icon-button id="btlang" icon="language" on-tap="{{closeAll}}"></core-icon-button>
-        <flag-icon key="Belgium"></flag-icon>
-        <core-icon-button id="btdock" icon="view-module"></core-icon-button>
-        <core-icon-button id="btaccount" icon="account-circle"></core-icon-button>
-        <core-icon-button id="bthelp" icon="help"></core-icon-button>
-      </core-selector>
+
+        <core-dropdown-menu label="Taal">
+          <core-dropdown class="dropdown">
+            <core-selector selected="0" id="lanselect" valueattr="label">
+              <core-item label="NL"></core-item>
+              <core-item label="FR"></core-item>
+              <core-item label="EN"></core-item>
+              <core-item label="DE"></core-item>
+            </core-selector>
+          </core-dropdown>
+        </core-dropdown-menu>
+
+        <core-icon-button label="knooppunt" id="btdock" icon="view-module"></core-icon-button>
+        
+        <core-icon-button label="profiel" id="btaccount" icon="account-circle" on-tap="{{openAuth}}"></core-icon-button>
+
+        <core-icon-button label="help" id="bthelp" icon="help"></core-icon-button>
       </div>
     </core-toolbar>
 
@@ -77,11 +103,13 @@
       </div>
 
       <div id="localisationpane" hidden?="{{!locPane}}">
-        <p>NL</p>
-        <p>EN</p>
-        <p>FR</p>
-        <p>DE</p>
+        <core-item label=""><flag-icon key="Netherlands"></flag-icon></core-item>
+        <core-item label=""><flag-icon key="France"></flag-icon></core-item>
+        <core-item label=""><flag-icon key="United Kingdom"></flag-icon></core-item>
+        <core-item label=""><flag-icon key="Germany"></flag-icon></core-item>
       </div>
+
+      
 
     </div>
 
@@ -91,9 +119,20 @@
 
   <script>
 
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
     Polymer({
 
       ready: function() {
+        var tokenn = getParameterByName('access_token');
+        if(tokenn){
+          console.log('hey! ',tokenn);
+        };
 
         // Localisation voorlopig
         this.locusername = 'Gebruikersnaam';
@@ -104,11 +143,16 @@
         this.locforgot = 'Ik ben mijn gegevens vergeten';
         this.locregister = 'Ik heb nog geen A-profiel';
         this.locsearchresult = 'Zoekresultaten voor';
-
-        // Toggle menu shit
-        this.$.toolsmenu.addEventListener('core-select', function(){
-          console.log('is selected');
+        //this.$.notif.notify();
+        this.$.lanselect.addEventListener('core-activate', function(e){
+          console.log(e.detail.item.label);
+          this.language = e.detail.item.label;
         });
+
+      },
+
+      openAuth: function(){
+        window.open("http://172.19.2.178:8400/authorize?scope=default&response_type=token&client_id=hvcEmR0bloR8lYUuU7QOkzk9M9Qa&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2F%3F", "myWindow", "scrollbars=yes, resizable=yes, width=400, height=570");
       },
 
       notificationChanged: function(){
@@ -116,7 +160,7 @@
       },
 
       closeAll: function(){
-        this.$.toolsmenu.selected = -1;
+        //this.$.toolsmenu.selected = -1;
       },
 
       toggleLogin: function(){

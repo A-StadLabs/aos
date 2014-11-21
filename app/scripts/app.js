@@ -1,6 +1,8 @@
 (function(document) {
   'use strict';
 
+
+
   document.addEventListener('polymer-ready', function() {
     // Perform some behaviour
     console.log('Polymer is ready to rock!');

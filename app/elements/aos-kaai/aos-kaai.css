@@ -1,10 +1,22 @@
 :host {
   display: block;
-  color: white;
+  color: gray;
   font-size: 11px;
   font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
   font-weight: 100;
   z-index: 999;
+}
+
+core-dropdown-menu {
+	background-color: #333333;
+}
+
+core-dropdown {
+	background-color: #333333;
+}
+
+core-selector {
+	background-color: #333333;
 }
 
 core-toolbar {
@@ -14,10 +26,10 @@ core-toolbar {
 	width: 100vw;
 }
 
-core-input {
-	text-align: center;
+.searchclass {
 	padding: 5px;
 	width: 50vw;
+	height: 2vh;
 	color: white;
 	background: #555555 url('https://cdn0.iconfinder.com/data/icons/essentials-3/512/685082-Search-24.png') no-repeat scroll 0px 0px;
 	background-position:right center;
@@ -40,10 +52,6 @@ core-input {
 a {
 	color: white;
 	text-decoration: none;
-}
-
-a::before {
-	content: '+ ';
 }
 
 h1 {
