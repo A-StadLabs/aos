@@ -15,6 +15,11 @@ core-dropdown {
 	background-color: #333333;
 }
 
+core-item {
+	background-color: #333333;
+	padding: 0px 10px 0px 10px;
+}
+
 core-selector {
 	background-color: #333333;
 }
@@ -27,7 +32,7 @@ core-toolbar {
 }
 
 .searchclass {
-	padding: 5px;
+	padding: 6px;
 	width: 50vw;
 	height: 2vh;
 	color: white;

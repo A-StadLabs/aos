@@ -51,12 +51,13 @@
       <div class="environment">
       <core-dropdown-menu label="Environment">
     <core-dropdown class="dropdown">
-        <core-selector selected="0">
-          <core-item label="Michael Thuy"></core-item>
+        <core-selector selected="0" id="envselect">
           <core-item label="Antwerpen.be"></core-item>
           <core-item label="Wilrijk.be"></core-item>
           <core-item label="Visit Antwerpen"></core-item>
+          <core-item label="Stedelijk Onderwijs"></core-item>
           <core-item label="Ondernemen"></core-item>
+          <core-item label="Oostende"></core-item>
         </core-selector>
     </core-dropdown>
 </core-dropdown-menu></div>
@@ -86,7 +87,6 @@
       </div>
     </core-toolbar>
 
-
     <div id="paneBar">
 
       <div id="aanmelden" hidden?="{{!loginPane}}">
@@ -108,9 +108,7 @@
         <core-item label=""><flag-icon key="United Kingdom"></flag-icon></core-item>
         <core-item label=""><flag-icon key="Germany"></flag-icon></core-item>
       </div>
-
-      
-
+  
     </div>
 
     </template>
@@ -126,12 +124,15 @@
       return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
+    var userobject;
+
     Polymer({
 
       ready: function() {
         var tokenn = getParameterByName('access_token');
         if(tokenn){
           console.log('hey! ',tokenn);
+
         };
 
         // Localisation voorlopig
@@ -149,10 +150,47 @@
           this.language = e.detail.item.label;
         });
 
+        this.$.envselect.addEventListener('core-activate', function(e){
+          console.log(e.detail.item.label);
+          this.environment = e.detail.item.label;
+          switch(this.environment){
+            case 'Antwerpen.be':
+              var loc = "https://www.antwerpen.be";
+              break;
+            case 'Wilrijk.be':
+              var loc = "http://www.wilrijk.be";
+              break;
+            case 'Visit Antwerpen':
+              var loc = "http://www.visitantwerpen.be/bzn.net?id=1464";
+              break;
+            case 'Ondernemen':
+              var loc = "http://www.ondernemeninantwerpen.be";
+              break;
+            case 'Oostende':
+              var loc = "http://www.oostende.be/";
+              break;
+            case 'Stedelijk Onderwijs':
+              var loc = "http://www.stedelijkonderwijs.be/";
+              break;
+
+
+              
+
+                   
+
+          }
+          
+          document.getElementById('canvas').src = loc;
+        });
+
       },
 
       openAuth: function(){
+        if(!userobject){
         window.open("http://172.19.2.178:8400/authorize?scope=default&response_type=token&client_id=hvcEmR0bloR8lYUuU7QOkzk9M9Qa&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2F%3F", "myWindow", "scrollbars=yes, resizable=yes, width=400, height=570");
+      } else {
+        this.loginPane = !this.loginPane;
+      }
       },
 
       notificationChanged: function(){
