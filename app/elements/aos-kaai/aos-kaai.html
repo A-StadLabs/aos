@@ -68,16 +68,22 @@
 
 
 
+
+
+
       <div horizontal center-justified layout>
-        <core-field>
+        <core-field  hidden?="{{bigSearchbar}}">
           <core-input placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" autofocus flex class="searchclass"></core-input><div id="searchloop" on-tap="{{toggleSearch}}"><img src="images/kaai-search-01.svg"></div>
         </core-field>
+
       </div>
+
+
 
 
       <div class="tools" horizontal end-justified layout>
 
-        <core-dropdown-menu label="Taal">
+        <core-dropdown-menu label="Taal" class="lan">
           <core-dropdown class="dropdown">
             <core-selector selected="0" id="lanselect" valueattr="label">
               <core-item label="NL"></core-item>
@@ -87,6 +93,9 @@
             </core-selector>
           </core-dropdown>
         </core-dropdown-menu>
+
+        <a href="/#/profiel" hidden?="{{smallSearchbar}}"><core-icon-button class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
+        </core-icon-button></a>
 
         <a href="/#/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
         </core-icon-button></a>
@@ -142,6 +151,16 @@
     Polymer({
 
       ready: function() {
+
+        this.bigSearchbar = false;
+        this.smallSearchbar = true;
+
+        if(window.innerWidth < 400){
+          this.bigSearchbar = true;
+          this.smallSearchbar = false;
+        };
+
+
         var tokenn = getParameterByName('access_token');
         if(tokenn){
           console.log('hey! ',tokenn);

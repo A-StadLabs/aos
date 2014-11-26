@@ -13,7 +13,6 @@ core-dropdown-menu {
 	font-size: 10px;
 	font-weight: 600;
 	color: #808080;
-
 }
 
 core-dropdown {
@@ -28,8 +27,7 @@ core-item {
 .dropdown {
 	background-color: #404040;
 	padding: 0px;
-	margin: -20px 0px 0px 0px;
-	min-width: 280px; 
+	margin: 0px;
 }
 
 
@@ -51,6 +49,7 @@ core-toolbar {
 	padding: 0px;
 	background-color: #333333;
 	width: 100vw;
+
 }
 
 
@@ -101,10 +100,38 @@ h1 {
 }
 
 
+.environment  /deep/ #label {
+	max-width: 8vw;
+}
+
+
+.environment /deep/ core-icon[role=img] {
+	min-width: 24px;
+}
+
+
+
+
+
+
 
 .tools {
 	width: 20vw;
+	min-width: 140px;
 }
+
+/*
+.lan  /deep/ #label {
+	width: 10px;
+}
+
+
+
+.lan /deep/ core-icon[role=img] {
+	visibility: hidden;
+}*/
+
+
 
 #paneBar {
 	width: 100%;
@@ -152,3 +179,11 @@ h1 {
 	width: 50vw;
 	background-color: #333333;
 }
+
+/*
+#collapse {
+	background-color: #333333;
+	width: 20vw;
+	min-width: 200px;
+	margin-left: 10vw;
+}*/
