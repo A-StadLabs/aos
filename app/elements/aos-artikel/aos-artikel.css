@@ -1,4 +1,5 @@
 :host {
   display: block;
   overflow: hidden;
+  margin: 0px auto;
 }
