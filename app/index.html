@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Entreprises Sponnet®</title>
+  <title>aOS</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -12,13 +12,17 @@
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild-->
   <script src="bower_components/platform/platform.js"></script>
-  <link rel="import" href="elements/aos-kaai/aos-kaai.html">
   <!-- endbuild-->
 </head>
 
 <body unresolved fullbleed>
   <aos-kaai theme="dark" language="nl"></aos-kaai>
-  <iframe id="canvas" style="margin-top: 0px; margin-bottom: 0px;" src="http://www.visitantwerpen.be/" width="100%" height="100%" frameborder="0"></iframe>
+
+  <app-router>
+    <app-route path="/" import="/apps/homescreen/homescreen.html"></app-route>
+  </app-router>
+
+  <!-- <iframe id="canvas" style="margin-top: 0px; margin-bottom: 0px;" src="" width="100%" height="100%" frameborder="0"></iframe> -->
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild-->
