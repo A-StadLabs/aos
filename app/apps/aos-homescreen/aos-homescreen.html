@@ -1,31 +1,41 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../bower_components/juicy-tile-list/dist/juicy-tile-list.html">
+<link rel="import" href="../../elements/aos-artikel/aos-artikel.html">
 
 <polymer-element name="aos-homescreen" attributes="">
 
-  <template>
+  <template bind id="temp">
 
 
     <link rel="stylesheet" href="aos-homescreen.css" />
-<core-ajax url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/20" method="GET" auto handleAs="json" response="{{resultaat}}"></core-ajax>
+<core-ajax url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/10" method="GET" auto handleAs="json" response="{{resultaat}}"></core-ajax>
+
+<juicy-tile-list setup="{{setup}}">  
   <template repeat="{{a in resultaat.data}}">
-   <h1> {{a.title}} </h1>
+    <aos-artikel class="artikel" object="{{a}}"></aos-artikel>
   </template>
+</juicy-tile-list>
   </template>
 
   <script>
-
-
 
     Polymer({
 
       ready: function() {
 
       	console.log('Homescreen app loaded.');
-        
+
+        this.$.temp.model = {
+            setup:{
+              height: 200,
+              heightAuto: true,
+              gutter: 20,
+              width: '33%',
+              }
+        };
 
         }
-
 
     });
 

@@ -9,7 +9,8 @@
     "flag-icon": "~0.7.1",
     "notification-elements": "*",
     "core-dropdown-menu": "Polymer/core-dropdown-menu#~0.5.1",
-    "core-menu-button": "Polymer/core-menu-button#~0.5.1"
+    "core-menu-button": "Polymer/core-menu-button#~0.5.1",
+    "juicy-tile-list": "~0.0.6"
   },
   "devDependencies": {
     "polymer-test-tools": "Polymer/polymer-test-tools#^0.5.1"
