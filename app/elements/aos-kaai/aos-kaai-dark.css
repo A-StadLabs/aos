@@ -21,9 +21,26 @@ core-dropdown {
 }
 
 core-item {
-	background-color: #333333;
-	padding: 0px 10px 0px 10px;
+/*	background-color: #333333;
+*/	padding: 0px 10px 0px 10px;
 }
+
+.dropdown {
+	background-color: #404040;
+	padding: 0px;
+	margin: -20px 0px 0px 0px;
+	min-width: 280px; 
+}
+
+
+.dropdown-taal {
+	background-color: #404040;
+	padding: 0px;
+	margin: 0px 0px 0px -280px;
+	min-width: 280px; 
+	text-align: right;
+}
+
 
 core-selector {
 	background-color: #333333;
@@ -57,19 +74,9 @@ core-toolbar {
 	background-color: #555555;
 	padding: 6px;
 	height: 18px;
+	width: 18px;
 }
 
-#aanmelden core-icon-button {
-	width: 160px;
-	color: white;
-	background-color: #209DC8;
-}
-
-#aanmelden core-input {
-	width: 165px;
-	margin-bottom: 5px;
-	background: #555555;
-}
 
 a {
 	color: white;
@@ -93,6 +100,8 @@ h1 {
 	width: 20vw;
 }
 
+
+
 .tools {
 	width: 20vw;
 }
@@ -109,8 +118,22 @@ h1 {
 	margin-right:5vw;
 	padding: 10px;
 	width: 200px;
-	background-color: #333333;
+	background-color: red;
 }
+
+
+#aanmelden core-icon-button {
+	width: 160px;
+	color: white;
+	background-color: #209DC8;
+}
+
+#aanmelden core-input {
+	width: 165px;
+	margin-bottom: 5px;
+	background: #555555;
+}
+
 
 #localisationpane {
 	display: block;
