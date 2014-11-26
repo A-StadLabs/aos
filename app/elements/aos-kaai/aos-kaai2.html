@@ -12,10 +12,10 @@
 <link rel="import" href="../../bower_components/core-menu-button/core-menu-button.html">
 <link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
 <link rel="import" href="../../bower_components/core-dropdown-menu/core-dropdown-menu.html">
-<!-- <link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html"> -->
+<link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html">
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
 
-<polymer-element name="aos-kaai" attributes="environment theme language notification">
+<polymer-element name="aos-kaai2" attributes="environment theme language notification">
 
   <template>
 
@@ -49,9 +49,7 @@
 
     <notification-elements id="notif" icon="http://www.daklozenhulpantwerpen.be/images/logos/antwerpen.gif" header="Antwerpen.be / E-Loket" body="Uw reispas ligt klaar aan de balie." duration="1"></notification-elements>
 
-    <core-toolbar horizontal center center-justified layout>
-
-
+    <core-toolbar horizontal center start-justified layout>
       <div class="environment">
       <core-dropdown-menu label="Environment">
     <core-dropdown class="dropdown">
@@ -67,10 +65,9 @@
 </core-dropdown-menu></div>
 
 
-
       <div horizontal center-justified layout>
         <core-field>
-          <core-input placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" autofocus flex class="searchclass"></core-input><div id="searchloop" on-tap="{{toggleSearch}}"><img src="images/kaai-search-01.svg"></div>
+          <core-input placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" autofocus flex class="searchclass"></core-input>
         </core-field>
       </div>
 
@@ -88,15 +85,11 @@
           </core-dropdown>
         </core-dropdown-menu>
 
-        <a href="/#/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
-        </core-icon-button></a>
+        <core-icon-button label="knooppunt" id="btdock" icon="view-module"></core-icon-button>
         
-        <a href="/#/profiel"><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel.svg">
-        </core-icon-button></a>
+        <core-icon-button label="profiel" id="btaccount" icon="account-circle" on-tap="{{openAuth}}"></core-icon-button>
 
-        <a href="/#/help"><core-icon-button class="kaaibtns" label="help" id="bthelp" src="images/kaai-help.svg">
-        </core-icon-button></a>
-
+        <core-icon-button label="help" id="bthelp" icon="help"></core-icon-button>
       </div>
     </core-toolbar>
 
