@@ -11,16 +11,19 @@
   <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild-->
-  <script src="bower_components/platform/platform.js"></script>
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="elements/elements.html">
+
   <!-- endbuild-->
 </head>
 
 <body unresolved fullbleed>
-  <aos-kaai theme="dark" language="nl"></aos-kaai>
+<!--   <aos-kaai theme="dark" language="nl"></aos-kaai>
+ -->  <aos-kaai></aos-kaai>
 
-  <app-router>
+<!--   <app-router>
     <app-route path="/" import="/apps/homescreen/homescreen.html"></app-route>
-  </app-router>
+  </app-router> -->
 
   <!-- <iframe id="canvas" style="margin-top: 0px; margin-bottom: 0px;" src="" width="100%" height="100%" frameborder="0"></iframe> -->
   <!-- build:js scripts/app.js -->
