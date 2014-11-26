@@ -49,7 +49,9 @@
 
     <notification-elements id="notif" icon="http://www.daklozenhulpantwerpen.be/images/logos/antwerpen.gif" header="Antwerpen.be / E-Loket" body="Uw reispas ligt klaar aan de balie." duration="1"></notification-elements>
 
-    <core-toolbar horizontal center start-justified layout>
+    <core-toolbar horizontal center center-justified layout>
+
+
       <div class="environment">
       <core-dropdown-menu label="Environment">
     <core-dropdown class="dropdown">
@@ -65,9 +67,10 @@
 </core-dropdown-menu></div>
 
 
+
       <div horizontal center-justified layout>
         <core-field>
-          <core-input placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" autofocus flex class="searchclass"></core-input>
+          <core-input placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" autofocus flex class="searchclass"></core-input><div id="searchloop" on-tap="{{toggleSearch}}"><img src="images/kaai-search-01.svg"></div>
         </core-field>
       </div>
 
@@ -85,11 +88,15 @@
           </core-dropdown>
         </core-dropdown-menu>
 
-        <core-icon-button label="knooppunt" id="btdock" icon="view-module"></core-icon-button>
+        <a href="/#/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
+        </core-icon-button></a>
         
-        <core-icon-button label="profiel" id="btaccount" icon="account-circle" on-tap="{{openAuth}}"></core-icon-button>
+        <a href="/#/profiel"><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel.svg">
+        </core-icon-button></a>
 
-        <core-icon-button label="help" id="bthelp" icon="help"></core-icon-button>
+        <a href="/#/help"><core-icon-button class="kaaibtns" label="help" id="bthelp" src="images/kaai-help.svg">
+        </core-icon-button></a>
+
       </div>
     </core-toolbar>
 

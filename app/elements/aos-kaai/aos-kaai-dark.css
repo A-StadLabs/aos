@@ -12,7 +12,7 @@ core-dropdown-menu {
 	text-transform: uppercase;
 	font-size: 10px;
 	font-weight: 600;
-	color: #8e8e8e;
+	color: #808080;
 
 }
 
@@ -36,14 +36,27 @@ core-toolbar {
 	width: 100vw;
 }
 
+
+.kaaibtns {
+	margin: 0px 5px 0px 5px;
+	padding: 0px;
+}
+
 .searchclass {
-	width: 50vw;
-	height: 30px;
+	padding: 6px;
+	width: 40vw;
+	height: 18px;
 	color: white;
-	background: #555555 url('https://cdn0.iconfinder.com/data/icons/essentials-3/512/685082-Search-24.png') no-repeat scroll 0px 0px;
+	background-color: #555555;
 	background-position:right center;
 	outline:0;
 	padding-right:30px;
+}
+
+#searchloop {
+	background-color: #555555;
+	padding: 6px;
+	height: 18px;
 }
 
 #aanmelden core-icon-button {
@@ -81,7 +94,7 @@ h1 {
 }
 
 .tools {
-	width: 30vw;
+	width: 20vw;
 }
 
 #paneBar {
