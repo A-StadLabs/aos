@@ -9,6 +9,11 @@
 
 core-dropdown-menu {
 	background-color: #333333;
+	text-transform: uppercase;
+	font-size: 10px;
+	font-weight: 600;
+	color: #8e8e8e;
+
 }
 
 core-dropdown {
@@ -25,16 +30,15 @@ core-selector {
 }
 
 core-toolbar {
-	height: 60px;
+	height: 50px;
 	padding: 0px;
 	background-color: #333333;
 	width: 100vw;
 }
 
 .searchclass {
-	padding: 6px;
 	width: 50vw;
-	height: 2vh;
+	height: 30px;
 	color: white;
 	background: #555555 url('https://cdn0.iconfinder.com/data/icons/essentials-3/512/685082-Search-24.png') no-repeat scroll 0px 0px;
 	background-position:right center;
