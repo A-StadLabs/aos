@@ -12,6 +12,10 @@
 <link rel="import" href="../../bower_components/core-menu-button/core-menu-button.html">
 <link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
 <link rel="import" href="../../bower_components/core-dropdown-menu/core-dropdown-menu.html">
+<link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../../bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
+
+
 <!-- <link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html"> -->
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
 
@@ -49,11 +53,16 @@
 
     <notification-elements id="notif" icon="http://www.daklozenhulpantwerpen.be/images/logos/antwerpen.gif" header="Antwerpen.be / E-Loket" body="Uw reispas ligt klaar aan de balie." duration="1"></notification-elements>
 
+
+
+  <core-header-panel condenses>
+
     <core-toolbar horizontal center center-justified layout>
 
 
-      <div class="environment">
-      <core-dropdown-menu label="Environment">
+      <div class="environment" horizontal layout >
+
+<!--       <core-dropdown-menu label="Environment">
     <core-dropdown class="dropdown">
         <core-selector selected="0" id="envselect">
           <core-item label="Antwerpen.be"></core-item>
@@ -64,11 +73,31 @@
           <core-item label="Oostende"></core-item>
         </core-selector>
     </core-dropdown>
-</core-dropdown-menu></div>
+</core-dropdown-menu>
+ -->
+
+
+ <core-dropdown-menu label="Taal" class="lan">
+          <core-dropdown class="dropdown">
+            <core-selector selected="0" id="lanselect" valueattr="label">
+              <core-item label="NL"></core-item>
+              <core-item label="FR"></core-item>
+              <core-item label="EN"></core-item>
+              <core-item label="DE"></core-item>
+            </core-selector>
+          </core-dropdown>
+        </core-dropdown-menu>
+
+        <a href="/#/help" class="helpbtn" ><core-icon-button label="help" id="bthelp" src="images/kaai-help.svg">
+        </core-icon-button></a>
+
+</div>
 
 
 
 
+
+        
 
 
       <div horizontal center-justified layout>
@@ -83,33 +112,25 @@
 
       <div class="tools" horizontal end-justified layout>
 
-        <core-dropdown-menu label="Taal" class="lan">
-          <core-dropdown class="dropdown">
-            <core-selector selected="0" id="lanselect" valueattr="label">
-              <core-item label="NL"></core-item>
-              <core-item label="FR"></core-item>
-              <core-item label="EN"></core-item>
-              <core-item label="DE"></core-item>
-            </core-selector>
-          </core-dropdown>
-        </core-dropdown-menu>
 
-        <a href="/#/profiel" hidden?="{{smallSearchbar}}"><core-icon-button class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
+        <a href="/#/profiel" hidden?="{{smallSearchbar}}"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
         </core-icon-button></a>
 
         <a href="/#/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
         </core-icon-button></a>
         
-        <a href="/#/profiel"><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel.svg">
+        <a href="/#/profiel"><core-icon-button  class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel2.svg">
         </core-icon-button></a>
 
-        <a href="/#/help"><core-icon-button class="kaaibtns" label="help" id="bthelp" src="images/kaai-help.svg">
-        </core-icon-button></a>
+
+
 
       </div>
     </core-toolbar>
+        </core-header-panel>
 
-    <div id="paneBar">
+
+ <!--    <div id="paneBar">
 
       <div id="aanmelden" hidden?="{{!loginPane}}">
         <h1>{{locaanmelden}}</h1>
@@ -132,7 +153,7 @@
       </div>
   
     </div>
-
+ -->
     </template>
 
   </template>
@@ -155,7 +176,7 @@
         this.bigSearchbar = false;
         this.smallSearchbar = true;
 
-        if(window.innerWidth < 400){
+        if(window.innerWidth < 401){
           this.bigSearchbar = true;
           this.smallSearchbar = false;
         };
@@ -257,6 +278,10 @@
 
     });
 
+
+ 
+
   </script>
+
 
 </polymer-element>

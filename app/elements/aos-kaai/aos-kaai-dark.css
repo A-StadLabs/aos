@@ -15,37 +15,49 @@ core-dropdown-menu {
 	color: #808080;
 }
 
+
+
+
+
 core-dropdown {
 	background-color: #333333;
 }
 
 core-item {
-/*	background-color: #333333;
-*/	padding: 0px 10px 0px 10px;
+	padding: 0px 14px 0px 18px;
 }
 
+core-scroll-header-panel {
+position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+}
+
+
+
+core-header-panel {
+
+  height: 100%;
+}
+
+
+
 .dropdown {
-	background-color: #404040;
+	background-color: #333333;
+	border-top: 1px solid #555555;
 	padding: 0px;
 	margin: 0px;
 }
-
-
-.dropdown-taal {
-	background-color: #404040;
-	padding: 0px;
-	margin: 0px 0px 0px -280px;
-	min-width: 280px; 
-	text-align: right;
-}
-
 
 core-selector {
 	background-color: #333333;
 }
 
 core-toolbar {
-	height: 50px;
+	height: 60px;
 	padding: 0px;
 	background-color: #333333;
 	width: 100vw;
@@ -53,8 +65,16 @@ core-toolbar {
 }
 
 
+
 .kaaibtns {
-	margin: 0px 5px 0px 5px;
+	margin: 0px 8px 0px 8px;
+	padding: 0px;
+
+}
+
+
+.helpbtn {
+	margin: 0px;
 	padding: 0px;
 }
 
@@ -96,41 +116,27 @@ h1 {
 }
 
 .environment {
-	width: 20vw;
+	width: 18vw;
+		min-width: 100px;
+
+}
+/*
+.environment /deep/ #label {
+	max-width: 20vw;
 }
 
 
-.environment  /deep/ #label {
-	max-width: 8vw;
+*/
+
+.lan {
+	margin: 0px 0px 0px 0px;
 }
-
-
-.environment /deep/ core-icon[role=img] {
-	min-width: 24px;
-}
-
-
-
-
-
 
 
 .tools {
-	width: 20vw;
+	width: 16vw;
 	min-width: 140px;
 }
-
-/*
-.lan  /deep/ #label {
-	width: 10px;
-}
-
-
-
-.lan /deep/ core-icon[role=img] {
-	visibility: hidden;
-}*/
-
 
 
 #paneBar {
@@ -179,11 +185,3 @@ h1 {
 	width: 50vw;
 	background-color: #333333;
 }
-
-/*
-#collapse {
-	background-color: #333333;
-	width: 20vw;
-	min-width: 200px;
-	margin-left: 10vw;
-}*/
