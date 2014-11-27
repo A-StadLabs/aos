@@ -15,10 +15,6 @@ core-dropdown-menu {
 	color: #808080;
 }
 
-
-
-
-
 core-dropdown {
 	background-color: #333333;
 }
@@ -27,21 +23,7 @@ core-item {
 	padding: 0px 14px 0px 18px;
 }
 
-core-scroll-header-panel {
-position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-}
 
-
-
-core-header-panel {
-
-  height: 100%;
-}
 
 
 
