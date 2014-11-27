@@ -1,12 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
-<link rel="import" href="../../bower_components/juicy-tile-list/dist/juicy-tile-list.html">
+<link rel="import" href="../../bower_components/juicy-tile-list/src/juicy-tile-list.html">
 <link rel="import" href="../../elements/aos-artikel/aos-artikel.html">
 <link rel="import" href="../../elements/aos-quickstart/aos-quickstart.html">
 
 <polymer-element name="aos-homescreen" attributes="">
 
-  <template bind>
+  <!-- <template bind> -->
+  <template if="{{setup}}">
 
     <link rel="stylesheet" href="aos-homescreen.css" />
 <!-- <core-ajax 
@@ -17,12 +18,12 @@ method="GET" auto handleAs="json" response="{{resultaat}}"></core-ajax> -->
   <aos-quickstart size="200"></aos-quickstart>
 
 <core-ajax 
-url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/20"
+url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/10"
 method="GET" 
 auto 
 handleAs="json" 
 response="{{resultaat}}"></core-ajax>
-<juicy-tile-list setup="{{setup}}">  
+<juicy-tile-list setup="{{setup}}" gap="20">  
   <template repeat="{{a in resultaat.data}}">
     <aos-artikel object="{{a}}" mode="short" class="item"></aos-artikel>
   </template>
@@ -53,50 +54,80 @@ response="{{resultaat}}"></core-ajax>
                         priority:0.5,// 0.6,
                         width: 400,
                         height: 600,
+                        heightAuto: true,                     
                         gutter: 4
                     },
                     {
                         index:1,
                         priority:0.8,// 0.9,
                         height: 600,
+                        heightAuto: true, 
                         width:200,gutter: 4
                     },
                     {
                         index:2,
                         priority:0.6,// 0.3,
                         height: 200,
+                        heightAuto: true, 
                         width: 400
                     },
                     {
                         index:3,
-                        priority:0.4,
+                        priority:0.9,
                         height: 300,
+                        heightAuto: true, 
                         width: 200
                     },
                     {
                         index:4,
                         priority:0.4,
                         height: 600,
+                        heightAuto: true, 
                         width: 400
                     },
                     {
                         index:5,
                         priority:0.4,
                         height: 300,
+                        heightAuto: true, 
                         width: 200
                     },
                     {
                         index:6,
                         priority:0.4,
                         height: 200,
+                        heightAuto: true, 
                         width: 400
                     },
                     {
                         index:7,
                         priority:0.4,
                         height: 400,
+                        heightAuto: true, 
                         width:400,
-                    }
+                    },
+                    {
+                        index:8,
+                        priority:0.4,
+                        height: 200,
+                        heightAuto: true, 
+                        width: 400
+                    },
+                    {
+                        index:9,
+                        priority:0.4,
+                        height: 200,
+                        heightAuto: true, 
+                        width: 400
+                    },
+                    {
+                        index:10,
+                        priority:0.4,
+                        height: 200,
+                        heightAuto: true, 
+                        width: 400
+                    },
+                    
                     // 
                     // 122
                     // 145
