@@ -9,9 +9,25 @@
 juicy-tile-list {
 	width: auto;
 	display: block;
-	padding: 0px;
-	margin: 20px auto 0px auto;
+	padding: 20px;
+	margin: 0px auto 0px auto;
 	background-color: transparent;
 	display: block;
 }
 
+.tip {
+	width: 300px;
+	height: 200px;
+	background-color: #D3D3D3;
+	color: white;
+	display: block;
+	border-radius: 10px;
+}
+
+.tip .container {
+	margin: 20px;
+}
+
+.tip h3 {
+	font-size: 1em;
+}
