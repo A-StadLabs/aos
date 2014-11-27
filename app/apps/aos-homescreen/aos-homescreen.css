@@ -1,23 +1,17 @@
 :host {
-	display: block;
-	margin-top: 50px !important;
+	display: inline-block;
 	min-width: 200px;
     width: 100%;
     margin: 0 auto;
+    background-color: #EBEBEB;
 }
 
 juicy-tile-list {
-	width: 100%;
+	width: auto;
 	display: block;
 	padding: 0px;
+	margin: 20px auto 0px auto;
 	background-color: transparent;
+	display: block;
 }
 
-aos-artikel {
-        background-color: white;
-/*        box-shadow:  0px 0px 10px 0px rgba(50, 50, 50, 0.75);
-*/        padding: 10px;
-        box-sizing: border-box;
-        margin-bottom: 10px;
-        margin-right:20px;
-  	}
