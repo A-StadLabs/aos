@@ -1,4 +1,7 @@
 :host {
-  display: block;
+  display: inline-block;
   background-color: #219DC7;
+  width: 100%;
+  color: white;
+  text-align: center;
 }

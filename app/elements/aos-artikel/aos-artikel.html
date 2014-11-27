@@ -5,23 +5,26 @@
   <template>
 
     <link rel="stylesheet" href="aos-artikel.css">
+  <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <template repeat="{{s in artikelMedia}}">
-      <img src="{{s.src}}/newsdetail_2columns" hidden?="{{!s.banner}}" /> 
+      <div class="box"><img src="{{s.src}}/newsdetail_2columns" hidden?="{{!s.banner}}" /></div>
     </template>
+    <div class="contents">
     <h3> {{object.title}} </h3> 
-    <small>{{object.creator.fullName}}</small>
-    <template is="juicy-html" content="{{ artikelIntro }}"></template>
+<!--     <small>{{object.creator.fullName}}</small>
+ -->    <template is="juicy-html" content="{{ artikelIntro }}"></template>
     <template if="{{ mode == 'long'}}" repeat="{{t in artikelCopy}}">
       <p>
       <template is="juicy-html" content="{{ t.text }}"></template></p>
     </template>
+    </div>
   </template>
   <script>
     (function () {
       'use strict';
 
-      
+
 
       Polymer({
         // define element prototype here
