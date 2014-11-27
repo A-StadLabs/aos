@@ -55,9 +55,8 @@
  -->
 
 
-<!--   <core-header-panel condenses>
- -->
-    <core-toolbar horizontal center center-justified layout fit>
+
+    <core-toolbar horizontal center center-justified layout fit class="{{ {gefocused: searchFocused } | tokenList}}">
 
 
       <div class="environment" horizontal layout >
@@ -102,7 +101,7 @@
 
       <div horizontal center-justified layout>
         <core-field  hidden?="{{bigSearchbar}}">
-          <core-input placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" autofocus flex class="searchclass"></core-input><div id="searchloop" on-tap="{{toggleSearch}}"><img src="images/kaai-search-01.svg"></div>
+          <input on-focus="{{handleFocus}}" on-blur="{{handleBlur}}" placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" flex class="searchclass"></input><div id="searchloop" on-tap="{{toggleSearch}}"><img src="images/kaai-search-01.svg"></div>
         </core-field>
 
       </div>
@@ -127,8 +126,7 @@
 
       </div>
     </core-toolbar>
-<!--         </core-header-panel>
- -->
+
 
  <!--    <div id="paneBar">
 
@@ -173,6 +171,8 @@
 
       ready: function() {
 
+                this.searchFocused = false;
+
         this.bigSearchbar = false;
         this.smallSearchbar = true;
 
@@ -190,7 +190,7 @@
 
         // Localisation voorlopig
         this.locusername = 'Gebruikersnaam';
-        this.locsearch = 'Wat wil je vinden?';
+        this.locsearch = 'Zoeken';
         this.locpassword = 'Wachtwoord';
         this.locaanmelden = 'Aanmelden met A-profiel';
         this.locaanmeldcta = 'Aanmelden';
@@ -203,38 +203,38 @@
           this.language = e.detail.item.label;
         });
 
-        this.$.envselect.addEventListener('core-activate', function(e){
-          console.log(e.detail.item.label);
-          this.environment = e.detail.item.label;
-          switch(this.environment){
-            case 'Antwerpen.be':
-              var loc = "https://www.antwerpen.be";
-              break;
-            case 'Wilrijk.be':
-              var loc = "https://www.wilrijk.be";
-              break;
-            case 'Visit Antwerpen':
-              var loc = "http://www.visitantwerpen.be/bzn.net?id=1464";
-              break;
-            case 'Ondernemen':
-              var loc = "http://www.ondernemeninantwerpen.be";
-              break;
-            case 'Oostende':
-              var loc = "http://www.oostende.be/";
-              break;
-            case 'Stedelijk Onderwijs':
-              var loc = "http://www.stedelijkonderwijs.be/";
-              break;
+        // this.$.envselect.addEventListener('core-activate', function(e){
+        //   console.log(e.detail.item.label);
+        //   this.environment = e.detail.item.label;
+        //   switch(this.environment){
+        //     case 'Antwerpen.be':
+        //       var loc = "https://www.antwerpen.be";
+        //       break;
+        //     case 'Wilrijk.be':
+        //       var loc = "https://www.wilrijk.be";
+        //       break;
+        //     case 'Visit Antwerpen':
+        //       var loc = "http://www.visitantwerpen.be/bzn.net?id=1464";
+        //       break;
+        //     case 'Ondernemen':
+        //       var loc = "http://www.ondernemeninantwerpen.be";
+        //       break;
+        //     case 'Oostende':
+        //       var loc = "http://www.oostende.be/";
+        //       break;
+        //     case 'Stedelijk Onderwijs':
+        //       var loc = "http://www.stedelijkonderwijs.be/";
+        //       break;
 
 
               
 
                    
 
-          }
+        //   }
           
-          document.getElementById('canvas').src = loc;
-        });
+        //   document.getElementById('canvas').src = loc;
+        // });
 
       },
 
@@ -244,6 +244,16 @@
       } else {
         this.loginPane = !this.loginPane;
       }
+      },
+
+      handleFocus: function(){
+        this.searchFocused = true;
+        console.log(this.searchFocused);
+      },
+
+      handleBlur: function(){
+        this.searchFocused = false;
+        console.log(this.searchFocused);
       },
 
       notificationChanged: function(){
