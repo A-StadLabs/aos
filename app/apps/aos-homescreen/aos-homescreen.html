@@ -4,7 +4,7 @@
 <link rel="import" href="../../elements/aos-artikel/aos-artikel.html">
 <link rel="import" href="../../elements/aos-quickstart/aos-quickstart.html">
 
-<polymer-element name="aos-homescreen" attributes="">
+<polymer-element name="aos-homescreen" attributes="setup">
 
   <!-- <template bind> -->
   <template if="{{setup}}">
@@ -22,7 +22,7 @@ url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/10"
 method="GET" 
 auto 
 handleAs="json" 
-response="{{resultaat}}"></core-ajax>
+response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
 <juicy-tile-list setup="{{setup}}" gap="20" id="jlist"> 
   <template if="{{tips}}">
   <div class="tip">
@@ -34,7 +34,7 @@ response="{{resultaat}}"></core-ajax>
   </div>
   </template>
   <template repeat="{{a in resultaat.data}}">
-    <aos-artikel object="{{a}}" mode="short" class="item"></aos-artikel>
+    <aos-artikel object="{{a}}" mode="short" class="item" id="artikel"></aos-artikel>
   </template>
 </juicy-tile-list>
   </template>
@@ -43,140 +43,39 @@ response="{{resultaat}}"></core-ajax>
 
     Polymer({
 
-      hideTips: function(){
-        //var that = this;
-        console.log('wtf?');
-        this.tips = false;
-        this.$.jlist.refresh();
-      },
-
       ready: function() {
        
         this.tips = true;
 
       	console.log('Homescreen app loaded.');
 
-        this.setup = {
-                gutter: 20,
-                items:[
-                    // 011
-                    // 233
-                    // 2
-                    // prioritized
-                    // 
-                    // 110
-                    // 233
-                    // 2
-                    {
-                        index:0,
-                        priority:0.9,// 0.6,
-                        width: 300,
-                        height: 200,
-                        heightAuto: true
-                    },
-                    {
-                        index:1,
-                        priority:0.4,// 0.9,
-                        width: 300,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:2,
-                        priority:0.4,// 0.3,
-                        width: 200,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:3,
-                        priority:0.4,
-                        width: 300,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:4,
-                        priority:0.4,
-                        width: 300,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:5,
-                        priority:0.4,
-                        width: 200,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:6,
-                        priority:0.4,
-                        width: 300,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:7,
-                        priority:0.4,
-                        width: 300,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:8,
-                        priority:0.4,
-                        width: 200,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:9,
-                        priority:0.4,
-                        width: 300,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:10,
-                        priority:0.4,
-                        width: 300,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    {
-                        index:11,
-                        priority:0.4,
-                        width: 300,
-                        height: 400,
-                        heightAuto: true
-                    },
-                    
-                    // 
-                    // 122
-                    // 145
-                    // 333
-                    // 
-                    // {
-                    //   width: 400,
-                    //   height: 2
-                    // }, {
-                    //   width: 400,
-                    //   height:  100
-                    // }, {
-                    //   width: 600,
-                    //   height:  100
-                    // }, {
-                    //   width: 300,
-                    //   height:  100
-                    // }, {
-                    //   width: 200,
-                    //   height:  100
-                    // }
-                ]
-            }
+        var i = 0;
+        var items = [];
+        this.setup = {gutter: 20, items:[]};
+        
+        document.addEventListener('addToFeed', function(e){
+            items.push({index:i, priority:0.9, width: 300, heightAuto: true});
+            this.setup = { gutter: 20, items:items};
+            i++;
+            console.log(JSON.stringify(this.setup));
+        });
 
-        }
+        },
+
+        hideTips: function(){
+        //var that = this;
+        console.log('wtf?');
+        this.tips = false;
+        this.$.jlist.refresh();
+      },
+
+      handleResponse: function(){
+        console.log('response changed');
+      },
+
+      setupChanged: function(){
+        console.log('setup changed');
+      }
 
     });
 

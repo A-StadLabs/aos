@@ -240,15 +240,16 @@
 
       openAuth: function(){
         if(!userobject){
-        window.open("http://172.19.2.178:8400/authorize?scope=default&response_type=token&client_id=hvcEmR0bloR8lYUuU7QOkzk9M9Qa&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2F%3F", "myWindow", "scrollbars=yes, resizable=yes, width=400, height=570");
-      } else {
-        this.loginPane = !this.loginPane;
-      }
+          window.open("http://172.19.2.178:8400/authorize?scope=default&response_type=token&client_id=hvcEmR0bloR8lYUuU7QOkzk9M9Qa&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2F%3F", "myWindow", "scrollbars=yes, resizable=yes, width=400, height=570");
+        } else {
+          this.loginPane = !this.loginPane;
+        }
       },
 
       handleFocus: function(){
         this.searchFocused = true;
         console.log(this.searchFocused);
+        location.href('/#/search');
       },
 
       handleBlur: function(){
