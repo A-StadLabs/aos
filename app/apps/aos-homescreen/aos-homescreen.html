@@ -51,7 +51,7 @@ response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
 
         var i = 0;
         var items = [];
-        this.setup = {gutter: 20, items:[]};
+        this.setup = {gutter: 20, items:items};
         
         document.addEventListener('addToFeed', function(e){
             items.push({index:i, priority:0.9, width: 300, heightAuto: true});
