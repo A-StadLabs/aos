@@ -1,41 +1,24 @@
 :host {
   display: block;
-  width: 100vw;
-/*  background-color: #219DC7;*/
-  background-color: rgba(0,0,0,0.1);
 }
-
-
-
-h1 {
-	color: red;
-	margin: 0px;
-}
-
-
-#container {
-	width: 80vw;
-  	height: 100%;
-	margin: 0vw 10vw 0vw 10vw;
-}
-
-
 
 #startbtns {
-	margin: 20px 0px 20px 0px;
+		width: 100vw;
+		background-color: #219dc8;
+
 }
 
 
 
 
 .startbtn {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 300;
 	color: rgba(255,255,255,1);
-	margin: 0px 15px 0px 0px;
-	background-color: rgba(255,255,255,0.05);
-	padding: 6px 20px 6px 20px;
-	min-width: 210px;
+/*	margin: 0px 15px 0px 0px;
+	background-color: rgba(255,255,255,0.05);*/
+	padding: 0.5vw 20px 0.5vw 20px;
+	min-width: 220px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
