@@ -23,8 +23,17 @@ method="GET"
 auto 
 handleAs="json" 
 response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
+
+<core-ajax 
+url="https://services.antwerpen.be/api/user/0.0.1/me"
+method="GET" 
+auto 
+headers='{"Authorization": "Bearer 3848a4daa5474e6d6a90114308ac797"}'
+handleAs="json" 
+response="{{userresult}}" on-core-response="{{handleResponseUser}}"></core-ajax>
+<h1>Hi there, {{userresult.data.first_name}} {{userresult.data.last_name}}.</h1>
 <juicy-tile-list setup="{{setup}}" gap="20" id="jlist"> 
-  <template if="{{tips}}">
+  <!-- <template if="{{tips}}">
   <div class="tip">
     <div class="container">
     <core-icon-button icon="close" on-tap="{{hideTips}}"><small>niet meer weergeven</small></core-icon-button>
@@ -32,7 +41,7 @@ response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
     <core-icon-button icon="arrow-forward">Ga naar mijn instellingen</core-icon-button>
     </div>
   </div>
-  </template>
+  </template> -->
   <template repeat="{{a in resultaat.data}}">
     <aos-artikel object="{{a}}" mode="short" class="item" id="artikel"></aos-artikel>
   </template>
@@ -49,12 +58,12 @@ response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
 
       	console.log('Homescreen app loaded.');
 
-        var i = 0;
+        var i = 1;
         var items = [];
         this.setup = {gutter: 20, items:items};
         
         document.addEventListener('addToFeed', function(e){
-            items.push({index:i, priority:0.9, width: 300, heightAuto: true});
+            items.push({index:i, width: '33%', heightAuto: true});
             this.setup = { gutter: 20, items:items};
             i++;
             console.log(JSON.stringify(this.setup));
@@ -71,6 +80,11 @@ response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
 
       handleResponse: function(){
         console.log('response changed');
+        //this.$.artikel.hidden = false;
+      },
+
+      handleResponseUser: function(){
+        console.log(this.userresult);
       },
 
       setupChanged: function(){
