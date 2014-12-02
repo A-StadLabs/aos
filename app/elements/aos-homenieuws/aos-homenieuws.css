@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  width: 100vw;
+}
+
+
+#container {
+	width: 76vw;
+	margin: 0vw 12vw 1vw 12vw;
+	  background-color: yellow;
+
+}

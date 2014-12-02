@@ -1,17 +1,7 @@
 :host {
   display: block;
   width: 100vw;
-/*  background-image: linear-gradient(to bottom, rgba(33,157, 200, 0.3), rgba(33,157, 200, 0.3)), url("https://assets.antwerpen.be/srv/assets/api/image/06f6bc5a-cc9e-4e7b-ac8b-080936a117bd/CIEOFF_LaGrandeParade_300dpi%203.jpg") ;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center; 
-  height: auto;*/
-
   background-color: #219dc8;
-
 }
 
 
@@ -21,8 +11,6 @@ h1 {
 	font-size: 5vw;
 	font-weight: 300;
 	padding: 0px;
-/*	text-shadow: 0.5vw 0.5vw 0.5vw rgba(0,0,0,0.25);
-*/
 }
 
 
@@ -42,17 +30,12 @@ h1 {
 
 
 
-
 .stralendeA {
 	width: 4vw;
 	min-width: 60px;
 	padding: 0vw 1vw 1vw 1vw;
 }
 
-
-#fotoondetitel {
-	opacity: 0.5;
-}
 
 
 p {
@@ -62,27 +45,18 @@ p {
 	font-weight: 300;
 	text-transform: uppercase;
 }
-/*
-small {
-	font-size: 10px;
-	font-weight: 600;
-}
-*/
-	
+
+
 
 #startbtns {
-		width: 100vw;
-		background-color: #219dc8;
-			margin-top: 10px;
-
-
+	width: 100vw;
+	background-color: #219dc8;
+	margin-top: 10px;
 }
-
-
 
 
 .startbtn {
-	background-color: rgba(255,255,255,0.035);
+	background-color: rgba(255,255,255,0.05);
 	min-width: 180px;
 	height: 150px;
 	padding: 0px 10px 0px 10px;
@@ -93,32 +67,41 @@ small {
 
 
 .startbtn:hover {
-	background-color: rgba(255,255,255,0.065);
+	background-color: rgba(255,255,255,0.08);
 }
 
 
 
-
-/*#morebtn {
-	min-width: 160px;
-	height: 150px;
-	padding: 0px 25px 0px 25px;
-	margin-left: 10px;
-	margin-bottom: 10px;
-	color: black;
-
+hr {
+	background: rgba(0,0,0,0.1);
+	height: 1px;
+	width: 100vw;
+	border: none;
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
 }
 
 
-#morebtn p {
-	color: black;
+#morebtn {
+	margin-left: 12vw;
+	padding: 30px 50px 30px 0px;
+}
+
+
+
+#morebtn a {
+	color: rgba(0,0,0,0.25);
+	font-size: 14px;
+	font-weight: 400;
 	text-transform: none;
+	text-decoration: none;
 }
 
 .knooppuntbtn {
-	margin: 10px 0px 0px 0px;
-	width: 30px; 
-}*/
+	width: 22px; 
+	min-width: 22px; 
+	margin: 0px 12px 0px 8px;
+}
 
 
 
@@ -151,12 +134,7 @@ h1 {
    	font-size: 12vw;
    	margin: 15px 0px 15px 0px;
 }
-/*
-p {
-   	font-size: 7px;
-	padding: 0px 10px 10px 0px;
-}
-*/
+
 .stralendeA {
 	width: 7vw;
 		min-width: 40px;

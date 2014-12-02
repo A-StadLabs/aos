@@ -3,9 +3,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="30px" height="30px" viewBox="-7.5 -7.5 30 30" enable-background="new -7.5 -7.5 30 30" xml:space="preserve">
-<circle opacity="0.5" fill="#666666" cx="7.501" cy="7.501" r="14.928"/>
-<rect x="1.524" y="2.042" fill="#FFFFFF" width="4.406" height="4.405"/>
-<rect x="9.069" y="2.042" fill="#FFFFFF" width="4.408" height="4.405"/>
-<rect x="1.524" y="9.736" fill="#FFFFFF" width="4.406" height="4.403"/>
-<rect x="9.069" y="9.736" fill="#FFFFFF" width="4.408" height="4.403"/>
+<path fill="#1D1D1B" d="M7.501-7.427c-8.244,0-14.928,6.684-14.928,14.928c0,8.244,6.684,14.929,14.928,14.929
+	S22.43,15.745,22.43,7.501C22.43-0.744,15.745-7.427,7.501-7.427z M5.931,14.14H1.524V9.736h4.406V14.14z M5.931,6.447H1.524V2.042
+	h4.406V6.447z M13.478,14.14H9.069V9.736h4.408V14.14z M13.478,6.447H9.069V2.042h4.408V6.447z"/>
 </svg>

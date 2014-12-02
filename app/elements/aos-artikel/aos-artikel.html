@@ -19,6 +19,27 @@
       <template is="juicy-html" content="{{ t.text }}"></template></p>
     </template>
     </div>
+
+
+
+
+
+    <template repeat="{{s in artikelMedia}}">
+      <div class="box"><img src="{{s.src}}/newsdetail_1columns" hidden?="{{!s.banner}}" /></div>
+    </template>
+    <div class="contents">
+    <h3> {{object.title}} </h3> 
+<!--     <small>{{object.creator.fullName}}</small>
+ -->    <template is="juicy-html" content="{{ artikelIntro }}"></template>
+    <template if="{{ mode == 'long'}}" repeat="{{t in artikelCopy}}">
+      <p>
+      <template is="juicy-html" content="{{ t.text }}"></template></p>
+    </template>
+    </div>
+
+
+
+
   </template>
   <script>
     (function () {

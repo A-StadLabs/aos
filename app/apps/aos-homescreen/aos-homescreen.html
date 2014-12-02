@@ -1,8 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
-<link rel="import" href="../../bower_components/juicy-tile-list/src/juicy-tile-list.html">
+
 <link rel="import" href="../../elements/aos-artikel/aos-artikel.html">
 <link rel="import" href="../../elements/aos-quickstart/aos-quickstart.html">
+<link rel="import" href="../../elements/aos-homebabbelbox/aos-homebabbelbox.html">
+<link rel="import" href="../../elements/aos-homenieuws/aos-homenieuws.html">
 
 <polymer-element name="aos-homescreen" attributes="setup">
 
@@ -17,68 +18,49 @@ method="GET" auto handleAs="json" response="{{resultaat}}"></core-ajax> -->
 
 
 <aos-hometop></aos-hometop>
+<aos-homenieuws></aos-homenieuws>
+<aos-homebabbelbox></aos-homebabbelbox>
 
-<!-- <aos-startmenu></aos-startmenu>
- -->
-<core-ajax 
-url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/10"
-method="GET" 
-auto 
-handleAs="json" 
-response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
-<juicy-tile-list setup="{{setup}}" gap="20" id="jlist"> 
-  <template if="{{tips}}">
-  <div class="tip">
-    <div class="container">
-    <core-icon-button icon="close" on-tap="{{hideTips}}"><small>niet meer weergeven</small></core-icon-button>
-    <h3>Wist je dat je dit startscherm kan personaliseren?</h3>
-    <core-icon-button icon="arrow-forward">Ga naar mijn instellingen</core-icon-button>
-    </div>
-  </div>
-  </template>
-  <template repeat="{{a in resultaat.data}}">
-    <aos-artikel object="{{a}}" mode="short" class="item" id="artikel"></aos-artikel>
-  </template>
-</juicy-tile-list>
+
   </template>
 
   <script>
 
     Polymer({
 
-      ready: function() {
+      // ready: function() {
        
-        this.tips = true;
+      //   this.tips = true;
 
-      	console.log('Homescreen app loaded.');
+      // 	console.log('Homescreen app loaded.');
 
-        var i = 0;
-        var items = [];
-        this.setup = {gutter: 20, items:items};
+      //   var i = 0;
+      //   var items = [];
+      //   this.setup = {gutter: 20, items:items};
         
-        document.addEventListener('addToFeed', function(e){
-            items.push({index:i, priority:0.9, width: 300, heightAuto: true});
-            this.setup = { gutter: 20, items:items};
-            i++;
-            console.log(JSON.stringify(this.setup));
-        });
+      //   document.addEventListener('addToFeed', function(e){
+      //       items.push({index:i, priority:0.9, width: 300, heightAuto: true});
+      //       this.setup = { gutter: 20, items:items};
+      //       i++;
+      //       console.log(JSON.stringify(this.setup));
+      //   });
 
-        },
+      //   },
 
-        hideTips: function(){
-        //var that = this;
-        console.log('wtf?');
-        this.tips = false;
-        this.$.jlist.refresh();
-      },
+      //   hideTips: function(){
+      //   //var that = this;
+      //   console.log('wtf?');
+      //   this.tips = false;
+      //   this.$.jlist.refresh();
+      // },
 
-      handleResponse: function(){
-        console.log('response changed');
-      },
+      // handleResponse: function(){
+      //   console.log('response changed');
+      // },
 
-      setupChanged: function(){
-        console.log('setup changed');
-      }
+      // setupChanged: function(){
+      //   console.log('setup changed');
+      // }
 
     });
 
