@@ -32,7 +32,6 @@ limitToFirst="2"
   </template> -->
   <template repeat="{{a in resultaat.data}}">
     <aos-artikel object="{{a}}" mode="short" class="item" id="artikel"></aos-artikel>
-   
   </template>
 <!-- </juicy-tile-list> -->
 </div>
@@ -68,7 +67,7 @@ limitToFirst="2"
         //var that = this;
         console.log('wtf?');
         this.tips = false;
-        this.$.jlist.refresh();
+        //this.$.jlist.refresh();
       },
 
       handleResponse: function(){
