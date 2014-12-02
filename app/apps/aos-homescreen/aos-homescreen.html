@@ -65,7 +65,6 @@ response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
       //   var items = [];
       //   this.setup = {gutter: 20, items:items};
         
-<<<<<<< HEAD
       //   document.addEventListener('addToFeed', function(e){
       //       items.push({index:i, priority:0.9, width: 300, heightAuto: true});
       //       this.setup = { gutter: 20, items:items};
@@ -90,15 +89,14 @@ response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
       //   console.log('setup changed');
       // }
 
-=======
-        document.addEventListener('addToFeed', function(e){
-            items.push({index:i, width: '33%', heightAuto: true});
-            this.setup = { gutter: 20, items:items};
-            i++;
-            console.log(JSON.stringify(this.setup));
-        });
+        // document.addEventListener('addToFeed', function(e){
+        //     items.push({index:i, width: '33%', heightAuto: true});
+        //     this.setup = { gutter: 20, items:items};
+        //     i++;
+        //     console.log(JSON.stringify(this.setup));
+        // });
 
-        },
+        // },
 
         hideTips: function(){
         //var that = this;
@@ -117,7 +115,6 @@ response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
       setupChanged: function(){
         console.log('setup changed');
       }
->>>>>>> FETCH_HEAD
 
     });
 
