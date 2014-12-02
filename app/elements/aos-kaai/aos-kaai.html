@@ -59,7 +59,7 @@
     <core-toolbar horizontal center center-justified layout fit class="{{ {gefocused: searchFocused } | tokenList}}">
 
 
-      <div class="environment" horizontal layout >
+      <div class="helpings" horizontal layout >
 
 <!--       <core-dropdown-menu label="Environment">
     <core-dropdown class="dropdown">
@@ -99,12 +99,6 @@
         
 
 
-      <div horizontal center-justified layout>
-        <core-field  hidden?="{{bigSearchbar}}">
-          <input on-focus="{{handleFocus}}" on-blur="{{handleBlur}}" placeholder="{{locsearch}}" on-change="{{toggleSearch}}" value="{{searchValue}}" flex class="searchclass"></input><div id="searchloop" on-tap="{{toggleSearch}}"><img src="images/kaai-search-01.svg"></div>
-        </core-field>
-
-      </div>
 
 
 
@@ -113,6 +107,8 @@
 
 
         <a href="/profiel" hidden?="{{smallSearchbar}}"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
+
+        <a href="/#/profiel"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
         </core-icon-button></a>
 
         <a href="/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
@@ -171,15 +167,15 @@
 
       ready: function() {
 
-                this.searchFocused = false;
+        //         this.searchFocused = false;
 
-        this.bigSearchbar = false;
-        this.smallSearchbar = true;
+        // this.bigSearchbar = false;
+        // this.smallSearchbar = true;
 
-        if(window.innerWidth < 401){
-          this.bigSearchbar = true;
-          this.smallSearchbar = false;
-        };
+        // if(window.innerWidth < 401){
+        //   this.bigSearchbar = true;
+        //   this.smallSearchbar = false;
+        // };
 
 
         var tokenn = getParameterByName('access_token');

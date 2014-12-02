@@ -24,7 +24,6 @@ core-item {
 	padding: 0px 14px 0px 18px;
 }
 
-<<<<<<< HEAD
 
 .dropdown {
 	background-color: #333333;
@@ -169,10 +168,9 @@ input-placeholder {
 
 
 
-.environment {
-	width: 18vw;
-		min-width: 100px;
-
+.helpings {
+width: 50vw;
+padding-left: 2vw; 
 }
 /*
 .environment /deep/ #label {
@@ -188,8 +186,9 @@ input-placeholder {
 
 
 .tools {
-	width: 16vw;
-	min-width: 140px;
+	width: 50vw;
+padding-right: 2vw; 
+
 }
 
 
