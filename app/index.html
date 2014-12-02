@@ -27,17 +27,12 @@
     <app-route path="/" import="apps/aos-homescreen/aos-homescreen.html"></app-route>
     <app-route path="/knooppunt" import="apps/aos-knooppunt/aos-knooppunt.html"></app-route>
     <app-route path="/profiel" import="apps/aos-profiel/aos-profiel.html"></app-route>
+    <app-route path="/callback/:token" import="apps/aos-login/aos-login.html"></app-route>
     <app-route path="/search" import="apps/aos-search/aos-search.html"></app-route>
+    <app-route path="/*" import="apps/aos-404/aos-404.html"></app-route>
   </app-router>
 
   </core-scroll-header-panel>
-
-
-
-
-
-
-  <!-- <iframe id="canvas" style="margin-top: 0px; margin-bottom: 0px;" src="" width="100%" height="100%" frameborder="0"></iframe> -->
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild-->

@@ -7,6 +7,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   background-color: white;
+  width: 33vw;
 }
 
 .contents {
@@ -29,6 +30,7 @@ small {
 p {
 	  font-size: 0.85em;
 	  line-height: 150%;
+	  color: #333333;
 }
 
 .box {
