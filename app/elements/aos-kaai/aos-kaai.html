@@ -19,7 +19,7 @@
 <!-- <link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html"> -->
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
 
-<polymer-element name="aos-kaai" attributes="environment theme language notification">
+<polymer-element name="aos-kaai" attributes="environment theme language notification user">
 
   <template>
 
@@ -76,6 +76,8 @@
  -->
 
 
+
+
  <core-dropdown-menu label="Taal" class="lan">
           <core-dropdown class="dropdown">
             <core-selector selected="0" id="lanselect" valueattr="label">
@@ -94,17 +96,17 @@
 
 
 
-
-
-        
-
-
-
-
-
-
       <div class="tools" horizontal end-justified layout>
 
+      <core-ajax 
+          url="https://services.antwerpen.be/api/user/0.0.1/me"
+          method="GET" 
+          auto 
+          headers='{"Authorization": "Bearer 85b770e18407bfa3fa2eeab1bfeca4"}'
+          handleAs="json" 
+          response="{{userresult}}" on-core-response="{{handleResponseUser}}"></core-ajax>
+        
+        <h1>Hi there, {{userresult.data.first_name}} {{userresult.data.last_name}}.</h1>
 
         <a href="/profiel" hidden?="{{smallSearchbar}}"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
 
@@ -154,14 +156,14 @@
 
   <script>
 
-    function getParameterByName(name) {
-      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-      results = regex.exec(location.search);
-      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
+    // function getParameterByName(name) {
+    //   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    //   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    //   results = regex.exec(location.search);
+    //   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    // }
 
-    var userobject;
+    // var userobject;
 
     Polymer({
 
@@ -178,11 +180,11 @@
         // };
 
 
-        var tokenn = getParameterByName('access_token');
-        if(tokenn){
-          console.log('hey! ',tokenn);
+        // var tokenn = getParameterByName('access_token');
+        // if(tokenn){
+        //   console.log('hey! ',tokenn);
 
-        };
+        // };
 
         // Localisation voorlopig
         this.locusername = 'Gebruikersnaam';
@@ -235,11 +237,11 @@
       },
 
       openAuth: function(){
-        if(!userobject){
-          window.open("https://services.antwerpen.be/authorize?scope=default&response_type=token&client_id=_07mr9GBEvhvd_iG0Jd1rbSWfW4a&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2F#%2Fcallback%2F", "myWindow", "scrollbars=yes, resizable=yes, width=400, height=570");
-        } else {
-          this.loginPane = !this.loginPane;
-        }
+        //if(!userobject){
+          window.open("https://services.antwerpen.be/authorize?scope=default&response_type=token&client_id=_07mr9GBEvhvd_iG0Jd1rbSWfW4a&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2F%23%2Flogin%2F", "myWindow", "scrollbars=yes, resizable=yes, width=400, height=570");
+       // } else {
+        //  this.loginPane = !this.loginPane;
+        //}
       },
 
       handleFocus: function(){
@@ -274,6 +276,11 @@
       toggleSearch: function(){
         this.closeAll();
         this.searchPane = !this.searchPane;
+      },
+
+      handleResponseUser: function(){
+        this.user = this.userresult;
+        console.log(this.userresult);
       },
 
       selectAction: function(e, detail) {

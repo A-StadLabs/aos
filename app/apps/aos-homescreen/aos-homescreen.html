@@ -4,7 +4,7 @@
 <link rel="import" href="../../elements/aos-artikel/aos-artikel.html">
 <link rel="import" href="../../elements/aos-quickstart/aos-quickstart.html">
 
-<polymer-element name="aos-homescreen" attributes="setup">
+<polymer-element name="aos-homescreen" attributes="setup userobject">
 
   <!-- <template bind> -->
   <template if="{{setup}}">
@@ -18,6 +18,8 @@ method="GET" auto handleAs="json" response="{{resultaat}}"></core-ajax> -->
 
 <aos-hometop></aos-hometop>
 
+<h1>Hallo {{userobject}}</h1>
+
 <!-- <aos-startmenu></aos-startmenu>
  -->
 <core-ajax 
@@ -27,14 +29,7 @@ auto
 handleAs="json" 
 response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
 
-<core-ajax 
-url="https://services.antwerpen.be/api/user/0.0.1/me"
-method="GET" 
-auto 
-headers='{"Authorization": "Bearer 3848a4daa5474e6d6a90114308ac797"}'
-handleAs="json" 
-response="{{userresult}}" on-core-response="{{handleResponseUser}}"></core-ajax>
-<h1>Hi there, {{userresult.data.first_name}} {{userresult.data.last_name}}.</h1>
+
 <juicy-tile-list setup="{{setup}}" gap="20" id="jlist"> 
   <!-- <template if="{{tips}}">
   <div class="tip">
@@ -86,9 +81,7 @@ response="{{userresult}}" on-core-response="{{handleResponseUser}}"></core-ajax>
         //this.$.artikel.hidden = false;
       },
 
-      handleResponseUser: function(){
-        console.log(this.userresult);
-      },
+      
 
       setupChanged: function(){
         console.log('setup changed');
