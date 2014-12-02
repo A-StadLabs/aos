@@ -5,7 +5,7 @@
 <link rel="import" href="../../elements/aos-homebabbelbox/aos-homebabbelbox.html">
 <link rel="import" href="../../elements/aos-homenieuws/aos-homenieuws.html">
 
-<polymer-element name="aos-homescreen" attributes="setup">
+<polymer-element name="aos-homescreen" attributes="setup userobject">
 
   <!-- <template bind> -->
   <template if="{{setup}}">
@@ -22,6 +22,32 @@ method="GET" auto handleAs="json" response="{{resultaat}}"></core-ajax> -->
 <aos-homebabbelbox></aos-homebabbelbox>
 
 
+<h1>Hallo {{userobject}}</h1>
+
+<!-- <aos-startmenu></aos-startmenu>
+ -->
+<core-ajax 
+url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/10"
+method="GET" 
+auto 
+handleAs="json" 
+response="{{resultaat}}" on-core-response="{{handleResponse}}"></core-ajax>
+
+
+<juicy-tile-list setup="{{setup}}" gap="20" id="jlist"> 
+  <!-- <template if="{{tips}}">
+  <div class="tip">
+    <div class="container">
+    <core-icon-button icon="close" on-tap="{{hideTips}}"><small>niet meer weergeven</small></core-icon-button>
+    <h3>Wist je dat je dit startscherm kan personaliseren?</h3>
+    <core-icon-button icon="arrow-forward">Ga naar mijn instellingen</core-icon-button>
+    </div>
+  </div>
+  </template> -->
+  <template repeat="{{a in resultaat.data}}">
+    <aos-artikel object="{{a}}" mode="short" class="item" id="artikel"></aos-artikel>
+  </template>
+</juicy-tile-list>
   </template>
 
   <script>
@@ -39,6 +65,7 @@ method="GET" auto handleAs="json" response="{{resultaat}}"></core-ajax> -->
       //   var items = [];
       //   this.setup = {gutter: 20, items:items};
         
+<<<<<<< HEAD
       //   document.addEventListener('addToFeed', function(e){
       //       items.push({index:i, priority:0.9, width: 300, heightAuto: true});
       //       this.setup = { gutter: 20, items:items};
@@ -63,6 +90,34 @@ method="GET" auto handleAs="json" response="{{resultaat}}"></core-ajax> -->
       //   console.log('setup changed');
       // }
 
+=======
+        document.addEventListener('addToFeed', function(e){
+            items.push({index:i, width: '33%', heightAuto: true});
+            this.setup = { gutter: 20, items:items};
+            i++;
+            console.log(JSON.stringify(this.setup));
+        });
+
+        },
+
+        hideTips: function(){
+        //var that = this;
+        console.log('wtf?');
+        this.tips = false;
+        this.$.jlist.refresh();
+      },
+
+      handleResponse: function(){
+        console.log('response changed');
+        //this.$.artikel.hidden = false;
+      },
+
+      
+
+      setupChanged: function(){
+        console.log('setup changed');
+      }
+>>>>>>> FETCH_HEAD
 
     });
 

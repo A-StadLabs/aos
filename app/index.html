@@ -21,13 +21,13 @@
 
 <core-scroll-header-panel fit>
 
-  <core-toolbar><aos-kaai theme="dark" language="nl"></aos-kaai></core-toolbar>
+  <core-toolbar><aos-kaai theme="dark" language="nl" id="kaai"></aos-kaai></core-toolbar>
 
   <app-router>
     <app-route path="/" import="apps/aos-homescreen/aos-homescreen.html"></app-route>
     <app-route path="/knooppunt" import="apps/aos-knooppunt/aos-knooppunt.html"></app-route>
     <app-route path="/profiel" import="apps/aos-profiel/aos-profiel.html"></app-route>
-    <app-route path="/callback/:token" import="apps/aos-login/aos-login.html"></app-route>
+    <app-route path="/login" import="apps/aos-login/aos-login.html"></app-route>
     <app-route path="/search" import="apps/aos-search/aos-search.html"></app-route>
     <app-route path="/*" import="apps/aos-404/aos-404.html"></app-route>
   </app-router>
