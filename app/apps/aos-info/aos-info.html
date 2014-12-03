@@ -1,5 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0375fd1fbf4e6c9043bbb9dcd4840de692d2f211
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="elements/aos-cat/aos-cat.html"> -->
 
@@ -19,6 +23,13 @@
     <!-- <core-ajax method="POST" id="entryPost" handleAs="json" url="https://blazing-fire-6426.firebaseio.com/infocenter/.json">
 </core-ajax> -->
 
+=======
+<firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" log></firebase-element>
+
+<!--     <core-ajax method="POST" id="entryPost" handleAs="json" url="https://blazing-fire-6426.firebaseio.com/infocenter/.json">
+</core-ajax>
+ -->
+>>>>>>> 0375fd1fbf4e6c9043bbb9dcd4840de692d2f211
 
     </div>
   </div>
@@ -34,25 +45,21 @@
         <template repeat="{{k in keys}}">
         <aos-cat titel="{{data[k].categorie}}" shorttxt="{{data[k].shorttxt}}" key="{{k}}"></aos-cat>
         </template>
+
+        <aos-cat>testing</aos-cat>
           <div>
             <h3 on-tap="selectCat">Adressen en openingsuren</a></h3>
             <p>O.a. Openingsuren, adressen en contactgegevens.</p>
           </div>
 
-          <div>
-            <h3><a href="">Afval, sorteren en ophaling</a></h3>
-            <p>O.a. Openingsuren, adressen en contactgegevens.</p>
-          </div>
+                  <template repeat="{{ k in keys }}">
 
           <div>
-            <h3><a href="">Belastingen en retributies</a></h3>
-            <p>O.a. Openingsuren, adressen en contactgegevens.</p>
+              <a href="#detail={{k}}">{{data[k].categorie}}</a>
+            <p>{{data[k].shorttxt}}</p>
           </div>
+</template>
 
-          <div>
-            <h3><a href="">Bibliotheken</a></h3>
-            <p>O.a. Openingsuren, adressen en contactgegevens.</p>
-          </div>
         </div>
         <!-- 1e kolom einde -->
 
@@ -202,7 +209,6 @@
       <button on-tap="{{saveCat}}">Opslaan</button>
       </div>
     </core-overlay>
->>>>>>> FETCH_HEAD
   </template>
 
   <script>
