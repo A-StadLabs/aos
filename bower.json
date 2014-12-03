@@ -14,7 +14,8 @@
     "app-router": "~2.0.4",
     "pushstate-anchor": "~0.3.0",
     "html5-history-anchor": "~0.4.0",
-    "flatiron-director": "PolymerLabs/flatiron-director#~0.5.0"
+    "flatiron-director": "PolymerLabs/flatiron-director#~0.5.0",
+    "firebase-element": "Polymer/firebase-element#~0.5.1"
   },
   "devDependencies": {
     "polymer-test-tools": "Polymer/polymer-test-tools#^0.5.1"

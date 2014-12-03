@@ -44,7 +44,7 @@
 
 #canvas {
 	width: 76vw;
-	margin: 0vw 12vw 0vw 12vw;
+	margin: 20px 12vw 0vw 12vw;
 	padding: 0px;
 	}
 
@@ -54,66 +54,46 @@ h1 {
 	color: #333333;
 }
 
-input {
-
-}
-
-
-
-/*.container {
-	width: 100vw;
-	font-family: 'Open Sans', sans-serif;
-}*/
-
-
-/*.kanvas {
-	background-color: white;
-	height: 180px;
-	margin: 0px auto 0px auto;
-	height: auto;
-	display: inline-block;
-}*/
-
-.categories-list {
-	width: 240px;
-	min-width: 25vw;
-	padding: 0px;
-
-}
-
-/*.categories-list li {
-	list-style: none;
-	margin: 0px 0px 40px 0px;
-}
-
-.overlay {
-	background-color: white;
-	display: block;
-}
-
-h1 {
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 300;
-	color: #333333;
-}
 
 h2 {
-	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
 	font-weight: 300;
 	color: #333333;
-	font-size: 1.5em;
 }
 
-h3 {
-	font-family: 'Open Sans', sans-serif;
+small {
+	color: #C0C9CF;
+	text-decoration: underline;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#leftmenu {
+	width: 240px;
+	min-width: 24vw;
+}
+
+
+#subcats {
+    background-image: url("images/next.svg");
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: right; 
+
+	margin-left: 15px;
+	padding: 10px;
+	border-bottom: 1px solid #E6E6E6;
+
+}
+
+
+#leftmenu h2 {
+	font-size: 24px;
+}
+
+
+#leftmenu a {
 	font-weight: 600;
-	color: #333333;
-	font-size: 1.2em;
+	font-size: 14px;
 }
-
-p {
-	font-size: 0.9em;
-	font-weight: 400;
-}
-
-*/
