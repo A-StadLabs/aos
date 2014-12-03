@@ -1,8 +1,11 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
 
-<polymer-element name="aos-addinfosub" attributes="">
+<polymer-element name="aos-addinfosub" attributes="selectedCat">
   <template>
     <link rel="stylesheet" href="aos-addinfosub.css">
+    <core-ajax method="POST" id="subPost" handleAs="json" data url="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/.json">
+</core-ajax>
     <div class="overlay">
       <h2>Subcategorie toevoegen</h2>
       <core-icon-button icon="close" core-overlay-toggle></core-icon-button>
@@ -19,6 +22,18 @@
 
       Polymer({
         // define element prototype here
+
+
+      saveSubCat: function(){
+        this.subpost = { "subtitel": this.subcategorie,
+                          "subshorttxt": this.subshorttxt,
+                    };
+        this.subpost = JSON.stringify(this.subpost);
+        
+        this.$.subPost.body = this.subpost;
+        
+        this.$.subPost.go();
+      },
       });
 
     })();

@@ -6,7 +6,6 @@
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="elements/aos-addinfocat/aos-addinfocat.html">
 <link rel="import" href="elements/aos-addinfosub/aos-addinfosub.html">
-<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="elements/aos-cat/aos-cat.html"> 
 
 <polymer-element name="aos-info" attributes="">
@@ -41,16 +40,9 @@
           <aos-addinfocat></aos-addinfocat>
         </core-overlay>
         </template>
-
-
-
+        
     </div>
   </div>
-
-
-
-
-
 
 </section>
 <section>
@@ -68,10 +60,9 @@
         <template bind>
           <div vertical layout center class="addbtn" on-tap="{{openAddSubCat}}"><h4>Een subcategorie toevoegen</h4></div>
           <core-overlay layered backdrop id="suboverlay">
-          <aos-addinfosub></aos-addinfosub>
+          <aos-addinfosub selectedCat="{{selectedCat}}"></aos-addinfosub>
           </core-overlay>
         </template>
-
         </div>
         </core-selector>
       </div>    
@@ -119,27 +110,7 @@
         console.log(this.$.catselector.selected);
       },
 
-      saveCat: function(){
-        this.post = { "categorie": this.categorie,
-                          "shorttxt": this.shorttxt,
-                    };
-        this.post = JSON.stringify(this.post);
-        
-        this.$.entryPost.body = this.post;
-        
-        this.$.entryPost.go();
-      },
-
-      saveSubCat: function(){
-        this.post = { "subcategorie": this.categorie,
-                          "subshorttxt": this.shorttxt,
-                    };
-        this.post = JSON.stringify(this.post);
-        
-        this.$.entryPost.body = this.post;
-        
-        this.$.entryPost.go();
-      },
+      
 
       handleResponse: function(){
         console.log(this.data2);

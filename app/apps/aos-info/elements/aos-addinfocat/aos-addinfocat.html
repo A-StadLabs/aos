@@ -1,8 +1,11 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
 
 <polymer-element name="aos-addinfocat" attributes="">
   <template>
     <link rel="stylesheet" href="aos-addinfocat.css">
+    <core-ajax method="POST" id="entryPost" handleAs="json" data url="https://blazing-fire-6426.firebaseio.com/infocenter/.json">
+</core-ajax>
     <div class="overlay">
       <h2>Categorie toevoegen</h2>
       <core-icon-button icon="close" core-overlay-toggle></core-icon-button>
@@ -20,6 +23,16 @@
 
       Polymer({
         // define element prototype here
+        saveCat: function(){
+        this.post = { "categorie": this.categorie,
+                          "shorttxt": this.shorttxt,
+                    };
+        this.post = JSON.stringify(this.post);
+        
+        this.$.entryPost.body = this.post;
+        
+        this.$.entryPost.go();
+      },
       });
 
     })();
