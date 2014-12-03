@@ -8,7 +8,7 @@
 
 
 
-<div id="container">
+<div id="container" horizontal layout>
 <core-ajax 
 url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/3"
 method="GET" 
@@ -30,13 +30,52 @@ limitToFirst="2"
     </div>
   </div>
   </template> -->
-  <template repeat="{{a in resultaat.data}}">
-    <aos-artikel object="{{a}}" mode="short" class="item" id="artikel"></aos-artikel>
+
+
+
+<!--   <template repeat="{{a in resultaat.data}}">
+    <aos-artikel object="{{a}}" mode="long" class="item" id="artikel"></aos-artikel>
   </template>
+ -->
+
+
+
 <!-- </juicy-tile-list> -->
+<div>
+<div id="artikelMEDIUM">
+  <div>
+  <h1>Op stap met wanten aan: tips voor winteruitstapjes</h1>
+<!--   <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/74f7a525-eef8-44b6-81be-f0e8ba12fdc7/cov%20er%20A-Winterportretten-40.jpg" width="auto"> -->
+  </div>
 </div>
 
 
+<div id="artikelSMALL">
+  <div>
+  <h1>Op stap met wanten aan: tips voor winteruitstapjes</h1>
+<!--   <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/74f7a525-eef8-44b6-81be-f0e8ba12fdc7/cov%20er%20A-Winterportretten-40.jpg" width="auto"> -->
+  </div>
+</div>
+
+<div id="artikelSMALL">
+  <div>
+  <h1>Op stap met wanten aan: tips voor winteruitstapjes</h1>
+<!--   <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/74f7a525-eef8-44b6-81be-f0e8ba12fdc7/cov%20er%20A-Winterportretten-40.jpg" width="auto"> -->
+  </div>
+</div>
+
+</div>
+
+
+<div id="artikelLARGE">
+  <div>
+  <h1>Op stap met wanten aan: tips voor winteruitstapjes</h1>
+<!--   <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/74f7a525-eef8-44b6-81be-f0e8ba12fdc7/cov%20er%20A-Winterportretten-40.jpg" width="auto"> -->
+  </div>
+</div>
+
+
+</div>
 
   </template>
   <script>
