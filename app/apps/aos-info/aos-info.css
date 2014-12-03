@@ -80,7 +80,6 @@ small {
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: right; 
-
 	margin-left: 15px;
 	padding: 10px;
 	border-bottom: 1px solid #E6E6E6;
@@ -96,4 +95,20 @@ small {
 #leftmenu a {
 	font-weight: 600;
 	font-size: 14px;
+}
+
+.addbtn {
+	margin-top: 30px; 
+	border-top: 1px solid #E6E6E6;
+}
+
+.addbtn h4 {
+	background-color: #E6E6E6;
+	margin: 12px 5px 12px 0px;
+	padding: 8px 10px 8px 10px; 
+	font-size: 13px;	
+	width: 170px;
+	font-weight: 400;
+	margin-top: 20px; 
+	text-align: center;
 }
