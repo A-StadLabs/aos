@@ -1,10 +1,12 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
-<polymer-element name="aos-cat" attributes="titel shorttxt">
+<polymer-element name="aos-cat" attributes="titel shorttxt key">
   <template>
     <link rel="stylesheet" href="aos-cat.css">
-    <h1>De titel</h1>
-    <p>De korte beschrijving</p>
+    <div on-tap="{{goDetail}}">
+    <h1>{{titel}}</h1>
+    <p>{{shorttxt}}</p>
+    </div>
   </template>
   <script>
     (function () {
@@ -13,7 +15,11 @@
       Polymer({
         // define element prototype here
         ready: function(){
-          
+
+        },
+        goDetail: function(){
+          this.fire('detail-tapped', {key: this.key});
+          //console.log('element klik', this.key);
         }
       });
 

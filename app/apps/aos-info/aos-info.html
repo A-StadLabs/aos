@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<!-- <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
-<link rel="import" href="../../bower_components/core-ajax/core-ajax.html"> -->
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="elements/aos-cat/aos-cat.html"> -->
 
 <polymer-element name="aos-info" attributes="">
@@ -9,19 +9,16 @@
 
     <link rel="stylesheet" href="aos-info.css" />
 
-
-
   <div class="leaderboard">
     <img class="stralendeA" src="../../elements/aos-homebabbelbox/images/a-rgb.svg">
     <div horizontal layout wrap center start-justified>
         <img class="appicon" src="../../elements/aos-homebabbelbox/images/infocenter.svg">
         <h1>Infocenter</h1><input class="searchbox" />
+    <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" log></firebase-element>
 
-<!--     <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" log></firebase-element>
+    <!-- <core-ajax method="POST" id="entryPost" handleAs="json" url="https://blazing-fire-6426.firebaseio.com/infocenter/.json">
+</core-ajax> -->
 
-    <core-ajax method="POST" id="entryPost" handleAs="json" url="https://blazing-fire-6426.firebaseio.com/infocenter/.json">
-</core-ajax>
- -->
 
     </div>
   </div>
@@ -34,7 +31,9 @@
 
         <!-- 1e kolom begin -->
         <div class="categories-list" vertical layout>
-        <aos-cat>testing</aos-cat>
+        <template repeat="{{k in keys}}">
+        <aos-cat titel="{{data[k].categorie}}" shorttxt="{{data[k].shorttxt}}" key="{{k}}"></aos-cat>
+        </template>
           <div>
             <h3 on-tap="selectCat">Adressen en openingsuren</a></h3>
             <p>O.a. Openingsuren, adressen en contactgegevens.</p>
@@ -213,7 +212,9 @@
       ready: function() {
 
       	console.log('info app loaded.'); 
-
+        this.addEventListener('detail-tapped', function(e){
+          console.log('detail tapped: ', e.detail.key);
+        })
         },
 
       openAddCat: function(){
