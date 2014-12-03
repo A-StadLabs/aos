@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <!-- <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html"> -->
+<link rel="import" href="elements/aos-cat/aos-cat.html"> -->
 
 <polymer-element name="aos-info" attributes="">
 
@@ -33,8 +34,9 @@
 
         <!-- 1e kolom begin -->
         <div class="categories-list" vertical layout>
+        <aos-cat>testing</aos-cat>
           <div>
-            <h3><a href="">Adressen en openingsuren</a></h3>
+            <h3 on-tap="selectCat">Adressen en openingsuren</a></h3>
             <p>O.a. Openingsuren, adressen en contactgegevens.</p>
           </div>
 
@@ -185,8 +187,6 @@
  -->
 
 
-
-=======
         </ol>
         </template>
         <template bind>
