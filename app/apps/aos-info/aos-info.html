@@ -22,7 +22,7 @@
     <div horizontal layout wrap center start-justified>
         <img class="appicon" src="images/infocenter.svg">
         <h1>Infocenter</h1><input class="searchbox" />
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" log></firebase-element>
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}"></firebase-element>
     </div>
   </div>
 
@@ -35,6 +35,9 @@
         <template repeat="{{k in keys}}">
         <aos-cat titel="{{data[k].categorie}}" shorttxt="{{data[k].shorttxt}}" key="{{k}}"></aos-cat>
         </template>
+        <template bind>
+          <core-icon-button icon="add" on-tap="{{openAddCat}}">Een categorie toevoegen</core-icon-button>
+        </template>
         </div>
                 <template bind>
         <div vertical layout center class="addbtn" on-tap="{{openAddCat}}"><h4>Een categorie toevoegen</h4></div>
@@ -43,6 +46,7 @@
     <aos-addinfocat></aos-addinfocat>
     </core-overlay>
         </template>
+
 
 
     </div>
@@ -59,13 +63,26 @@
     <div id="canvas">
       <small on-tap="{{toNext}}"> naar overzicht</small>
       <div id="leftmenu">
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/" data="{{subdata}}" keys="{{subkeys}}" on-data-change="{{handleResponse}}" log></firebase-element>
         <h2>{{selectedTitle}}</h2>
-<!--         <h2>{{selectedCat}}</h2> -->
-        <core-selector  id="catselector" selected="{{selected}}" valueattr="value" on-core-select="{{cattapped}}">
+        <core-selector id="catselector" selected="{{selected}}" valueattr="value" on-core-select="{{cattapped}}">
         <div id="subcats">
-        <template repeat="{{k in keys}}">
-     
+        <template repeat="{{sk in subkeys}}">
+          <p>{{subdata[sk].subtitel}}</p>
         </template>
+        <template bind>
+          <core-overlay layered backdrop id="suboverlay">
+    <div class="overlay">
+      <h2>Subcategorie toevoegen</h2>
+      <core-icon-button icon="close" core-overlay-toggle></core-icon-button>
+      <input placeholder="Categorie" autofocus value="{{subcategorie}}">
+      <input placeholder="Beschrijving" value="{{subshorttxt}}">
+      <button on-tap="{{saveSubCat}}">Opslaan</button>
+      </div>
+    </core-overlay>
+          <core-icon-button icon="add" on-tap="{{openAddSubCat}}">subcategorie</core-icon-button>
+        </template>
+
         <div>
         </core-selector>
       </div>    
@@ -76,7 +93,11 @@
 
 
 
+<<<<<<< HEAD
 
+=======
+     -->
+>>>>>>> FETCH_HEAD
 
 </core-animated-pages>
 
@@ -120,6 +141,21 @@
         this.$.entryPost.body = this.post;
         
         this.$.entryPost.go();
+      },
+
+      saveSubCat: function(){
+        this.post = { "subcategorie": this.categorie,
+                          "subshorttxt": this.shorttxt,
+                    };
+        this.post = JSON.stringify(this.post);
+        
+        this.$.entryPost.body = this.post;
+        
+        this.$.entryPost.go();
+      },
+
+      handleResponse: function(){
+        console.log(this.data2);
       }
 
 
