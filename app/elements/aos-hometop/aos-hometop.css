@@ -46,7 +46,9 @@ p {
 	text-transform: uppercase;
 }
 
-
+a {
+	text-decoration: none;
+}
 
 #startbtns {
 	width: 100vw;
