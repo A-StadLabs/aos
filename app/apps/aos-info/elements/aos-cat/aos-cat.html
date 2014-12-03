@@ -3,8 +3,8 @@
 <polymer-element name="aos-cat" attributes="titel shorttxt key">
   <template>
     <link rel="stylesheet" href="aos-cat.css">
-    <div on-tap="{{goDetail}}">
-    <h1>{{titel}}</h1>
+    <div on-tap="{{goDetail}}" class="catitem">
+    <a href="">{{titel}}</a>
     <p>{{shorttxt}}</p>
     </div>
   </template>
