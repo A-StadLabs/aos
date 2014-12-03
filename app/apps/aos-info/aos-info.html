@@ -43,11 +43,12 @@
     <div id="canvas">
       <small on-tap="{{toNext}}"> naar overzicht</small>
       <div id="leftmenu">
-        <h2>Hier komt de cat</h2>
+        <h2>{{selectedTitle}}</h2>
+        <h2>{{selectedCat}}</h2>
         <core-selector  id="catselector" selected="{{selected}}" valueattr="value" on-core-select="{{cattapped}}">
         <div id="subcats">
         <template repeat="{{k in keys}}">
-        <a></a>
+     
         </template>
         <div>
         </core-selector>
@@ -84,11 +85,14 @@
     Polymer({
 
       ready: function() {
-        this.$.scenes.selected = 1;
+        this.$.scenes.selected = 0;
 
       	console.log('info app loaded.'); 
         this.addEventListener('detail-tapped', function(e){
           console.log('detail tapped: ', e.detail.key);
+          this.$.scenes.selected = 1;
+          this.selectedCat = e.detail.key;
+          this.selectedTitle = e.detail.cat;
         })
         },
 

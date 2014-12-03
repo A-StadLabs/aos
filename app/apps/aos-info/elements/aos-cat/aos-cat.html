@@ -4,7 +4,7 @@
   <template>
     <link rel="stylesheet" href="aos-cat.css">
     <div on-tap="{{goDetail}}" class="catitem">
-    <a href="">{{titel}}</a>
+    {{titel}}
     <p>{{shorttxt}}</p>
     </div>
   </template>
@@ -18,7 +18,7 @@
 
         },
         goDetail: function(){
-          this.fire('detail-tapped', {key: this.key});
+          this.fire('detail-tapped', {key: this.key, cat: this.titel});
           //console.log('element klik', this.key);
         }
       });
