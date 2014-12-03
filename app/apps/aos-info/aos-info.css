@@ -35,12 +35,16 @@
 	width: 30%;
 	padding: 0px;
 	margin: 0px 20px auto auto;
-
 }
 
 .categories-list li {
 	list-style: none;
 	margin: 0px 0px 40px 0px;
+}
+
+.overlay {
+	background-color: white;
+	display: block;
 }
 
 h1 {

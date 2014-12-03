@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 
 <polymer-element name="aos-info" attributes="">
 
@@ -8,7 +9,10 @@
     <link rel="stylesheet" href="aos-info.css" />
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-    <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" data="{{data}}" keys="{{keys}}" log></firebase-element>
+    <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" log></firebase-element>
+
+    <core-ajax method="POST" id="entryPost" handleAs="json" url="https://blazing-fire-6426.firebaseio.com/infocenter/.json">
+</core-ajax>
 
     <div class="leaderboard">
       <div class="container">
@@ -20,22 +24,33 @@
 
     <div class="kanvas">
       <div class="container">
+
         <h1>Informatie en diensten</h1>
+
         <template repeat="{{ k in keys }}">
         <ol class="categories-list">
           <li>
             <h3>
-              <a href="">{{data[k].categorie}}</a>
+              <a href="#detail={{k}}">{{data[k].categorie}}</a>
             </h3>
             <p>{{data[k].shorttxt}}</p>
           </li>
         </ol>
         </template>
+        <template bind>
+          <core-icon-button icon="add" on-tap="{{openAddCat}}">Een categorie toevoegen</core-icon-button>
+        </template>
       </div>
     </div>
-
-
-
+    <core-overlay layered backdrop id="overlay">
+    <div class="overlay">
+      <h2>Categorie toevoegen</h2>
+      <core-icon-button icon="close" core-overlay-toggle></core-icon-button>
+      <input placeholder="Categorie" autofocus value="{{categorie}}">
+      <input placeholder="Beschrijving" value="{{shorttxt}}">
+      <button on-tap="{{saveCat}}">Opslaan</button>
+      </div>
+    </core-overlay>
   </template>
 
   <script>
@@ -46,7 +61,22 @@
 
       	console.log('info app loaded.'); 
 
-        }
+        },
+
+      openAddCat: function(){
+        this.$.overlay.toggle();
+      },
+
+      saveCat: function(){
+        this.post = { "categorie": this.categorie,
+                          "shorttxt": this.shorttxt,
+                    };
+        this.post = JSON.stringify(this.post);
+        
+        this.$.entryPost.body = this.post;
+        
+        this.$.entryPost.go();
+      }
 
 
     });
