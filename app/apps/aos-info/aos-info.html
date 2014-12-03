@@ -5,8 +5,7 @@
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="elements/aos-addinfocat/aos-addinfocat.html">
-
-
+<link rel="import" href="elements/aos-addinfosub/aos-addinfosub.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="elements/aos-cat/aos-cat.html"> 
 
@@ -36,12 +35,11 @@
         <aos-cat titel="{{data[k].categorie}}" shorttxt="{{data[k].shorttxt}}" key="{{k}}"></aos-cat>
         </template>
         </div>
-                <template bind>
+        <template bind>
         <div vertical layout center class="addbtn" on-tap="{{openAddCat}}"><h4>Een categorie toevoegen</h4></div>
-
-    <core-overlay layered backdrop id="overlay">
-    <aos-addinfocat></aos-addinfocat>
-    </core-overlay>
+        <core-overlay layered backdrop id="overlay">
+          <aos-addinfocat></aos-addinfocat>
+        </core-overlay>
         </template>
 
 
@@ -63,24 +61,18 @@
         <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/" data="{{subdata}}" keys="{{subkeys}}" on-data-change="{{handleResponse}}" log></firebase-element>
         <h2>{{selectedTitle}}</h2>
         <core-selector id="catselector" selected="{{selected}}" valueattr="value" on-core-select="{{cattapped}}">
-        <div id="subcats">
-        <template repeat="{{sk in subkeys}}">
+        <div>
+        <template id="subcats" repeat="{{sk in subkeys}}">
           <p>{{subdata[sk].subtitel}}</p>
         </template>
         <template bind>
+          <div vertical layout center class="addbtn" on-tap="{{openAddSubCat}}"><h4>Een subcategorie toevoegen</h4></div>
           <core-overlay layered backdrop id="suboverlay">
-    <div class="overlay">
-      <h2>Subcategorie toevoegen</h2>
-      <core-icon-button icon="close" core-overlay-toggle></core-icon-button>
-      <input placeholder="Categorie" autofocus value="{{subcategorie}}">
-      <input placeholder="Beschrijving" value="{{subshorttxt}}">
-      <button on-tap="{{saveSubCat}}">Opslaan</button>
-      </div>
-    </core-overlay>
-          <core-icon-button icon="add" on-tap="{{openAddSubCat}}">subcategorie</core-icon-button>
+          <aos-addinfosub></aos-addinfosub>
+          </core-overlay>
         </template>
 
-        <div>
+        </div>
         </core-selector>
       </div>    
     </div>
@@ -89,12 +81,6 @@
 
 
 
-
-<<<<<<< HEAD
-
-=======
-     -->
->>>>>>> FETCH_HEAD
 
 </core-animated-pages>
 
@@ -123,6 +109,10 @@
 
       openAddCat: function(){
         this.$.overlay.toggle();
+      },
+
+      openAddSubCat: function(){
+        this.$.suboverlay.toggle();
       },
 
       cattapped: function(){
