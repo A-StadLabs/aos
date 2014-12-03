@@ -1,0 +1,146 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+
+<link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
+<link rel="import" href="elements/aos-addinfocat/aos-addinfocat.html">
+<link rel="import" href="elements/aos-addinfosub/aos-addinfosub.html">
+<link rel="import" href="elements/aos-cat/aos-cat.html"> 
+
+<polymer-element name="aos-info" attributes="lorem">
+
+  <template>
+
+    <link rel="stylesheet" href="aos-info.css" />
+
+    <core-ajax url="infofiches.json" handleAs="JSON" auto on-core-response="{{response}}" response="{{localjson}}"></core-ajax>
+  <div class="leaderboard">
+    <img class="stralendeA" src="../../elements/aos-homebabbelbox/images/a-rgb.svg">
+    <div horizontal layout wrap center start-justified>
+        <img class="appicon" src="images/infocenter.svg">
+        <h1>Info Center</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+       
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
+
+    </div>
+  </div>
+
+
+<core-animated-pages id="scenes" transitions="slide-from-right">
+<section>
+  <div class="container">
+    <div id="canvas" >
+
+        <div horizontal layout start wrap>
+        <template repeat="{{k in keys}}">
+        <aos-cat titel="{{data[k].categorie}}" shorttxt="{{data[k].shorttxt}}" key="{{k}}"></aos-cat>
+        </template>
+
+        
+        </div>
+        <template bind>
+        <div vertical layout center class="addbtn" on-tap="{{openAddCat}}"><h4>Een categorie toevoegen</h4></div>
+        <core-overlay layered backdrop id="overlay">
+          <aos-addinfocat></aos-addinfocat>
+        </core-overlay>
+        </template>
+        
+    </div>
+  </div>
+
+</section>
+<section>
+  <div class="container">
+    <div id="canvas">
+      <small on-tap="{{toNext}}">< naar overzicht</small>
+      <div id="leftmenu">
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/" data="{{subdata}}" keys="{{subkeys}}" on-data-change="{{handleResponse}}" log></firebase-element>
+        <h2>{{selectedTitle}}</h2>
+        <core-selector id="catselector" selected="{{selected}}" valueattr="value" on-core-select="{{cattapped}}">
+        <div>
+        <template id="subcats" repeat="{{sk in subkeys}}">
+          <p>{{subdata[sk].subtitel}}</p>
+        </template>
+        <template bind>
+          <div vertical layout center class="addbtn" on-tap="{{openAddSubCat}}"><h4>Een subcategorie toevoegen</h4></div>
+          <core-overlay layered backdrop id="suboverlay">
+          <aos-addinfosub selectedCat="{{selectedCat}}"></aos-addinfosub>
+          </core-overlay>
+        </template>
+        </div>
+        </core-selector>
+      </div>    
+    </div>
+  </div>
+</section>
+
+
+
+
+</core-animated-pages>
+
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      ready: function() {
+        this.$.scenes.selected = 0;
+
+      	console.log('info app loaded.'); 
+
+        this.addEventListener('detail-tapped', function(e){
+          console.log('detail tapped: ', e.detail.key);
+          this.$.scenes.selected = 1;
+          this.selectedCat = e.detail.key;
+          this.selectedTitle = e.detail.cat;
+        })
+
+      },
+
+      response: function(){
+        console.log('ajax response', this.localjson);
+      },
+
+      toNext: function(){
+        this.$.scenes.selected = 0;
+      },
+
+      openAddCat: function(){
+        this.$.overlay.toggle();
+        console.log('ajax response', this.localjson);
+      },
+
+      openAddSubCat: function(){
+        this.$.suboverlay.toggle();
+      },
+
+      cattapped: function(){
+        console.log(this.$.catselector.selected);
+      },
+
+      handleResponse: function(){
+        
+      }
+
+      // filter: function(e, detail, sender) {
+      //   console.log('there it is', this.lorem);
+      //   var regex = new RegExp(sender.value, 'i');
+      //   this.filteredData = this.lorem.filter(function(d, idx, array) {
+      //     return regex.test(data[k]);
+      //   });
+      // }
+
+      
+
+
+    });
+
+  </script>
+
+</polymer-element>
