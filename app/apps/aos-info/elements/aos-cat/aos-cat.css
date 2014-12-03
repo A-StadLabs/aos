@@ -4,10 +4,13 @@
 
 }
 
-a {
+h3 {
 	font-weight: 400;
 	font-size: 18px;
 	color: #219dc8;
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
+	text-decoration: underline;
 }
 
 p {
