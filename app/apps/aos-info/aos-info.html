@@ -21,7 +21,7 @@
     <div horizontal layout wrap center start-justified>
         <img class="appicon" src="images/infocenter.svg">
         <h1>Infocenter</h1><input class="searchbox" />
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" log></firebase-element>
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}"></firebase-element>
     </div>
   </div>
 
@@ -43,12 +43,12 @@
     <div id="canvas">
       <small on-tap="{{toNext}}"> naar overzicht</small>
       <div id="leftmenu">
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/" data="{{subdata}}" keys="{{subkeys}}" on-data-change="{{handleResponse}}" log></firebase-element>
         <h2>{{selectedTitle}}</h2>
-<!--         <h2>{{selectedCat}}</h2> -->
         <core-selector  id="catselector" selected="{{selected}}" valueattr="value" on-core-select="{{cattapped}}">
         <div id="subcats">
-        <template repeat="{{k in keys}}">
-     
+        <template repeat="{{sk in subkeys}}">
+          <p>{{subdata[sk].subtitel}}</p>
         </template>
         <div>
         </core-selector>
@@ -117,6 +117,10 @@
         this.$.entryPost.body = this.post;
         
         this.$.entryPost.go();
+      },
+
+      handleResponse: function(){
+        console.log(this.data2);
       }
 
 
