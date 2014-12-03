@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<!-- <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
-<link rel="import" href="../../bower_components/core-ajax/core-ajax.html"> -->
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<!-- <link rel="import" href="../../bower_components/core-ajax/core-ajax.html"> -->
 
 <polymer-element name="aos-info" attributes="">
 
@@ -16,9 +16,9 @@
         <img class="appicon" src="../../elements/aos-homebabbelbox/images/infocenter.svg">
         <h1>Infocenter</h1><input class="searchbox" />
 
-<!--     <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" log></firebase-element>
+<firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" log></firebase-element>
 
-    <core-ajax method="POST" id="entryPost" handleAs="json" url="https://blazing-fire-6426.firebaseio.com/infocenter/.json">
+<!--     <core-ajax method="POST" id="entryPost" handleAs="json" url="https://blazing-fire-6426.firebaseio.com/infocenter/.json">
 </core-ajax>
  -->
 
@@ -33,25 +33,15 @@
 
         <!-- 1e kolom begin -->
         <div class="categories-list" vertical layout>
-          <div>
-            <h3><a href="">Adressen en openingsuren</a></h3>
-            <p>O.a. Openingsuren, adressen en contactgegevens.</p>
-          </div>
+
+                  <template repeat="{{ k in keys }}">
 
           <div>
-            <h3><a href="">Afval, sorteren en ophaling</a></h3>
-            <p>O.a. Openingsuren, adressen en contactgegevens.</p>
+              <a href="#detail={{k}}">{{data[k].categorie}}</a>
+            <p>{{data[k].shorttxt}}</p>
           </div>
+</template>
 
-          <div>
-            <h3><a href="">Belastingen en retributies</a></h3>
-            <p>O.a. Openingsuren, adressen en contactgegevens.</p>
-          </div>
-
-          <div>
-            <h3><a href="">Bibliotheken</a></h3>
-            <p>O.a. Openingsuren, adressen en contactgegevens.</p>
-          </div>
         </div>
         <!-- 1e kolom einde -->
 
