@@ -59,24 +59,7 @@
 <section>
   <div class="container">
     <div id="canvas">
-
-
       <aos-infoleftmenu selectedCat="{{selectedCat}}" selectedTitle="{{selectedTitle}}"></aos-infoleftmenu>
-      <!-- <div id="leftmenu">
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/" data="{{subdata}}" keys="{{subkeys}}" on-data-change="{{handleResponse}}" log></firebase-element>
-        <h2>{{selectedTitle}}</h2>
-        <core-selector id="catselector" selected="{{selected}}" valueattr="value" on-core-select="{{cattapped}}">
-        <template repeat="{{sk in subkeys}}">
-          <p class="subcats"> {{subdata[sk].subtitel}}</p>
-        </template>
-        </core-selector>
-          <template bind>
-          <div vertical layout center class="addbtn" on-tap="{{openAddSubCat}}"><h4>Een subcategorie toevoegen</h4></div>
-          <core-overlay layered backdrop id="suboverlay">
-          <aos-addinfosub selectedCat="{{selectedCat}}"></aos-addinfosub>
-          </core-overlay>
-        </template>
-      </div>     -->
     </div>
   </div>
 </section>
@@ -112,7 +95,7 @@
 
 
       ready: function() {
-        this.$.scenes.selected = 2;
+        this.$.scenes.selected = 0;
 
       	console.log('info app loaded.'); 
 

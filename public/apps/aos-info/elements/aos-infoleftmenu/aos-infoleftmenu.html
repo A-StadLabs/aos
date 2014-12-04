@@ -14,9 +14,9 @@
 
         <core-animated-pages id="subcatscenes" transitions="slide-from-right">
         <section>
-        <core-selector id="catselector" selected="{{selected}}" valueattr="label" on-core-select="{{cattapped}}">
+        <core-selector id="catselector" selected="{{selected}}" valueattr="label" on-core-activate="{{cattapped}}">
         <template repeat="{{sk in subkeys}}">
-          <div label="{{subdata[sk].subtitel}}" class="subcats"> {{subdata[sk].subtitel}}</div>
+          <div label="{{subdata[sk].subtitel}}" class="subcats">{{subdata[sk].subtitel}}</div>
         </template>
         </core-selector>
           <template bind>
@@ -52,8 +52,6 @@
       toNext: function(){
         this.$.subcatscenes.selected = 0;
         this.fire('menureset');
-
-
       },
 
         cattapped: function(){
