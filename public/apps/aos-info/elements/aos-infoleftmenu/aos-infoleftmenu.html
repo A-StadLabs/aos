@@ -49,6 +49,11 @@
 
         },
 
+      openAddSubCat: function(){
+        this.$.suboverlay.toggle();
+      },
+
+
       toNext: function(){
         this.$.subcatscenes.selected = 0;
         this.fire('menureset');

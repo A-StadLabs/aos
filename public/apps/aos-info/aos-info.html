@@ -101,7 +101,7 @@
 
         this.addEventListener('menureset', function(){
           this.$.scenes.selected = 0;
-          
+
           });
 
         this.addEventListener('detail-tapped', function(e){
@@ -121,11 +121,7 @@
         this.$.overlay.toggle();
         console.log('ajax response', this.localjson);
       },
-
-      openAddSubCat: function(){
-        this.$.suboverlay.toggle();
-      },
-
+      
       cattapped: function(){
         console.log(this.$.catselector.selected);
       },
