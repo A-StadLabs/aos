@@ -81,6 +81,9 @@
     <div id="canvas">
     <input type="text" on-keyup="{{searchBox}}" class="searchbox">
       <small on-tap="">< {{selectedCat}}</small>
+      <template repeat="{{s in searchresult.data}}">
+        <p>{{s.title}}</p>
+      </template>
       <p>test {{searchresult}}</p>
       <div class="column">
       <aos-artikel mode="long" object="{{artikel.data}}"></aos-artikel>
@@ -110,7 +113,7 @@
           this.windowMobile = true;
         };
 
-        this.$.scenes.selected = 0;
+        this.$.scenes.selected = 2;
 
 
       	console.log('info app loaded.'); 

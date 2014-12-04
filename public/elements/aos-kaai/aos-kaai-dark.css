@@ -21,9 +21,16 @@ core-dropdown {
 }
 
 core-item {
-	padding: 0px 14px 0px 18px;
+	padding: 5px 14px 0px 18px;
 }
 
+.avatar {
+	width: 25px;
+	height: 25px;
+	border-radius:50%;
+	margin: 0px 8px 0px 8px;
+	padding: 0px;
+}
 
 .dropdown {
 	background-color: #333333;
