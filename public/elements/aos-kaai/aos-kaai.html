@@ -98,13 +98,7 @@
 
       <div class="tools" horizontal center end-justified layout>
 
-      <core-ajax 
-          url="https://services.antwerpen.be/api/user/0.0.1/me"
-          method="GET" 
-          auto 
-          headers='{"Authorization": "Bearer 249b313f11b4c044f8819f5a636e28c"}'
-          handleAs="json" 
-          response="{{userresult}}" on-core-response="{{handleResponseUser}}"></core-ajax>
+     
         
 <!--         <h1>Hi there, {{userresult.data.first_name}} {{userresult.data.last_name}}.</h1>
 
