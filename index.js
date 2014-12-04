@@ -56,4 +56,14 @@ app.get('/notifications', function(req, res){
 	});
 });
 
+//Infofiche detail opvragen
+app.get('/infofichedetail', function(req, res){
+ 	//console.log(val);
+ 	var val = req.query.infokey;
+ 	request.get({url: 'https://www.antwerpen.be/srv/content/d/detail/id/'+val, jar: true}, function(error, response, body){
+  		console.log('Body die terug komt? ',body, '////// Response: ', response);
+  		res.send(body);
+	});
+});
+
 

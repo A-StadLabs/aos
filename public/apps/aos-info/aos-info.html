@@ -69,9 +69,9 @@
       </div> -->
       <div id="subcatdetail" hidden?="{{windowMobile}}">
       <template repeat="{{k2 in keys2}}">
-        <h3>INFOFICHE {{data2[k2].titel}}</h3>
+        <h3 on-tap="{{showDetail}}" value="{{data2[k2].infokey}}">{{data2[k2].titel}}</h3>
       </template>
-      </div>
+      
 
       <template bind>
         <div vertical layout center class="addbtn" on-tap="{{openAddFiche}}"><h4>Een infofiche toevoegen</h4></div>
@@ -79,21 +79,21 @@
           <aos-addinfofiche selectedCat="{{selectedCat}}" selectedSubCat="{{subCat}}" subKey="{{subKey}}"></aos-addinfofiche>
         </core-overlay>
       </template>
+      </div>
     </div>
 
   </div>
 </section>
 
 <section>
-<core-ajax url="https://www.antwerpen.be/srv/content/d/detail/id/537ca18cb0a8a70b5c8b458c" handleAs="json" response="{{artikel}}" on-core-response="{{handleResponseArtikel}}" auto method="GET"></core-ajax>
+<core-ajax url="/infofichedetail?infokey={{selectedDetail}}" handleAs="json" response="{{artikel}}" on-core-response="{{handleResponseArtikel}}" auto method="GET"></core-ajax>
 
 
   <div class="container">
     <div id="canvas">
     
-      <small on-tap="">< {{selectedCat}}</small>
+      <small on-tap="{{backSubCat}}">< {{selectedCat}}</small>
       
-      <p>test {{searchresult}}</p>
       <div class="column">
       <aos-artikel mode="long" object="{{artikel.data}}"></aos-artikel>
     </div>
@@ -139,6 +139,16 @@
           this.selectedTitle = e.detail.cat;
         })
 
+      },
+
+      backSubCat: function(){
+        this.$.scenes.selected = 1;
+      },
+
+      showDetail: function(e, detail, sender){
+        this.$.scenes.selected = 2;
+        this.selectedDetail = sender.attributes[1].value;
+        console.log(this.selectedDetail);
       },
 
       response: function(){
