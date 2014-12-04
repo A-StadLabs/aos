@@ -58,9 +58,18 @@
 </section>
 <section>
   <div class="container">
-    <div id="canvas">
-      <aos-infoleftmenu selectedCat="{{selectedCat}}" selectedTitle="{{selectedTitle}}"></aos-infoleftmenu>
-    </div>
+    <div id="canvas2" horizontal layout>
+      <aos-infoleftmenu selectedCat="{{selectedCat}}" selectedTitle="{{selectedTitle}}" subCat="{{subCat}}"></aos-infoleftmenu>
+
+      <div id="subcatdetail" hidden?="{{windowMobile}}">
+        <h3>1e infofiche over {{subCat}} </h3>
+        <h3>2e infofiche over {{subCat}} </h3>
+        <h3>3e infofiche over {{subCat}} </h3>
+        <h3>4e infofiche over {{subCat}} </h3>
+        <h3>5e infofiche over {{subCat}} </h3>
+      </div>
+          </div>
+
   </div>
 </section>
 
@@ -95,6 +104,12 @@
 
 
       ready: function() {
+          this.windowMobile = false;
+
+        if(window.innerWidth < 401){
+          this.windowMobile = true;
+        };
+
         this.$.scenes.selected = 0;
 
       	console.log('info app loaded.'); 

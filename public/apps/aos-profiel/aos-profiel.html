@@ -1,15 +1,21 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 
 
 <polymer-element name="aos-profiel" attributes="yoyo">
 
   <template>
+  <link rel="stylesheet" href="aos-profiel.css" />
+
+   <core-ajax method="POST" id="subPost" handleAs="json" data url="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/.json">
 
 
-    <link rel="stylesheet" href="aos-profiel.css" />
-
-    <h1>TEST DE profiel APP</h1>
-    <p>{{yoyo}}</p>
+  <div vertical layout center center-justified>
+    <h1>Aanmelden</h1>
+    <input value="{{userName}}" placeholder="Je gebruikersnaam"></input>
+    <input value="{{passWord}}"placeholder="Je wachtwoord"></input>
+    <button on-tap="{{loginSubmit}}">Aanmelden</button>
+  </div>
 
   </template>
 
@@ -23,6 +29,10 @@
 
       	console.log('profiel app loaded.');
         
+
+        },
+
+        loginSubmit: function(){
 
         }
 

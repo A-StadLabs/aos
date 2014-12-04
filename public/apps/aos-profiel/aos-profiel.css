@@ -1,4 +1,20 @@
 :host {
 	display: block;
-	margin-top: 60px !important;
+}
+
+
+h1 {
+	font-weight: 300;
+	color: #333333;
+}
+
+input {
+	background-color: white;
+	border:none;
+	border-radius: none;
+	height: 10px;
+	padding: 20px;
+	width: 240px;
+	min-width: 30vw;
+	margin-bottom: 10px; 
 }

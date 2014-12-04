@@ -3,7 +3,7 @@
 <link rel="import" href="../../../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../../../../bower_components/core-animated-pages/core-animated-pages.html">
 
-<polymer-element name="aos-infoleftmenu" attributes="selectedCat selectedTitle">
+<polymer-element name="aos-infoleftmenu" attributes="selectedCat selectedTitle subCat">
   <template>
     <link rel="stylesheet" href="aos-infoleftmenu.css">
       <div id="leftmenu">
@@ -11,13 +11,18 @@
               <small on-tap="{{toNext}}"> naar overzicht</small>
 
         <h2>{{selectedTitle}}</h2>
-
+      </div> 
+      <div id="leftmenu2">
         <core-animated-pages id="subcatscenes" transitions="slide-from-right">
         <section>
         <core-selector id="catselector" selected="{{selected}}" valueattr="label" on-core-activate="{{cattapped}}">
         <template repeat="{{sk in subkeys}}">
           <div label="{{subdata[sk].subtitel}}" class="subcats">{{subdata[sk].subtitel}}</div>
         </template>
+
+
+
+
         </core-selector>
           <template bind>
           <div vertical layout center class="addbtn" on-tap="{{openAddSubCat}}"><h4>Een subcategorie toevoegen</h4></div>
@@ -26,13 +31,25 @@
           </core-overlay>
         </template>
         </section>
+
         <section>
-          <div id="subcat">{{subCat}}</div>
+          <div id="subcat" horizontal layout center> <img id="bckbtn" on-tap="{{toCatMenu}}" src="../../images/back.svg">{{subCat}}
+          </div>
+
+
+      <div id="subcatdetail">
+        <h3>1e infofiche over {{subCat}} </h3>
+        <h3>2e infofiche over {{subCat}} </h3>
+        <h3>3e infofiche over {{subCat}} </h3>
+        <h3>4e infofiche over {{subCat}} </h3>
+        <h3>5e infofiche over {{subCat}} </h3>
+      </div>
+
         </section>
-
-
       </core-animated-pages>
+
       </div> 
+
   </template>
   <script>
     (function () {
@@ -59,8 +76,16 @@
         this.fire('menureset');
       },
 
-        cattapped: function(){
+      toCatMenu: function(){
+        this.$.subcatscenes.selected = 0;
+        this.$.catselector.selected = '';
+      },
+
+      cattapped: function(){
+
+                  if(window.innerWidth < 401){
           this.$.subcatscenes.selected = 1;
+        };
         }
       });
 

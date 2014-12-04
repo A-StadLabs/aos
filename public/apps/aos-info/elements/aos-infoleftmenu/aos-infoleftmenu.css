@@ -9,6 +9,8 @@ h2 {
 	font-size: 18px;
 	font-weight: 300;
 	color: #333333;
+	margin: 10px 0px 10px 0px;
+	padding: 0px; 
 }
 
 small {
@@ -22,35 +24,50 @@ small {
 #leftmenu {
 	width: 240px;
 	min-width: 24vw;
+
 }
 
+
+
+#leftmenu2 {
+	width: 240px;
+	min-width: 24vw;
+}
+
+
 .subcats {
-/*    background-image: url("images/next.svg");
-    background-size: 15px;
-    background-repeat: no-repeat;
-    background-position: right;
-	margin-left: 15px; */
 	padding: 10px;
 	border-bottom: 1px solid #E6E6E6;
 	font-size: 14px;
 	font-weight: 400;
 }
 
-#subcat {
-	background-color: yellow;
-
-}
 
 .subcats.core-selected {
 	font-weight: 600;
-	border-bottom: 1px solid #219dc8;
+	border-bottom: 2px solid #219dc8;
 	padding: 10px 10px 10px 15px;
 /*    background-image: url("../../images/next-blue.svg");
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: right; */
-
   }
+
+
+#subcat {
+/*	border-top:1px solid #999999;*/
+	padding: 8px 8px 8px 0px; 
+	font-weight: 600;
+	font-size: 14px;
+	border-bottom: 1px solid #666666;
+}
+
+
+#bckbtn {
+	width: 15px;
+	margin: 0px 14px 0px 0px;
+}
+
 
 
 #leftmenu h2 {
@@ -77,3 +94,40 @@ small {
 	margin-top: 20px; 
 	text-align: center;
 }
+
+
+
+
+@media only screen and (max-width: 320px) {
+
+
+#leftmenu {
+	width: 76vw;
+	margin: 20px 12vw 0vw 12vw;
+	padding: 0px;
+}
+
+#leftmenu2 {
+	width: 100vw;
+	padding: 0px;
+}
+
+.subcats {
+	padding: 12px 10px 12px 12vw;
+}
+
+#subcat {
+	width: 76vw;
+	margin: 10px 12vw 0vw 12vw;
+	padding: 0px 0px 10px 0px;
+}
+
+#subcatdetail {
+		width: 76vw;
+	margin: 10px 12vw 0vw 12vw;
+	padding: 0px 0px 10px 0px;
+}
+
+
+}
+
