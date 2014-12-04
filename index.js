@@ -5,16 +5,18 @@ var toughcookie = require('tough-cookie');
 
 app.set('port', (process.env.PORT || 5000));
 
+// serveer de polymeer
 app.use(express.static(__dirname + '/public'));
 
+// gewuun ne status update
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
 
+// Search voor infofiches
 app.get('/searching', function(req, res){
 	var val = req.query.search;
  	//console.log(val);
-
  	request.post({
   		headers: {'Content-Type' : 'application/json'},
   		method: 'post',
@@ -27,6 +29,7 @@ app.get('/searching', function(req, res){
 	});
 });
 
+// Login voor profiel
 app.get('/login', function(req, res){
 	var user = req.query.username;
 	var pass = req.query.password;
@@ -44,7 +47,7 @@ app.get('/login', function(req, res){
 	});
 });
 
-
+// Notificaties 
 app.get('/notifications', function(req, res){
  	//console.log(val);
  	request.get({url: 'https://www.antwerpen.be/srv/notification/d/unread', jar: true}, function(error, response, body){
