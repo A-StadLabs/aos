@@ -1,57 +1,7 @@
 :host {
-	display: block;
-	width: 100vw;
-	margin: 0px;
-	padding: 0px;
-}
-
-.leaderboard {
-	width: 76vw;
-	padding: 0vw 12vw 0vw 12vw;
-	background-color: #C0C9CF;
-	height: 180px;
-	margin: 0px auto 0px auto;
-	display: inline-block;
-}
-
-.stralendeA {
-	width: 4vw;
-	min-width: 60px;
-	padding: 0px;
-}
+  display: block;
 
 
-.searchbox {
-	margin: 0px 0px 0px 10px;
-	padding: 0px;
-	border: none;
-}
-
-.appicon {
-	width: 35px;
-	margin-right: 10px;
-	opacity: 0.5;
-}
-
-
-
-.container {
-	width: 100vw;
-	margin: 0px;
-}
-
-
-
-#canvas {
-	width: 76vw;
-	margin: 20px 12vw 0vw 12vw;
-	padding: 0px;
-	}
-
-h1 {
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 300;
-	color: #333333;
 }
 
 
@@ -68,31 +18,37 @@ small {
 	padding: 0px;
 }
 
-/*
 
 #leftmenu {
 	width: 240px;
 	min-width: 24vw;
 }
 
-
 .subcats {
+/*    background-image: url("images/next.svg");
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: right;
+	margin-left: 15px; */
 	padding: 10px;
 	border-bottom: 1px solid #E6E6E6;
 	font-size: 14px;
 	font-weight: 400;
 }
 
+#subcat {
+	background-color: yellow;
 
+}
 
 .subcats.core-selected {
 	font-weight: 600;
 	border-bottom: 1px solid #219dc8;
 	padding: 10px 10px 10px 15px;
-    background-image: url("images/next-blue.svg");
+/*    background-image: url("../../images/next-blue.svg");
     background-size: 15px;
     background-repeat: no-repeat;
-    background-position: right; 
+    background-position: right; */
 
   }
 
@@ -106,7 +62,7 @@ small {
 	font-weight: 600;
 	font-size: 14px;
 }
-*/
+
 .addbtn {
 	margin-top: 30px; 
 }
@@ -121,4 +77,3 @@ small {
 	margin-top: 20px; 
 	text-align: center;
 }
-

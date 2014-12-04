@@ -8,7 +8,9 @@
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="elements/aos-addinfocat/aos-addinfocat.html">
 <link rel="import" href="elements/aos-addinfosub/aos-addinfosub.html">
-<link rel="import" href="elements/aos-cat/aos-cat.html"> 
+<link rel="import" href="elements/aos-cat/aos-cat.html">
+<link rel="import" href="elements/aos-infoleftmenu/aos-infoleftmenu.html"> 
+
 
 <polymer-element name="aos-info" attributes="lorem">
 
@@ -55,24 +57,24 @@
 <section>
   <div class="container">
     <div id="canvas">
-      <small on-tap="{{toNext}}">< naar overzicht</small>
-      <div id="leftmenu">
+
+
+      <aos-infoleftmenu selectedCat="{{selectedCat}}" selectedTitle="{{selectedTitle}}"></aos-infoleftmenu>
+      <!-- <div id="leftmenu">
         <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/" data="{{subdata}}" keys="{{subkeys}}" on-data-change="{{handleResponse}}" log></firebase-element>
         <h2>{{selectedTitle}}</h2>
         <core-selector id="catselector" selected="{{selected}}" valueattr="value" on-core-select="{{cattapped}}">
-        <div>
-        <template id="subcats" repeat="{{sk in subkeys}}">
-          <p>{{subdata[sk].subtitel}}</p>
+        <template repeat="{{sk in subkeys}}">
+          <p class="subcats"> {{subdata[sk].subtitel}}</p>
         </template>
-        <template bind>
+        </core-selector>
+          <template bind>
           <div vertical layout center class="addbtn" on-tap="{{openAddSubCat}}"><h4>Een subcategorie toevoegen</h4></div>
           <core-overlay layered backdrop id="suboverlay">
           <aos-addinfosub selectedCat="{{selectedCat}}"></aos-addinfosub>
           </core-overlay>
         </template>
-        </div>
-        </core-selector>
-      </div>    
+      </div>     -->
     </div>
   </div>
 </section>
@@ -94,6 +96,11 @@
 
       	console.log('info app loaded.'); 
 
+        this.addEventListener('menureset', function(){
+          this.$.scenes.selected = 0;
+          
+          });
+
         this.addEventListener('detail-tapped', function(e){
           console.log('detail tapped: ', e.detail.key);
           this.$.scenes.selected = 1;
@@ -105,10 +112,6 @@
 
       response: function(){
         console.log('ajax response', this.localjson);
-      },
-
-      toNext: function(){
-        this.$.scenes.selected = 0;
       },
 
       openAddCat: function(){
