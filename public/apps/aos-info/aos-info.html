@@ -8,6 +8,7 @@
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="elements/aos-addinfocat/aos-addinfocat.html">
 <link rel="import" href="elements/aos-addinfosub/aos-addinfosub.html">
+<link rel="import" href="elements/aos-addinfofiche/aos-addinfofiche.html">
 <link rel="import" href="elements/aos-cat/aos-cat.html">
 <link rel="import" href="elements/aos-infoleftmenu/aos-infoleftmenu.html"> 
 
@@ -17,10 +18,7 @@
 <polymer-element name="aos-info" attributes="lorem">
 
   <template>
-
-    <link rel="stylesheet" href="aos-info.css" />
-
-    
+    <link rel="stylesheet" href="aos-info.css" /> 
   <div class="leaderboard">
     <img class="stralendeA" src="../../elements/aos-homebabbelbox/images/a-rgb.svg">
     <div horizontal layout wrap center start-justified>
@@ -31,7 +29,6 @@
 
     </div>
   </div>
-
 
 <core-animated-pages id="scenes" transitions="slide-from-right">
 <section>
@@ -59,31 +56,43 @@
 <section>
   <div class="container">
     <div id="canvas2" horizontal layout>
-      <aos-infoleftmenu selectedCat="{{selectedCat}}" selectedTitle="{{selectedTitle}}" subCat="{{subCat}}"></aos-infoleftmenu>
+      <aos-infoleftmenu selectedCat="{{selectedCat}}" selectedTitle="{{selectedTitle}}" subCat="{{subCat}}" subKey="{{subKey}}"></aos-infoleftmenu>
 
-      <div id="subcatdetail" hidden?="{{windowMobile}}">
-        <h3>1e infofiche over {{subCat}} </h3>
+      <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/{{subKey}}/infofiches" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}"></firebase-element>
+
+      <!-- <div id="subcatdetail" hidden?="{{windowMobile}}">
+        <h3>1e infofiche over {{subCat}} {{subKey}}</h3>
         <h3>2e infofiche over {{subCat}} </h3>
         <h3>3e infofiche over {{subCat}} </h3>
         <h3>4e infofiche over {{subCat}} </h3>
         <h3>5e infofiche over {{subCat}} </h3>
+      </div> -->
+      <div id="subcatdetail" hidden?="{{windowMobile}}">
+      <template repeat="{{k2 in keys2}}">
+        <h3>INFOFICHE {{data2[k2].titel}}</h3>
+      </template>
       </div>
-          </div>
+
+      <template bind>
+        <div vertical layout center class="addbtn" on-tap="{{openAddFiche}}"><h4>Een infofiche toevoegen</h4></div>
+        <core-overlay layered backdrop id="overlay2">
+          <aos-addinfofiche selectedCat="{{selectedCat}}" selectedSubCat="{{subCat}}" subKey="{{subKey}}"></aos-addinfofiche>
+        </core-overlay>
+      </template>
+    </div>
 
   </div>
 </section>
 
 <section>
 <core-ajax url="https://www.antwerpen.be/srv/content/d/detail/id/537ca18cb0a8a70b5c8b458c" handleAs="json" response="{{artikel}}" on-core-response="{{handleResponseArtikel}}" auto method="GET"></core-ajax>
-<core-ajax url="/searching" id="searchInfo" handleAs="json" response="{{searchresult}}" on-core-response="{{handleResponseSearch}}" method="GET"></core-ajax>
+
 
   <div class="container">
     <div id="canvas">
-    <input type="text" on-keyup="{{searchBox}}" class="searchbox">
+    
       <small on-tap="">< {{selectedCat}}</small>
-      <template repeat="{{s in searchresult.data}}">
-        <p>{{s.title}}</p>
-      </template>
+      
       <p>test {{searchresult}}</p>
       <div class="column">
       <aos-artikel mode="long" object="{{artikel.data}}"></aos-artikel>
@@ -113,7 +122,7 @@
           this.windowMobile = true;
         };
 
-        this.$.scenes.selected = 2;
+        this.$.scenes.selected = 0;
 
 
       	console.log('info app loaded.'); 
@@ -140,6 +149,11 @@
         this.$.overlay.toggle();
         console.log('ajax response', this.localjson);
       },
+
+      openAddFiche: function(){
+        this.$.overlay2.toggle();
+        console.log('ajax response', this.localjson);
+      },
       
       cattapped: function(){
         console.log(this.$.catselector.selected);
@@ -147,18 +161,9 @@
 
       handleResponse: function(){
         
-      },
-
-      searchBox: function(e, detail, sender){
-        console.log(sender.value);
-        // this.zoekOpdracht = { "type": [{"key":9,"value":"Infofiche","type":"type"}],
-        //                       "titel":[{"key":"titel","value":"aanvraag","type":"titel"}]
-        //                     };
-
-        //this.$.searchInfo.headers = {"Content-Type": "application/json"};
-        this.$.searchInfo.params = {search:sender.value};
-        this.$.searchInfo.go();
       }
+
+      
 
       // filter: function(e, detail, sender) {
       //   console.log('there it is', this.lorem);

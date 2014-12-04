@@ -50,8 +50,6 @@
 
 </div>
 
-
-
       <div class="tools" horizontal center end-justified layout>
 
         <a href="/#/profiel"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
@@ -61,8 +59,10 @@
         </core-icon-button></a>
         
         <a href="/#/profiel "><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel2.svg">
-        </core-icon-button></a>
+        </core-icon-but
+        ton></a>
       </div>
+      <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}" auto>
     </core-toolbar>
     </template>
 
