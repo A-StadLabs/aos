@@ -75,15 +75,15 @@
 
 <section>
 <core-ajax url="https://www.antwerpen.be/srv/content/d/detail/id/537ca18cb0a8a70b5c8b458c" handleAs="json" response="{{artikel}}" on-core-response="{{handleResponseArtikel}}" auto method="GET"></core-ajax>
-<core-ajax url="/searching" id="searchInfo" handleAs="json" response="{{searchresult}}" on-core-response="{{handleResponseSearch}}" method="POST"></core-ajax>
+<core-ajax url="/searching" id="searchInfo" handleAs="json" response="{{searchresult}}" on-core-response="{{handleResponseSearch}}" method="GET"></core-ajax>
 
   <div class="container">
     <div id="canvas">
     <input type="text" on-keyup="{{searchBox}}" class="searchbox">
       <small on-tap="">< {{selectedCat}}</small>
+      <p>test {{searchresult}}</p>
       <div class="column">
       <aos-artikel mode="long" object="{{artikel.data}}"></aos-artikel>
-
     </div>
     </div>
   </div>
@@ -111,6 +111,7 @@
         };
 
         this.$.scenes.selected = 0;
+
 
       	console.log('info app loaded.'); 
 
@@ -152,7 +153,7 @@
         //                     };
 
         //this.$.searchInfo.headers = {"Content-Type": "application/json"};
-        this.$.searchInfo.body = {search:sender.value};
+        this.$.searchInfo.params = {search:sender.value};
         this.$.searchInfo.go();
       }
 
