@@ -5,6 +5,15 @@
 	padding: 0px;
 }
 
+li {
+	font-weight: 400;
+	/*font-size: 18px;*/
+	color: #219dc8;
+	margin: 0px 0px 5px 0px;
+	padding: 0px;
+	text-decoration: underline;
+}
+
 .leaderboard {
 	width: 76vw;
 	padding: 0vw 12vw 0vw 12vw;
@@ -74,6 +83,13 @@ small {
 	min-width: 24vw;
 }
 
+.lijntje {
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.column {
+	width: 60vw;
+}
 
 #subcats {
     background-image: url("images/next.svg");
@@ -83,7 +99,6 @@ small {
 	margin-left: 15px;
 	padding: 10px;
 	border-bottom: 1px solid #E6E6E6;
-
 }
 
 

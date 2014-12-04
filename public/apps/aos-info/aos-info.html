@@ -10,13 +10,15 @@
 <link rel="import" href="elements/aos-addinfosub/aos-addinfosub.html">
 <link rel="import" href="elements/aos-cat/aos-cat.html"> 
 
+<link rel="import" href="../../elements/aos-artikel/aos-artikel.html"> 
+
 <polymer-element name="aos-info" attributes="lorem">
 
   <template>
 
     <link rel="stylesheet" href="aos-info.css" />
 
-    <core-ajax url="infofiches.json" handleAs="JSON" auto on-core-response="{{response}}" response="{{localjson}}"></core-ajax>
+    
   <div class="leaderboard">
     <img class="stralendeA" src="../../elements/aos-homebabbelbox/images/a-rgb.svg">
     <div horizontal layout wrap center start-justified>
@@ -77,8 +79,21 @@
   </div>
 </section>
 
+<section>
+<core-ajax url="https://www.antwerpen.be/srv/content/d/detail/id/537ca18cb0a8a70b5c8b458c" handleAs="json" response="{{artikel}}" on-core-response="{{handleResponseArtikel}}" auto method="GET"></core-ajax>
+<core-ajax url="/searching" id="searchInfo" handleAs="json" response="{{searchresult}}" on-core-response="{{handleResponseSearch}}" method="POST"></core-ajax>
 
+  <div class="container">
+    <div id="canvas">
+    <input type="text" on-keyup="{{searchBox}}" class="searchbox">
+      <small on-tap="">< {{selectedCat}}</small>
+      <div class="column">
+      <aos-artikel mode="long" object="{{artikel.data}}"></aos-artikel>
 
+    </div>
+    </div>
+  </div>
+</section>
 
 </core-animated-pages>
 
@@ -89,8 +104,13 @@
 
     Polymer({
 
+      handleResponseArtikel: function(){
+        console.log('artikel: ', JSON.stringify(this.artikel));
+      },
+
+
       ready: function() {
-        this.$.scenes.selected = 0;
+        this.$.scenes.selected = 2;
 
       	console.log('info app loaded.'); 
 
@@ -126,6 +146,17 @@
 
       handleResponse: function(){
         
+      },
+
+      searchBox: function(e, detail, sender){
+        console.log(sender.value);
+        // this.zoekOpdracht = { "type": [{"key":9,"value":"Infofiche","type":"type"}],
+        //                       "titel":[{"key":"titel","value":"aanvraag","type":"titel"}]
+        //                     };
+
+        //this.$.searchInfo.headers = {"Content-Type": "application/json"};
+        this.$.searchInfo.body = {search:sender.value};
+        this.$.searchInfo.go();
       }
 
       // filter: function(e, detail, sender) {
