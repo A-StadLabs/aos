@@ -41,38 +41,23 @@
       Polymer({
         // define element prototype here
         ready: function(){
-          // this.$.subcatscenes.selected = 0;
+
           var that = this;
-
-
-        this.$.catselector.addEventListener('core-select', function(e){
+          this.$.catselector.addEventListener('core-select', function(e){
             that.subCat = this.selected;
-            console.log('Dit is de aangeklikte subcat:', that.subCat);
-
           });
 
         },
 
       toNext: function(){
-        this.subCat = '';
         this.$.subcatscenes.selected = 0;
-        this.$.catselector.selected = '';
-
-
         this.fire('menureset');
-        // this.$.catselector.selected = -1;
-        console.log('Leeggemaakte subcat:', this.subCat);
-        // console.log('catselector terug op niks:', this.$.catselector.selected);
+
 
       },
 
         cattapped: function(){
           this.$.subcatscenes.selected = 1;
-
-
-          // this.subCat = this.$.catselector.selected;
-          // console.log(this.subCat);
-
         }
       });
 
