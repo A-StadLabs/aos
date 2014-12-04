@@ -26,7 +26,7 @@
 
     <link rel="stylesheet" href="aos-kaai-dark.css" />
 
-
+    <aos-globals id="globals"></aos-globals>
     <!-- <template if="{{userLoggedin}}">
 
     <core-toolbar horizontal start-justified layout>
@@ -110,7 +110,7 @@
         <a href="/#/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
         </core-icon-button></a>
         
-
+        {{$.globals.values.user.data.firstName}}
 
         <a href="/#/profiel "><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel2.svg">
         </core-icon-button></a>

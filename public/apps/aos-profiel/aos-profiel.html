@@ -13,12 +13,13 @@
   <div vertical layout center center-justified fit>
     <h1>Aanmelden</h1>
     user: {{responseUser}}
+    <aos-globals id="globals"></aos-globals>
     <img src="{{responseUser.data.avatarUrl}}">
     <input value="{{username}}" placeholder="Je gebruikersnaam"></input>
     <input value="{{password}}" placeholder="Je wachtwoord" type="password"></input>
     <button on-tap="{{loginSubmit}}">Aanmelden</button>
   </div>
-   <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}">
+   <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}">
 
   </template>
 
@@ -38,7 +39,13 @@
         loginSubmit: function(){
           this.$.loginAjax.params = { "username": this.username, "password": this.password };
           this.$.loginAjax.go();
+        },
+
+        handleResponseUser: function(){
+          this.$.globals.values.user = this.responseUser;
         }
+
+
 
 
     });
