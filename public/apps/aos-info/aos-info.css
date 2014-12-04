@@ -77,6 +77,7 @@ small {
 	padding: 0px;
 }
 
+/*
 
 #leftmenu {
 	width: 240px;
@@ -91,15 +92,13 @@ small {
 	width: 60vw;
 }
 
-#subcats {
-    background-image: url("images/next.svg");
-    background-size: 15px;
-    background-repeat: no-repeat;
-    background-position: right; 
-	margin-left: 15px;
+.subcats {
 	padding: 10px;
 	border-bottom: 1px solid #E6E6E6;
+	font-size: 14px;
+	font-weight: 400;
 }
+
 
 
 #leftmenu h2 {
@@ -111,10 +110,9 @@ small {
 	font-weight: 600;
 	font-size: 14px;
 }
-
+*/
 .addbtn {
 	margin-top: 30px; 
-	border-top: 1px solid #E6E6E6;
 }
 
 .addbtn h4 {
@@ -127,3 +125,4 @@ small {
 	margin-top: 20px; 
 	text-align: center;
 }
+

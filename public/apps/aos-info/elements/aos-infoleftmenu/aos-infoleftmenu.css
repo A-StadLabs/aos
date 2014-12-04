@@ -1,0 +1,79 @@
+:host {
+  display: block;
+
+
+}
+
+
+h2 {
+	font-size: 18px;
+	font-weight: 300;
+	color: #333333;
+}
+
+small {
+	color: #C0C9CF;
+	text-decoration: underline;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#leftmenu {
+	width: 240px;
+	min-width: 24vw;
+}
+
+.subcats {
+/*    background-image: url("images/next.svg");
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: right;
+	margin-left: 15px; */
+	padding: 10px;
+	border-bottom: 1px solid #E6E6E6;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+#subcat {
+	background-color: yellow;
+
+}
+
+.subcats.core-selected {
+	font-weight: 600;
+	border-bottom: 1px solid #219dc8;
+	padding: 10px 10px 10px 15px;
+/*    background-image: url("../../images/next-blue.svg");
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: right; */
+
+  }
+
+
+#leftmenu h2 {
+	font-size: 24px;
+}
+
+
+#leftmenu a {
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.addbtn {
+	margin-top: 30px; 
+}
+
+.addbtn h4 {
+	background-color: #E6E6E6;
+	margin: 12px 5px 12px 0px;
+	padding: 8px 10px 8px 10px; 
+	font-size: 13px;	
+	width: 170px;
+	font-weight: 400;
+	margin-top: 20px; 
+	text-align: center;
+}
