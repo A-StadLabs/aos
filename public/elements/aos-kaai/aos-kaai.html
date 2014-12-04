@@ -27,56 +27,12 @@
     <link rel="stylesheet" href="aos-kaai-dark.css" />
 
     <aos-globals id="globals"></aos-globals>
-    <!-- <template if="{{userLoggedin}}">
-
-    <core-toolbar horizontal start-justified layout>
-      <core-icon-button icon="chevron-right"></core-icon-button>
-      <div class="environment">{{environment}}</div>
-      <div horizontal center-justified layout>
-        <core-field>
-          <core-input placeholder="{{locplaceholder}}" autofocus flex class="searchclass"></core-input>
-        </core-field>
-      </div>
-      <div class="tools" horizontal end-justified layout>
-      <core-menu selected="0" selectedIndex="{{selected}}">
-        <core-icon-button icon="view-module"></core-icon-button>
-        <core-icon-button icon="sort"></core-icon-button>
-        <core-icon-button icon="account-circle"></core-icon-button>
-        <core-icon-button icon="help"></core-icon-button>
-      </core-menu>
-      </div>
-    </core-toolbar>
-
-    </template> -->
-
-    <template if="{{!userLoggedin}}">
-
-<!--     <notification-elements id="notif" icon="http://www.daklozenhulpantwerpen.be/images/logos/antwerpen.gif" header="Antwerpen.be / E-Loket" body="Uw reispas ligt klaar aan de balie." duration="1"></notification-elements>
- -->
-
-
+   <template if="{{!$.globals.values.user}}">
 
     <core-toolbar horizontal center center-justified layout fit class="{{ {gefocused: searchFocused } | tokenList}}">
 
 
       <div class="helpings" horizontal layout >
-
-<!--       <core-dropdown-menu label="Environment">
-    <core-dropdown class="dropdown">
-        <core-selector selected="0" id="envselect">
-          <core-item label="Antwerpen.be"></core-item>
-          <core-item label="Wilrijk.be"></core-item>
-          <core-item label="Visit Antwerpen"></core-item>
-          <core-item label="Stedelijk Onderwijs"></core-item>
-          <core-item label="Ondernemen"></core-item>
-          <core-item label="Oostende"></core-item>
-        </core-selector>
-    </core-dropdown>
-</core-dropdown-menu>
- -->
-
-
-
 
  <core-dropdown-menu label="Taal" class="lan">
           <core-dropdown class="dropdown">
@@ -98,12 +54,45 @@
 
       <div class="tools" horizontal center end-justified layout>
 
-     
-        
-<!--         <h1>Hi there, {{userresult.data.first_name}} {{userresult.data.last_name}}.</h1>
+        <a href="/#/profiel"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
+        </core-icon-button></a>
 
-        <a href="/profiel" hidden?="{{smallSearchbar}}"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
- -->
+        <a href="/#/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
+        </core-icon-button></a>
+        
+        <a href="/#/profiel "><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel2.svg">
+        </core-icon-button></a>
+      </div>
+    </core-toolbar>
+    </template>
+
+    <template if="{{$.globals.values.user}}">
+
+    <core-toolbar horizontal center center-justified layout fit class="{{ {gefocused: searchFocused } | tokenList}}">
+
+
+      <div class="helpings" horizontal layout >
+
+ <core-dropdown-menu label="Taal" class="lan">
+          <core-dropdown class="dropdown">
+            <core-selector selected="0" id="lanselect" valueattr="label">
+              <core-item label="NL"></core-item>
+              <core-item label="FR"></core-item>
+              <core-item label="EN"></core-item>
+              <core-item label="DE"></core-item>
+            </core-selector>
+          </core-dropdown>
+        </core-dropdown-menu>
+
+        <a href="/help" class="helpbtn" ><core-icon-button label="help" id="bthelp" src="images/kaai-help.svg">
+        </core-icon-button></a>
+
+</div>
+
+
+
+      <div class="tools" horizontal center end-justified layout>
+
         <a href="/#/profiel"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
         </core-icon-button></a>
 
@@ -111,43 +100,11 @@
         </core-icon-button></a>
         
         {{$.globals.values.user.data.firstName}}
-
-        <a href="/#/profiel "><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel2.svg">
+        <img src="{{$.globals.values.user.data.avatarUrl}}">
+        <a href="/#/profiel "><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="{{$.globals.values.user.data.avatarUrl}}">
         </core-icon-button></a>
-<!--         <core-icon-button on-tap="{{openAuth}}" class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel2.svg">
-        </core-icon-button> -->
-
-
-
-
       </div>
     </core-toolbar>
-
-
- <!--    <div id="paneBar">
-
-      <div id="aanmelden" hidden?="{{!loginPane}}">
-        <h1>{{locaanmelden}}</h1>
-        <core-input placeholder="{{locusername}}"></core-input>
-        <core-input placeholder="{{locpassword}}" type="password"></core-input>
-        <core-icon-button icon="done" flex>{{locaanmeldcta}}</core-icon-button><br />
-        <a href="#">{{locforgot}}</a><br />
-        <a href="#">{{locregister}}</a>
-      </div>
-
-      <div id="searchpane" hidden?="{{!searchPane}}">
-        <h1>{{locsearchresult}} <i>{{searchValue}}</i>:</h1>
-      </div>
-
-      <div id="localisationpane" hidden?="{{!locPane}}">
-        <core-item label=""><flag-icon key="Netherlands"></flag-icon></core-item>
-        <core-item label=""><flag-icon key="France"></flag-icon></core-item>
-        <core-item label=""><flag-icon key="United Kingdom"></flag-icon></core-item>
-        <core-item label=""><flag-icon key="Germany"></flag-icon></core-item>
-      </div>
-  
-    </div>
- -->
     </template>
 
   </template>
