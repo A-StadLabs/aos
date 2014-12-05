@@ -7,11 +7,10 @@
 
     <link rel="stylesheet" href="aos-knooppunt.css" />
 
-
-<div id="recentcontainer" vertical layout start center-justified>
-
+<div id="favos">
+<div id="container" vertical layout start center-justified>
 <div horizontal layout center start-justified class="grouptitle">
-  <h1 flex>Favorieten</h1>
+  <div flex><h1>Favorieten</h1></div>
   <div class="switcher" end-justified>
   <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
   <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
@@ -44,9 +43,109 @@
     <img class="appicon" src="images/appicons/icon-contacteren.svg">
     <p class="appdescr">Stad Antwerpen contacteren</p>
   </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-afspraakmaken.svg">
+    <p >Afspraak maken</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-aanvragen.svg">
+    <p >Documenten aanvragen</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img class="appicon" src="images/appicons/icon-probleem.svg">
+    <p class="appdescr">Een probleem melden</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img class="appicon" src="images/appicons/icon-contacteren.svg">
+    <p class="appdescr">Stad Antwerpen contacteren</p>
+  </a>
   </div>
 
 </div>
+</div>
+
+
+
+<div id="container" vertical layout start center-justified>
+
+<div horizontal layout center start-justified class="grouptitle">
+  
+  <div flex horizontal layout start start-justified >
+    <img class="groupicon" src="images/a-rgb.svg">
+    <h1>Stad Antwerpen</h1>
+  </div>
+  
+  <div class="switcher" end-justified>
+  <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
+  <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
+  </div>
+
+</div>
+
+  <div id="group" horizontal layout wrap start start-justified>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-infocenter.svg">
+    <p >Informatie opzoeken</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-afspraakmaken.svg">
+    <p >Afspraak maken</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-aanvragen.svg">
+    <p >Documenten aanvragen</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img class="appicon" src="images/appicons/icon-probleem.svg">
+    <p class="appdescr">Een probleem melden</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img class="appicon" src="images/appicons/icon-contacteren.svg">
+    <p class="appdescr">Stad Antwerpen contacteren</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-afspraakmaken.svg">
+    <p >Afspraak maken</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-aanvragen.svg">
+    <p >Documenten aanvragen</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img class="appicon" src="images/appicons/icon-probleem.svg">
+    <p class="appdescr">Een probleem melden</p>
+  </a>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img class="appicon" src="images/appicons/icon-contacteren.svg">
+    <p class="appdescr">Stad Antwerpen contacteren</p>
+  </a>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
