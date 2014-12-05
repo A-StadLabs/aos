@@ -14,7 +14,14 @@ body {
 }
 
 
+
 .container {
+	display: inline-block;
+	margin-top: 60px;
+}
+
+app-router {
+	display: block;
 	margin-top: 60px;
 }
 

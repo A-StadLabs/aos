@@ -24,6 +24,7 @@
    </template>
    <template if="{{$.globals.values.user}}">
     <h1>{{$.globals.values.user.data.firstName}}</h1>
+    <p>{{$.globals.values.userJSON}}</p>
    </template>
 
   </template>
@@ -49,6 +50,7 @@
 
         handleResponseUser: function(){
           this.$.globals.values.user = this.responseUser;
+          this.$.globals.values.userJSON = JSON.stringify(this.$.globals.values.user.data);
         }
 
 
