@@ -78,6 +78,16 @@ h2 {
 	color: #333333;
 }
 
+
+h3 {
+	font-size: 18px;
+	font-weight: 300;
+	color: #219dc8;
+	text-decoration: underline;
+}
+
+
+
 small {
 	color: #C0C9CF;
 	text-decoration: underline;
@@ -85,40 +95,17 @@ small {
 	padding: 0px;
 }
 
-/*
 
-#leftmenu {
-	width: 240px;
-	min-width: 24vw;
-}
 
-.lijntje {
-	border-bottom: 1px solid #E6E6E6;
-}
-
-.column {
-	width: 60vw;
-}
-
-.subcats {
-	padding: 10px;
-	border-bottom: 1px solid #E6E6E6;
-	font-size: 14px;
-	font-weight: 400;
+#subcatdetail {
+	padding-left: 50px;
 }
 
 
 
-#leftmenu h2 {
-	font-size: 24px;
-}
 
 
-#leftmenu a {
-	font-weight: 600;
-	font-size: 14px;
-}
-*/
+
 .addbtn {
 	margin-top: 30px; 
 }
@@ -145,5 +132,9 @@ small {
 	padding: 0px;
 	}
 
+
+#subcatdetail {
+	padding-left: 0px;
+}
 
 }

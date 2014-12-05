@@ -123,9 +123,17 @@ small {
 }
 
 #subcatdetail {
-		width: 76vw;
+	width: 76vw;
 	margin: 10px 12vw 0vw 12vw;
 	padding: 0px 0px 10px 0px;
+}
+
+
+h3 {
+	font-size: 12px;
+	font-weight: 900;
+	color: red;
+	text-decoration: none;
 }
 
 

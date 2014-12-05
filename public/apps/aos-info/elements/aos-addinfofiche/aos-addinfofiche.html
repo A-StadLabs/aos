@@ -6,16 +6,18 @@
     <link rel="stylesheet" href="aos-addinfofiche.css">
     <core-ajax method="POST" id="infofichePost" handleAs="json" data url="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/{{subKey}}/infofiches/.json">
 </core-ajax>
-    <div class="overlay">
+    <div class="overlay" vertical layout start center-justified>
+      <div horizontal layout center>
       <h2>Infofiche toevoegen</h2>
-      <p>cat: {{selectedCat}}</p>
-      <p>sub: {{subKey}}</p>
+      <core-icon-button end-justified icon="close" core-overlay-toggle></core-icon-button>
+      </div>
+<!--       <p>cat: {{selectedCat}}</p>
+      <p>sub: {{subKey}}</p> -->
       <core-ajax url="/searching" id="searchInfo" handleAs="json" response="{{searchresult}}" on-core-response="{{handleResponseSearch}}" method="GET"></core-ajax>
       <input type="text" on-keyup="{{searchBox}}" class="searchbox">
       <template repeat="{{s in searchresult.data}}">
         <core-icon-button icon="arrow-down" on-tap="{{addInfoFiche}}" value="{{s.id}}" titel="{{s.title}}">{{s.title}}</core-icon-button>
       </template>
-      <core-icon-button icon="close" core-overlay-toggle></core-icon-button>
       <input placeholder="Categorie" autofocus value="{{categorie}}">
       <input placeholder="Beschrijving" value="{{shorttxt}}">
       <button on-tap="{{saveCat}}">Opslaan</button>

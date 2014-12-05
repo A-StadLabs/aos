@@ -21,7 +21,7 @@
         </template>
         </core-selector>
           <template bind id="addinfofiche">
-          <div vertical layout center class="addbtn" on-tap="{{openAddSubCat}}"><h4>Een subcategorie toevoegen</h4></div>
+          <div vertical layout start class="addbtn" on-tap="{{openAddSubCat}}"><h4>Een subcategorie toevoegen</h4></div>
           <core-overlay layered backdrop id="suboverlay">
           <aos-addinfosub selectedCat="{{selectedCat}}" subKey="{{subKey}}"></aos-addinfosub>
           </core-overlay>
@@ -33,12 +33,19 @@
           </div>
 
 
-      <div id="subcatdetail">
-        <h3>1e infofiche over {{subCat}} {{subKey}} </h3>
-        <h3>2e infofiche over {{subCat}} </h3>
-        <h3>3e infofiche over {{subCat}} </h3>
-        <h3>4e infofiche over {{subCat}} </h3>
-        <h3>5e infofiche over {{subCat}} </h3>
+
+
+
+    <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/{{subKey}}/infofiches" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}"></firebase-element>
+
+      <div id="subcatdetail" hidden?="{{windowMobile}}">
+      <template repeat="{{k2 in keys2}}">
+        <h3 on-tap="{{fireDetail}}" value="{{data2[k2].infokey}}">{{data2[k2].titel}}</h3>
+      </template>
+
+
+
+
       </div>
 
         </section>
@@ -70,6 +77,10 @@
 
       openAddSubCat: function(){
         this.$.suboverlay.toggle();
+      },
+
+      fireDetail: function(){
+        this.fire('toScene2');
       },
 
 

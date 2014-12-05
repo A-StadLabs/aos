@@ -1,7 +1,37 @@
 :host {
   display: block;
-  width: 300px;
-  background-color: white;
+
 }
 
 
+.overlay {
+	  width: 330px;
+  background-color: white;
+  padding: 30px;
+}
+
+
+h2 {
+	font-size: 22px;
+	font-weight: 300;
+	color: #333333;
+	margin: 10px 0px 10px 0px;
+	padding: 0px; 
+}
+
+
+input {
+	font-size: 13px;
+	background-color: #F2F2F2;
+	padding: 10px;
+	margin-bottom: 10px;
+	color:#333333;
+	border-radius: 5px;
+	border: none;
+	min-width: 280px; 
+}
+
+
+.searchbox {
+	background-color: #FAFAFA;
+}

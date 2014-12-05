@@ -60,13 +60,6 @@
 
       <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/{{subKey}}/infofiches" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}"></firebase-element>
 
-      <!-- <div id="subcatdetail" hidden?="{{windowMobile}}">
-        <h3>1e infofiche over {{subCat}} {{subKey}}</h3>
-        <h3>2e infofiche over {{subCat}} </h3>
-        <h3>3e infofiche over {{subCat}} </h3>
-        <h3>4e infofiche over {{subCat}} </h3>
-        <h3>5e infofiche over {{subCat}} </h3>
-      </div> -->
       <div id="subcatdetail" hidden?="{{windowMobile}}">
       <template repeat="{{k2 in keys2}}">
         <h3 on-tap="{{showDetail}}" value="{{data2[k2].infokey}}">{{data2[k2].titel}}</h3>
@@ -74,7 +67,7 @@
       
 
       <template bind>
-        <div vertical layout center class="addbtn" on-tap="{{openAddFiche}}"><h4>Een infofiche toevoegen</h4></div>
+        <div vertical layout start class="addbtn" on-tap="{{openAddFiche}}"><h4>Een infofiche toevoegen</h4></div>
         <core-overlay layered backdrop id="overlay2">
           <aos-addinfofiche selectedCat="{{selectedCat}}" selectedSubCat="{{subCat}}" subKey="{{subKey}}"></aos-addinfofiche>
         </core-overlay>
@@ -131,6 +124,14 @@
           this.$.scenes.selected = 0;
 
           });
+
+
+        this.addEventListener('toScene2', function(){
+          this.$.scenes.selected = 2;
+
+          });
+
+        
 
         this.addEventListener('detail-tapped', function(e){
           console.log('detail tapped: ', e.detail.key);

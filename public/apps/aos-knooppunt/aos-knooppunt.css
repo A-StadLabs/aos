@@ -18,7 +18,7 @@
 #container {
 	width: 76vw;
 	margin: 0px 12vw 0px 12vw;
-	padding: 50px 0px 30vw 0px;
+	padding: 50px 0px 30vw 12vw;
 
 }
 
@@ -26,15 +26,11 @@
 
 .apptile {
 	background-color: rgba(0,0,0,0.05);
-	min-width: 180px;
+	width: 180px;
 	padding: 30px 10px 20px 10px;
 	margin-left: 10px;
 	margin-bottom: 10px;
-
 }
-
-
-
 
 
 .apptile:active {
@@ -48,7 +44,8 @@ a {
 }
 
 .apptile p {
-	width: 90%;
+	width: 160px;
+	margin: 10px 10px 15px 10px;
 	text-align: center;
 	color: #333333;
 	font-size: 14px;
@@ -59,7 +56,7 @@ a {
 	width: 50px;
 	border-radius: 50px;
 	background-color: white;
-	margin-bottom: 10px;
+	margin: 0px 65px 10px 65px;
 }
 
 h1 {
@@ -69,6 +66,38 @@ h1 {
 	margin: 0px 0px 30px 0px;
 	font-size: 26px;
 }
+
+
+
+
+
+.applist {
+	background-color: rgba(0,0,0,0.05);
+	width: 40vw;
+	padding: 25px 20px 15px 20px;
+	margin: 0px 10px 10px 0px;
+	border-bottom: 1px solid #EBEBEB;
+
+}
+
+
+.applist p {
+	width: 75%;
+	text-align: left;
+	color: #333333;
+	font-size: 14px;
+}
+
+.applist img {
+	height: 30px;
+	width: 30px;
+	border-radius: 30px;
+	background-color: white;
+	margin-bottom: 2px;
+}
+
+
+
 
 
 
@@ -104,9 +133,11 @@ h1 {
 }
 
 
+/* TILE !!!!!!!!!!!! */
+
 .apptile {
 	background-color: rgba(0,0,0,0.05);
-	min-width: 156px;
+	width: 156px;
 	padding: 25px 0px 15px 0px;
 	margin: 0px 4px 4px 0px;
 
@@ -115,10 +146,11 @@ h1 {
 
 
 .apptile p {
-	width: 75%;
+	width: 130px;
 	text-align: center;
 	color: #333333;
 	font-size: 14px;
+	margin: 10px 15px 10px 15px;
 }
 
 .apptile img {
@@ -126,18 +158,22 @@ h1 {
 	width: 50px;
 	border-radius: 50px;
 	background-color: white;
-	margin-bottom: 2px;
+	margin: 0px 52px 2px 52px;
+
 }
 
 
 
+
+/* LIST !!!!!!!!!!!! */
+
+
 .applist {
 	background-color: rgba(0,0,0,0.05);
-	min-width: 156px;
-	padding: 25px 0px 15px 0px;
-	margin: 0px 4px 4px 0px;
-
-
+	width: 90vw;
+	padding: 25px 5vw 15px 5vw;
+	margin: 0px 0px 0px 0px;
+	border-bottom: 1px solid #EBEBEB;
 }
 
 
@@ -147,6 +183,12 @@ h1 {
 	color: #333333;
 	font-size: 14px;
 }
+
+
+
+
+
+
 
 .applist img {
 	height: 50px;
