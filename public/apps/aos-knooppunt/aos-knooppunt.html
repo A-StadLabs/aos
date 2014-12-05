@@ -10,29 +10,40 @@
 
 <div id="recentcontainer" vertical layout start center-justified>
 
-  <h1 class="grouptitle">Favorieten</h1>
-  <div id="group" horizontal layout wrap center start-justified>
+<div horizontal layout center start-justified class="grouptitle">
+  <h1 flex>Favorieten</h1>
+  <div class="switcher" end-justified>
+  <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
+  <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
+  </div>
+</div>
 
-  <a href="/#/info" class="applist" horizontal layout center start-justified wrap>
-    <img src="images/infocenter.svg">
+  <div id="group" horizontal layout wrap start start-justified>
+
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-infocenter.svg">
     <p >Informatie opzoeken</p>
   </a>
 
-  <a href="/#/info" class="applist" horizontal layout center start-justified wrap>
-    <img src="images/infocenter.svg">
-    <p >Informatie opzoeken</p>
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-afspraakmaken.svg">
+    <p >Afspraak maken</p>
   </a>
 
-  <a href="/#/info" class="applist" horizontal layout center start-justified wrap>
-    <img src="images/infocenter.svg">
-    <p >Informatie opzoeken</p>
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-aanvragen.svg">
+    <p >Documenten aanvragen</p>
   </a>
 
-  <a href="/#/info" class="applist" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/infocenter.svg">
-    <p class="appdescr">Informatie opzoeken</p>
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img class="appicon" src="images/appicons/icon-probleem.svg">
+    <p class="appdescr">Een probleem melden</p>
   </a>
 
+  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img class="appicon" src="images/appicons/icon-contacteren.svg">
+    <p class="appdescr">Stad Antwerpen contacteren</p>
+  </a>
   </div>
 
 </div>
@@ -145,8 +156,20 @@
     Polymer({
 
       ready: function() {
-
+        this.tile = true;
+        this.list = false;
       	console.log('Knooppunt app loaded.'); 
+
+        },
+
+        switchToList: function() {
+        this.tile = false;
+        this.list = true;
+        },
+
+        switchToTile: function() {
+        this.tile = true;
+        this.list = false;
 
         }
 
