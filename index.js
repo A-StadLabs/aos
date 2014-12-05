@@ -52,6 +52,14 @@ app.get('/login', function(req, res){
 	});
 });
 
+//logout
+app.get('/logout', function(req, res){
+	req.session.destroy(function(err) {
+  	// cannot access session here
+	});
+});
+
+// check user
 app.get('/user', function(req, res){
 	if(req.session.userobject){
 		res.send(req.session.userobject);

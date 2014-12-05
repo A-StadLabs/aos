@@ -195,7 +195,12 @@
 
       handleResponseUserCheck: function(){
         console.log('reactie van /user: ',JSON.stringify(this.responseUser));
-        this.$.globals.values.user = this.responseUser;
+        if(this.responseUser&&this.responseUser.status==='E'){
+          console.log('Sessie bestaat niet, user is leeg');
+          delete this.$.globals.values.user;
+        } else {
+          this.$.globals.values.user = this.responseUser;
+        }
       },
 
       openAuth: function(){

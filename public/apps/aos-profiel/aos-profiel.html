@@ -7,8 +7,6 @@
   <template>
   <link rel="stylesheet" href="aos-profiel.css" />
 
-  
-
   <template if="{{!$.globals.values.user}}">
   <div vertical layout center center-justified fit>
     <h1>Aanmelden</h1>
@@ -22,11 +20,14 @@
    <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}">
    </core-ajax>
    </template>
-   <template if="{{$.globals.values.user}}">
+   <template if="{{$.globals.values.user}}" bind>
     <h1>{{$.globals.values.user.data.firstName}}</h1>
     <p>{{$.globals.values.userJSON}}</p>
     <button on-tap="{{logout}}">Logout</button>
+    
    </template>
+
+   <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
 
   </template>
 
@@ -40,11 +41,11 @@
 
       	console.log('profiel app loaded.');
         
-
         },
 
         logout: function(){
-          this.$.globals.values.user = '';
+          this.$.logoutAjax.go();
+          delete this.$.globals.values.user;
         },
 
         loginSubmit: function(){
@@ -57,9 +58,6 @@
           this.$.globals.values.user = this.responseUser;
           this.$.globals.values.userJSON = JSON.stringify(this.$.globals.values.user.data);
         }
-
-
-
 
     });
 
