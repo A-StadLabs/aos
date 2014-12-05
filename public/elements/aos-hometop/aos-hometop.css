@@ -4,8 +4,121 @@
   background-color: #219dc8;
 }
 
+#topcontainer {
+	width: 76vw;
+	margin: 0px 12vw 0px 12vw;
+}
 
-h1 {
+
+
+
+#group {
+	margin: 0px 0px 50px 0px; 
+}
+
+
+.grouptitle {
+	margin: 0px 0px 20px 0px;
+	width: 76vw;
+
+}
+
+.grouptitle h1 {
+	color: rgba(0,0,0,0.35);
+	margin: 35px 0px 10px 0px;
+	font-size: 3vw;
+	font-weight: 300;
+	padding: 0px;
+}
+
+
+.groupicon {
+	height: 30px;
+	margin: 18px 15px 0px 0px;
+
+}
+
+
+
+.apptile {
+	background-color: rgba(0,0,0,0.05);
+	width: 180px;
+	height: 120px;
+	padding: 30px 10px 20px 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+
+.apptile:active {
+	background-color: #EBEBEB;
+}
+
+
+a {
+	text-decoration: none;
+
+}
+
+.apptile p {
+	width: 160px;
+	margin: 10px 10px 15px 10px;
+	text-align: center;
+	color: #333333;
+	font-size: 14px;
+}
+
+.apptile img {
+	height: 40px;
+	width: 40px;
+	border-radius: 50px;
+	background-color: white;
+	margin: 0px 55px 10px 55px;
+	padding: 10px;
+	opacity: 0.8;
+}
+
+.apptile img:hover {
+	opacity: 1;
+}
+
+
+
+.switcherbtn {
+	background-color: none;
+	border: none;
+	padding: 0px;
+}
+
+.switcherbtn:active {
+	background-color: none;
+	border: none;
+	padding: 0px;
+}
+
+
+
+.switcherbtn img {
+	background-color: none;
+	width: 20px;
+	padding: 10px 0px 0px 0px;
+}
+
+
+.activated {
+	opacity: 1;
+}
+
+
+.notactivated {
+	opacity: 0.25;
+}
+
+
+
+
+
+/*h1 {
 	color: rgba(0,0,0,0.35);
 	margin: 15px 0px 5px 0px;
 	font-size: 5vw;
@@ -115,7 +228,7 @@ hr {
 }
 
 
-
+*/
 
 
 
@@ -129,54 +242,71 @@ hr {
 /* MOBILE UITZONDERINGEN */
 
 
-
 @media only screen and (max-width: 320px) {
 
-h1 {
-   	font-size: 14vw;
-   	font-size: 12vw;
-   	margin: 15px 0px 15px 0px;
-}
 
-.stralendeA {
-	width: 7vw;
-		min-width: 40px;
-
-}
-
-#container {
-	width: 76vw;
-	margin: 0vw 12vw 4vw 12vw;
-}
-
-
-#container2 {
+#topcontainer {
 	width: 100vw;
-	margin: 0vw 0vw 0vw 0vw;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 }
 
 
 
-.startbtn {
-	background-color: rgba(255,255,255,0.05);
-	min-width: 156px;
-	height: 110px;
-	padding: 5px 0px 5px 0px;
-	margin-left: 0px;
-	border: 2px solid #219dc8;
-		margin-bottom: 0px;
-
-
-}
-
-p {
-	color: white;
-	margin: 0px;
-	font-size: 11px;
-	font-weight: 400;
-	text-transform: uppercase;
+.apptile {
+	background-color: rgba(0,0,0,0.05);
+	width: 156px;
+	padding: 25px 0px 15px 0px;
+	margin: 0px 4px 4px 0px;
 }
 
 
+.apptile p {
+	width: 130px;
+	text-align: center;
+	color: #333333;
+	font-size: 14px;
+	margin: 10px 15px 10px 15px;
 }
 
+
+
+.apptile img {
+	height: 30px;
+	width: 30px;
+	border-radius: 30px;
+	background-color: white;
+	margin: 0px 48px 10px 48px;
+	padding: 15px;
+	opacity: 0.8;
+}
+
+
+
+#group {
+	margin: 0px 0px -4px 0px; 
+}
+
+
+.grouptitle {
+	width: 80vw;
+	margin: 0px 10vw 15px 10vw;
+}
+
+
+
+
+.grouptitle h1 {
+	color: rgba(0,0,0,0.35);
+	margin: 20px 0px 10px 0px;
+	font-size: 10vw;
+	font-weight: 300;
+	padding: 0px;
+}
+
+
+
+
+
+
+}

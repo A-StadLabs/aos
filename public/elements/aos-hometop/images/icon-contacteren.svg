@@ -4,9 +4,9 @@
 <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
 <g>
-	<path fill="none" stroke="#FFFFFF" stroke-width="2.1" stroke-miterlimit="10" d="M38.747,19.898
-		c0-7.645-6.199-13.844-13.846-13.844s-13.845,6.199-13.845,13.844c0,5.065,2.729,9.482,6.788,11.896v11.646l7.057-5.106
-		l7.057,5.106V31.794C36.019,29.38,38.747,24.963,38.747,19.898z"/>
-	<circle fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-miterlimit="10" cx="24.902" cy="19.988" r="8.082"/>
+	
+		<rect x="8.925" y="13.042" fill="none" stroke="#333333" stroke-width="2.1" stroke-miterlimit="10" width="33.794" height="23.528"/>
+	<polyline fill="none" stroke="#333333" stroke-width="1.5" stroke-miterlimit="10" points="8.925,14.499 25.822,28.594 
+		42.719,14.043 	"/>
 </g>
 </svg>
