@@ -11,7 +11,7 @@
 <link rel="import" href="elements/aos-addinfofiche/aos-addinfofiche.html">
 <link rel="import" href="elements/aos-cat/aos-cat.html">
 <link rel="import" href="elements/aos-infoleftmenu/aos-infoleftmenu.html"> 
-
+<link rel="import" href="../../elements/aos-globals/aos-globals.html">
 
 <link rel="import" href="../../elements/aos-artikel/aos-artikel.html"> 
 
@@ -19,6 +19,8 @@
 
   <template>
     <link rel="stylesheet" href="aos-info.css" /> 
+        <aos-globals id="globals"></aos-globals>
+
   <div class="leaderboard">
     <img class="stralendeA" src="../../elements/aos-homebabbelbox/images/a-rgb.svg">
     <div horizontal layout wrap center start-justified>
@@ -65,7 +67,6 @@
         <h3 on-tap="{{showDetail}}" value="{{data2[k2].infokey}}">{{data2[k2].titel}}</h3>
       </template>
       
-
       <template bind>
         <div vertical layout start class="addbtn" on-tap="{{openAddFiche}}"><h4>Een infofiche toevoegen</h4></div>
         <core-overlay layered backdrop id="overlay2">
@@ -162,7 +163,8 @@
       },
 
       openAddFiche: function(){
-        this.$.overlay2.toggle();
+        var that = this;
+        that.$.overlay2.toggle();
         console.log('ajax response', this.localjson);
       },
       

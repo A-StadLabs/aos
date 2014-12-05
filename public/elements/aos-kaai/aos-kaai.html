@@ -14,6 +14,7 @@
 <link rel="import" href="../../bower_components/core-dropdown-menu/core-dropdown-menu.html">
 <link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
 <link rel="import" href="../../bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 
 
 <!-- <link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html"> -->
@@ -23,14 +24,15 @@
 
   <template>
 
-
     <link rel="stylesheet" href="aos-kaai-dark.css" />
 
+    <core-ajax method="GET" id="checkUser" handleAs="json" url="/user" response="{{responseUser}}" on-core-response="{{handleResponseUserCheck}}" auto></core-ajax>
+
     <aos-globals id="globals"></aos-globals>
+
    <template if="{{!$.globals.values.user}}">
 
     <core-toolbar horizontal center center-justified layout fit class="{{ {gefocused: searchFocused } | tokenList}}">
-
 
       <div class="helpings" horizontal layout >
 
@@ -62,7 +64,7 @@
         </core-icon-but
         ton></a>
       </div>
-      <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}" auto>
+      <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}">
     </core-toolbar>
     </template>
 
@@ -189,6 +191,11 @@
         //   document.getElementById('canvas').src = loc;
         // });
 
+      },
+
+      handleResponseUserCheck: function(){
+        console.log('reactie van /user: ',JSON.stringify(this.responseUser));
+        this.$.globals.values.user = this.responseUser;
       },
 
       openAuth: function(){

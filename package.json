@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "express": "~4.9.x",
+    "express-session": "^1.9.3",
     "request": "^2.49.0",
     "tough-cookie": "^0.12.1"
   },
