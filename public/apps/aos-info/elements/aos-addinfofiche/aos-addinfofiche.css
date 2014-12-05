@@ -20,18 +20,34 @@ h2 {
 }
 
 
-input {
+.searchbox {
 	font-size: 13px;
-	background-color: #F2F2F2;
 	padding: 10px;
 	margin-bottom: 10px;
 	color:#333333;
 	border-radius: 5px;
 	border: none;
 	min-width: 280px; 
+
+	background-color: #FAFAFA;
+	background-image: url("../../images/searchloop.svg");
+/*    background-size: 15px;
+*/    background-repeat: no-repeat;
+    background-position: right; 
 }
 
 
-.searchbox {
-	background-color: #FAFAFA;
+
+
+.addbtn {
+	background-color: #219dc8;
+	margin: 12px 5px 12px 0px;
+	padding: 8px 10px 8px 10px; 
+	font-size: 13px;	
+	width: 170px;
+	font-weight: 400;
+	margin-top: 20px; 
+	text-align: center;
+	border: none;
+	color: white;
 }

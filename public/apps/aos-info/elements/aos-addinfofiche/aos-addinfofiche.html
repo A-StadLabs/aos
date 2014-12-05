@@ -18,9 +18,9 @@
       <template repeat="{{s in searchresult.data}}">
         <core-icon-button icon="arrow-down" on-tap="{{addInfoFiche}}" value="{{s.id}}" titel="{{s.title}}">{{s.title}}</core-icon-button>
       </template>
-      <input placeholder="Categorie" autofocus value="{{categorie}}">
-      <input placeholder="Beschrijving" value="{{shorttxt}}">
-      <button on-tap="{{saveCat}}">Opslaan</button>
+<!--       <input placeholder="Categorie" autofocus value="{{categorie}}">
+      <input placeholder="Beschrijving" value="{{shorttxt}}"> -->
+      <button class="addbtn" on-tap="{{saveCat}}">toevoegen</button>
       </div>
 
 
