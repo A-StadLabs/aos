@@ -25,6 +25,7 @@
    <template if="{{$.globals.values.user}}">
     <h1>{{$.globals.values.user.data.firstName}}</h1>
     <p>{{$.globals.values.userJSON}}</p>
+    <button on-tap="{{logout}}">Logout</button>
    </template>
 
   </template>
@@ -40,6 +41,10 @@
       	console.log('profiel app loaded.');
         
 
+        },
+
+        logout: function(){
+          this.$.globals.values.user = '';
         },
 
         loginSubmit: function(){
