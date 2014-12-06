@@ -87,4 +87,13 @@ app.get('/infofichedetail', function(req, res){
 	});
 });
 
+//Homefeed opvragen
+app.get('/homefeed', function(req, res){
+  //console.log(val);
+  request.get({url: 'https://www.antwerpen.be/srv/kanalen/d/homefeed/0/9', jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
+
 

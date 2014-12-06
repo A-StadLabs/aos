@@ -9,6 +9,11 @@
 	margin: 0vw 12vw 1vw 12vw;
 }
 
+#jlist {
+	width: 100%;
+	padding: 20px;
+}
+
 
 #leftcolumn {
 	width: 240px;
