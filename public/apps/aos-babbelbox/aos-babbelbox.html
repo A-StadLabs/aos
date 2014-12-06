@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="aos-babbelbox" attributes="">
+
+  <template>
+
+    <link rel="stylesheet" href="aos-babbelbox.css" />
+
+    <core-ajax 
+url="/helpcenter"
+method="GET" 
+auto 
+handleAs="json" 
+response="{{resultaat}}"
+on-core-response="{{handleResponse}}" 
+></core-ajax>
+
+<core-scaffold drawerWidth="300px" fit>
+  <core-header-panel navigation flex mode="seamed">
+    <core-toolbar><div flex>Babbels</div><core-icon-button icon="add"></core-icon-button></core-toolbar>
+    <core-menu theme="core-light-theme">
+    <template repeat="{{h in resultaat.data}}">
+      <div class="item" horizontal layout>
+      <div><img src="{{h.user.avatarUrl}}" class="avatar"></div>
+      <div flex><p>{{h.title}}</p></div>
+      </div>
+    </template>
+    </core-menu>
+  </core-header-panel>
+  <div tool>Title</div>
+  <div>Main content goes here...</div>
+</core-scaffold>
+    
+  </template>
+
+  <script>
+
+    Polymer({
+
+      ready: function() {
+
+      	console.log('Babbelbox app loaded.'); 
+
+        }
+
+
+    });
+
+  </script>
+
+</polymer-element>

@@ -87,4 +87,20 @@ app.get('/infofichedetail', function(req, res){
 	});
 });
 
+//Homefeed opvragen
+app.get('/homefeed', function(req, res){
+  //console.log(val);
+  request.get({url: 'https://www.antwerpen.be/srv/kanalen/d/homefeed/0/9', jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
+//Helpcenter content opvragen
+app.get('/helpcenter', function(req, res){
+  //console.log(val);
+  request.get({url: 'https://www.antwerpen.be/srv/babbelbox/d/list?1417880524389&numberOfItems=20&start=0', jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
 

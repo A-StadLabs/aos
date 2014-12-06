@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/juicy-tile-list/src/juicy-tile-list.html">
+<link rel="import" href="../aos-artikel/aos-artikel.html">
 
 <polymer-element name="aos-homenieuws" attributes="">
   <template>
@@ -10,13 +11,12 @@
 
 <div id="container" horizontal layout start wrap>
 <core-ajax 
-url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/3"
+url="/homefeed"
 method="GET" 
 auto 
 handleAs="json" 
 response="{{resultaat}}"
 on-core-response="{{handleResponse}}" 
-limitToFirst="2"
 >
 
 </core-ajax>
@@ -32,15 +32,12 @@ limitToFirst="2"
   </template> -->
 
 
-
-<!--   <template repeat="{{a in resultaat.data}}">
-    <aos-artikel object="{{a}}" mode="long" class="item" id="artikel"></aos-artikel>
+<juicy-tile-list setup="{{setup}}" id="jlist"> 
+<template repeat="{{a in resultaat.data}}">
+    <aos-artikel object="{{a}}" mode="short" class="item" id="artikel"></aos-artikel>
   </template>
- -->
+  </juicy-tile-list>
 
-
-
-<!-- </juicy-tile-list> -->
 
 
 
@@ -61,6 +58,9 @@ limitToFirst="2"
 
     <div id="artikelMEDIUM">
     <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/74f7a525-eef8-44b6-81be-f0e8ba12fdc7/cov%20er%20A-Winterportretten-40.jpg">
+
+<div vertical layout start id="leftcolumn">
+  <div id="artikelMEDIUM">
     <h1> Medium // </h1>
   </div>
 
@@ -91,16 +91,22 @@ limitToFirst="2"
 
         console.log('Homescreen app loaded.');
 
-        // var i = 0;
-        // var items = [];
-        // this.setup = {gutter: 20, items:items};
+        var i = 0;
+        var items = [];
+        this.setup = {width: '100%', gutter: 20, items:items};
         
-        // document.addEventListener('addToFeed', function(e){
-        //     items.push({index:i, priority:0.9, width: 200, heightAuto: true});
-        //     this.setup = { gutter: 20, items:items};
-        //     i++;
-        //     console.log(JSON.stringify(this.setup));
-        // });
+        document.addEventListener('addToFeed', function(e){
+            items.push({index:i, priority:0.9, width: 350, heightAuto: true});
+            this.setup = { gutter: 20, items:items};
+            i++;
+            console.log(JSON.stringify(this.setup));
+
+        });
+        var that = this;
+        setTimeout(function(){ that.$.jlist.refresh(); }, 2000);
+
+
+        
 
         },
 
@@ -108,7 +114,7 @@ limitToFirst="2"
         //var that = this;
         console.log('wtf?');
         this.tips = false;
-        //this.$.jlist.refresh();
+        this.$.jlist.refresh();
       },
 
       handleResponse: function(){
