@@ -34,19 +34,31 @@ button {
 
 }
 
+.grouptitle a {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	color: #333333;
+	font-size: 26px;
+	padding: 0px;
+	margin: 0px 15px 0px 0px;
+}
+
+
+
 .grouptitle h1 {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	color: #333333;
 	font-size: 26px;
 	padding: 0px;
-	margin-right: 15px;
+	margin: 0px 15px 0px 0px;
 }
+
 
 
 .groupicon {
 	height: 30px;
-	margin: 18px 15px 0px 0px;
+	margin: 4px 15px 0px 0px;
 
 }
 
@@ -177,7 +189,7 @@ a {
 
 
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 400px) {
 
 
 #favos {
@@ -203,9 +215,9 @@ a {
 
 .apptile {
 	background-color: rgba(0,0,0,0.05);
-	width: 156px;
+	width: 48vw;
 	padding: 25px 0px 15px 0px;
-	margin: 0px 4px 4px 0px;
+	margin: 0px 2vw 4px 0px;
 }
 
 
@@ -216,32 +228,22 @@ a {
 
 
 .apptile p {
-	width: 130px;
+	width: 40vw;
 	text-align: center;
 	color: #333333;
 	font-size: 14px;
-	margin: 10px 15px 10px 15px;
+	margin: 10px 4vw 10px 4vw;
 }
-
-/*.apptile img {
-	height: 50px;
-	width: 50px;
-	border-radius: 50px;
-	background-color: white;
-	margin: 0px 52px 2px 52px;
-
-}
-*/
 
 
 
 .apptile img {
-	height: 30px;
-	width: 30px;
-	border-radius: 30px;
+	height: 10vw;
+	width: 10vw;
+	border-radius: 12vw;
 	background-color: white;
-	margin: 0px 48px 10px 48px;
-	padding: 15px;
+	margin: 0px 17vw 10px 17vw;
+	padding: 2vw;
 	opacity: 0.8;
 }
 
@@ -270,11 +272,6 @@ a {
 	color: #333333;
 	font-size: 14px;
 }
-
-
-
-
-
 
 
 .applist img {

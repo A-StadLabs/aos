@@ -8,7 +8,7 @@
 
 
 
-<div id="container" horizontal layout>
+<div id="container" horizontal layout start wrap>
 <core-ajax 
 url="https://www.antwerpen.be/srv/kanalen/d/homefeed/0/3"
 method="GET" 
@@ -43,11 +43,24 @@ limitToFirst="2"
 <!-- </juicy-tile-list> -->
 
 
-<!--   <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/74f7a525-eef8-44b6-81be-f0e8ba12fdc7/cov%20er%20A-Winterportretten-40.jpg" width="auto"> -->
 
 
-<div vertical layout start id="leftcolumn">
-  <div id="artikelMEDIUM">
+
+<div id="leftcolumn">
+
+  <div id="artikelLARGE">
+      <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/06f6bc5a-cc9e-4e7b-ac8b-080936a117bd/CIEOFF_LaGrandeParade_300dpi 3.jpg">
+    <h1> Large // </h1>
+  </div>
+
+</div>
+
+
+<div vertical layout start  id="rightcolumn">
+
+
+    <div id="artikelMEDIUM">
+    <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/74f7a525-eef8-44b6-81be-f0e8ba12fdc7/cov%20er%20A-Winterportretten-40.jpg">
     <h1> Medium // </h1>
   </div>
 
@@ -58,15 +71,6 @@ limitToFirst="2"
 
   <div id="artikelSMALL">
     <h1> Small // </h1>
-  </div>
-
-</div>
-
-
-<div id="rightcolumn">
-
-  <div id="artikelLARGE">
-    <h1> Large // </h1>
   </div>
 
 </div>
