@@ -95,5 +95,12 @@ app.get('/homefeed', function(req, res){
   });
 });
 
+//Helpcenter content opvragen
+app.get('/helpcenter', function(req, res){
+  //console.log(val);
+  request.get({url: 'https://www.antwerpen.be/srv/babbelbox/d/list?1417880524389&numberOfItems=20&start=0', jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
 
 
