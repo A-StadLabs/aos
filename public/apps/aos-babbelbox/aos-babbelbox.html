@@ -82,7 +82,7 @@ on-core-response="{{detailResponse}}"
         if (detail.isSelected) {
           var selectedItem = detail.item;
           console.log(selectedItem.attributes[1].value);
-          this.$.genAjax.url = 'http://localhost:5000/helpcenter-item?item='+selectedItem.attributes[1].value;
+          this.$.genAjax.url = '/helpcenter-item?item='+selectedItem.attributes[1].value;
           this.$.genAjax.go();
         }
       },
