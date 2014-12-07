@@ -16,6 +16,7 @@ auto
 handleAs="json" 
 response="{{resultaat}}"
 on-core-response="{{handleResponse}}" 
+progress="{{progress}}"
 ></core-ajax>
 
 <core-ajax 
@@ -24,13 +25,14 @@ method="GET"
 handleAs="json" 
 response="{{helpdetail}}"
 on-core-response="{{detailResponse}}" 
+
 ></core-ajax>
 
 
 <core-scaffold drawerWidth="400px" fit>
   <core-header-panel navigation flex mode="seamed">
     <core-toolbar><div flex>Babbels</div><core-icon-button icon="add"></core-icon-button></core-toolbar>
-    <core-menu theme="core-light-theme" on-core-select="{{selectItem}}">
+    <core-menu theme="core-light-theme" on-core-select="{{selectItem}}" selected="0">
     <template repeat="{{h in resultaat.data}}">
       <core-item class="item" selectedId="{{h._id}}" horizontal layout on-tap="{{selectItem}}">
       <div><img src="{{h.user.avatarUrl}}" class="avatar"></div>
@@ -40,8 +42,7 @@ on-core-response="{{detailResponse}}"
     </core-menu>
   </core-header-panel>
   <template bind id="t_detail">
-  <div tool>{{title}}</div>
-  <div>
+    <div>
   <p>{{body}}</p>
   <template repeat="{{a in answers}}">
     <div><img src="{{a.user.avatarUrl}}" class="avatar"></div>
@@ -69,6 +70,8 @@ on-core-response="{{detailResponse}}"
         });
 
         },
+
+        
 
       handleResponse: function(){
         var t = this.$.t_detail;

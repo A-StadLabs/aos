@@ -1,5 +1,5 @@
 :host {
-	display: inline-block;
+	display: block;
 	min-width: 200px;
     width: 100%;
     margin: 0 auto;
@@ -30,4 +30,8 @@ juicy-tile-list {
 
 .tip h3 {
 	font-size: 1em;
+}
+
+.item {
+	width: 33%;
 }

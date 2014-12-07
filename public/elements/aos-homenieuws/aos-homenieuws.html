@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/juicy-tile-list/src/juicy-tile-list.html">
+<link rel="import" href="../../bower_components/ordered-columns/ordered-columns.html">
 <link rel="import" href="../aos-artikel/aos-artikel.html">
 
 <polymer-element name="aos-homenieuws" attributes="">
@@ -9,7 +10,8 @@
 
 
 
-<div id="container" horizontal layout start wrap>
+<div id="container">
+
 <core-ajax 
 url="/homefeed"
 method="GET" 
@@ -20,62 +22,12 @@ on-core-response="{{handleResponse}}"
 >
 
 </core-ajax>
-<!-- <juicy-tile-list setup="{{setup}}" gap="20" id="jlist"> 
-  <template if="{{tips}}">
-  <div class="tip">
-    <div class="container">
-    <core-icon-button icon="close" on-tap="{{hideTips}}"><small>niet meer weergeven</small></core-icon-button>
-    <h3>Wist je dat je dit startscherm kan personaliseren?</h3>
-    <core-icon-button icon="arrow-forward">Ga naar mijn instellingen</core-icon-button>
-    </div>
-  </div>
-  </template> -->
 
-
-<juicy-tile-list setup="{{setup}}" id="jlist"> 
-<template repeat="{{a in resultaat.data}}">
-    <aos-artikel object="{{a}}" mode="short" class="item" id="artikel"></aos-artikel>
+<ordered-columns id="orderedColumns">
+ <template repeat="{{a in resultaat.data}}">
+    <aos-artikel role="article" object="{{a}}" mode="short" class="item" id="artikel" style="width: 400px; margin-right: 20px; margin-top: 0px;"></aos-artikel>
   </template>
-  </juicy-tile-list>
-
-
-
-
-
-
-<div id="leftcolumn">
-
-  <div id="artikelLARGE">
-      <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/06f6bc5a-cc9e-4e7b-ac8b-080936a117bd/CIEOFF_LaGrandeParade_300dpi 3.jpg">
-    <h1> Large // </h1>
-  </div>
-
-</div>
-
-
-<div vertical layout start  id="rightcolumn">
-
-
-    <div id="artikelMEDIUM">
-    <img class="foto" src="https://assets.antwerpen.be/srv/assets/api/image/74f7a525-eef8-44b6-81be-f0e8ba12fdc7/cov%20er%20A-Winterportretten-40.jpg">
-
-<div vertical layout start id="leftcolumn">
-  <div id="artikelMEDIUM">
-    <h1> Medium // </h1>
-  </div>
-
-
-  <div id="artikelSMALL">
-    <h1> Small // </h1>
-  </div>
-
-  <div id="artikelSMALL">
-    <h1> Small // </h1>
-  </div>
-
-</div>
-
-
+  </ordered-columns>
 
 </div>
 
@@ -84,6 +36,18 @@ on-core-response="{{handleResponse}}"
     (function () {
       'use strict';
 
+      var orderedColumns = document.getElementById('orderedColumns');
+function resize(){
+  if(orderedColumns.clientWidth < 600){
+    orderedColumns.count = 1;
+  }else if(orderedColumns.clientWidth < 1000){
+    orderedColumns.count = 2;
+  }else{
+    orderedColumns.count = 3;
+  }
+}
+window.addEventListener('resize', resize);
+
       Polymer({
       ready: function() {
        
@@ -91,19 +55,19 @@ on-core-response="{{handleResponse}}"
 
         console.log('Homescreen app loaded.');
 
-        var i = 0;
-        var items = [];
-        this.setup = {width: '100%', gutter: 20, items:items};
+        // var i = 0;
+        // var items = [];
+        // this.setup = {width: '100%', gutter: 20, items:items};
         
-        document.addEventListener('addToFeed', function(e){
-            items.push({index:i, priority:0.9, width: 350, heightAuto: true});
-            this.setup = { gutter: 20, items:items};
-            i++;
-            console.log(JSON.stringify(this.setup));
+        // document.addEventListener('addToFeed', function(e){
+        //     items.push({index:i, priority:0.9, width: 350, heightAuto: true});
+        //     this.setup = { gutter: 20, items:items};
+        //     i++;
+        //     console.log(JSON.stringify(this.setup));
 
-        });
-        var that = this;
-        setTimeout(function(){ that.$.jlist.refresh(); }, 2000);
+        // });
+        // var that = this;
+        // setTimeout(function(){ that.$.jlist.refresh(); }, 2000);
 
 
         
@@ -114,7 +78,7 @@ on-core-response="{{handleResponse}}"
         //var that = this;
         console.log('wtf?');
         this.tips = false;
-        this.$.jlist.refresh();
+        //this.$.jlist.refresh();
       },
 
       handleResponse: function(){

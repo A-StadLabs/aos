@@ -11,6 +11,6 @@
     "commit": "8955fabc02dec94e830a4a3ffad57eb523b54105"
   },
   "_source": "git://github.com/Polymer/polymer-test-tools.git",
-  "_target": "^0.5.1",
+  "_target": "^0.5.0",
   "_originalSource": "Polymer/polymer-test-tools"
 }

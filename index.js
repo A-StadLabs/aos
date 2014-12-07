@@ -65,6 +65,9 @@ app.get('/user', function(req, res){
 		res.send(req.session.userobject);
 	} else {
 		res.send({ 'status': 'E', 'msg': 'User not logged in.'});
+    req.session.destroy(function(err) {
+    // cannot access session here
+  });
 	}
 
 });

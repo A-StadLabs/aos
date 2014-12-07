@@ -15,12 +15,11 @@
 <!--     <small>{{object.creator.fullName}}</small>
  -->    <template is="juicy-html" content="{{ artikelIntro }}"></template>
     <template if="{{ mode == 'long'}}" repeat="{{t in artikelCopy}}">
-      <p>
-      <template is="juicy-html" content="{{ t.text }}"></template></p>
+      <div><p>
+      <template is="juicy-html" content="{{ t.text }}"></template></p></div>
     </template>
 
 
-    
     </div>
 
 
