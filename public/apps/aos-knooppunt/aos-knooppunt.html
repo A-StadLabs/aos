@@ -75,13 +75,16 @@
 
 
 
+
+
+
 <div id="container" vertical layout start center-justified>
 
 <div horizontal layout center start-justified class="grouptitle">
   
   <div flex horizontal layout start start-justified >
     <img class="groupicon" src="images/a-rgb.svg">
-    <h1>Stad Antwerpen</h1>
+    <a href="/">Stad Antwerpen</a>
   </div>
   
   <div class="switcher" end-justified>
@@ -140,6 +143,46 @@
   </div>
 
 </div>
+
+
+
+
+
+
+
+<div id="container" vertical layout start center-justified>
+
+<div horizontal layout center start-justified class="grouptitle">
+  
+  <div flex horizontal layout start start-justified >
+    <img class="groupicon" src="images/astadlabs.svg">
+    <a href="/#/">AstadLabs</a>
+  </div>
+  
+  <div class="switcher" end-justified>
+  <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
+  <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
+  </div>
+
+</div>
+
+  <div id="group" horizontal layout wrap start start-justified>
+
+  <a href="/#/quistar" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-quistar.svg">
+    <p >Quistar</p>
+  </a>
+
+  <a href="/#/songsvanongs" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-songsvanongs.svg">
+    <p >Songs van Ongs</p>
+  </a>
+
+  </div>
+
+</div>
+
+
 
 
   </template>
