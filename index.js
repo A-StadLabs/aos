@@ -103,4 +103,13 @@ app.get('/helpcenter', function(req, res){
   });
 });
 
+//Helpcenter detail opvragen
+app.get('/helpcenter-item', function(req, res){
+  //console.log(val);
+  var val = req.query.item;
+  request.get({url: 'https://www.antwerpen.be/srv/babbelbox/d/show/'+val, jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
 

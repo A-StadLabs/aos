@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../bower_components/core-item/core-item.html">
 
 <polymer-element name="aos-babbelbox" attributes="">
 
@@ -17,20 +18,38 @@ response="{{resultaat}}"
 on-core-response="{{handleResponse}}" 
 ></core-ajax>
 
-<core-scaffold drawerWidth="300px" fit>
+<core-ajax 
+id="genAjax"
+method="GET"  
+handleAs="json" 
+response="{{helpdetail}}"
+on-core-response="{{detailResponse}}" 
+></core-ajax>
+
+
+<core-scaffold drawerWidth="400px" fit>
   <core-header-panel navigation flex mode="seamed">
     <core-toolbar><div flex>Babbels</div><core-icon-button icon="add"></core-icon-button></core-toolbar>
-    <core-menu theme="core-light-theme">
+    <core-menu theme="core-light-theme" on-core-select="{{selectItem}}">
     <template repeat="{{h in resultaat.data}}">
-      <div class="item" horizontal layout>
+      <core-item class="item" selectedId="{{h._id}}" horizontal layout on-tap="{{selectItem}}">
       <div><img src="{{h.user.avatarUrl}}" class="avatar"></div>
       <div flex><p>{{h.title}}</p></div>
-      </div>
+      </core-item>
     </template>
     </core-menu>
   </core-header-panel>
-  <div tool>Title</div>
-  <div>Main content goes here...</div>
+  <template bind id="t_detail">
+  <div tool>{{title}}</div>
+  <div>
+  <p>{{body}}</p>
+  <template repeat="{{a in answers}}">
+    <div><img src="{{a.user.avatarUrl}}" class="avatar"></div>
+    <p>{{a.user.username}}</p>
+    <p>{{a.body}}</p>
+  </template>
+  </div>
+  </template>
 </core-scaffold>
     
   </template>
@@ -43,7 +62,35 @@ on-core-response="{{handleResponse}}"
 
       	console.log('Babbelbox app loaded.'); 
 
+        this.$.selekt.addEventListener('core-activate', function(e, detail, sender){
+          console.log(JSON.stringify(this.selected));
+          var t = this.$.t_detail;
+          t.model = this.selected;
+        });
+
+        },
+
+      handleResponse: function(){
+        var t = this.$.t_detail;
+        t.model = { 'titel': 'hallo', 'detail': 'Hallo detail.'};
+      },
+
+      selectItem: function(e, detail) {
+        if (detail.isSelected) {
+          var selectedItem = detail.item;
+          console.log(selectedItem.attributes[1].value);
+          this.$.genAjax.url = 'http://localhost:5000/helpcenter-item?item='+selectedItem.attributes[1].value;
+          this.$.genAjax.go();
         }
+      },
+
+      detailResponse: function(){
+        console.log(this.helpdetail.data);
+        var t = this.$.t_detail;
+        t.model = this.helpdetail.data;
+      }
+
+      
 
 
     });
