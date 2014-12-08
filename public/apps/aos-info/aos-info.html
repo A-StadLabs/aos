@@ -28,9 +28,7 @@
         <img class="appicon" src="images/infocenter.svg">
         <h1>Info Center</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
       </div>
-
        
-        
         <core-ajax 
         url="/infofichecats"
         method="GET" 
@@ -39,8 +37,6 @@
         response="{{categories}}"
         on-core-response="{{handleResponse}}">
         </core-ajax>
-
-        infofichecats
 
     </div>
   </div>
