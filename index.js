@@ -90,6 +90,21 @@ app.get('/infofichedetail', function(req, res){
 	});
 });
 
+// infofiche categorieen
+app.get('/infofichecats', function(req, res){
+  //console.log(val);
+  var val = req.query.infokey;
+  request.get({url: 'https://www.antwerpen.be/srv/kanalen/d/category', jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
+// kanalen in thema
+//https://www.antwerpen.be/srv/kanalen/d/overzicht?official=true&sort=name&category=53635dad4d57a4c4a6000004
+
+// subcategorie in kanaal
+// https://www.antwerpen.be/srv/kanalen/d/channels/afvalophaling
+
 //Homefeed opvragen
 app.get('/homefeed', function(req, res){
   //console.log(val);
