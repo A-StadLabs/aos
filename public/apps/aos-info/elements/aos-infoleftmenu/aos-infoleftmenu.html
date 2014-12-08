@@ -11,6 +11,7 @@
               <small on-tap="{{toNext}}"> naar overzicht</small>
 
               <core-ajax 
+        id="AjaxSubcat"
         url="/infofichetabs?slug={{subCat}}"
         method="GET" 
         auto 
@@ -18,6 +19,8 @@
         response="{{tabs}}"
         on-core-response="{{handleResponse}}">
         </core-ajax>
+
+        
 
         <h2>{{selectedTitle}}</h2>
       </div> 
@@ -27,8 +30,10 @@
         <section>
         <core-selector id="catselector" selected="{{selected}}" valueattr="label" on-core-activate="{{cattapped}}">
         <template repeat="{{t in tabs.data.links}}">
-          <div label="{{t.title}}" key="{{t.slug}}" class="subcats" details="{{t.details}}" linktype="{{t.linkType}}">{{t.title}}</div>
+          <div label="{{t.title}}" key="{{t.slug}}" class="subcats" details="{{t.details}}" linktype="{{t.linkType}}" >{{t.title}}</div>
         </template>
+
+
         </core-selector>
           
         </section>
@@ -39,12 +44,21 @@
           </div>
 
       <div id="subcatdetail">
-      <template repeat="{{t in tabs.data.links}}">
+      
+        <template repeat="{{t in tabs.data.links}}">
           <div label="{{subdata[sk].subtitel}}" key="{{sk}}" class="subcats">{{t.title}}</div>
         </template>
 
+        <core-ajax 
+        id="AjaxContentid"
+        method="GET" 
+        url=""
+        handleAs="json" 
+        response="{{AjaxContent}}"
+        on-core-response="{{handleResponse1}}">
+        </core-ajax>
 
-
+        
 
       </div>
 
@@ -67,22 +81,36 @@
           var that = this;
 
           this.subKey = subKey;
+          this.$.catselector.selected = -1;
           this.$.catselector.addEventListener('core-activate', function(e){
             //that.subCat = this.selected;
             //that.subKey = e.detail.item.attributes[1].value;
             that.details = e.detail.item.attributes[3].value;
             that.linkType = e.detail.item.attributes[4].value;
             that.details = JSON.parse(that.details);
+
             if(that.linkType==='tabs'){
             that.details = that.details.tabs;
-            console.log('details: ',that.details.tabs);
+            //console.log('details: ',that.details.tabs);
             };
+
             if(that.linkType==='content'){
-            that.details = that.details.tabs;
-            console.log('details: ',that.details.tabs);
+              //console.log(that.details);
+              
+              var channelId = that.details.channelId;
+              var contentTags = that.details.tags;
+              //console.log('channelId: ',channelId);
+              that.$.AjaxContentid.url = '/content?channelId='+channelId+'&contentType=9&contentStart=0&contentLimit=10&contentTags='+contentTags;
+              //console.log('url: ',that.$.AjaxContentid.url);
+              that.$.AjaxContentid.go();              
             };
           });
 
+        },
+
+        handleResponse1: function(){
+          console.log(JSON.stringify(this.AjaxContent.data));
+          this.details = this.AjaxContent.data;
         },
 
       openAddSubCat: function(){

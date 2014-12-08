@@ -28,7 +28,7 @@
         <img class="appicon" src="images/infocenter.svg">
         <h1>Info Center</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
       </div>
-       
+
         <core-ajax 
         url="/infofichecats"
         method="GET" 
@@ -46,15 +46,15 @@
   <div class="container">
     <div id="canvas" >
       <div vertical layout start center-justified id="shortlinks">
-        <h1>Meest bezocht:</h1>
+        <h1>Actueel:</h1>
         <div horizontal layout>
         <a href="">Openingsuren Schaatsbaan</a>
         <p>|</p>
-        <a href="">Hoe de kerstboom correct sorteren</a>
+        <a href="">Strooidiensten</a>
         <p>|</p>
-        <a href="">What happens in the winter van A</a>
+        <a href="">Vuurwerk: mag het?</a>
         <p>|</p>
-        <a href="">Stay in the winter van A</a>
+        <a href="">Verkeer: Winter in Antwerpen</a>
       </div>
       </div>
         <div horizontal layout start wrap>
@@ -77,7 +77,7 @@
       
       <div id="subcatdetail" hidden?="{{windowMobile}}">
       <template repeat="{{k in details}}">
-        <h3 on-tap="{{showDetail}}" value="{{k.contentId}}">{{k.title}}</h3>
+        <h3 on-tap="{{showDetail}}" value="{{k.contentId}}{{k.id}}">{{k.title}}</h3>
       </template>
       
       

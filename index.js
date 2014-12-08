@@ -90,6 +90,19 @@ app.get('/infofichedetail', function(req, res){
 	});
 });
 
+//Content opvragen
+app.get('/content', function(req, res){
+  //console.log(val);
+  var channelId = req.query.channelId;
+  var contentType = req.query.contentType;
+  var contentTags = req.query.contentTags;
+  var start = req.query.contentStart;
+  var limit = req.query.contentLimit;
+  request.get({url: 'https://www.antwerpen.be/srv/content/d/channel/'+channelId+'/content-type/'+contentType+'/tags/'+contentTags+'/start/'+start+'/limit/'+limit, jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
 // infofiche categorieen
 app.get('/infofichecats', function(req, res){
   //console.log(val);
