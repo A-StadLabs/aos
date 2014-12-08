@@ -100,10 +100,22 @@ app.get('/infofichecats', function(req, res){
 });
 
 // kanalen in thema
-//https://www.antwerpen.be/srv/kanalen/d/overzicht?official=true&sort=name&category=53635dad4d57a4c4a6000004
+app.get('/infofichesubcats', function(req, res){
+  //console.log(val);
+  var val = req.query.cat;
+  request.get({url: 'https://www.antwerpen.be/srv/kanalen/d/overzicht?official=true&sort=name&category='+val, jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
 
 // subcategorie in kanaal
-// https://www.antwerpen.be/srv/kanalen/d/channels/afvalophaling
+app.get('/infofichetabs', function(req, res){
+  //console.log(val);
+  var val = req.query.slug;
+  request.get({url: 'https://www.antwerpen.be/srv/kanalen/d/channels/'+val, jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
 
 //Homefeed opvragen
 app.get('/homefeed', function(req, res){

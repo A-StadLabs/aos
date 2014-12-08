@@ -1,11 +1,26 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 
 <polymer-element name="aos-cat" attributes="titel key">
   <template>
     <link rel="stylesheet" href="aos-cat.css">
-    <div on-tap="{{goDetail}}" class="catitem">
+
+                <core-ajax 
+url="/infofichesubcats?cat={{key}}"
+method="GET" 
+auto 
+handleAs="json" 
+response="{{subcategories}}"
+on-core-response="{{handleResponse1}}">
+</core-ajax>
+
+    <div class="catitem">
     <h3>{{titel}}</h3>
-    <p>Hier komen dus de subcategorien</p>
+    <ul>
+    <template repeat="{{s in subcategories.data}}">
+    <li on-tap="{{goDetail}}" key="{{s._id}}" titel="{{s.name}}" slug="{{s.slug}}">{{s.name}}</li>
+    </template>
+    </ul>
     </div>
   </template>
   <script>
@@ -17,8 +32,8 @@
         ready: function(){
 
         },
-        goDetail: function(){
-          this.fire('detail-tapped', {key: this.key, cat: this.titel});
+        goDetail: function(e, detail, sender){
+          this.fire('detail-tapped', {key: sender.attributes[1].value, cat: sender.attributes[2].value, slug: sender.attributes[3].value});
           //console.log('element klik', this.key);
         }
       });

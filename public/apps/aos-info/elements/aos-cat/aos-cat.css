@@ -17,6 +17,10 @@ p {
 	color: #666666;
 }
 
+.smaller {
+	font-size: 13px;
+}
+
 
 .catitem {
 	width: 240px;

@@ -30,7 +30,17 @@
       </div>
 
        
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
+        
+        <core-ajax 
+        url="/infofichecats"
+        method="GET" 
+        auto 
+        handleAs="json" 
+        response="{{categories}}"
+        on-core-response="{{handleResponse}}">
+        </core-ajax>
+
+        infofichecats
 
     </div>
   </div>
@@ -52,41 +62,29 @@
       </div>
       </div>
         <div horizontal layout start wrap>
-        <template repeat="{{k in keys}}">
-        <aos-cat titel="{{data[k].categorie}}" shorttxt="{{data[k].shorttxt}}" key="{{k}}"></aos-cat>
+        <template repeat="{{k in categories.data}}">
+        <aos-cat titel="{{k.name}}" key="{{k._id}}"></aos-cat>
         </template>
-
-        
-        </div>
-        <template bind>
-        <div vertical layout center class="addbtn" on-tap="{{openAddCat}}"><h4>Een categorie toevoegen</h4></div>
-        <core-overlay layered backdrop id="overlay">
-          <aos-addinfocat></aos-addinfocat>
-        </core-overlay>
-        </template>
-        
+        </div>  
     </div>
   </div>
 
 </section>
+
+
 <section>
   <div class="container">
     <div id="canvas2" horizontal layout>
-      <aos-infoleftmenu selectedCat="{{selectedCat}}" selectedTitle="{{selectedTitle}}" subCat="{{subCat}}" subKey="{{subKey}}"></aos-infoleftmenu>
 
-      <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter/{{selectedCat}}/subcategories/{{subKey}}/infofiches" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}"></firebase-element>
-
+      <aos-infoleftmenu selectedCat="{{selectedCat}}" selectedTitle="{{selectedTitle}}" subCat="{{selectedCat}}" subKey="{{subKey}}" details="{{details}}"></aos-infoleftmenu>
+   
+      
       <div id="subcatdetail" hidden?="{{windowMobile}}">
-      <template repeat="{{k2 in keys2}}">
-        <h3 on-tap="{{showDetail}}" value="{{data2[k2].infokey}}">{{data2[k2].titel}}</h3>
+      <template repeat="{{k in details}}">
+        <h3 on-tap="{{showDetail}}" value="{{k.contentId}}">{{k.title}}</h3>
       </template>
       
-      <template bind>
-        <div vertical layout start class="addbtn" on-tap="{{openAddFiche}}"><h4>Een infofiche toevoegen</h4></div>
-        <core-overlay layered backdrop id="overlay2">
-          <aos-addinfofiche selectedCat="{{selectedCat}}" selectedSubCat="{{subCat}}" subKey="{{subKey}}"></aos-addinfofiche>
-        </core-overlay>
-      </template>
+      
       </div>
     </div>
 
@@ -122,9 +120,8 @@
         console.log('artikel: ', JSON.stringify(this.artikel));
       },
 
-
       ready: function() {
-          this.windowMobile = false;
+        this.windowMobile = false;
 
         if(window.innerWidth < 401){
           this.windowMobile = true;
@@ -132,26 +129,20 @@
 
         this.$.scenes.selected = 0;
 
-
       	console.log('info app loaded.'); 
 
         this.addEventListener('menureset', function(){
           this.$.scenes.selected = 0;
-
-          });
-
+        });
 
         this.addEventListener('toScene2', function(){
           this.$.scenes.selected = 2;
-
-          });
-
-        
-
+        });
+     
         this.addEventListener('detail-tapped', function(e){
-          console.log('detail tapped: ', e.detail.key);
+          console.log('detail tapped: ', e.detail.slug);
           this.$.scenes.selected = 1;
-          this.selectedCat = e.detail.key;
+          this.selectedCat = e.detail.slug;
           this.selectedTitle = e.detail.cat;
         })
 
