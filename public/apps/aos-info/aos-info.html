@@ -28,9 +28,7 @@
         <img class="appicon" src="images/infocenter.svg">
         <h1>Info Center</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
       </div>
-      <div end-justified id="shortlinks">
-        <p>Dus hier komen 10 custom items</p>
-      </div>
+
        
         <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
 
@@ -41,7 +39,18 @@
 <section>
   <div class="container">
     <div id="canvas" >
-
+      <div vertical layout start center-justified id="shortlinks">
+        <h1>Meest bezocht:</h1>
+        <div horizontal layout>
+        <a href="">Openingsuren Schaatsbaan</a>
+        <p>|</p>
+        <a href="">Hoe de kerstboom correct sorteren</a>
+        <p>|</p>
+        <a href="">What happens in the winter van A</a>
+        <p>|</p>
+        <a href="">Stay in the winter van A</a>
+      </div>
+      </div>
         <div horizontal layout start wrap>
         <template repeat="{{k in keys}}">
         <aos-cat titel="{{data[k].categorie}}" shorttxt="{{data[k].shorttxt}}" key="{{k}}"></aos-cat>
