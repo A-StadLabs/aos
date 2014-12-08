@@ -23,22 +23,22 @@
       </div> 
       <div id="leftmenu2">
         <core-animated-pages id="subcatscenes" transitions="slide-from-right">
+        <!-- hier laten we de subcats zien -->
         <section>
         <core-selector id="catselector" selected="{{selected}}" valueattr="label" on-core-activate="{{cattapped}}">
         <template repeat="{{t in tabs.data.links}}">
-          <div label="{{t.title}}" key="{{t.slug}}" class="subcats" details="{{t.details}}">{{t.title}}</div>
+          <div label="{{t.title}}" key="{{t.slug}}" class="subcats" details="{{t.details}}" linktype="{{t.linkType}}">{{t.title}}</div>
         </template>
         </core-selector>
           
         </section>
 
         <section>
-          <div id="subcat" horizontal layout center> <img id="bckbtn" on-tap="{{toCatMenu}}" src="../../images/back.svg">{{subCat}}
+          <div id="subcat" horizontal layout center>
+            <img id="bckbtn" on-tap="{{toCatMenu}}" src="../../images/back.svg">{{subCat}}
           </div>
 
-
-
-      <!-- <div id="subcatdetail" hidden?="{{windowMobile}}">
+      <div id="subcatdetail">
       <template repeat="{{t in tabs.data.links}}">
           <div label="{{subdata[sk].subtitel}}" key="{{sk}}" class="subcats">{{t.title}}</div>
         </template>
@@ -46,7 +46,7 @@
 
 
 
-      </div> -->
+      </div>
 
         </section>
       </core-animated-pages>
@@ -68,12 +68,19 @@
 
           this.subKey = subKey;
           this.$.catselector.addEventListener('core-activate', function(e){
-            that.subCat = this.selected;
-            that.subKey = e.detail.item.attributes[1].value;
+            //that.subCat = this.selected;
+            //that.subKey = e.detail.item.attributes[1].value;
             that.details = e.detail.item.attributes[3].value;
+            that.linkType = e.detail.item.attributes[4].value;
             that.details = JSON.parse(that.details);
+            if(that.linkType==='tabs'){
             that.details = that.details.tabs;
             console.log('details: ',that.details.tabs);
+            };
+            if(that.linkType==='content'){
+            that.details = that.details.tabs;
+            console.log('details: ',that.details.tabs);
+            };
           });
 
         },
@@ -98,9 +105,7 @@
       },
 
       cattapped: function(){
-        //if(window.innerWidth < 401){
-          this.$.subcatscenes.selected = 1;
-        //};
+
         },
 
         handleResponse: function(){
