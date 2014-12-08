@@ -1,58 +1,95 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
-<link rel="import" href="../../bower_components/core-item/core-item.html">
-
+<link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
 <polymer-element name="aos-babbelbox" attributes="">
 
   <template>
 
     <link rel="stylesheet" href="aos-babbelbox.css" />
 
-    <core-ajax 
-url="/helpcenter"
-method="GET" 
-auto 
-handleAs="json" 
-response="{{resultaat}}"
-on-core-response="{{handleResponse}}" 
-progress="{{progress}}"
-></core-ajax>
-
-<core-ajax 
-id="genAjax"
-method="GET"  
-handleAs="json" 
-response="{{helpdetail}}"
-on-core-response="{{detailResponse}}" 
-
-></core-ajax>
 
 
-<core-scaffold drawerWidth="400px" fit>
-  <core-header-panel navigation flex mode="seamed">
-    <core-toolbar><div flex>Babbels</div><core-icon-button icon="add"></core-icon-button></core-toolbar>
-    <core-menu theme="core-light-theme" on-core-select="{{selectItem}}" selected="0">
-    <template repeat="{{h in resultaat.data}}">
-      <core-item class="item" selectedId="{{h._id}}" horizontal layout on-tap="{{selectItem}}">
-      <div><img src="{{h.user.avatarUrl}}" class="avatar"></div>
-      <div flex><p>{{h.title}}</p></div>
-      </core-item>
-    </template>
-    </core-menu>
-  </core-header-panel>
-  <template bind id="t_detail">
-    <div>
-  <p>{{body}}</p>
-  <template repeat="{{a in answers}}">
-    <div><img src="{{a.user.avatarUrl}}" class="avatar"></div>
-    <p>{{a.user.username}}</p>
-    <p>{{a.body}}</p>
-  </template>
+
+ <div class="leaderboard">
+    <img class="stralendeA" src="images/a-rgb.svg">
+    <div horizontal layout wrap center start-justified>
+      <div horizontal layout wrap center start-justified>
+        <img class="appicon" src="images/babbelbox.svg">
+        <h1>Babbelbox</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+      </div>
+
+       
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/infocenter" orderByChild="categorie" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
+
+    </div>
   </div>
-  </template>
-</core-scaffold>
-    
+
+<div class="container">
+
+<div id="toolbarbtns" horizontal layout start wrap>
+  <button id="newconv"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
+nieuw gesprek</div></button>
+
+   <core-dropdown-menu label="sorteren" class="sortbtns">
+          <core-dropdown class="dropdown">
+            <core-selector selected="0" id="lanselect" valueattr="label">
+              <core-item label="Chronologisch"></core-item>
+              <core-item label="Alfabetisch"></core-item>
+            </core-selector>
+          </core-dropdown>
+  </core-dropdown-menu>
+
+   <core-dropdown-menu label="reach" class="sortbtns">
+          <core-dropdown class="dropdown">
+            <core-selector selected="0" id="lanselect" valueattr="label">
+              <core-item label="Alle gesprekken"></core-item>
+              <core-item label="enkele speficieke gesprekken"></core-item>
+            </core-selector>
+          </core-dropdown>
+  </core-dropdown-menu>
+</div>
+
+
+<div class="canvas">
+   <!--  <core-drawer-panel>
+
+
+      <div drawer>
+         <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ante ut cursus ultricies. Cras quis magna sed est imperdiet imperdiet. Quisque ut sapien nibh. Nulla auctor dapibus dolor, eget efficitur turpis bibendum euismod. Quisque vitae metus fringilla, tristique odio eu, volutpat ipsum. Nulla scelerisque, erat eu porta tincidunt, tortor dolor dapibus lacus, faucibus posuere ante est non nibh. Maecenas porttitor dui sed purus pellentesque, et congue est vulputate. Phasellus nec sem et orci efficitur consectetur vitae sit amet magna. Etiam id faucibus velit, sed molestie risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin rutrum neque malesuada, volutpat justo porta, elementum ipsum. Etiam faucibus pretium quam eu pharetra. Curabitur luctus, ligula ac tempor molestie, enim metus mollis elit, ac finibus erat libero pulvinar sem. Ut in mi euismod, viverra mauris in, rhoncus turpis. Etiam arcu libero, semper ut odio ut, blandit lacinia libero.
+
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque diam urna, consectetur at enim quis, dictum commodo justo. Etiam turpis nisl, volutpat et feugiat ut, molestie laoreet nulla. Proin vitae mauris erat. Suspendisse finibus condimentum quam ac blandit. Nunc et est sit amet erat feugiat vestibulum non sed massa. Proin hendrerit felis sed nibh blandit pretium. Aliquam dui mi, egestas ut neque bibendum, volutpat facilisis lectus. Cras auctor tortor et nisi aliquet, ut molestie nisi suscipit. Mauris sed ipsum ipsum. Pellentesque non nisl vel diam fringilla posuere. Nulla hendrerit tincidunt nunc at tincidunt. In hac habitasse platea dictumst.
+
+
+
+
+    </p>
+      </div>
+        
+      <div main>
+        <button core-drawer-toggle>toggle drawer</button>
+     <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum ante ut cursus ultricies. Cras quis magna sed est imperdiet imperdiet. Quisque ut sapien nibh. Nulla auctor dapibus dolor, eget efficitur turpis bibendum euismod. Quisque vitae metus fringilla, tristique odio eu, volutpat ipsum. Nulla scelerisque, erat eu porta tincidunt, tortor dolor dapibus lacus, faucibus posuere ante est non nibh. Maecenas porttitor dui sed purus pellentesque, et congue est vulputate. Phasellus nec sem et orci efficitur consectetur vitae sit amet magna. Etiam id faucibus velit, sed molestie risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin rutrum neque malesuada, volutpat justo porta, elementum ipsum. Etiam faucibus pretium quam eu pharetra. Curabitur luctus, ligula ac tempor molestie, enim metus mollis elit, ac finibus erat libero pulvinar sem. Ut in mi euismod, viverra mauris in, rhoncus turpis. Etiam arcu libero, semper ut odio ut, blandit lacinia libero.
+
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque diam urna, consectetur at enim quis, dictum commodo justo. Etiam turpis nisl, volutpat et feugiat ut, molestie laoreet nulla. Proin vitae mauris erat. Suspendisse finibus condimentum quam ac blandit. Nunc et est sit amet erat feugiat vestibulum non sed massa. Proin hendrerit felis sed nibh blandit pretium. Aliquam dui mi, egestas ut neque bibendum, volutpat facilisis lectus. Cras auctor tortor et nisi aliquet, ut molestie nisi suscipit. Mauris sed ipsum ipsum. Pellentesque non nisl vel diam fringilla posuere. Nulla hendrerit tincidunt nunc at tincidunt. In hac habitasse platea dictumst.
+
+
+
+
+    </p>
+      </div>
+   
+</core-drawer-panel>
+ -->
+</div>
+
+
+
+</div>
+
+
+
   </template>
 
   <script>
@@ -61,38 +98,8 @@ on-core-response="{{detailResponse}}"
 
       ready: function() {
 
-      	console.log('Babbelbox app loaded.'); 
-
-        this.$.selekt.addEventListener('core-activate', function(e, detail, sender){
-          console.log(JSON.stringify(this.selected));
-          var t = this.$.t_detail;
-          t.model = this.selected;
-        });
-
-        },
-
-        
-
-      handleResponse: function(){
-        var t = this.$.t_detail;
-        t.model = { 'titel': 'hallo', 'detail': 'Hallo detail.'};
-      },
-
-      selectItem: function(e, detail) {
-        if (detail.isSelected) {
-          var selectedItem = detail.item;
-          console.log(selectedItem.attributes[1].value);
-          this.$.genAjax.url = '/helpcenter-item?item='+selectedItem.attributes[1].value;
-          this.$.genAjax.go();
+      	
         }
-      },
-
-      detailResponse: function(){
-        console.log(this.helpdetail.data);
-        var t = this.$.t_detail;
-        t.model = this.helpdetail.data;
-      }
-
       
 
 

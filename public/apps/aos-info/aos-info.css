@@ -16,7 +16,7 @@ li {
 
 .leaderboard {
 	width: 76vw;
-	padding: 0vw 12vw 0vw 12vw;
+	padding: 0vw 12vw 20px 12vw;
 	background-color: #C0C9CF;
 	margin: 0px auto 0px auto;
 	display: inline-block;
