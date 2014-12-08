@@ -88,7 +88,8 @@
             that.details = e.detail.item.attributes[3].value;
             that.linkType = e.detail.item.attributes[4].value;
             that.details = JSON.parse(that.details);
-
+            that.contentType = that.details.contentType;
+            console.log(that.contentType)
             if(that.linkType==='tabs'){
             that.details = that.details.tabs;
             //console.log('details: ',that.details.tabs);
@@ -96,12 +97,12 @@
 
             if(that.linkType==='content'){
               //console.log(that.details);
-              
+              var contentType = that.details.contentType;
               var channelId = that.details.channelId;
               var contentTags = that.details.tags;
               //console.log('channelId: ',channelId);
-              that.$.AjaxContentid.url = '/content?channelId='+channelId+'&contentType=9&contentStart=0&contentLimit=10&contentTags='+contentTags;
-              //console.log('url: ',that.$.AjaxContentid.url);
+              that.$.AjaxContentid.url = '/content?channelId='+channelId+'&contentType='+contentType+'&contentStart=0&contentLimit=10&contentTags='+contentTags;
+              console.log('url: ',that.$.AjaxContentid.url);
               that.$.AjaxContentid.go();              
             };
           });

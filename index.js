@@ -98,9 +98,15 @@ app.get('/content', function(req, res){
   var contentTags = req.query.contentTags;
   var start = req.query.contentStart;
   var limit = req.query.contentLimit;
+  if(contentTags!='undefined'){
   request.get({url: 'https://www.antwerpen.be/srv/content/d/channel/'+channelId+'/content-type/'+contentType+'/tags/'+contentTags+'/start/'+start+'/limit/'+limit, jar: true}, function(error, response, body){
       res.send(body);
   });
+} else {
+  request.get({url: 'https://www.antwerpen.be/srv/content/d/channel/'+channelId+'/content-type/'+contentType+'/start/'+start+'/limit/'+limit, jar: true}, function(error, response, body){
+      res.send(body);
+  });
+}
 });
 
 // infofiche categorieen
