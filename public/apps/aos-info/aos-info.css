@@ -40,10 +40,10 @@ li {
 	background-color: rgba(0,0,0,0.05);
 	padding: 20px;
 	font-size: 13px;
-	margin-bottom: 20px;
-
+	margin: 0px 4vw 20px 0px;
+	max-width: 18vw;
 }
-
+/*
 #shortlinks h1 {
 	margin: 0px 0px 10px 0px;
 }
@@ -53,9 +53,14 @@ li {
 }
 
 #shortlinks a {
-	margin: 0px 0px 0px 0px;
 	color:#219dc8;
+	width: 240px;
+	min-width: 24vw;
+	margin: 6px 5px 6px 0px;
+	font-size: 14px;
 }
+*/
+
 
 .appicon {
 	width: 35px;

@@ -45,19 +45,17 @@
 <section>
   <div class="container">
     <div id="canvas" >
-      <div vertical layout start center-justified id="shortlinks">
+
+        <div horizontal layout start wrap>
+<!--                 <div vertical layout start center-justified id="shortlinks">
         <h1>Actueel:</h1>
-        <div horizontal layout>
+        <div horizontal layout start wrap>
         <a href="">Openingsuren Schaatsbaan</a>
-        <p>|</p>
         <a href="">Strooidiensten</a>
-        <p>|</p>
         <a href="">Vuurwerk: mag het?</a>
-        <p>|</p>
         <a href="">Verkeer: Winter in Antwerpen</a>
       </div>
-      </div>
-        <div horizontal layout start wrap>
+      </div> -->
         <template repeat="{{k in categories.data}}">
         <aos-cat titel="{{k.name}}" key="{{k._id}}"></aos-cat>
         </template>
@@ -90,7 +88,7 @@
 <section>
 <core-ajax url="/infofichedetail?infokey={{selectedDetail}}" handleAs="json" response="{{artikel}}" on-core-response="{{handleResponseArtikel}}" auto method="GET"></core-ajax>
 
-
+  
   <div class="container">
     <div id="canvas">
     

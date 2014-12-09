@@ -15,7 +15,7 @@ on-core-response="{{handleResponse1}}">
 </core-ajax>
 
     <div class="catitem">
-    <h3>{{titel}}</h3>
+    <h1>{{titel}}</h1>
     <ul>
     <template repeat="{{s in subcategories.data}}">
     <li on-tap="{{goDetail}}" key="{{s._id}}" titel="{{s.name}}" slug="{{s.slug}}">{{s.name}}</li>

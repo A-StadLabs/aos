@@ -15,11 +15,13 @@
 	display: inline-block;
 }
 
-h3 {
+h1 {
 	font-weight: 300;
-	font-size: 1.27143em;
+	font-size: 28px;
+	padding: 10px 0px 10px 0px; 
 	line-height: 120%;
 	margin-bottom: 0x;
+	color: #333333;
 }
 
 small {
@@ -28,7 +30,7 @@ small {
 }
 
 p {
-	  font-size: 0.85em;
+	  font-size: 14px;
 	  line-height: 150%;
 	  color: #333333;
 }
