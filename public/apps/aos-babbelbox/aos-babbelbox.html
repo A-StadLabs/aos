@@ -1,6 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+
 <link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
 <polymer-element name="aos-babbelbox" attributes="">
 
@@ -28,7 +30,8 @@
 <div class="container">
 
 <div id="toolbarbtns" horizontal layout start wrap>
-  <button id="newconv" on-tap="{{newInput}}"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
+
+  <button id="newconv" on-tap="{{toggleInput}}"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
 nieuw gesprek</div></button>
 
    <core-dropdown-menu label="sorteren" class="sortbtns">
@@ -52,8 +55,24 @@ nieuw gesprek</div></button>
 
 
 <div class="canvas">
+<core-collapse id="collapse">
+<div id="newitem" vertical layout start>
+<input autofocus placeholder="Begin een gesprek">
 
-  <div id="newitem" horizontal layout center><input id="newinput" autofocus placeholder="Begin een gesprek"><button id="submitbtn">ok</button><p on-tap="{{annInput}}">annuleren</p></div>
+  <div id="" horizontal layout start start-justified wrap>
+    <button class="itemaddons">tag toevoegen</button>
+    <button class="itemaddons">bestand toevoegen</button>
+  </div>
+
+
+  <div id="inputbtns" horizontal layout center end-justified>
+    <p on-tap="{{toggleInput}}">annuleren</p>
+    <button id="submitbtn">OK</button>
+  </div>
+
+</div>
+</core-collapse>
+
 
   <div class="comm-item" horizontal layout start start-justified>
     <div class="updownbtns" vertical layout center>
@@ -110,16 +129,22 @@ nieuw gesprek</div></button>
     Polymer({
 
       ready: function() {
-        this.$.newitem.hidden = true;
-      	
+        var that = this;
+
+      // this.$.collapse.addEventListener('core-collapse-open', function(){
+      //   that.$.toolbarbtns.hidden = true;
+      // });
+
+      // this.$.collapse.addEventListener('core-collapse-closed', function(){
+      //   that.$.toolbarbtns.hidden = false;
+      // });
+
+
         },
 
-      newInput: function(){
-        this.$.newitem.hidden = false;
-      },
-
-      annInput:function(){
-        this.$.newitem.hidden = true;
+      toggleInput: function(){
+        this.$.collapse.toggle();
+        this.$.toolbarbtns.hidden = !this.$.toolbarbtns.hidden;
 
       }
 
