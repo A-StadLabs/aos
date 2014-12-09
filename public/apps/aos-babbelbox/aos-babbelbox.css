@@ -1,7 +1,6 @@
 :host {
 	display: block;
-		font-family: 'Open Sans', sans-serif;
-
+	font-family: 'Open Sans', sans-serif;
 }
 
 
@@ -53,10 +52,6 @@ h1 {
 }
 
 
-#comm-items {
-	width: 76vw;
-	padding: 0vw 12vw 0vw 12vw;
-}
 
 
 
