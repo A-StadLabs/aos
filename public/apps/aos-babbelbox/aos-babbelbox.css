@@ -50,6 +50,7 @@ h1 {
 	width: 76vw;
 	padding: 60vw 12vw 0vw 12vw;
 	display: block;
+	background-color: red;
 }
 
 #toolbarbtns {
