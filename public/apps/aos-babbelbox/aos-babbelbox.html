@@ -52,31 +52,47 @@ nieuw gesprek</div></button>
 
 
 <div class="canvas">
+<!-- 
+  <div id="newitem" horizontal layout center><input id="newinput" on-focus="{{handleInput}}" on-blur="{{handleBlur}}" placeholder="Begin een gesprek"><button id="submitbtn">ok</button></div> -->
 
   <div class="comm-item" horizontal layout start start-justified>
-    <div id="updownbtns" vertical layout center></div>
-    <div vertical layout start>
-      <h1>Waarom is Michael eig zo'ne lastige gast soms?</h1>
-      <p>Da weet niemand, really.</p>
+    <div class="updownbtns" vertical layout center>
+      <button><img class="updownimg" src="images/up.svg"></button>
+      <p>58</p>
+      <button><img class="updownimg" src="images/down.svg"></button>
     </div>
-  </div>
-
-  <div class="comm-item" horizontal layout start start-justified>
-    <div id="updownbtns" vertical layout center></div>
-    <div vertical layout start>
+    <div class="comm-content" vertical layout start>
       <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>Gewoon zowa, hoe het eruit moet zien en waar de data geschoten wordt.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
     </div>
   </div>
 
 
   <div class="comm-item" horizontal layout start start-justified>
-    <div id="updownbtns" vertical layout center></div>
-    <div vertical layout start>
-      <h1>Maar wacht, waar komen dan de andere babbelbox-en, zoals vb die van oostende of ...?</h1>
-      <p>Ja man, ik weet da toch ni, Michael had der een idee bij.</p>
+    <div class="updownbtns" vertical layout center>
+      <button><img class="updownimg" src="images/up.svg"></button>
+      <p>58</p>
+      <button><img class="updownimg" src="images/down.svg"></button>
+    </div>
+    <div class="comm-content" vertical layout start>
+      <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
     </div>
   </div>
+
+  <div class="comm-item" horizontal layout start start-justified>
+    <div class="updownbtns" vertical layout center>
+      <button><img class="updownimg" src="images/up.svg"></button>
+      <p>58</p>
+      <button><img class="updownimg" src="images/down.svg"></button>
+    </div>
+    <div class="comm-content" vertical layout start>
+      <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
+    </div>
+  </div>
+
+  
 
 
 </div>
@@ -94,9 +110,17 @@ nieuw gesprek</div></button>
     Polymer({
 
       ready: function() {
-
+        this.$.submitbtn.hidden = true;
       	
-        }
+        },
+
+      handleInput: function(){
+        this.$.submitbtn.hidden = false;
+      },
+
+      handleBlur: function() {
+        this.$.submitbtn.hidden = true;
+      }
       
 
 
