@@ -48,10 +48,17 @@ h1 {
 
 
 .canvas {
+	width: 100vw;
+	padding: 0vw 0vw 0vw 0vw;
+}
+
+
+#comm-items {
 	width: 76vw;
 	padding: 0vw 12vw 0vw 12vw;
-	background-color: red;
 }
+
+
 
 #toolbarbtns {
 	margin: 0px 0px 0px 0px;
@@ -119,3 +126,29 @@ core-drawer-panel {
 	display: block;
 }
 
+
+
+.comm-item {
+	border-bottom: 1px solid #ebebeb;
+	margin: 0px;
+	padding: 20px 12vw 20px 12vw;
+}
+
+
+.comm-item h1 {
+	font-weight: 300;
+	color: #219dc8;
+	font-size: 20px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+.comm-item p {
+	font-weight: 300;
+	color: #333333;
+	font-size: 14px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+}
