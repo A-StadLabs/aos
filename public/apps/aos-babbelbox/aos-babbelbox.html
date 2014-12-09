@@ -28,7 +28,7 @@
 <div class="container">
 
 <div id="toolbarbtns" horizontal layout start wrap>
-  <button id="newconv"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
+  <button id="newconv" on-tap="{{newInput}}"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
 nieuw gesprek</div></button>
 
    <core-dropdown-menu label="sorteren" class="sortbtns">
@@ -52,8 +52,8 @@ nieuw gesprek</div></button>
 
 
 <div class="canvas">
-<!-- 
-  <div id="newitem" horizontal layout center><input id="newinput" on-focus="{{handleInput}}" on-blur="{{handleBlur}}" placeholder="Begin een gesprek"><button id="submitbtn">ok</button></div> -->
+
+  <div id="newitem" horizontal layout center><input id="newinput" autofocus placeholder="Begin een gesprek"><button id="submitbtn">ok</button><p on-tap="{{annInput}}">annuleren</p></div>
 
   <div class="comm-item" horizontal layout start start-justified>
     <div class="updownbtns" vertical layout center>
@@ -110,17 +110,20 @@ nieuw gesprek</div></button>
     Polymer({
 
       ready: function() {
-        this.$.submitbtn.hidden = true;
+        this.$.newitem.hidden = true;
       	
         },
 
-      handleInput: function(){
-        this.$.submitbtn.hidden = false;
+      newInput: function(){
+        this.$.newitem.hidden = false;
       },
 
-      handleBlur: function() {
-        this.$.submitbtn.hidden = true;
+      annInput:function(){
+        this.$.newitem.hidden = true;
+
       }
+
+
       
 
 
