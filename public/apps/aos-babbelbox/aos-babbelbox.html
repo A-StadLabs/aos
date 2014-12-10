@@ -134,10 +134,30 @@ nieuw gesprek</div></button>
 
   <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/" childEvents orderByChild="votes" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}" id="fbBabbelboxDetail" log></firebase-element>
 
+
+
+
+  <core-ajax 
+  id="ajaxComments" 
+  url="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/comments/.json"
+  method="POST" 
+  handleAs="json" 
+  response="{{postResponse}}"
+  on-core-response="{{handleResponse}}">
+  </core-ajax>
+
+
+
   <div id="detail">
     <template bind>
     <small on-tap="{{gotoList}}">back</small>
     <h1>{{data2.title}}</h1>
+    
+
+
+<input value="{{NewComment}}">
+    <button id="submitcomment" on-tap="{{submitNewComment}}">OK</button>
+
     </template>
   </div>
 </div>
@@ -193,6 +213,14 @@ nieuw gesprek</div></button>
           this.postBody = { 'time': this.time, 'title': this.newConversation, 'tags':'antwerpen' };
           this.$.ajaxBabbelbox.body = JSON.stringify(this.postBody);
           this.$.ajaxBabbelbox.go();
+          this.$.newConv.value = '';
+      },
+
+      submitNewComment: function() {
+          this.time = new Date();
+          this.commentBody = { 'time': this.time, 'title': this.NewComment, 'tags':'antwerpen' };
+          this.$.ajaxComments.body = JSON.stringify(this.commentBody);
+          this.$.ajaxComments.go();
           this.$.newConv.value = '';
       },
 
