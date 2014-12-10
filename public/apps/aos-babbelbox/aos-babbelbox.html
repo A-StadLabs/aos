@@ -30,7 +30,7 @@
       </div>
 
        
-       <!--  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element> -->
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
 
     </div>
   </div>
@@ -101,7 +101,7 @@ nieuw gesprek</div></button>
 <core-selector id="convselector" selected="{{selected}}" valueattr="value" on-core-select="">
 
 
-  <template repeat="{{k in keys}}">
+  <template repeat="{{k in keys}}" id="repeater">
     <div class="convitem" horizontal layout start start-justified>
       <div class="updownbtns" vertical layout center>
         <button on-tap="{{upVote}}" key="{{k}}"><img class="updownimg" src="images/up.svg"></button>
@@ -109,7 +109,7 @@ nieuw gesprek</div></button>
         <button on-tap="{{downVote}}" key="{{k}}"><img class="updownimg" src="images/down.svg"></button>
       </div>
       <div class="convcontent" vertical layout start>
-      <h1 on-tap="{{gotoDetail}}" key="{{k}}" name="convSelected">{{data[k].title}}</h1>
+      <h1 on-tap="{{gotoDetail}}" key="{{k}}" name="convSelected">tit {{data[k].title}}</h1>
         <small><time-ago datetime="{{data[k].time}}"></time-ago> | <span class="convcomments"> 112 reacties </span> </small>
         
 
@@ -132,10 +132,9 @@ nieuw gesprek</div></button>
 <section>
 <div class="canvas">
 
-  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/" childEvents orderByChild="votes" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}" id="fbBabbelboxDetail" log></firebase-element>
+  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/" childEvents orderByChild="votes" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}" id="fbBabbelboxDetail"></firebase-element>
 
-
-
+  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/comments/" childEvents orderByChild="votes" data="{{data3}}" keys="{{keys3}}" on-data-change="{{handleResponse2}}" id="fbBabbelboxComments"></firebase-element>
 
   <core-ajax 
   id="ajaxComments" 
@@ -146,8 +145,6 @@ nieuw gesprek</div></button>
   on-core-response="{{handleResponse}}">
   </core-ajax>
 
-
-
   <div id="detail">
     <template bind>
     <small on-tap="{{gotoList}}">back</small>
@@ -157,6 +154,10 @@ nieuw gesprek</div></button>
 
 <input value="{{NewComment}}">
     <button id="submitcomment" on-tap="{{submitNewComment}}">OK</button>
+
+    <template repeat="{{ c in keys3}}">
+    <h1>{{data3[c].title}}</h1>
+    </template>
 
     </template>
   </div>
@@ -182,14 +183,8 @@ nieuw gesprek</div></button>
 
       ready: function() {
 
-        var ref = new Firebase("https://blazing-fire-6426.firebaseio.com/babbelbox");
-        var data = '';
-        ref.orderByChild("votes").on("child_added", function(snapshot) {
-          //console.log(snapshot.key() + " was " + snapshot.val().votes + " meters tall");
-          data = data + snapshot.key() + " was " + snapshot.val().votes;
-      });
-        console.log('data: ',data);
-        this.data = data;
+
+        
         },
 
       toggleInput: function(){
