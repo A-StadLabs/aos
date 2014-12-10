@@ -293,7 +293,7 @@ core-drawer-panel {
 
 #detail {
 	background-color: white;
-	width: 76px;
+	width: 76vw;
 	padding: 0px 12vw 0px 12vw;
 	margin: 0px;
 }
