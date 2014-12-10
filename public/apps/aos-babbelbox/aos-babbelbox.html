@@ -30,7 +30,7 @@
       </div>
 
        
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="time" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" childEvents orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
 
     </div>
   </div>
@@ -109,7 +109,7 @@ nieuw gesprek</div></button>
         <button on-tap="{{downVote}}" key="{{k}}"><img class="updownimg" src="images/down.svg"></button>
       </div>
       <div class="convcontent" vertical layout start>
-        <h1 on-tap="{{gotoDetail}}" name="convSelected">{{data[k].title}}</h1>
+      <h1 on-tap="{{gotoDetail}}" key="{{k}}" name="convSelected">{{data[k].title}}</h1>
         <small><time-ago datetime="{{data[k].time}}"></time-ago> | <span class="convcomments"> 112 reacties </span> </small>
         
 
@@ -132,9 +132,13 @@ nieuw gesprek</div></button>
 <section>
 <div class="canvas">
 
+  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/" childEvents orderByChild="votes" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}" id="fbBabbelboxDetail" log></firebase-element>
+
   <div id="detail">
+    <template bind>
     <small on-tap="{{gotoList}}">back</small>
-    <h1>{{data[k].title}}</h1>
+    <h1>{{data2.title}}</h1>
+    </template>
   </div>
 
 </div>
@@ -158,16 +162,6 @@ nieuw gesprek</div></button>
     Polymer({
 
       ready: function() {
-        var that = this;
-
-      // this.$.collapse.addEventListener('core-collapse-open', function(){
-      //   that.$.toolbarbtns.hidden = true;
-      // });
-
-      // this.$.collapse.addEventListener('core-collapse-closed', function(){
-      //   that.$.toolbarbtns.hidden = false;
-      // });
-
 
         },
 
@@ -177,8 +171,9 @@ nieuw gesprek</div></button>
         this.$.newConv.value = '';
       },
 
-      gotoDetail: function() {
+      gotoDetail: function(e, detail, sender) {
         this.$.babbelscenes.selected = 1;
+        this.selectedItem = sender.attributes[1].value;
       },
 
       gotoList: function() {
@@ -198,28 +193,28 @@ nieuw gesprek</div></button>
           this.keys.reverse();
       },
 
+      handleResponse2: function(){
+        console.log(JSON.stringify(this.data2.title));
+      },
+
       upVote: function(e, detail, sender){
           this.key = sender.attributes[1].value;
           var addPlay = new Firebase('blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
-          console.log('addplay: ', addPlay);
 
           addPlay.transaction(function(currentRank) {
            // If /users/fred/rank has never been set, currentRank will be null.
              return currentRank+1;
            });
-          console.log('upvote item e: ', e, 'upvote detail: ', detail, 'upvote sender: ', sender.attributes[1].value);
       },
 
       downVote: function(e, detail, sender){
           this.key = sender.attributes[1].value;
           var addPlay = new Firebase('blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
-          console.log('addplay: ', addPlay);
 
           addPlay.transaction(function(currentRank) {
            // If /users/fred/rank has never been set, currentRank will be null.
              return currentRank-1;
            });
-          console.log('upvote item e: ', e, 'upvote detail: ', detail, 'upvote sender: ', sender.attributes[1].value);
       }
 
       
