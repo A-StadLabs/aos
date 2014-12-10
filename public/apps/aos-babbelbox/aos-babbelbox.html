@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../../elements/aos-comment/aos-comment.html">
 
 <link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
 <polymer-element name="aos-babbelbox" attributes="">
@@ -82,11 +83,10 @@ nieuw gesprek</div></button>
     </div>
     <div class="convcontent" vertical layout start>
       <h1 on-tap="{{toggleDetail}}">Klein hagelkruis afgesloten</h1>
-      <p>Gisteren om 21u15 | <span class="convcomments"> 112 reacties </span> </p>
+      <small>Gisteren om 21u15 | <span class="convcomments"> 112 reacties </span> </small>
 
       <core-collapse id="detail">
-      <div><h2>Detail detail detail</h2>
-      </div>
+      <aos-comment></aos-comment>
       </core-collapse>
 
 
@@ -102,7 +102,7 @@ nieuw gesprek</div></button>
     </div>
     <div class="convcontent" vertical layout start>
       <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>3 dagen geleden | <span class="convcomments"> 8 reacties </span> </p>
+      <small>3 dagen geleden | <span class="convcomments"> 8 reacties </span> </small>
     </div>
   </div>
 
@@ -114,7 +114,7 @@ nieuw gesprek</div></button>
     </div>
     <div class="convcontent" vertical layout start>
       <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>3 dagen geleden | <span class="convcomments"> 8 reacties </span> </p>
+      <small>3 dagen geleden | <span class="convcomments"> 8 reacties </span> </small>
     </div>
   </div>
 
