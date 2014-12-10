@@ -3,14 +3,12 @@
 <link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
-<<<<<<< HEAD
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../elements/aos-comment/aos-comment.html">
-=======
+<link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
-
 <link rel="import" href="elements/time-ago/src/time-ago.html">
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
->>>>>>> FETCH_HEAD
 
 <link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
 <polymer-element name="aos-babbelbox" attributes="">
@@ -39,6 +37,11 @@
 
 <div class="container">
 
+
+<core-animated-pages id="babbelscenes"  transitions="slide-from-right"> 
+
+
+<section>
 <div id="toolbarbtns" horizontal layout start wrap>
 
   <button id="newconv" on-tap="{{toggleInput}}"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
@@ -74,6 +77,8 @@ nieuw gesprek</div></button>
 
 
 <div class="canvas">
+
+
 <core-collapse id="collapse">
 <div id="newitem" vertical layout start>
 <input autofocus placeholder="Begin een gesprek" value="{{newConversation}}" id="newConv">
@@ -92,6 +97,10 @@ nieuw gesprek</div></button>
 </div>
 </core-collapse>
 
+
+<core-selector id="convselector" selected="{{selected}}" valueattr="value" on-core-select="">
+
+
   <template repeat="{{k in keys}}">
     <div class="convitem" horizontal layout start start-justified>
       <div class="updownbtns" vertical layout center>
@@ -100,19 +109,40 @@ nieuw gesprek</div></button>
         <button on-tap="{{downVote}}" key="{{k}}"><img class="updownimg" src="images/down.svg"></button>
       </div>
       <div class="convcontent" vertical layout start>
-        <h1 on-tap="{{toggleDetail}}">{{data[k].title}}</h1>
+        <h1 on-tap="{{gotoDetail}}" name="convSelected">{{data[k].title}}</h1>
         <small><time-ago datetime="{{data[k].time}}"></time-ago> | <span class="convcomments"> 112 reacties </span> </small>
         
 
-        <core-collapse id="detail">
-        <div><h2>Detail detail detail</h2>
-        </div>
-        </core-collapse>
+
       </div>
 
     </div>
   </template>
   
+
+</core-selector>  
+</section>
+
+
+
+
+
+
+
+<section>
+<div class="canvas">
+
+  <div id="detail">
+    <small on-tap="{{gotoList}}">back</small>
+    <h1>{{data[k].title}}</h1>
+  </div>
+
+</div>
+</section>
+
+
+</core-animated-pages> 
+
 </div>
 
 
@@ -147,8 +177,12 @@ nieuw gesprek</div></button>
         this.$.newConv.value = '';
       },
 
-      toggleDetail: function() {
-        this.$.detail.toggle();
+      gotoDetail: function() {
+        this.$.babbelscenes.selected = 1;
+      },
+
+      gotoList: function() {
+        this.$.babbelscenes.selected = 0;
       },
 
       // Nieuwe conversatie opslaan
@@ -187,7 +221,6 @@ nieuw gesprek</div></button>
            });
           console.log('upvote item e: ', e, 'upvote detail: ', detail, 'upvote sender: ', sender.attributes[1].value);
       }
-
 
       
 

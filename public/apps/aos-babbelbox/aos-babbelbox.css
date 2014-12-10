@@ -1,6 +1,7 @@
 :host {
 	display: block;
 	font-family: 'Open Sans', sans-serif;
+	background-color: white;
 }
 
 
@@ -11,6 +12,7 @@
 	background-color: rgba(114,191,157,0.75);
 	margin: 0px;
 	display: inline-block;
+
 }
 
 .stralendeA {
@@ -49,9 +51,9 @@ h1 {
 .canvas {
 	width: 100vw;
 	padding: 0vw 0vw 0vw 0vw;
+	background-color: white;
+
 }
-
-
 
 
 
@@ -61,6 +63,8 @@ h1 {
 	padding: 20px 12vw 20px 12vw;
 	background-color: white;
 	border-bottom: 1px solid #f5f5f5;
+		background-color: white;
+
 }
 
 
@@ -128,6 +132,7 @@ core-drawer-panel {
 	border-bottom: 1px solid #f5f5f5;
 	margin: 0px;
 	padding: 20px 12vw 20px 12vw;
+	background-color: white;
 }
 
 
@@ -277,6 +282,20 @@ core-drawer-panel {
 	background-color: white;
 	font-size: 14px;
 	border: 
+}
+
+
+
+
+
+
+
+
+#detail {
+	background-color: white;
+	width: 76px;
+	padding: 0px 12vw 0px 12vw;
+	margin: 0px;
 }
 
 
