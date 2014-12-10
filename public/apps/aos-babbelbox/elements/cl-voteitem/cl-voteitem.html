@@ -1,0 +1,104 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+
+<polymer-element name="cl-voteitem" attributes="key item votes">
+  <template>
+    <link rel="stylesheet" href="cl-voteitem.css">
+
+
+    <div vertical layout center id="voterij">
+      <svg id="btAdd" viewBox="0 0 10 5" on-tap="{{addVote}}" class="{{ { highlight: userValue === 1 } | tokenList }}">
+      <polygon points="0,5 5,0 10,5"></polygon>
+      </svg>
+      <h3>{{votes}}</h3>
+      <svg id="btRem" viewBox="0 0 10 5" on-tap="{{remVote}}" class="{{ { highlight: userValue === -1 } | tokenList }}">
+      <polygon points="0,0 5,5 10,0"></polygon>
+      </svg>
+    </div>
+  
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        // define element prototype here
+        ready: function(){
+        },
+
+        FBAddVote: function(){
+          var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes/');
+          addPlay.transaction(function(currentRank) {
+            return currentRank+1;
+          });
+        },
+
+        FBRemVote: function(){
+          var addPlay = new Firebase('blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
+          addPlay.transaction(function(currentRank) {
+            return currentRank-1;
+          });
+        },
+
+        DeactivatePlus: function(){
+          var that = this;
+          //that.votes--;
+          this.FBRemVote();
+          that.$.btAdd.active = false;
+        },
+
+        DeactivateMin: function(){
+          var that = this;
+          //that.votes++;
+          this.FBAddVote();
+          that.$.btRem.active = false;
+        },
+
+        addVote: function(){
+          var that = this;
+
+          this.userValue = 1;
+
+          if(that.$.btAdd.active){
+            this.DeactivatePlus();
+            this.userValue = 0;
+          } else {
+            if(that.$.btRem.active){
+              this.DeactivateMin();
+            }
+            that.$.btAdd.active = true;
+            that.$.btRem.active = false;
+            console.log('Deze button was NIET actief en geklikt');
+            //that.votes++;
+            this.FBAddVote();
+          }
+        },
+
+        remVote: function(){
+          var that = this;
+
+          this.userValue = -1;
+
+          if(that.$.btRem.active){
+            this.DeactivateMin();
+            this.userValue = 0;
+          } else {
+            if(that.$.btAdd.active){
+              this.DeactivatePlus();
+            }
+            that.$.btRem.active = true;
+            that.$.btAdd.active = false;
+            console.log('Deze button was NIET actief en geklikt');
+            //that.votes--;
+            this.FBRemVote();
+          }
+        },
+     
+      });
+
+    })();
+  </script>
+</polymer-element>

@@ -8,6 +8,8 @@
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="elements/time-ago/src/time-ago.html">
+<link rel="import" href="elements/cl-voteitem/cl-voteitem.html">
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 
 <link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
@@ -104,12 +106,10 @@ nieuw gesprek</div></button>
   <template repeat="{{k in keys}}" id="repeater">
     <div class="convitem" horizontal layout start start-justified>
       <div class="updownbtns" vertical layout center>
-        <button on-tap="{{upVote}}" key="{{k}}"><img class="updownimg" src="images/up.svg"></button>
-        <p>{{data[k].votes}}</p>
-        <button on-tap="{{downVote}}" key="{{k}}"><img class="updownimg" src="images/down.svg"></button>
+        <cl-voteitem key="{{k}}" votes="{{data[k].votes}}"></cl-voteitem>
       </div>
       <div class="convcontent" vertical layout start>
-      <h1 on-tap="{{gotoDetail}}" key="{{k}}" name="convSelected">tit {{data[k].title}}</h1>
+      <h1 on-tap="{{gotoDetail}}" key="{{k}}" name="convSelected">{{data[k].title}}</h1>
         <small><time-ago datetime="{{data[k].time}}"></time-ago> | <span class="convcomments"> 112 reacties </span> </small>
         
 
@@ -150,9 +150,7 @@ nieuw gesprek</div></button>
     <small on-tap="{{gotoList}}">back</small>
     <h1>{{data2.title}}</h1>
     
-
-
-<input value="{{NewComment}}">
+    <input value="{{NewComment}}">
     <button id="submitcomment" on-tap="{{submitNewComment}}">OK</button>
 
     <template repeat="{{ c in keys3}}">
@@ -227,25 +225,7 @@ nieuw gesprek</div></button>
         console.log(JSON.stringify(this.data2.title));
       },
 
-      upVote: function(e, detail, sender){
-          this.key = sender.attributes[1].value;
-          var addPlay = new Firebase('blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
-
-          addPlay.transaction(function(currentRank) {
-           // If /users/fred/rank has never been set, currentRank will be null.
-             return currentRank+1;
-           });
-      },
-
-      downVote: function(e, detail, sender){
-          this.key = sender.attributes[1].value;
-          var addPlay = new Firebase('blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
-
-          addPlay.transaction(function(currentRank) {
-           // If /users/fred/rank has never been set, currentRank will be null.
-             return currentRank-1;
-           });
-      }
+      
 
       
 
