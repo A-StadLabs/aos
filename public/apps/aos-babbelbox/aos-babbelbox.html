@@ -27,7 +27,8 @@
     <div horizontal layout wrap center start-justified>
       <div horizontal layout wrap center start-justified>
         <img class="appicon" src="images/babbelbox.svg">
-        <h1>Babbelbox</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+        <h1>Babbelbox</h1>
+        <!-- <input type="text" on-keyup="{{filter}}" class="searchbox"> -->
       </div>
 
        
@@ -94,9 +95,9 @@ nieuw gesprek</div></button>
   <template repeat="{{k in keys}}">
     <div class="convitem" horizontal layout start start-justified>
       <div class="updownbtns" vertical layout center>
-        <button><img class="updownimg" src="images/up.svg"></button>
-        <p>58</p>
-        <button><img class="updownimg" src="images/down.svg"></button>
+        <button on-tap="{{upVote}}" key="{{k}}"><img class="updownimg" src="images/up.svg"></button>
+        <p>{{data[k].votes}}</p>
+        <button on-tap="{{downVote}}" key="{{k}}"><img class="updownimg" src="images/down.svg"></button>
       </div>
       <div class="convcontent" vertical layout start>
         <h1 on-tap="{{toggleDetail}}">{{data[k].title}}</h1>
@@ -157,11 +158,34 @@ nieuw gesprek</div></button>
           this.$.ajaxBabbelbox.body = JSON.stringify(this.postBody);
           this.$.ajaxBabbelbox.go();
           this.$.newConv.value = '';
-          toggleInput();
       },
 
       handleResponse: function(){
           this.keys.reverse();
+      },
+
+      upVote: function(e, detail, sender){
+          this.key = sender.attributes[1].value;
+          var addPlay = new Firebase('blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
+          console.log('addplay: ', addPlay);
+
+          addPlay.transaction(function(currentRank) {
+           // If /users/fred/rank has never been set, currentRank will be null.
+             return currentRank+1;
+           });
+          console.log('upvote item e: ', e, 'upvote detail: ', detail, 'upvote sender: ', sender.attributes[1].value);
+      },
+
+      downVote: function(e, detail, sender){
+          this.key = sender.attributes[1].value;
+          var addPlay = new Firebase('blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
+          console.log('addplay: ', addPlay);
+
+          addPlay.transaction(function(currentRank) {
+           // If /users/fred/rank has never been set, currentRank will be null.
+             return currentRank-1;
+           });
+          console.log('upvote item e: ', e, 'upvote detail: ', detail, 'upvote sender: ', sender.attributes[1].value);
       }
 
 
