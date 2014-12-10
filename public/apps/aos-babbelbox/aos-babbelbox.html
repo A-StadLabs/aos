@@ -30,7 +30,7 @@
       </div>
 
        
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" childEvents orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+       <!--  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element> -->
 
     </div>
   </div>
@@ -140,7 +140,6 @@ nieuw gesprek</div></button>
     <h1>{{data2.title}}</h1>
     </template>
   </div>
-
 </div>
 </section>
 
@@ -163,6 +162,14 @@ nieuw gesprek</div></button>
 
       ready: function() {
 
+        var ref = new Firebase("https://blazing-fire-6426.firebaseio.com/babbelbox");
+        var data = '';
+        ref.orderByChild("votes").on("child_added", function(snapshot) {
+          //console.log(snapshot.key() + " was " + snapshot.val().votes + " meters tall");
+          data = data + snapshot.key() + " was " + snapshot.val().votes;
+      });
+        console.log('data: ',data);
+        this.data = data;
         },
 
       toggleInput: function(){
@@ -190,7 +197,7 @@ nieuw gesprek</div></button>
       },
 
       handleResponse: function(){
-          this.keys.reverse();
+          this.data.sort(function(a, b){return b-a});
       },
 
       handleResponse2: function(){
