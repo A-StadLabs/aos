@@ -27,7 +27,7 @@
       </div>
 
        
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="categorie" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="time" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
 
     </div>
   </div>
@@ -149,6 +149,12 @@ nieuw gesprek</div></button>
           this.postBody = { 'time': this.time, 'title': this.newConversation, 'tags':'antwerpen' };
           this.$.ajaxBabbelbox.body = JSON.stringify(this.postBody);
           this.$.ajaxBabbelbox.go();
+          this.$.newConv.value = '';
+          toggleInput();
+      },
+
+      handleResponse: function(){
+          this.keys.reverse();
       }
 
 
