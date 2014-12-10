@@ -285,7 +285,7 @@ core-drawer-panel {
 #detail {
 	background-color: white;
 	width: 76vw;
-	padding: 0px 12vw 0px 12vw;
+	padding: 0px 12vw 30px 12vw;
 	margin: 0px;
 }
 
@@ -297,20 +297,35 @@ core-drawer-panel {
 #detail h1 {
 	font-weight: 300;
 	font-size: 28px;
-	margin: 20px 0px 20px 0px;
-	padding: 0px 0px 20px 0px;
-	border-bottom: 1px solid #f5f5f5;
+	margin: 20px 0px 10px 0px;
+	padding: 0px;
 }
 
 
+#detail small {
+	margin: 10px 0px 0px 0px;
+	color: #999999;
+	font-size: 14px;
+	font-weight: 300;
+}
 
 
+.detailcomments {
+	color: #333333;
+	font-weight: 400;
+}
+
+
+#detailtop {
+	margin-bottom: 30px;
+}
 
 .back {
 	width: 100vw;
 	padding: 20px 12vw 20px 12vw;
 	color:  #72BF9D;
 	border-bottom: 1px solid #f5f5f5;
+
 }
 
 
@@ -318,7 +333,7 @@ core-drawer-panel {
 
 #commentbox {
 	font-family: 'Open Sans', sans-serif;
-	background-color: #EBEBEB;
+	background-color: white;
 	border: none;
 	border-radius: 5px;
 	font-size: 14px;
@@ -326,7 +341,8 @@ core-drawer-panel {
 	color: #333333;
 	margin: 0px 0px 10px 0px;
 	min-width: 50vw;
-	padding: 1vw;
+	padding: 0.5vw;
+	border: 1px solid #999999;
 
 }
 
