@@ -11,15 +11,35 @@ p {
 
 svg {
   display: block;
-  fill: #F0BEAF;
+  fill: #333333;
   height: 10px;
   overflow: hidden;
   width: 20px;
 }
 
 svg.highlight {
-  fill: #E84310;
+  fill: #72BF9D;
+    width: 20px;
+
 }
+
+
+polygon {
+  points:4.619,12.94 13.015,3.524 21.399,12.633 22.617,11.512 12.995,1.06 3.382,11.84;
+}
+
+
+p {
+  margin: 10px 0px 10px 0px;
+  padding: 0px;
+  color: black;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  width: 20px;
+}
+
+
 
 
 #info {
