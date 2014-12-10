@@ -2,6 +2,7 @@
 <link rel="import" href="../time-ago/src/time-ago.html">
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 <link rel="import" href="../cl-voteitem/cl-voteitem.html">
+<link rel="import" href="../babbel-postcomment/babbel-postcomment.html">
 
 <polymer-element name="babbel-antwoord" attributes="childOf key object">
 
@@ -19,6 +20,7 @@
           <time-ago datetime="{{object.time}}"></time-ago> | 
           <span class="convcomments"> 112 reacties </span>
         </small>
+        <babbel-postcomment op="0" tags="child" mother="{{object.key}}"></babbel-postcomment>
       </div>
 
     </div>
