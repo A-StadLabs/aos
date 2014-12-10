@@ -1,7 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+
+<link rel="import" href="elements/time-ago/src/time-ago.html">
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 
 <link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
 <polymer-element name="aos-babbelbox" attributes="">
@@ -22,7 +27,7 @@
       </div>
 
        
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="categorie" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
+        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="categorie" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
 
     </div>
   </div>
@@ -33,6 +38,15 @@
 
   <button id="newconv" on-tap="{{toggleInput}}"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
 nieuw gesprek</div></button>
+
+  <core-ajax 
+  id="ajaxBabbelbox" 
+  url="https://blazing-fire-6426.firebaseio.com/babbelbox/.json"
+  method="POST" 
+  handleAs="json" 
+  response="{{postResponse}}"
+  on-core-response="{{handleResponse}}">
+  </core-ajax>
 
    <core-dropdown-menu label="sorteren" class="sortbtns">
           <core-dropdown class="dropdown">
@@ -57,7 +71,7 @@ nieuw gesprek</div></button>
 <div class="canvas">
 <core-collapse id="collapse">
 <div id="newitem" vertical layout start>
-<input autofocus placeholder="Begin een gesprek">
+<input autofocus placeholder="Begin een gesprek" value="{{newConversation}}" id="newConv">
 
   <div id="" horizontal layout start start-justified wrap>
     <button class="itemaddons">tag toevoegen</button>
@@ -67,60 +81,30 @@ nieuw gesprek</div></button>
 
   <div id="inputbtns" horizontal layout center end-justified>
     <p on-tap="{{toggleInput}}">annuleren</p>
-    <button id="submitbtn">OK</button>
+    <button id="submitbtn" on-tap="{{submitNewConversation}}">OK</button>
   </div>
 
 </div>
 </core-collapse>
 
-
-  <div class="comm-item" horizontal layout start start-justified>
-<<<<<<< HEAD
-    <div id="updownbtns" vertical layout center>test</div>
-    <div vertical layout start>
-      <h1>Waarom is Michael eig zo'ne lastige gast soms?</h1>
-      <p>Da weet niemand, really.</p>
-=======
-    <div class="updownbtns" vertical layout center>
-      <button><img class="updownimg" src="images/up.svg"></button>
-      <p>58</p>
-      <button><img class="updownimg" src="images/down.svg"></button>
+  <template repeat="{{k in keys}}">
+    <div class="convitem" horizontal layout start start-justified>
+      <div class="updownbtns" vertical layout center>
+        <button><img class="updownimg" src="images/up.svg"></button>
+        <p>58</p>
+        <button><img class="updownimg" src="images/down.svg"></button>
+      </div>
+      <div class="convcontent" vertical layout start>
+        <h1 on-tap="{{toggleDetail}}">{{data[k].title}}</h1>
+        <p><time-ago datetime="{{data[k].time}}"></time-ago> | <span class="convcomments"> 112 reacties </span> </p>
+        <core-collapse id="detail">
+        <div><h2>Detail detail detail</h2>
+        </div>
+        </core-collapse>
+      </div>
     </div>
-    <div class="comm-content" vertical layout start>
-      <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
->>>>>>> d78d182f8f9f144651ca1f0759faa28440306184
-    </div>
-  </div>
-
-
-  <div class="comm-item" horizontal layout start start-justified>
-    <div class="updownbtns" vertical layout center>
-      <button><img class="updownimg" src="images/up.svg"></button>
-      <p>58</p>
-      <button><img class="updownimg" src="images/down.svg"></button>
-    </div>
-    <div class="comm-content" vertical layout start>
-      <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
-    </div>
-  </div>
-
-  <div class="comm-item" horizontal layout start start-justified>
-    <div class="updownbtns" vertical layout center>
-      <button><img class="updownimg" src="images/up.svg"></button>
-      <p>58</p>
-      <button><img class="updownimg" src="images/down.svg"></button>
-    </div>
-    <div class="comm-content" vertical layout start>
-      <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
-    </div>
-  </div>
-
+  </template>
   
-
-
 </div>
 
 
@@ -152,7 +136,19 @@ nieuw gesprek</div></button>
       toggleInput: function(){
         this.$.collapse.toggle();
         this.$.toolbarbtns.hidden = !this.$.toolbarbtns.hidden;
+        this.$.newConv.value = '';
+      },
 
+      toggleDetail: function() {
+        this.$.detail.toggle();
+      },
+
+      // Nieuwe conversatie opslaan
+      submitNewConversation: function(){
+          this.time = new Date();
+          this.postBody = { 'time': this.time, 'title': this.newConversation, 'tags':'antwerpen' };
+          this.$.ajaxBabbelbox.body = JSON.stringify(this.postBody);
+          this.$.ajaxBabbelbox.go();
       }
 
 
