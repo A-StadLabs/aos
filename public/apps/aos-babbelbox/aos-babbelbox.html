@@ -146,28 +146,30 @@ nieuw gesprek</div></button>
   on-core-response="{{handleResponse}}">
   </core-ajax>
 
-  <div id="detail">
+      <div class="back">
+    <small on-tap="{{gotoList}}">terug naar lijst</small>
+  </div>
+  <div id="detail" vertical layout start>
 
     <template bind>
 
 
-
-    <small on-tap="{{gotoList}}">back</small>
-
-
-    <h1>{{data2.title}}</h1>
-
+<div id="detailtop">
+  <h1>{{data2.title}}</h1>
+  <small>{{data2.time}} | <span class="detailcomments"> 112 reacties </span> </small>
+</div>
 
 
+<div id="selfcomment">
+  <input id="commentbox" value="{{NewComment}}">
+  <button id="submitcomment" on-tap="{{submitNewComment}}">OK</button>
+</div>
 
-<input value="{{NewComment}}">
-
-    <button id="submitcomment" on-tap="{{submitNewComment}}">OK</button>
-
+<div id="currentcomments">
     <template repeat="{{ c in keys3}}">
     <p>{{data3[c].title}}</p>
     </template>
-
+</div>
     </template>
   </div>
 </div>
