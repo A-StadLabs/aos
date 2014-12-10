@@ -143,15 +143,25 @@ nieuw gesprek</div></button>
   </core-ajax>
 
   <div id="detail">
+
     <template bind>
+
+
+
     <small on-tap="{{gotoList}}">back</small>
+
+
     <h1>{{data2.title}}</h1>
-    
-    <input value="{{NewComment}}">
+
+
+
+
+<input value="{{NewComment}}">
+
     <button id="submitcomment" on-tap="{{submitNewComment}}">OK</button>
 
     <template repeat="{{ c in keys3}}">
-    <h1>{{data3[c].title}}</h1>
+    <p>{{data3[c].title}}</p>
     </template>
 
     </template>
