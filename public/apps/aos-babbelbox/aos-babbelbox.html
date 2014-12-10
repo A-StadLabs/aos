@@ -1,6 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+
 <link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
 <polymer-element name="aos-babbelbox" attributes="">
 
@@ -28,7 +30,8 @@
 <div class="container">
 
 <div id="toolbarbtns" horizontal layout start wrap>
-  <button id="newconv"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
+
+  <button id="newconv" on-tap="{{toggleInput}}"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
 nieuw gesprek</div></button>
 
    <core-dropdown-menu label="sorteren" class="sortbtns">
@@ -52,31 +55,70 @@ nieuw gesprek</div></button>
 
 
 <div class="canvas">
+<core-collapse id="collapse">
+<div id="newitem" vertical layout start>
+<input autofocus placeholder="Begin een gesprek">
+
+  <div id="" horizontal layout start start-justified wrap>
+    <button class="itemaddons">tag toevoegen</button>
+    <button class="itemaddons">bestand toevoegen</button>
+  </div>
+
+
+  <div id="inputbtns" horizontal layout center end-justified>
+    <p on-tap="{{toggleInput}}">annuleren</p>
+    <button id="submitbtn">OK</button>
+  </div>
+
+</div>
+</core-collapse>
+
 
   <div class="comm-item" horizontal layout start start-justified>
+<<<<<<< HEAD
     <div id="updownbtns" vertical layout center>test</div>
     <div vertical layout start>
       <h1>Waarom is Michael eig zo'ne lastige gast soms?</h1>
       <p>Da weet niemand, really.</p>
+=======
+    <div class="updownbtns" vertical layout center>
+      <button><img class="updownimg" src="images/up.svg"></button>
+      <p>58</p>
+      <button><img class="updownimg" src="images/down.svg"></button>
     </div>
-  </div>
-
-  <div class="comm-item" horizontal layout start start-justified>
-    <div id="updownbtns" vertical layout center></div>
-    <div vertical layout start>
+    <div class="comm-content" vertical layout start>
       <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>Gewoon zowa, hoe het eruit moet zien en waar de data geschoten wordt.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
+>>>>>>> d78d182f8f9f144651ca1f0759faa28440306184
     </div>
   </div>
 
 
   <div class="comm-item" horizontal layout start start-justified>
-    <div id="updownbtns" vertical layout center></div>
-    <div vertical layout start>
-      <h1>Maar wacht, waar komen dan de andere babbelbox-en, zoals vb die van oostende of ...?</h1>
-      <p>Ja man, ik weet da toch ni, Michael had der een idee bij.</p>
+    <div class="updownbtns" vertical layout center>
+      <button><img class="updownimg" src="images/up.svg"></button>
+      <p>58</p>
+      <button><img class="updownimg" src="images/down.svg"></button>
+    </div>
+    <div class="comm-content" vertical layout start>
+      <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
     </div>
   </div>
+
+  <div class="comm-item" horizontal layout start start-justified>
+    <div class="updownbtns" vertical layout center>
+      <button><img class="updownimg" src="images/up.svg"></button>
+      <p>58</p>
+      <button><img class="updownimg" src="images/down.svg"></button>
+    </div>
+    <div class="comm-content" vertical layout start>
+      <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
+    </div>
+  </div>
+
+  
 
 
 </div>
@@ -94,9 +136,26 @@ nieuw gesprek</div></button>
     Polymer({
 
       ready: function() {
+        var that = this;
 
-      	
-        }
+      // this.$.collapse.addEventListener('core-collapse-open', function(){
+      //   that.$.toolbarbtns.hidden = true;
+      // });
+
+      // this.$.collapse.addEventListener('core-collapse-closed', function(){
+      //   that.$.toolbarbtns.hidden = false;
+      // });
+
+
+        },
+
+      toggleInput: function(){
+        this.$.collapse.toggle();
+        this.$.toolbarbtns.hidden = !this.$.toolbarbtns.hidden;
+
+      }
+
+
       
 
 
