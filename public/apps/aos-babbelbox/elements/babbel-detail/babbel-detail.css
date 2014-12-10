@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+
+
+#detail {
+	background-color: white;
+	width: 76vw;
+	padding: 0px 12vw 30px 12vw;
+	margin: 0px;
+}
+
+
+
+h1 {
+	font-weight: 300;
+	color: #333333;
+}
+
+
+#detail h1 {
+	font-weight: 300;
+	font-size: 28px;
+	margin: 20px 0px 10px 0px;
+	padding: 0px;
+}
+
+
+#detail small {
+	margin: 10px 0px 0px 0px;
+	color: #999999;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+
+.detailcomments {
+	color: #333333;
+	font-weight: 400;
+}
+
+
+#detailtop {
+	margin-bottom: 30px;
+}

@@ -1,13 +1,37 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
 
-<polymer-element name="babbel-postcomment" attributes="">
+<polymer-element name="babbel-postcomment" attributes="tags op mother">
 
   <template>
 
 
     <link rel="stylesheet" href="babbel-postcomment.css" />
 
-    <h1>TEST DE KNOOPPUNT APP</h1>
+    <core-ajax 
+  id="ajaxBabbelbox" 
+  url="https://blazing-fire-6426.firebaseio.com/babbelbox/.json"
+  method="POST" 
+  handleAs="json" 
+  response="{{postResponse}}"
+  on-core-response="{{handleResponse}}">
+  </core-ajax>
+
+    <div id="newitem" vertical layout start>
+    <input autofocus placeholder="Begin een gesprek" value="{{newConversation}}" id="newConv">
+
+    <div id="" horizontal layout start start-justified wrap>
+      <button class="itemaddons">tag toevoegen</button>
+      <button class="itemaddons">bestand toevoegen</button>
+    </div>
+
+
+  <div id="inputbtns" horizontal layout center end-justified>
+    <p on-tap="{{toggleInput}}">annuleren</p>
+    <button id="submitbtn" on-tap="{{submitNewConversation}}">OK</button>
+  </div>
+
+</div>
 
   </template>
 
@@ -19,7 +43,16 @@
 
       	console.log('Babbelbox entry loaded.'); 
 
-        }
+      },
+
+      // Nieuwe conversatie opslaan
+      submitNewConversation: function(){
+          this.time = new Date();
+          this.postBody = { 'time': this.time, 'title': this.newConversation, 'tags':this.tags, 'op': this.op, 'mother': this.mother, 'votes': 1 };
+          this.$.ajaxBabbelbox.body = JSON.stringify(this.postBody);
+          this.$.ajaxBabbelbox.go();
+          this.$.newConv.value = '';
+      },
 
 
     });

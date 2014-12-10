@@ -8,13 +8,12 @@
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 
-<link rel="import" href="elements/time-ago/src/time-ago.html">
 <link rel="import" href="elements/babbel-babbel/babbel-babbel.html">
 <link rel="import" href="elements/babbel-comment/babbel-comment.html">
+<link rel="import" href="elements/babbel-detail/babbel-detail.html">
 <link rel="import" href="elements/babbel-postcomment/babbel-postcomment.html">
-<link rel="import" href="elements/cl-voteitem/cl-voteitem.html">
+<link rel="import" href="elements/babbelbox-comments/babbelbox-comments.html">
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 
 <link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
 <polymer-element name="aos-babbelbox" attributes="">
@@ -23,7 +22,7 @@
 
     <link rel="stylesheet" href="aos-babbelbox.css" />
 
-
+    <firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="votes" data="{{data}}" childEvents on-child-added="{{childAdded}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
 
 
  <div class="leaderboard">
@@ -35,7 +34,7 @@
         <!-- <input type="text" on-keyup="{{filter}}" class="searchbox"> -->
       </div>
        
-        <firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+        
 
     </div>
   </div>
@@ -51,15 +50,6 @@
 
   <button id="newconv" on-tap="{{toggleInput}}"> <div horizontal layout center><img class="new" src="images/nieuw.svg">
 nieuw gesprek</div></button>
-
-  <core-ajax 
-  id="ajaxBabbelbox" 
-  url="https://blazing-fire-6426.firebaseio.com/babbelbox/.json"
-  method="POST" 
-  handleAs="json" 
-  response="{{postResponse}}"
-  on-core-response="{{handleResponse}}">
-  </core-ajax>
 
    <core-dropdown-menu label="sorteren" class="sortbtns">
           <core-dropdown class="dropdown">
@@ -80,97 +70,59 @@ nieuw gesprek</div></button>
   </core-dropdown-menu>
 </div>
 
-
-<div class="canvas">
-
-
-<core-collapse id="collapse">
-<div id="newitem" vertical layout start>
-<input autofocus placeholder="Begin een gesprek" value="{{newConversation}}" id="newConv">
-
-  <div id="" horizontal layout start start-justified wrap>
-    <button class="itemaddons">tag toevoegen</button>
-    <button class="itemaddons">bestand toevoegen</button>
-  </div>
-
-
-  <div id="inputbtns" horizontal layout center end-justified>
-    <p on-tap="{{toggleInput}}">annuleren</p>
-    <button id="submitbtn" on-tap="{{submitNewConversation}}">OK</button>
-  </div>
-
-</div>
-</core-collapse>
-
-
-<core-selector id="convselector" selected="{{selected}}" valueattr="value" on-core-select="">
-
-
-  <template repeat="{{k in keys}}" id="repeater">
-    <div class="convitem" horizontal layout start start-justified>
-      <div class="updownbtns" vertical layout center>
-        <cl-voteitem key="{{k}}" votes="{{data[k].votes}}"></cl-voteitem>
-      </div>
-      <div class="convcontent" vertical layout start>
-      <h1 on-tap="{{gotoDetail}}" key="{{k}}" name="convSelected">{{data[k].title}}</h1>
-        <small><time-ago datetime="{{data[k].time}}"></time-ago> | <span class="convcomments"> 112 reacties </span> </small>
-
-      </div>
-
-    </div>
-  </template>
-  
-
-</core-selector>  
-</section>
-
-
-
-
-
-
-
-<section>
-<div class="canvas">
-
-  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/" childEvents orderByChild="votes" data="{{data2}}" keys="{{keys2}}" on-data-change="{{handleResponse2}}" id="fbBabbelboxDetail"></firebase-element>
-
-  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/comments/" childEvents orderByChild="votes" data="{{data3}}" keys="{{keys3}}" on-data-change="{{handleResponse2}}" id="fbBabbelboxComments"></firebase-element>
-
-  <core-ajax 
-  id="ajaxComments" 
-  url="https://blazing-fire-6426.firebaseio.com/babbelbox/{{selectedItem}}/comments/.json"
+<!-- Dit is de core-ajax die een nieuw bericht post -->
+<!-- <core-ajax 
+  id="ajaxBabbelbox" 
+  url="https://blazing-fire-6426.firebaseio.com/babbelbox/.json"
   method="POST" 
   handleAs="json" 
   response="{{postResponse}}"
   on-core-response="{{handleResponse}}">
-  </core-ajax>
+  </core-ajax> -->
 
-      <div class="back">
-    <small on-tap="{{gotoList}}">terug naar lijst</small>
+<div class="canvas">
+
+<core-collapse id="collapse">
+  <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
+</core-collapse>
+
+<!-- Hier begint de lijst van berichten -->
+
+<template repeat="{{k in opdata}}" id="repeater">
+
+  <template if="{{k.op==1}}">
+      <babbel-babbel key="{{k.key}}" object="{{k}}" mode="parent" childOf="{{k.mother}}"></babbel-babbel>
+  </template>
+
+</template>
+
+</section>
+
+<!-- einde lijst berichten -->
+
+
+<!-- in deze sectie zit het detail van het bericht -->
+
+<section>
+<div class="canvas">
+  <div class="back">
+    <small on-tap="{{gotoList}}">< terug naar lijst</small>
   </div>
+
   <div id="detail" vertical layout start>
 
-    <template bind>
+  <babbel-detail object="{{selObject}}" key="{{selKey}}"></babbel-detail>
 
+  
 
-<div id="detailtop">
-  <h1>{{data2.title}}</h1>
-  <small>{{data2.time}} | <span class="detailcomments"> 112 reacties </span> </small>
-</div>
-
-
-<div id="selfcomment">
-  <input id="commentbox" value="{{NewComment}}">
-  <button id="submitcomment" on-tap="{{submitNewComment}}">OK</button>
-</div>
+  <div id="selfcomment">
+    <babbel-postcomment mother="{{selKey}}" op="0" tags="{{selObject.title}}"></babbel-postcomment>
+  </div>
 
 <div id="currentcomments">
-    <template repeat="{{ c in keys3}}">
-    <p>{{data3[c].title}}</p>
-    </template>
+    <babbelbox-comments key="{{selKey}}"></babbelbox-comments>
 </div>
-    </template>
+
   </div>
 </div>
 </section>
@@ -190,23 +142,62 @@ nieuw gesprek</div></button>
 
   <script>
 
+    var opdata = [];
+
     Polymer({
+
+      childAdded: function(){
+        var that = this;
+        console.log('added ', event.detail.name, ':', event.detail.value);
+            opdata.push({ 
+              'key': event.detail.name,
+              'title': event.detail.value['title'], 
+              'tags': event.detail.value['tags'], 
+              'votes': event.detail.value['votes'],
+              'op': event.detail.value['op'],
+              'mother': event.detail.value['mother'],
+              'time': event.detail.value['time']});
+
+        console.log(opdata);
+      },
 
       ready: function() {
 
+        this.opdata = opdata;
+        this.childdata = childdata;
+
+        var that = this;
+        
+        // this.$.FBgeneral.addEventListener('child-added',function(){
+        //   var that = this;
+        //   console.log('added ', event.detail.name, ':', event.detail.value);
+        //   if(event.detail.value['op']===1){
+        //     opdata.push({ 'title': event.detail.value['title'], 'tags': event.detail.value['tags'], 'time': event.detail.value['time']});
+        //   };
+        //   console.log(opdata);
+        // });
+
+        document.addEventListener('babbel-select', function(e, detail, sender){
+          //console.log('selected someo shit!', e.detail.key, detail, sender);
+          that.selKey = e.detail.key;
+          that.selObject = that.data[e.detail.key];
+          that.$.babbelscenes.selected = 1;
+        });
+
+        document.addEventListener('go-home', function(){
+          delete that.selKey;
+          delete that.selObject;
+          that.$.babbelscenes.selected = 0;
+        });
 
         
-        },
+
+      },
 
       toggleInput: function(){
         this.$.collapse.toggle();
         this.$.toolbarbtns.hidden = !this.$.toolbarbtns.hidden;
         this.$.newConv.value = '';
-      },
-
-      gotoDetail: function(e, detail, sender) {
-        this.$.babbelscenes.selected = 1;
-        this.selectedItem = sender.attributes[1].value;
       },
 
       gotoList: function() {
@@ -227,17 +218,10 @@ nieuw gesprek</div></button>
           this.commentBody = { 'time': this.time, 'title': this.NewComment, 'tags':'antwerpen' };
           this.$.ajaxComments.body = JSON.stringify(this.commentBody);
           this.$.ajaxComments.go();
-          this.$.newConv.value = '';
+          //this.$.newConv.value = '';
       },
 
-      handleResponse: function(){
-          this.data.sort(function(a, b){return b-a});
-      },
-
-      handleResponse2: function(){
-        console.log(JSON.stringify(this.data2.title));
-      },
-
+     
       
 
       
