@@ -5,7 +5,6 @@
   <template>
     <link rel="stylesheet" href="cl-voteitem.css">
 
-
     <div vertical layout center id="voterij">
       <svg id="btAdd" viewBox="0 0 10 5" on-tap="{{addVote}}" class="{{ { highlight: userValue === 1 } | tokenList }}">
       <polygon points="0,5 5,0 10,5"></polygon>
@@ -15,7 +14,6 @@
       <polygon points="0,0 5,5 10,0"></polygon>
       </svg>
     </div>
-  
 
   </template>
 
@@ -24,6 +22,8 @@
       'use strict';
 
       Polymer({
+
+
 
         // define element prototype here
         ready: function(){
@@ -42,6 +42,14 @@
             return currentRank-1;
           });
         },
+
+        // FBAddVote: function(){
+        //   this.votes++;
+        // },
+
+        // FBRemVote: function(){
+        //   this.votes--;
+        // },
 
         DeactivatePlus: function(){
           var that = this;

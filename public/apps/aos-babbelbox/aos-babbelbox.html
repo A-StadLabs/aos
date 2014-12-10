@@ -27,12 +27,11 @@
     <div horizontal layout wrap center start-justified>
       <div horizontal layout wrap center start-justified>
         <img class="appicon" src="images/babbelbox.svg">
-        <h1>Babbelbox</h1>
+        <h1>Hoe heet deze app?</h1>
         <!-- <input type="text" on-keyup="{{filter}}" class="searchbox"> -->
       </div>
-
        
-        <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+        <firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
 
     </div>
   </div>
@@ -111,8 +110,6 @@ nieuw gesprek</div></button>
       <div class="convcontent" vertical layout start>
       <h1 on-tap="{{gotoDetail}}" key="{{k}}" name="convSelected">{{data[k].title}}</h1>
         <small><time-ago datetime="{{data[k].time}}"></time-ago> | <span class="convcomments"> 112 reacties </span> </small>
-        
-
 
       </div>
 
