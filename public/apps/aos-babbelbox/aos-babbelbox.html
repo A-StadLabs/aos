@@ -74,40 +74,47 @@ nieuw gesprek</div></button>
 </core-collapse>
 
 
-  <div class="comm-item" horizontal layout start start-justified>
+  <div class="convitem" horizontal layout start start-justified>
     <div class="updownbtns" vertical layout center>
       <button><img class="updownimg" src="images/up.svg"></button>
       <p>58</p>
       <button><img class="updownimg" src="images/down.svg"></button>
     </div>
-    <div class="comm-content" vertical layout start>
-      <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
+    <div class="convcontent" vertical layout start>
+      <h1 on-tap="{{toggleDetail}}">Klein hagelkruis afgesloten</h1>
+      <p>Gisteren om 21u15 | <span class="convcomments"> 112 reacties </span> </p>
+
+      <core-collapse id="detail">
+      <div><h2>Detail detail detail</h2>
+      </div>
+      </core-collapse>
+
+
     </div>
   </div>
 
 
-  <div class="comm-item" horizontal layout start start-justified>
+  <div class="convitem" horizontal layout start start-justified>
     <div class="updownbtns" vertical layout center>
       <button><img class="updownimg" src="images/up.svg"></button>
-      <p>58</p>
+      <p>22</p>
       <button><img class="updownimg" src="images/down.svg"></button>
     </div>
-    <div class="comm-content" vertical layout start>
+    <div class="convcontent" vertical layout start>
       <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
+      <p>3 dagen geleden | <span class="convcomments"> 8 reacties </span> </p>
     </div>
   </div>
 
-  <div class="comm-item" horizontal layout start start-justified>
+  <div class="convitem" horizontal layout start start-justified>
     <div class="updownbtns" vertical layout center>
       <button><img class="updownimg" src="images/up.svg"></button>
-      <p>58</p>
+      <p>8</p>
       <button><img class="updownimg" src="images/down.svg"></button>
     </div>
-    <div class="comm-content" vertical layout start>
+    <div class="convcontent" vertical layout start>
       <h1>Wa wilde gij dan eig weten over den Babbelbox?</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at maximus arcu, a placerat nunc. </p>
+      <p>3 dagen geleden | <span class="convcomments"> 8 reacties </span> </p>
     </div>
   </div>
 
@@ -145,7 +152,10 @@ nieuw gesprek</div></button>
       toggleInput: function(){
         this.$.collapse.toggle();
         this.$.toolbarbtns.hidden = !this.$.toolbarbtns.hidden;
+      },
 
+      toggleDetail: function() {
+        this.$.detail.toggle();
       }
 
 
