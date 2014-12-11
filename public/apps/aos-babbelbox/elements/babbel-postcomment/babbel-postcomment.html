@@ -26,7 +26,10 @@
   <div horizontal layout center wrap>
     <input autofocus placeholder="Begin een gesprek" value="{{newConversation}}" id="newConv">
 
+
+
     <div id="inputbtns" horizontal layout center>
+    
       <button id="submitbtn" on-tap="{{submitNewConversation}}">OK</button>
     </div>
   </div>
@@ -64,6 +67,11 @@
         
             var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.mother+'/children/');
           addPlay.transaction(function(currentRank) {
+            return currentRank+1;
+          });
+
+            var addVote = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.mother+'/votes/');
+          addVote.transaction(function(currentRank) {
             return currentRank+1;
           });
           

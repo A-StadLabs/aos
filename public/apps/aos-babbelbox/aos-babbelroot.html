@@ -39,8 +39,14 @@
     </div>
   </div>
 
+<button on-tap="{{openadd}}">Begin een Babble</button>
 <button on-tap="{{sortthis}}">Sorteer op meeste votes</button>
+<button on-tap="{{sorttime}}">Meest recent</button>
+<button on-tap="{{sortchild}}">Meest antwoord</button>
+
+<core-collapse id="startConv">
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
+</core-collapse>
 
 <core-selector selected="{{selected}}" id="selektor">
 
@@ -79,6 +85,12 @@ var opdata = [];
 
       opdataChanged: function(){
         console.log('Opdata changed; ',this.opdata);
+        this.$.selektor.selected = -1;
+      },
+
+      openadd: function(){
+        this.$.startConv.toggle();
+        this.$.selektor.selected = -1;
       },
 
       sorting: function(a,b) {
@@ -89,8 +101,6 @@ var opdata = [];
         return 0;
       },
 
-     
-
       sortthis: function(){
         console.log('sorteren', this.opdata);
 
@@ -100,6 +110,31 @@ var opdata = [];
 
         console.log('gesorteerd', this.opdata);
       },
+
+      sorttime: function() {
+        this.handleResponse();
+      },
+
+      sortnumChild: function(a,b) {
+        if (a.children < b.children)
+          return -1;
+        if (a.children > b.children)
+          return 1;
+        return 0;
+      },
+
+      sortchild: function(){
+        console.log('sorteren', this.opdata);
+
+        this.opdata.sort(this.sortnumChild);
+
+        this.opdata.reverse();
+
+        console.log('gesorteerd', this.opdata);
+      },
+
+
+      
 
     	ready: function(){
 
