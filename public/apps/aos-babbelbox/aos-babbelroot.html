@@ -39,12 +39,12 @@
     </div>
   </div>
 
-
+<button on-tap="{{sortthis}}">Sorteer op meeste votes</button>
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
 
 <core-selector selected="{{selected}}" id="selektor">
 
-<template repeat="{{d, i in opdata | orderBy('votes', true) }}">
+<template repeat="{{d, i in opdata }}">
 <div class="babbelbabbel">
 		<babbel-babbel key="{{d.key}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
 		<core-collapse opened?="{{selected == i}}">
@@ -79,6 +79,26 @@ var opdata = [];
 
       opdataChanged: function(){
         console.log('Opdata changed; ',this.opdata);
+      },
+
+      sorting: function(a,b) {
+        if (a.votes < b.votes)
+          return -1;
+        if (a.votes > b.votes)
+          return 1;
+        return 0;
+      },
+
+     
+
+      sortthis: function(){
+        console.log('sorteren', this.opdata);
+
+        this.opdata.sort(this.sorting);
+
+        this.opdata.reverse();
+
+        console.log('gesorteerd', this.opdata);
       },
 
     	ready: function(){
@@ -121,6 +141,7 @@ var opdata = [];
                         'title': this.data[keys[i]].title,
                         'votes': this.data[keys[i]].votes,
                         'op': this.data[keys[i]].op,
+                        'children': this.data[keys[i]].children,
                         'mother': this.data[keys[i]].mother,
                         'time': this.data[keys[i]].time,
                         'tags': this.data[keys[i]].tags

@@ -6,13 +6,14 @@
 <link rel="import" href="../babbel-babbel/babbel-babbel.html">
 <link rel="import" href="../babbel-postcomment/postcomment-babbel.html">
 
-<polymer-element name="babbel-subposts" attributes="mother">
+<polymer-element name="babbel-subposts" attributes="mother numChildren">
 
   <template>
 
 <firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
+<button on-tap="{{sortthis}}">Sorteer op meeste votes</button>
 <babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
-<template repeat="{{ l in childdata | orderBy('votes', true) }}">
+<template repeat="{{ l, i in childdata }}">
  	<babbel-babbel key="{{l.key}}" object="{{l}}" mode="child" childOf="{{mother}}"></babbel-babbel>
 </template>
 
@@ -25,6 +26,30 @@ Polymer({
       	console.log('Babbelbox entry loaded.'); 
     },
 
+    iChanged: function(){
+    	console.log('i changed ',this.i);
+    },
+
+    sorting: function(a,b) {
+        if (a.votes < b.votes)
+          return -1;
+        if (a.votes > b.votes)
+          return 1;
+        return 0;
+      },
+
+     
+
+      sortthis: function(){
+        console.log('sorteren', this.childdata);
+
+        this.childdata.sort(this.sorting);
+
+        this.childdata.reverse();
+
+        console.log('gesorteerd', this.childdata);
+      },
+
      handleResponse: function(){
         var childdata = [];
         var answerkeys = this.answerkeys;
@@ -36,12 +61,14 @@ Polymer({
                         'title': this.answerdata[answerkeys[i]].title,
                         'votes': this.answerdata[answerkeys[i]].votes,
                         'op': this.answerdata[answerkeys[i]].op,
+                        'children': this.answerdata[answerkeys[i]].children,
                         'mother': this.answerdata[answerkeys[i]].mother,
                         'time': this.answerdata[answerkeys[i]].time,
                         'tags': this.answerdata[answerkeys[i]].tags
                       });
         };
         this.childdata = childdata;
+        this.numChildren = i;
         console.log('childdata :',this.childdata);
     	}
 

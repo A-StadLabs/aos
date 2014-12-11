@@ -19,6 +19,8 @@
   on-core-response="{{handleResponse}}">
   </core-ajax>
 
+
+
 <div id="newitem" vertical layout start>
 
   <div horizontal layout center wrap>
@@ -54,11 +56,29 @@
       // Nieuwe conversatie opslaan
       submitNewConversation: function(){
           this.time = new Date();
-          this.postBody = { 'time': this.time, 'title': this.newConversation, 'tags':this.tags, 'op': this.op, 'mother': this.mother, 'votes': 1 };
+          this.postBody = { 'time': this.time, 'title': this.newConversation, 'tags':this.tags, 'op': this.op, 'mother': this.mother, 'votes': 1, 'children': 0 };
           this.$.ajaxBabbelbox.body = JSON.stringify(this.postBody);
           this.$.ajaxBabbelbox.go();
           this.$.newConv.value = '';
-      }
+
+        
+            var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.mother+'/children/');
+          addPlay.transaction(function(currentRank) {
+            return currentRank+1;
+          });
+          
+
+          //Add child on mother children value
+
+      },
+      
+      FBAddVote: function(){
+
+          var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.mother+'/children/');
+          addPlay.transaction(function(currentRank) {
+            return currentRank+1;
+          });
+        },
 
     });
 
