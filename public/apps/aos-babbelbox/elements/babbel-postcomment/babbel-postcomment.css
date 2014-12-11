@@ -1,9 +1,10 @@
 :host {
   display: block;
-  width: 50vw;
-}
+  background-color: white;
+/*  width: 50vw;
+*/}
 
-#newitem {
+/*#newitem {
 	width: 76vw;
 	padding: 30px 12vw 30px 12vw; 
 	border-bottom: 1px solid #EBEBEB;
@@ -12,14 +13,13 @@
 
 #newitem input {
 	font-family: 'Open Sans', sans-serif;
-	background-color: #EBEBEB;
-	border: none;
-	border-radius: 5px;
+	background-color: white;
+	border: 1px solid #EBEBEB;
 	font-size: 14px;
 	font-weight: 300;
 	color: #333333;
 	margin: 0px 0px 10px 0px;
-	min-width: 20vw;
+	min-width: 50vw;
 	padding: 1vw;
 }
 
@@ -74,4 +74,4 @@
 	background-color: white;
 	font-size: 14px;
 	border: 
-}
+}*/

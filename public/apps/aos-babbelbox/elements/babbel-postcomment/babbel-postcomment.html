@@ -6,7 +6,9 @@
   <template>
 
 
-    <link rel="stylesheet" href="babbel-postcomment.css" />
+<!--     <link rel="stylesheet" href="babbel-postcomment.css" />
+ -->        <link rel="stylesheet" href="../../aos-babbelroot.css" />
+
 
     <core-ajax 
   id="ajaxBabbelbox" 
@@ -17,8 +19,16 @@
   on-core-response="{{handleResponse}}">
   </core-ajax>
 
-    <div id="newitem" vertical layout start>
+<div id="newitem" vertical layout start>
+
+  <div horizontal layout center wrap>
     <input autofocus placeholder="Begin een gesprek" value="{{newConversation}}" id="newConv">
+
+    <div id="inputbtns" horizontal layout center>
+      <button id="submitbtn" on-tap="{{submitNewConversation}}">OK</button>
+    </div>
+  </div>
+
 
     <div id="" horizontal layout start start-justified wrap>
       <button class="itemaddons">tag toevoegen</button>
@@ -26,10 +36,6 @@
     </div>
 
 
-  <div id="inputbtns" horizontal layout center end-justified>
-    <p on-tap="{{toggleInput}}">annuleren</p>
-    <button id="submitbtn" on-tap="{{submitNewConversation}}">OK</button>
-  </div>
 
 </div>
 
@@ -52,8 +58,7 @@
           this.$.ajaxBabbelbox.body = JSON.stringify(this.postBody);
           this.$.ajaxBabbelbox.go();
           this.$.newConv.value = '';
-      },
-
+      }
 
     });
 

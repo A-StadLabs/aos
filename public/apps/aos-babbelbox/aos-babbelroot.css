@@ -2,3 +2,199 @@
 	display: block;
 }
 
+
+/*  STYLING GENERAL LEADERBOARD */
+
+
+.leaderboard {
+	width: 76vw;
+	padding: 0vw 12vw 20px 12vw;
+	background-color: #72BF9D;
+}
+
+.stralendeA {
+	width: 4vw;
+	min-width: 60px;
+	padding: 0px;
+}
+
+
+.searchbox {
+	margin: 0px 0px 0px 10px;
+	padding: 0px;
+	border: none;
+}
+
+.leaderboard h1 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	color: #333333;
+		font-size: 28px;
+
+}
+
+.appicon {
+	width: 35px;
+	margin-right: 10px;
+	opacity: 0.5;
+}
+
+
+
+
+
+/* STYLING BABBEL */
+
+.convitem {
+	border-bottom: 1px solid #f5f5f5;
+	margin: 0px;
+	padding: 20px 12vw 20px 12vw;
+	background-color: white;
+}
+
+
+.convitem h1 {
+	font-weight: 300;
+	color: #72BF9D;
+	font-size: 24px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+.convitem p {
+	font-weight: 300;
+	color: #333333;
+	font-size: 14px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+}
+
+
+
+.convitem small {
+	font-weight: 400;
+	color: #999999;
+	font-size: 13px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	margin-top: 5px;
+
+}
+
+
+.convcomments {
+	color: #333333;
+}
+
+
+
+/* STYLING POSTCOMMENT */
+
+#newitem {
+	width: 100vw;
+	padding: 30px 12vw 30px 12vw; 
+	border-bottom: 1px solid #EBEBEB;
+	background-color: white;
+}
+
+
+#newitem input {
+	font-family: 'Open Sans', sans-serif;
+	background-color: white;
+	border: 1px solid #EBEBEB;
+	font-size: 14px;
+	font-weight: 300;
+	color: #333333;
+	margin: 0px;
+	min-width: 50vw;
+	padding: 1vw;
+}
+
+#newitem input:focus {
+	background-color: #F5F5F5;
+	border: 2px solid #72BF9D;
+	outline:0;
+	    -webkit-box-shadow:none;
+       -moz-box-shadow:none;
+            box-shadow:none;
+    background: transparent;
+
+}
+
+
+#newitem p {
+	color:  #6BB393;
+	text-decoration: underline;
+}
+
+
+
+#inputbtns {
+	margin: 0px; 
+	padding: 0px; 
+	width: 20vw;
+}
+
+
+
+#submitbtn {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0px; 
+	padding: 14px;
+	border: 1px solid #EBEBEB;
+	background-color: #EBEBEB;
+	font-size: 14px;
+	font-weight: 300;
+	color: #333333;
+}
+
+
+
+.itemaddons {
+	color: #999999;
+	text-decoration: underline;
+	border: none;
+	padding: 0px;
+	margin: 6px 15px 6px 0px;
+	background-color: white;
+	font-size: 14px;
+}
+
+
+
+
+
+/* STYLING VOTE-ITEM */
+
+#voterij svg {
+  display: block;
+  fill: #333333;
+  height: 10px;
+  overflow: hidden;
+  width: 20px;
+}
+
+#voterij svg.highlight {
+  fill: #72BF9D;
+  width: 20px;
+}
+
+
+#voterij p {
+  margin: 5px 0px 5px 0px;
+  padding: 0px;
+  color: black;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  width: 20px;
+}
+
+
+#voterij {
+	margin: 6px 15px 0px 0px;
+}
+

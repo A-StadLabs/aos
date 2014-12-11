@@ -1,9 +1,10 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="cl-voteitem" attributes="key item votes">
+<polymer-element name="cl-voteitem" attributes="key item votes mode">
   <template>
-    <link rel="stylesheet" href="cl-voteitem.css">
+<!--     <link rel="stylesheet" href="cl-voteitem.css"> -->
+<link rel="stylesheet" href="../../aos-babbelroot.css" />
 
     <div vertical layout center id="voterij">
       <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{addVote}}" class="{{ { highlight: userValue === 1 } | tokenList }}">
