@@ -36,11 +36,12 @@
         <cl-voteitem key="{{key}}" votes="{{object.votes}}"></cl-voteitem>
       </div>
       <div class="convcontent" vertical layout start on-tap="{{fireSelect}}">
-      <h2 on-tap="{{gotoDetail}}" key="{{key}}" name="convSelected">{{object.title}}</h2>
+      <p on-tap="{{gotoDetail}}" key="{{key}}" name="convSelected">{{object.title}}</p>
         <small>
           <time-ago datetime="{{object.time}}"></time-ago> | 
-          <span class="convcomments"> 112 reacties </span>
+          <span class="convcomments"> 88 reacties </span>
         </small>
+      <hr>
       </div>
       </div>
 

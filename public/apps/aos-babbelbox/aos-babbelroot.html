@@ -44,7 +44,7 @@
 <core-selector selected="{{selected}}" id="selektor">
 
 <template repeat="{{k, i in keys }}">
-<div>
+<div class="babbelbabbel">
 		<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="parent" childOf="0"></babbel-babbel>
 		<core-collapse opened?="{{selected == i}}">
 			<babbel-subposts mother="{{k}}"></babbel-subposts>
