@@ -15,8 +15,9 @@
 
 .stralendeA {
 	width: 4vw;
-	min-width: 60px;
-	padding: 0px;
+	min-width: 20px;
+	background-color: #FAC937;
+	padding: 10px;
 }
 
 
