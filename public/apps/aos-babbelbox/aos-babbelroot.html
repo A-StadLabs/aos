@@ -2,10 +2,14 @@
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+
 
 <!-- Hier staat onze custom elementen -->
 <link rel="import" href="elements/babbel-babbel/babbel-babbel.html">
 <link rel="import" href="elements/babbel-postcomment/babbel-postcomment.html">
+<link rel="import" href="elements/babbel-subposts/babbel-subposts.html">
 
 <polymer-element name="aos-babbelroot" attributes="">
 <template>
@@ -13,7 +17,8 @@
     <link rel="stylesheet" href="aos-babbelroot.css" /> 
 
 
-<firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="votes" data="{{data}}" childEvents on-child-added="{{childAdded}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+<firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="op" equalTo="1" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+
 <core-animated-pages id="babbelscenes"  transitions="slide-from-right"> 
 <section>
 
@@ -35,22 +40,30 @@
 
 
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
-<template repeat="{{k in keys}}">
-	<template if="{{data[k].op==1}}">
+
+<core-selector selected="{{selected}}" id="selektor">
+
+<template repeat="{{k, i in keys }}">
+<div>
 		<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="parent" childOf="0"></babbel-babbel>
-	</template>
+		<core-collapse opened?="{{selected == i}}">
+			<babbel-subposts mother="{{k}}"></babbel-subposts>
+		</core-collapse>
+</div>
 </template>
+
+</core-selector>
 </section>
 <!--  Hier gaan we dieper in een post -->
 <section>
-  <button on-tap="{{goBack}}">back</button>
+
 
 	<babbel-babbel key="{{selKey}}" object="{{selObject}}" mode="parent" childOf="0"></babbel-babbel>
 	<babbel-postcomment op="0" tags="child" mother="{{selKey}}"></babbel-postcomment>
 
 	<template repeat="{{k in keys}}">
 		<template if="{{data[k].mother==selKey}}">
-			<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="child" childOf="{{selKey}}"></babbel-babbel>
+			<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="child" childOf="{{selKey}}" parentObject="{{selObject}}"></babbel-babbel>
 		</template>
 	</template>
 </section>
@@ -63,28 +76,39 @@ var opdata = [];
 
     Polymer({
 
+
+
     	ready: function(){
 
     		var that = this;
 
-    		document.addEventListener('babbel-select', function(e, detail, sender){
-          		console.log('selected someo shit!', e.detail.key, detail, sender);
-          		that.selKey = e.detail.key;
-          		that.selObject = that.data[e.detail.key];
-          		that.$.babbelscenes.selected = 1;
+    		//this.$.selektor.selected = 2;
+
+    		// document.addEventListener('babbel-select', function(e){
+      //     		console.log('selected someo shit!', e.detail.key);
+      //     		that.selKey = e.detail.key;
+      //     		that.selObject = that.data[e.detail.key];
+      //     		that.$.babbelscenes.selected = 1;
+      //   	});
+
+      //   	document.addEventListener('babbel-open', function(e){
+      //     		console.log('selected someo shit!', e.detail.mother);
+      //     		that.selKey = e.detail.mother;
+      //     		that.selObject = that.data[e.detail.mother];
+      //     		that.$.babbelscenes.selected = 1;
+      //   	});
+
+    		this.$.selektor.addEventListener('core-activate', function(e){
+          		console.log('selected someo shit!', e.detail, this.selected);
+          		
         	});
 
     	},
+    	
 
     	handleResponse: function(){
-    		//opdata = this.data;
-    	},
 
-      goBack: function(){
-                      this.$.babbelscenes.selected = 0;
-
-      }
-
+    	}
     });
 
 </script>
