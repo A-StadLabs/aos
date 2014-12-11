@@ -1,6 +1,8 @@
 
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../../../bower_components/polymer-filters/polymer-filters.html">
+
 <link rel="import" href="../babbel-babbel/babbel-babbel.html">
 <link rel="import" href="../babbel-postcomment/postcomment-babbel.html">
 
@@ -10,8 +12,8 @@
 
 <firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
 <babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
-<template repeat="{{l in answerkeys}}">
- 	<babbel-babbel key="{{l}}" object="{{answerdata[l]}}" mode="child" childOf="{{mother}}"></babbel-babbel>
+<template repeat="{{ l in childdata | orderBy('votes', true) }}">
+ 	<babbel-babbel key="{{l.key}}" object="{{l}}" mode="child" childOf="{{mother}}"></babbel-babbel>
 </template>
 
 
@@ -20,21 +22,28 @@
 Polymer({
 
      ready: function() {
-
       	console.log('Babbelbox entry loaded.'); 
-
     },
 
      handleResponse: function(){
         var childdata = [];
-        var keys = this.answerkeys;
-        
-        for (var i = keys.length - 1; i >= 0; i--) {
-          console.log(this.data[keys[i]]);
-          childdata.push(this.data[keys[i]]);
+        var answerkeys = this.answerkeys;
+
+        for (var i = answerkeys.length - 1; i >= 0; i--) {
+          console.log('answer: ',this.answerdata[answerkeys[i]]);
+          //console.log(this.name);
+          childdata.push({ 'key': answerkeys[i],
+                        'title': this.answerdata[answerkeys[i]].title,
+                        'votes': this.answerdata[answerkeys[i]].votes,
+                        'op': this.answerdata[answerkeys[i]].op,
+                        'mother': this.answerdata[answerkeys[i]].mother,
+                        'time': this.answerdata[answerkeys[i]].time,
+                        'tags': this.answerdata[answerkeys[i]].tags
+                      });
         };
         this.childdata = childdata;
-    }
+        console.log('childdata :',this.childdata);
+    	}
 
 
     });

@@ -44,11 +44,11 @@
 
 <core-selector selected="{{selected}}" id="selektor">
 
-<template repeat="{{d, i in opdata | orderBy('votes') }}">
+<template repeat="{{d, i in opdata | orderBy('votes', true) }}">
 <div class="babbelbabbel">
-		<babbel-babbel key="{{k}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
+		<babbel-babbel key="{{d.key}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
 		<core-collapse opened?="{{selected == i}}">
-			<babbel-subposts mother="{{k}}"></babbel-subposts>
+			<babbel-subposts mother="{{d.key}}"></babbel-subposts>
 		</core-collapse>
 </div>
 </template>
@@ -117,7 +117,14 @@ var opdata = [];
         for (var i = keys.length - 1; i >= 0; i--) {
           console.log(this.data[keys[i]]);
           console.log(this.name);
-          opdata.push(this.data[keys[i]]);
+          opdata.push({ 'key': keys[i],
+                        'title': this.data[keys[i]].title,
+                        'votes': this.data[keys[i]].votes,
+                        'op': this.data[keys[i]].op,
+                        'mother': this.data[keys[i]].mother,
+                        'time': this.data[keys[i]].time,
+                        'tags': this.data[keys[i]].tags
+                      });
         };
         this.opdata = opdata;
     	},
