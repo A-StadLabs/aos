@@ -9,10 +9,31 @@
 
 <polymer-element name="aos-babbelroot" attributes="">
 <template>
+
+    <link rel="stylesheet" href="aos-babbelroot.css" /> 
+
+
 <firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="votes" data="{{data}}" childEvents on-child-added="{{childAdded}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
 <core-animated-pages id="babbelscenes"  transitions="slide-from-right"> 
 <section>
-<h1>Babbelbox right?</h1>
+
+
+
+<!-- <h1>Babbelbox right?</h1>
+ -->
+  <div class="leaderboard">
+    <img class="stralendeA" src="images/a-rgb.svg">
+    <div horizontal layout wrap center start-justified>
+      <div horizontal layout wrap center start-justified flex>
+        <img class="appicon" src="images/babbelbox.svg">
+        <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+      </div>
+
+
+    </div>
+  </div>
+
+
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
 <template repeat="{{k in keys}}">
 	<template if="{{data[k].op==1}}">
@@ -22,6 +43,8 @@
 </section>
 <!--  Hier gaan we dieper in een post -->
 <section>
+  <button on-tap="{{goBack}}">back</button>
+
 	<babbel-babbel key="{{selKey}}" object="{{selObject}}" mode="parent" childOf="0"></babbel-babbel>
 	<babbel-postcomment op="0" tags="child" mother="{{selKey}}"></babbel-postcomment>
 
@@ -55,7 +78,12 @@ var opdata = [];
 
     	handleResponse: function(){
     		//opdata = this.data;
-    	}
+    	},
+
+      goBack: function(){
+                      this.$.babbelscenes.selected = 0;
+
+      }
 
     });
 
