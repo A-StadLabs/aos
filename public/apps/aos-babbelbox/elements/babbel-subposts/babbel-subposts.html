@@ -1,0 +1,38 @@
+
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../babbel-babbel/babbel-babbel.html">
+<link rel="import" href="../babbel-postcomment/postcomment-babbel.html">
+
+<polymer-element name="babbel-subposts" attributes="mother">
+
+  <template bond>
+
+<firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
+
+			<template repeat="{{l in answerkeys}}">
+<!-- 			<h1>test - {{answerdata[l].title}}</h1>
+ -->				<babbel-babbel key="{{l}}" object="{{answerdata[l]}}" mode="child" childOf="{{mother}}"></babbel-babbel>
+			</template>
+			<babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
+
+
+</template>
+<script>
+Polymer({
+
+      ready: function() {
+
+      	console.log('Babbelbox entry loaded.'); 
+
+      },
+
+      handleResponse: function(){
+      	console.log('ok, keys: ',this.answerkeys);
+      	console.log('ok, response: ',this.answerdata);
+      }
+
+
+    });
+</script>
+</polymer-element>
