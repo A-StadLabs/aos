@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/polymer-filters/polymer-filters.html">
 
 
 <!-- Hier staat onze custom elementen -->
@@ -80,6 +81,8 @@ var opdata = [];
 
     	ready: function(){
 
+        this.filteredkeys = this.keys;
+
     		var that = this;
 
     		//this.$.selektor.selected = 2;
@@ -104,10 +107,14 @@ var opdata = [];
         	});
 
     	},
-    	
 
     	handleResponse: function(){
-
+        var opdata = [];
+        var keys = this.keys;
+        for (var i = keys.length - 1; i >= 0; i--) {
+          console.log(this.data[keys[i]]);
+          opdata.push({key: keys[i], data: this.data[keys[i]]});
+        };
     	}
     });
 
