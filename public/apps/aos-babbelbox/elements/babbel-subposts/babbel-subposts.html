@@ -9,26 +9,32 @@
   <template>
 
 <firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
-
+<babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
 <template repeat="{{l in answerkeys}}">
  	<babbel-babbel key="{{l}}" object="{{answerdata[l]}}" mode="child" childOf="{{mother}}"></babbel-babbel>
 </template>
-<babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
+
 
 </template>
 <script>
 Polymer({
 
-      ready: function() {
+     ready: function() {
 
       	console.log('Babbelbox entry loaded.'); 
 
-      },
+    },
 
-      handleResponse: function(){
-      	console.log('ok, keys: ',this.answerkeys);
-      	console.log('ok, response: ',this.answerdata);
-      }
+     handleResponse: function(){
+        var childdata = [];
+        var keys = this.answerkeys;
+        
+        for (var i = keys.length - 1; i >= 0; i--) {
+          console.log(this.data[keys[i]]);
+          childdata.push(this.data[keys[i]]);
+        };
+        this.childdata = childdata;
+    }
 
 
     });

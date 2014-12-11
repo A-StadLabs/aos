@@ -44,9 +44,9 @@
 
 <core-selector selected="{{selected}}" id="selektor">
 
-<template repeat="{{k, i in keys }}">
+<template repeat="{{d, i in opdata | orderBy('votes') }}">
 <div class="babbelbabbel">
-		<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="parent" childOf="0"></babbel-babbel>
+		<babbel-babbel key="{{k}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
 		<core-collapse opened?="{{selected == i}}">
 			<babbel-subposts mother="{{k}}"></babbel-subposts>
 		</core-collapse>
@@ -77,7 +77,9 @@ var opdata = [];
 
     Polymer({
 
-
+      opdataChanged: function(){
+        console.log('Opdata changed; ',this.opdata);
+      },
 
     	ready: function(){
 
@@ -111,11 +113,18 @@ var opdata = [];
     	handleResponse: function(){
         var opdata = [];
         var keys = this.keys;
+        console.log(JSON.stringify());
         for (var i = keys.length - 1; i >= 0; i--) {
           console.log(this.data[keys[i]]);
-          opdata.push({key: keys[i], data: this.data[keys[i]]});
+          console.log(this.name);
+          opdata.push(this.data[keys[i]]);
         };
-    	}
+        this.opdata = opdata;
+    	},
+
+      sort: function(value, term){
+        return value;
+      }
     });
 
 </script>
