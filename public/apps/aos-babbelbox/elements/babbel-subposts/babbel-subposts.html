@@ -6,9 +6,9 @@
 
 <polymer-element name="babbel-subposts" attributes="mother">
 
-<template>
+  <template>
 
-<firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="votes" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
+<firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
 
 <template repeat="{{l in answerkeys}}">
  	<babbel-babbel key="{{l}}" object="{{answerdata[l]}}" mode="child" childOf="{{mother}}"></babbel-babbel>
