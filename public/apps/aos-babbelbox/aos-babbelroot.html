@@ -1,0 +1,63 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+
+<!-- Hier staat onze custom elementen -->
+<link rel="import" href="elements/babbel-babbel/babbel-babbel.html">
+<link rel="import" href="elements/babbel-postcomment/babbel-postcomment.html">
+
+<polymer-element name="aos-babbelroot" attributes="">
+<template>
+<firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="votes" data="{{data}}" childEvents on-child-added="{{childAdded}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+<core-animated-pages id="babbelscenes"  transitions="slide-from-right"> 
+<section>
+<h1>Babbelbox right?</h1>
+<babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
+<template repeat="{{k in keys}}">
+	<template if="{{data[k].op==1}}">
+		<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="parent" childOf="0"></babbel-babbel>
+	</template>
+</template>
+</section>
+<!--  Hier gaan we dieper in een post -->
+<section>
+	<babbel-babbel key="{{selKey}}" object="{{selObject}}" mode="parent" childOf="0"></babbel-babbel>
+	<babbel-postcomment op="0" tags="child" mother="{{selKey}}"></babbel-postcomment>
+
+	<template repeat="{{k in keys}}">
+		<template if="{{data[k].mother==selKey}}">
+			<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="child" childOf="{{selKey}}"></babbel-babbel>
+		</template>
+	</template>
+</section>
+</core-animated-pages>
+
+</template>
+<script>
+
+var opdata = [];
+
+    Polymer({
+
+    	ready: function(){
+
+    		var that = this;
+
+    		document.addEventListener('babbel-select', function(e, detail, sender){
+          		console.log('selected someo shit!', e.detail.key, detail, sender);
+          		that.selKey = e.detail.key;
+          		that.selObject = that.data[e.detail.key];
+          		that.$.babbelscenes.selected = 1;
+        	});
+
+    	},
+
+    	handleResponse: function(){
+    		//opdata = this.data;
+    	}
+
+    });
+
+</script>
+</polymer-element>
