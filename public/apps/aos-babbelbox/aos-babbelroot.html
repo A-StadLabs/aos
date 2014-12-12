@@ -121,9 +121,6 @@ var opdata = [];
       //        that.$.babbelscenes.selected = 1;
       //    });
 
-       
-
-
       },
 
       opdataChanged: function(){
@@ -132,8 +129,16 @@ var opdata = [];
       },
 
       openadd: function(){
+        if(this.$.globals.values.user){
         this.$.startConv.toggle();
         this.$.selektor.selected = -1;
+        } else {
+          this.openOverlay();
+        }
+      },
+
+      openOverlay: function(){
+        console.log("je hebt niet de juiste rechten.");
       },
 
       sorting: function(a,b) {
