@@ -6,79 +6,63 @@
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../bower_components/polymer-filters/polymer-filters.html">
 
-
 <!-- Hier staat onze custom elementen -->
 <link rel="import" href="elements/babbel-babbel/babbel-babbel.html">
 <link rel="import" href="elements/babbel-postcomment/babbel-postcomment.html">
 <link rel="import" href="elements/babbel-subposts/babbel-subposts.html">
+<link rel="import" href="../../elements/aos-globals/aos-globals.html">
 
 <polymer-element name="aos-babbelroot" attributes="">
+
 <template>
 
-    <link rel="stylesheet" href="aos-babbelroot.css" /> 
-
+<link rel="stylesheet" href="aos-babbelroot.css" /> 
 
 <firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="op" equalTo="1" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
+
+<aos-globals id="globals"></aos-globals>
 
 <core-animated-pages id="babbelscenes"  transitions="slide-from-right"> 
 <section>
 
-
-
-<!-- <h1>Babbelbox right?</h1>
- -->
-  <div class="leaderboard">
-    <img class="stralendeA" src="images/astadlabs.svg">
-    <div horizontal layout wrap center start-justified>
-      <div horizontal layout wrap center start-justified flex>
-        <img class="appicon" src="images/babbelbox.svg">
-        <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
-      </div>
-
-
+<div class="leaderboard">
+  <img class="stralendeA" src="images/astadlabs.svg">
+  <div horizontal layout wrap center start-justified>
+    <div horizontal layout wrap center start-justified flex>
+      <img class="appicon" src="images/babbelbox.svg">
+      <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
     </div>
   </div>
-
-
-
-
-
+</div>
 
 <div id="generalsort" horizontal layout center start-justified >
   <button class="startbtn" on-tap="{{openadd}}" horizontal layout center start-justified ><img src="images/nieuw.svg">Begin een Babble</button>
-<p>  Sorteer op </p>
+<p>Sorteer op</p>
 <button class="sortbtn" on-tap="{{sortthis}}">meeste votes</button>
 <button class="sortbtn" on-tap="{{sorttime}}">Meest recent</button>
 <button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
 </div>
 
-
 <core-collapse id="startConv">
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
 </core-collapse>
 
-
-
 <core-selector selected="{{selected}}" id="selektor">
-
-<template repeat="{{d, i in opdata }}">
-<div class="babbelbabbel">
-		<babbel-babbel key="{{d.key}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
-		<core-collapse opened?="{{selected == i}}">
-			<babbel-subposts mother="{{d.key}}"></babbel-subposts>
-		</core-collapse>
-</div>
-</template>
-
+  <template repeat="{{d, i in opdata }}">
+  <div class="babbelbabbel">
+  		<babbel-babbel key="{{d.key}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
+  		<core-collapse opened?="{{selected == i}}">
+  			<babbel-subposts mother="{{d.key}}"></babbel-subposts>
+  		</core-collapse>
+  </div>
+  </template>
 </core-selector>
 </section>
+
 <!--  Hier gaan we dieper in een post -->
 <section>
-
-
 	<babbel-babbel key="{{selKey}}" object="{{selObject}}" mode="parent" childOf="0"></babbel-babbel>
 	<babbel-postcomment op="0" tags="child" mother="{{selKey}}"></babbel-postcomment>
-
 	<template repeat="{{k in keys}}">
 		<template if="{{data[k].mother==selKey}}">
 			<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="child" childOf="{{selKey}}" parentObject="{{selObject}}"></babbel-babbel>
@@ -86,7 +70,6 @@
 	</template>
 </section>
 </core-animated-pages>
-
 </template>
 <script>
 
@@ -114,11 +97,8 @@ var opdata = [];
 
       sortthis: function(){
         console.log('sorteren', this.opdata);
-
         this.opdata.sort(this.sorting);
-
         this.opdata.reverse();
-
         console.log('gesorteerd', this.opdata);
       },
 
@@ -136,44 +116,17 @@ var opdata = [];
 
       sortchild: function(){
         console.log('sorteren', this.opdata);
-
         this.opdata.sort(this.sortnumChild);
-
         this.opdata.reverse();
-
         console.log('gesorteerd', this.opdata);
       },
-
-
-      
-
+    
     	ready: function(){
-
         this.filteredkeys = this.keys;
-
     		var that = this;
-
-    		//this.$.selektor.selected = 2;
-
-    		// document.addEventListener('babbel-select', function(e){
-      //     		console.log('selected someo shit!', e.detail.key);
-      //     		that.selKey = e.detail.key;
-      //     		that.selObject = that.data[e.detail.key];
-      //     		that.$.babbelscenes.selected = 1;
-      //   	});
-
-      //   	document.addEventListener('babbel-open', function(e){
-      //     		console.log('selected someo shit!', e.detail.mother);
-      //     		that.selKey = e.detail.mother;
-      //     		that.selObject = that.data[e.detail.mother];
-      //     		that.$.babbelscenes.selected = 1;
-      //   	});
-
     		this.$.selektor.addEventListener('core-activate', function(e){
-          		console.log('selected someo shit!', e.detail, this.selected);
-          		
-        	});
-
+       		console.log('selected someo shit!', e.detail, this.selected);
+        });
     	},
 
     	handleResponse: function(){
@@ -194,6 +147,7 @@ var opdata = [];
                       });
         };
         this.opdata = opdata;
+        this.sortthis();
     	},
 
       sort: function(value, term){
