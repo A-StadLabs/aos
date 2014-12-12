@@ -39,14 +39,25 @@
     </div>
   </div>
 
-<button on-tap="{{openadd}}">Begin een Babble</button>
-<button on-tap="{{sortthis}}">Sorteer op meeste votes</button>
-<button on-tap="{{sorttime}}">Meest recent</button>
-<button on-tap="{{sortchild}}">Meest antwoord</button>
+
+
+
+
+
+<div id="generalsort" horizontal layout center start-justified >
+  <button class="startbtn" on-tap="{{openadd}}" horizontal layout center start-justified ><img src="images/nieuw.svg">Begin een Babble</button>
+<p>  Sorteer op </p>
+<button class="sortbtn" on-tap="{{sortthis}}">meeste votes</button>
+<button class="sortbtn" on-tap="{{sorttime}}">Meest recent</button>
+<button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
+</div>
+
 
 <core-collapse id="startConv">
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
 </core-collapse>
+
+
 
 <core-selector selected="{{selected}}" id="selektor">
 

@@ -10,12 +10,14 @@
 
   <template>
 
+    <link rel="stylesheet" href="../../aos-babbelroot.css" />
+
 <firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
-<button on-tap="{{sortthis}}">Sorteer op meeste votes</button>
-<babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
+<div id="sortsubs"><button class="sortbtn" on-tap="{{sortthis}}">Sorteer op meeste votes</button></div>
 <template repeat="{{ l, i in childdata }}">
  	<babbel-babbel key="{{l.key}}" object="{{l}}" mode="child" childOf="{{mother}}"></babbel-babbel>
 </template>
+<babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
 
 
 </template>

@@ -1,6 +1,8 @@
 :host {
 	display: block;
 	background-color: white;
+	font-family: 'Open Sans', sans-serif;
+
 }
 
 
@@ -10,13 +12,13 @@
 .leaderboard {
 	width: 76vw;
 	padding: 0vw 12vw 20px 12vw;
-	background-color: #72BF9D;
+	background-color: #95d2b7;
 }
 
 .stralendeA {
 	width: 4vw;
 	min-width: 50px;
-	background-color: #FAC937;
+	background-color: rgba(0,0,0,0.1);
 	padding: 10px;
 }
 
@@ -28,10 +30,9 @@
 }
 
 .leaderboard h1 {
-	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	color: #333333;
-		font-size: 28px;
+	font-size: 28px;
 
 }
 
@@ -43,6 +44,74 @@
 
 
 
+.sortbtn {
+	border: 1px solid #EBEBEB;
+	border-bottom: 1px solid #999999;
+	color: #666666;
+	background-color: white;
+	border-radius: 0px;
+	font-family: 'Open Sans', sans-serif;
+	padding: 4px 6px 4px 6px;
+	outline: 0;
+	margin: 0px 5px 0px 0px;
+}
+
+
+
+.sortbtn:hover {
+	border: 1px solid rgba(149,210,183,0.5);
+	border-bottom: 1px solid #6EB897;
+	color: #6EB897;
+}
+
+#sortsubs {
+	width: 76vw;
+	padding: 10px 12vw 5px 14vw;
+	margin: 0px 0px 0px 5px;
+}
+
+
+.convcomments {
+	color: #333333;
+	margin-left: 5px;
+	font-weight: 400;
+/*	background-color: #CEF2E2;*/
+}
+
+#generalsort {
+	background-color: white;
+	width: 76vw;
+	padding: 30px 12vw 5px 12vw;
+	margin: 0px;
+}
+
+
+#generalsort p {
+	color: #666666;
+	font-size: 11px;
+	margin: 0px 10px 0px 0px;
+}
+
+.startbtn {
+	margin: 0px 20px 0px  0px;
+	background-color: rgba(33,157,200,0.1);
+	border: none;
+	border-radius: none;
+	color: #219dc8;
+	font-size: 12px;
+	padding: 6px 10px 6px 10px;
+	font-family: 'Open Sans', sans-serif;
+	cursor: pointer;
+}
+
+
+
+.startbtn img {
+	width: 20px;
+	margin: 0px 6px 0px 0px;
+}
+
+
 
 
 /* STYLING BABBEL */
@@ -51,6 +120,14 @@
 	border-bottom: 1px solid #EBEBEB; 
 }
  
+
+.convcontent {
+	border-left: 1px solid #EBEBEB;
+	margin: 0px 10px 0px 0px;
+	padding: 0px 0px 0px 15px;
+}
+
+
 /* PARENTMODE */
 :host([mode=parent]) .convitem {
 /*	border-bottom: 1px solid #f5f5f5; */
@@ -63,10 +140,11 @@
 
 :host([mode=parent]) .convitem h1 {
 	font-weight: 300;
-	color: #72BF9D;
+	color: #60BF95;
 	font-size: 24px;
 	margin: 0px;
 	padding: 0px;
+	max-width: 60vw;
 }
 
 
@@ -125,12 +203,6 @@
 }
 
 
-.convcomments {
-	color: #333333;
-}
-
-
-
 
 /* STYLING POSTCOMMENT */
 
@@ -156,7 +228,8 @@
 
 #newitem input:focus {
 	background-color: #F5F5F5;
-	border: 2px solid #72BF9D;
+	border: 2px solid #60BF95;
+
 	outline:0;
 	    -webkit-box-shadow:none;
        -moz-box-shadow:none;
@@ -219,7 +292,7 @@
 }
 
 .voterij svg.highlight {
-  fill: #72BF9D;
+  fill: #95d2b7;
   width: 20px;
 }
 
