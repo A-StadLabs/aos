@@ -6,21 +6,25 @@
 <link rel="import" href="../babbel-babbel/babbel-babbel.html">
 <link rel="import" href="../babbel-postcomment/postcomment-babbel.html">
 
-<polymer-element name="babbel-subposts" attributes="mother numChildren">
+<polymer-element name="babbel-subposts" attributes="mother">
 
-  <template>
+<template>
 
-    <link rel="stylesheet" href="../../aos-babbelroot.css" />
+<link rel="stylesheet" href="../../aos-babbelroot.css" />
 
-<firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
+
+  
 <div id="sortsubs"><button class="sortbtn" on-tap="{{sortthis}}">Sorteer op meeste votes</button></div>
-<template repeat="{{ l, i in childdata }}">
- 	<babbel-babbel key="{{l.key}}" object="{{l}}" mode="child" childOf="{{mother}}"></babbel-babbel>
-</template>
+
 <babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
 
-
+<template repeat="{{ l, i in childdata }}">
+  <babbel-babbel key="{{l.key}}" object="{{l}}" mode="child" childOf="{{mother}}"></babbel-babbel>
 </template>
+  
+<firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
+</template>
+
 <script>
 Polymer({
 
@@ -32,6 +36,10 @@ Polymer({
     	console.log('i changed ',this.i);
     },
 
+    motherChanged: function(){
+      this.$.FBanswer.requery();
+    },
+
     sorting: function(a,b) {
         if (a.votes < b.votes)
           return -1;
@@ -40,19 +48,15 @@ Polymer({
         return 0;
       },
 
-     
-
       sortthis: function(){
         console.log('sorteren', this.childdata);
-
         this.childdata.sort(this.sorting);
-
         this.childdata.reverse();
-
         console.log('gesorteerd', this.childdata);
       },
 
      handleResponse: function(){
+        console.log('answerdata: ',this.answerdata);
         var childdata = [];
         var answerkeys = this.answerkeys;
 
