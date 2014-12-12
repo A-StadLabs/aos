@@ -28,7 +28,7 @@
 <!-- <h1>Babbelbox right?</h1>
  -->
   <div class="leaderboard">
-    <img class="stralendeA" src="images/a-rgb.svg">
+    <img class="stralendeA" src="images/astadlabs.svg">
     <div horizontal layout wrap center start-justified>
       <div horizontal layout wrap center start-justified flex>
         <img class="appicon" src="images/babbelbox.svg">
@@ -39,16 +39,22 @@
     </div>
   </div>
 
+<button on-tap="{{openadd}}">Begin een Babble</button>
+<button on-tap="{{sortthis}}">Sorteer op meeste votes</button>
+<button on-tap="{{sorttime}}">Meest recent</button>
+<button on-tap="{{sortchild}}">Meest antwoord</button>
 
+<core-collapse id="startConv">
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
+</core-collapse>
 
 <core-selector selected="{{selected}}" id="selektor">
 
-<template repeat="{{k, i in keys }}">
+<template repeat="{{d, i in opdata }}">
 <div class="babbelbabbel">
-		<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="parent" childOf="0"></babbel-babbel>
+		<babbel-babbel key="{{d.key}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
 		<core-collapse opened?="{{selected == i}}">
-			<babbel-subposts mother="{{k}}"></babbel-subposts>
+			<babbel-subposts mother="{{d.key}}"></babbel-subposts>
 		</core-collapse>
 </div>
 </template>
@@ -77,7 +83,58 @@ var opdata = [];
 
     Polymer({
 
+      opdataChanged: function(){
+        console.log('Opdata changed; ',this.opdata);
+        this.$.selektor.selected = -1;
+      },
 
+      openadd: function(){
+        this.$.startConv.toggle();
+        this.$.selektor.selected = -1;
+      },
+
+      sorting: function(a,b) {
+        if (a.votes < b.votes)
+          return -1;
+        if (a.votes > b.votes)
+          return 1;
+        return 0;
+      },
+
+      sortthis: function(){
+        console.log('sorteren', this.opdata);
+
+        this.opdata.sort(this.sorting);
+
+        this.opdata.reverse();
+
+        console.log('gesorteerd', this.opdata);
+      },
+
+      sorttime: function() {
+        this.handleResponse();
+      },
+
+      sortnumChild: function(a,b) {
+        if (a.children < b.children)
+          return -1;
+        if (a.children > b.children)
+          return 1;
+        return 0;
+      },
+
+      sortchild: function(){
+        console.log('sorteren', this.opdata);
+
+        this.opdata.sort(this.sortnumChild);
+
+        this.opdata.reverse();
+
+        console.log('gesorteerd', this.opdata);
+      },
+
+
+      
 
     	ready: function(){
 
@@ -111,11 +168,26 @@ var opdata = [];
     	handleResponse: function(){
         var opdata = [];
         var keys = this.keys;
+        console.log(JSON.stringify());
         for (var i = keys.length - 1; i >= 0; i--) {
           console.log(this.data[keys[i]]);
-          opdata.push({key: keys[i], data: this.data[keys[i]]});
+          console.log(this.name);
+          opdata.push({ 'key': keys[i],
+                        'title': this.data[keys[i]].title,
+                        'votes': this.data[keys[i]].votes,
+                        'op': this.data[keys[i]].op,
+                        'children': this.data[keys[i]].children,
+                        'mother': this.data[keys[i]].mother,
+                        'time': this.data[keys[i]].time,
+                        'tags': this.data[keys[i]].tags
+                      });
         };
-    	}
+        this.opdata = opdata;
+    	},
+
+      sort: function(value, term){
+        return value;
+      }
     });
 
 </script>

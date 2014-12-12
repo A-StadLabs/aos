@@ -4,6 +4,7 @@
 <link rel="import" href="../cl-voteitem/cl-voteitem.html">
 <link rel="import" href="../babbel-antwoord/babbel-antwoord.html">
 <link rel="import" href="../babbel-postcomment/babbel-postcomment.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 
 
 <polymer-element name="babbel-babbel" attributes="childOf key object mode parentObject">
@@ -22,7 +23,7 @@
       <h1 on-tap="{{gotoDetail}}" key="{{key}}" name="convSelected">{{object.title}}</h1>
         <small>
           <time-ago datetime="{{object.time}}"></time-ago> | 
-          <span class="convcomments"> 112 reacties </span>
+          <span class="convcomments"> {{object.children}} reacties </span>
         </small>
       </div>
       </div>
@@ -41,6 +42,7 @@
         <small>
           <time-ago datetime="{{object.time}}"></time-ago>
 <!--           <span class="convcomments"> 88 reacties </span> -->
+
         </small>
 
       </div>
