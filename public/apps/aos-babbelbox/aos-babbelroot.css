@@ -67,7 +67,7 @@
 #sortsubs {
 	width: 76vw;
 	padding: 10px 12vw 5px 14vw;
-	margin: 0px 0px 0px 5px;
+	margin: 0px 0px 5px 5px;
 }
 
 
@@ -93,7 +93,7 @@
 }
 
 .startbtn {
-	margin: 0px 20px 0px  0px;
+	margin: 10px 20px 10px 0px;
 	background-color: rgba(33,157,200,0.1);
 	border: none;
 	border-radius: none;
@@ -102,6 +102,7 @@
 	padding: 6px 10px 6px 10px;
 	font-family: 'Open Sans', sans-serif;
 	cursor: pointer;
+	outline: 0;
 }
 
 
@@ -116,10 +117,10 @@
 
 /* STYLING BABBEL */
 
-.babbelbabbel {
+/*.babbelbabbel {
 	border-bottom: 1px solid #EBEBEB; 
 }
- 
+ */
 
 .convcontent {
 	border-left: 1px solid #EBEBEB;

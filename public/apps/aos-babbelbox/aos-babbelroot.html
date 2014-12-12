@@ -20,9 +20,6 @@
 
 <firebase-element id="FBgeneral" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="op" equalTo="1" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" id="fbBabbelbox"></firebase-element>
 
-<core-animated-pages id="babbelscenes"  transitions="slide-from-right"> 
-<section>
-
 
 
 <!-- <h1>Babbelbox right?</h1>
@@ -43,15 +40,19 @@
 
 
 
+<core-animated-pages id="babbelscenes"  transitions="slide-from-right"> 
+<section>
 
-<div id="generalsort" horizontal layout center start-justified >
+
+<div id="generalsort" horizontal layout center start-justified wrap>
   <button class="startbtn" on-tap="{{openadd}}" horizontal layout center start-justified ><img src="images/nieuw.svg">Begin een Babble</button>
 <p>  Sorteer op </p>
+<core-selector>
 <button class="sortbtn" on-tap="{{sortthis}}">meeste votes</button>
 <button class="sortbtn" on-tap="{{sorttime}}">Meest recent</button>
 <button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
 </div>
-
+</core-selector>
 
 <core-collapse id="startConv">
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
@@ -59,15 +60,13 @@
 
 
 
-<core-selector selected="{{selected}}" id="selektor">
+<core-selector valueattr="key" selected="{{selected}}" id="selektor">
 
 <template repeat="{{d, i in opdata }}">
-<div class="babbelbabbel">
 		<babbel-babbel key="{{d.key}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
-		<core-collapse opened?="{{selected == i}}">
+<!-- 		<core-collapse opened?="{{selected == i}}">
 			<babbel-subposts mother="{{d.key}}"></babbel-subposts>
-		</core-collapse>
-</div>
+		</core-collapse> -->
 </template>
 
 </core-selector>
@@ -75,7 +74,11 @@
 <!--  Hier gaan we dieper in een post -->
 <section>
 
+<h1>{{selected}}</h1>
 
+    <babbel-babbel key="{{selected}}" object="{{selectedObject}}" mode="parent" childOf="0"></babbel-babbel>
+
+<!-- 
 	<babbel-babbel key="{{selKey}}" object="{{selObject}}" mode="parent" childOf="0"></babbel-babbel>
 	<babbel-postcomment op="0" tags="child" mother="{{selKey}}"></babbel-postcomment>
 
@@ -84,6 +87,9 @@
 			<babbel-babbel key="{{k}}" object="{{data[k]}}" mode="child" childOf="{{selKey}}" parentObject="{{selObject}}"></babbel-babbel>
 		</template>
 	</template>
+ -->
+
+
 </section>
 </core-animated-pages>
 
@@ -151,6 +157,9 @@ var opdata = [];
 
         this.filteredkeys = this.keys;
 
+        this.selected = '';
+        this.selectedObject = '';
+
     		var that = this;
 
     		//this.$.selektor.selected = 2;
@@ -169,9 +178,11 @@ var opdata = [];
       //     		that.$.babbelscenes.selected = 1;
       //   	});
 
-    		this.$.selektor.addEventListener('core-activate', function(e){
-          		console.log('selected someo shit!', e.detail, this.selected);
-          		
+    		this.$.selektor.addEventListener('core-activate', function(e, detail, sender){
+          		console.log('selected someo shit!', sender  , this.selected);
+          		        that.$.babbelscenes.selected = 1;
+                      that.selectedObject = e.detail.attributes[1].value;
+
         	});
 
     	},
@@ -199,6 +210,7 @@ var opdata = [];
       sort: function(value, term){
         return value;
       }
+
     });
 
 </script>
