@@ -208,7 +208,7 @@
 /* STYLING POSTCOMMENT */
 
 #newitem {
-	width: 100vw;
+	width: 10vw;
 	padding: 30px 12vw 30px 12vw; 
 /*	border-bottom: 1px solid #EBEBEB;
 */	background-color: white;
@@ -225,7 +225,7 @@
 	margin: 0px;
 /*	min-width: 50vw;*/
 	padding: 1vw;
-	width: 200px;
+	width: 100px;
 }
 
 #newitem input:focus {
