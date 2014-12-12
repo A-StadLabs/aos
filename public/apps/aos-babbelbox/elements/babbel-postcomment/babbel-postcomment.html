@@ -70,10 +70,7 @@
             return currentRank+1;
           });
 
-            var addVote = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.mother+'/votes/');
-          addVote.transaction(function(currentRank) {
-            return currentRank+1;
-          });
+          
           
 
           //Add child on mother children value

@@ -1,5 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../time-ago/src/time-ago.html">
+<link rel="import" href="../../../../bower_components/core-icon/core-icon.html">
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 <link rel="import" href="../cl-voteitem/cl-voteitem.html">
 <link rel="import" href="../babbel-antwoord/babbel-antwoord.html">
@@ -20,7 +22,7 @@
         <cl-voteitem key="{{key}}" votes="{{object.votes}}" mode="{{mode}}"></cl-voteitem>
       </div>
       <div class="convcontent" vertical layout start on-tap="{{fireSelect}}">
-      <h1 on-tap="{{gotoDetail}}" key="{{key}}" name="convSelected">{{object.title}}</h1>
+      <h1 on-tap="{{gotoDetail}}" key="{{key}}" name="convSelected"><core-icon icon="lock-open"></core-icon>{{object.title}}</h1>
         <small>
           <time-ago datetime="{{object.time}}"></time-ago> 
           <span class="convcomments"> {{object.children}} reacties </span>
