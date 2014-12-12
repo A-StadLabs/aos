@@ -31,10 +31,6 @@
     <div horizontal layout wrap center start-justified flex>
       <img class="appicon" src="images/babbelbox.svg">
       <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
-      <template if="{{$.globals.values.user}}" bind>
-    <h1>{{$.globals.values.user.data.firstName}}</h1>
-<!--     <p>{{$.globals.values.user.data.roles}}</p>    
- -->   </template>
     </div>
   </div>
 </div>
@@ -51,6 +47,10 @@
 <button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
 </div>
 
+<core-collapse id="locked">
+<h1>{{lockedmessage}}</h1>
+<button on-tap="{{togglelocked}}">sluiten</button>
+</core-collapse>
 
 <core-collapse id="startConv">
 <babbel-postcomment op="1" tags="OP" mother="0"></babbel-postcomment>
@@ -139,6 +139,12 @@ var opdata = [];
 
       openOverlay: function(){
         console.log("je hebt niet de juiste rechten.");
+        this.lockedmessage = 'Je bent niet aangemeld.';
+        this.$.locked.toggle();
+      },
+
+      togglelocked: function(){
+        this.$.locked.toggle();
       },
 
       sorting: function(a,b) {
