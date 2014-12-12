@@ -47,7 +47,7 @@
 /* STYLING BABBEL */
 
 .babbelbabbel {
-	border-bottom: 1px solid #f5f5f5; 
+	border-bottom: 1px solid #EBEBEB; 
 }
  
 /* PARENTMODE */
@@ -74,18 +74,29 @@
 
 /* CHILDMODE */
 :host([mode=child]) .convitem  {
-	padding: 10px 12vw 10px 14vw;
+	padding: 8px 12vw 14px 14vw;
 }
 
 :host([mode=child]) .convitem p {
 	font-weight: 400;
 	color: #333333;
 	font-size: 16px;
-	margin: 0px;
+	margin: 5px 0px 0px 0px;
 	padding: 0px;
+	max-width: 60vw;
 
 }
 
+:host([mode=child]) hr {
+/*	color: #f00;
+*/
+	background-color: #EBEBEB;
+	height: 1px;
+	padding: 0px;
+	margin: 0px 12vw 0px 12vw;
+	border: none;
+	width: 76vw;
+}
 
 
 
@@ -116,6 +127,7 @@
 .convcomments {
 	color: #333333;
 }
+
 
 
 
@@ -197,21 +209,21 @@
 
 /* STYLING VOTE-ITEM */
 
-#voterij svg {
+.voterij svg {
   display: block;
-  fill: #333333;
+  fill: #666666;
   height: 10px;
   overflow: hidden;
   width: 20px;
 }
 
-#voterij svg.highlight {
+.voterij svg.highlight {
   fill: #72BF9D;
   width: 20px;
 }
 
 
-#voterij p {
+.voterij p {
   margin: 5px 0px 5px 0px;
   padding: 0px;
   color: black;
@@ -222,7 +234,21 @@
 }
 
 
-#voterij {
+.voterij {
 	margin: 6px 15px 0px 0px;
 }
+
+
+
+.voterij small {
+  margin: 3px 0px 3px 0px;
+  color: #666666;
+  font-weight: 600;
+
+}
+
+
+
+
+
 

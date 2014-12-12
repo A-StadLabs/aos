@@ -30,18 +30,19 @@
       </template>
 
       <template if="{{mode=='child'}}">
-
+      <!-- <hr> --> 
       <div class="convitem" horizontal layout start start-justified>
-      <div class="updownbtns" vertical layout center>
-        <cl-voteitem key="{{key}}" votes="{{object.votes}}"></cl-voteitem>
+                   <div class="updownbtns" vertical layout center>
+
+        <cl-voteitem key="{{key}}" votes="{{object.votes}}" mode="{{mode}}"></cl-voteitem>
       </div>
       <div class="convcontent" vertical layout start on-tap="{{fireSelect}}">
       <p on-tap="{{gotoDetail}}" key="{{key}}" name="convSelected">{{object.title}}</p>
         <small>
-          <time-ago datetime="{{object.time}}"></time-ago> | 
-          <span class="convcomments"> 88 reacties </span>
+          <time-ago datetime="{{object.time}}"></time-ago>
+<!--           <span class="convcomments"> 88 reacties </span> -->
         </small>
-      <hr>
+
       </div>
       </div>
 
