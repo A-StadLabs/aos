@@ -113,7 +113,26 @@
 }
 
 
+#message {
+	background-color: #F5F5F5;
+	margin: 20px 12vw 0px 12vw;
+/*	padding: 1vw 1vw 1vw 1vw;*/
+/*	border: 2px solid #F5F5F5;*/
+	padding: 1vw; 
+}
 
+
+#message small {
+	font-size: 18px;
+	font-weight: 300;
+	color: #333333;
+	font-weight: 300;
+}
+
+
+core-collapse {
+	background-color: white;
+}
 
 /* STYLING BABBEL */
 
@@ -208,7 +227,7 @@
 /* STYLING POSTCOMMENT */
 
 #newitem {
-	width: 10vw;
+	width: 50vw;
 	padding: 30px 12vw 30px 12vw; 
 /*	border-bottom: 1px solid #EBEBEB;
 */	background-color: white;
@@ -223,7 +242,7 @@
 	font-weight: 300;
 	color: #333333;
 	margin: 0px;
-/*	min-width: 50vw;*/
+	min-width: 25vw;
 	padding: 1vw;
 	width: 100px;
 }
