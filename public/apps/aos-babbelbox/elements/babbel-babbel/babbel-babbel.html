@@ -22,7 +22,7 @@
         <cl-voteitem key="{{key}}" votes="{{object.votes}}" mode="{{mode}}"></cl-voteitem>
       </div>
       <div class="convcontent" vertical layout start on-tap="{{fireSelect}}">
-      <h1 on-tap="{{gotoDetail}}" key="{{key}}" name="convSelected"><core-icon icon="lock-open"></core-icon>{{object.title}}</h1>
+      <h1 key="{{key}}" name="convSelected"><core-icon icon="lock-open"></core-icon>{{object.title}}</h1>
         <small>
           <time-ago datetime="{{object.time}}"></time-ago> 
           <span class="convcomments"> {{object.children}} reacties </span>
@@ -65,7 +65,7 @@
 
       handleResponse: function(){
         console.log(this.dataa);
-      }
+      },
 
       // fireTerug: function(){
       //   this.fire('babbel-open', {'key': this.key, 'mother': this.childOf})
@@ -73,13 +73,13 @@
 
       
 
-      // fireSelect: function(){
-      //   if(this.mode=='parent'){
-      //     this.fire('babbel-select', {key: this.key, data: this.object})
-      //   } else {
-      //     this.fire('babbel-select', {key: this.key, data: this.object})
-      //   }
-      // }
+      fireSelect: function(){
+        if(this.mode=='parent'){
+          this.fire('babbel-select', {key: this.key, data: this.object})
+        } else {
+          this.fire('babbel-selectchild', {key: this.key, data: this.object})
+        }
+      }
 
       
 

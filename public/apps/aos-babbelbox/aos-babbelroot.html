@@ -44,13 +44,12 @@
 <div id="generalsort" horizontal layout center start-justified wrap>
   <button class="startbtn" on-tap="{{openadd}}" horizontal layout center start-justified ><img src="images/nieuw.svg">Begin een Babble</button>
 <p>  Sorteer op </p>
-<core-selector>
+
 
 <button class="sortbtn" on-tap="{{sortthis}}">meeste votes</button>
 <button class="sortbtn" on-tap="{{sorttime}}">Meest recent</button>
 <button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
 </div>
-</core-selector>
 
 
 <core-collapse id="startConv">
@@ -60,17 +59,12 @@
 
 
 
-<core-selector valueattr="key" selected="{{selected}}" id="selektor">
 
 <template repeat="{{d, i in opdata }}">
 		<babbel-babbel key="{{d.key}}" object="{{d}}" mode="parent" childOf="0"></babbel-babbel>
-<!-- 		<core-collapse opened?="{{selected == i}}">
-			<babbel-subposts mother="{{d.key}}"></babbel-subposts>
-		</core-collapse> -->
 </template>
 
 
-</core-selector>
 </section>
 
 <!--  Hier gaan we dieper in een post -->
@@ -79,8 +73,8 @@
 
 <h1>{{selected}}</h1>
 
-    <babbel-babbel key="{{selected}}" object="{{selectedObject}}" mode="parent" childOf="0"></babbel-babbel>
-
+    <babbel-babbel key="{{selKey}}" object="{{selObject}}" mode="parent" childOf="0"></babbel-babbel>
+    <babbel-subposts mother="{{selKey}}"></babbel-subposts>
 <!-- 
 
 	<babbel-babbel key="{{selKey}}" object="{{selObject}}" mode="parent" childOf="0"></babbel-babbel>
@@ -101,6 +95,36 @@
 var opdata = [];
 
     Polymer({
+
+      ready: function(){
+        this.filteredkeys = this.keys;
+
+
+        this.selected = '';
+        this.selectedObject = '';
+
+        var that = this;
+
+        //this.$.selektor.selected = 2;
+
+        document.addEventListener('babbel-select', function(e){
+             console.log('selected someo shit!', e.detail.key);
+             that.selKey = e.detail.key;
+             that.selObject = that.data[e.detail.key];
+             that.$.babbelscenes.selected = 1;
+         });
+
+      //    document.addEventListener('babbel-open', function(e){
+      //        console.log('selected someo shit!', e.detail.mother);
+      //        that.selKey = e.detail.mother;
+      //        that.selObject = that.data[e.detail.mother];
+      //        that.$.babbelscenes.selected = 1;
+      //    });
+
+       
+
+
+      },
 
       opdataChanged: function(){
         console.log('Opdata changed; ',this.opdata);
@@ -146,40 +170,7 @@ var opdata = [];
         console.log('gesorteerd', this.opdata);
       },
     
-    	ready: function(){
-        this.filteredkeys = this.keys;
-
-
-        this.selected = '';
-        this.selectedObject = '';
-
-    		var that = this;
-
-    		//this.$.selektor.selected = 2;
-
-    		// document.addEventListener('babbel-select', function(e){
-      //     		console.log('selected someo shit!', e.detail.key);
-      //     		that.selKey = e.detail.key;
-      //     		that.selObject = that.data[e.detail.key];
-      //     		that.$.babbelscenes.selected = 1;
-      //   	});
-
-      //   	document.addEventListener('babbel-open', function(e){
-      //     		console.log('selected someo shit!', e.detail.mother);
-      //     		that.selKey = e.detail.mother;
-      //     		that.selObject = that.data[e.detail.mother];
-      //     		that.$.babbelscenes.selected = 1;
-      //   	});
-
-    		this.$.selektor.addEventListener('core-activate', function(e, detail, sender){
-          		console.log('selected someo shit!', sender  , this.selected);
-          		        that.$.babbelscenes.selected = 1;
-                      that.selectedObject = e.detail.attributes[1].value;
-
-        	});
-
-
-    	},
+    	
 
     	handleResponse: function(){
         var opdata = [];
