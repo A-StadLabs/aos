@@ -31,6 +31,10 @@
     <div horizontal layout wrap center start-justified flex>
       <img class="appicon" src="images/babbelbox.svg">
       <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+      <template if="{{$.globals.values.user}}" bind>
+    <h1>{{$.globals.values.user.data.firstName}}</h1>
+    <p>{{$.globals.values.user.data.roles}}</p>    
+   </template>
     </div>
   </div>
 </div>
