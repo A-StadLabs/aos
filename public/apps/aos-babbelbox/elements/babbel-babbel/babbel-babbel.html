@@ -55,6 +55,8 @@
       </div>
 
       </template>
+
+  
     
   </template>
 
@@ -78,12 +80,9 @@
       
 
       fireSelect: function(){
-        if(this.mode=='parent'){
-          this.fire('babbel-select', {key: this.key, data: this.object})
-        } else {
-          this.fire('babbel-selectchild', {key: this.key, data: this.object})
-        }
-      }
+
+            this.fire('babbel-select', {key: this.key, data: this.object})
+          }
 
       
 

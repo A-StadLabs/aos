@@ -11,8 +11,6 @@
 <template>
 
 <link rel="stylesheet" href="../../aos-babbelroot.css" />
-
-
   
 <div id="sortsubs"><button class="sortbtn" on-tap="{{sortthis}}">Sorteer op meeste votes</button></div>
 
@@ -29,7 +27,14 @@
 Polymer({
 
      ready: function() {
-      	console.log('Babbelbox entry loaded.'); 
+      	console.log('Babbelbox entry loaded.');
+
+        var that = this;
+
+        // document.addEventListener('babbel-selectchild', function(e){
+        //      console.log('selected someo shit!', e.detail.key);
+        //      that.mother = e.detail.key;
+        //  }); 
     },
 
     iChanged: function(){
