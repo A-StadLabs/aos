@@ -26,7 +26,8 @@
         <cl-voteitem key="{{key}}" votes="{{object.votes}}" mode="{{mode}}"></cl-voteitem>
       </div>
       <div class="convcontent" vertical layout start on-tap="{{fireSelect}}">
-      <h1 key="{{key}}" name="convSelected"><core-icon icon="lock-open"></core-icon>{{object.title}}</h1>
+      <h1 key="{{key}}" name="convSelected"><core-icon icon="{{ unlocked ? 'lock-open' : 'lock'}}"></core-icon>{{object.title}}</h1>
+
         <small>
           <time-ago datetime="{{object.time}}"></time-ago> 
           <span class="convcomments"> {{object.children}} reacties </span>
@@ -41,7 +42,7 @@
       <div class="convitem" horizontal layout start start-justified>
                    <div class="updownbtns" vertical layout center>
 
-        <cl-voteitem key="{{key}}" votes="{{object.votes}}" mode="{{mode}}"></cl-voteitem>
+        <cl-voteitem key="{{key}}" votes="{{object.votes}}" mode="{{mode}}" user="{{$.globals.values.user.data.id}}"></cl-voteitem>
       </div>
       <div class="convcontent" vertical layout start on-tap="{{fireSelect}}">
       <p on-tap="{{gotoDetail}}" key="{{key}}" name="convSelected">{{object.title}}</p>
@@ -70,7 +71,7 @@
       },
 
       handleResponse: function(){
-        console.log(this.dataa);
+        //console.log(this.dataa);
       },
 
       // fireTerug: function(){

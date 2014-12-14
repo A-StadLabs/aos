@@ -312,6 +312,14 @@ core-collapse {
   width: 20px;
 }
 
+.voterijdis svg {
+  display: block;
+  fill: #999999;
+  height: 10px;
+  overflow: hidden;
+  width: 20px;
+}
+
 .voterij svg.highlight {
   fill: #95d2b7;
   width: 20px;

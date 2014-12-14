@@ -8,22 +8,18 @@
 		color: #666666;
 
 }
-
-svg {
+*/
+.voterijdis svg {
   display: block;
-  fill: #333333;
+  fill: red;
   height: 10px;
   overflow: hidden;
   width: 20px;
 }
 
-svg.highlight {
-  fill: #72BF9D;
-    width: 20px;
-
-}
 
 
+/*
 p {
   margin: 10px 0px 10px 0px;
   padding: 0px;

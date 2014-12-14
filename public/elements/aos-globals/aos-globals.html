@@ -10,7 +10,15 @@
            var attr = this.attributes[i];
            values[attr.nodeName] = attr.value;
          }
+       },
+
+       valuesChanged: function(){
+        this.fire('values-changed');
        }
+
+
+
+
     });
   })();
   </script>

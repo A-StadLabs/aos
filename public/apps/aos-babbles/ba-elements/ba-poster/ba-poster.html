@@ -1,0 +1,48 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ba-poster" attributes="path mode">
+  <template>
+    <link rel="stylesheet" href="ba-poster.css" />
+    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ iets en druk enter." />  
+</template>
+<script>
+    Polymer({
+
+    	ready: function(){
+    		this.postdata = '';
+    		this.valuek = '';
+    		var that = this;
+	  		this.$.poster.addEventListener('keypress', function(e) {
+	    		if (e.keyCode == 13) {
+	      			this.async(function() {
+	        		that.enter();
+	      			});
+	    		}
+	  		});
+    	},
+
+    	enter: function(){
+    		var that = this;
+    		if(!this.postdata==''){
+    			var path = this.path
+    			var valuek = this.valuek;
+    			console.log('Saven maar: ', this.valuek);
+    			if(this.mode=='child'){
+    			var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+path+"/children/");
+    		} else {
+    			var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/");
+    		}
+	    		userFB.push({"text":valuek}, function(e){
+	    			that.valuek = '';
+	    		});
+	    		delete userFB;
+	    		delete this.valuek;
+	    		delete path;
+
+	    		
+    		}
+    	}
+
+    });
+</script>
+</polymer-element>

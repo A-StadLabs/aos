@@ -1,63 +1,83 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="cl-voteitem" attributes="key item votes mode">
-  <template>
 <!--     <link rel="stylesheet" href="cl-voteitem.css"> -->
 <link rel="stylesheet" href="../../aos-babbelroot.css" />
+<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
+
+<polymer-element name="cl-voteitem" attributes="key item votes mode">
+<template>
+
+  <aos-globals id="globals"></aos-globals>
 
 
-<template if="{{mode=='parent'}}">
-    <div vertical layout center class="voterij">
-      <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{addVote}}" class="{{ { highlight: userValue === 1 } | tokenList }}">
-      <polygon points="4.619,12.94 13.015,3.524 21.399,12.633 22.617,11.512 12.995,1.06 3.382,11.84 "/>
+  <firebase-element location="https://blazing-fire-6426.firebaseio.com/babbelbox/votes" orderByChild="user" equalTo="{{$.globals.values.user.data.id}}" data="{{votingdata}}" keys="{{votingkeys}}" on-data-change="{{votingResponse}}" id="fbVote"></firebase-element>
 
-      </svg>
-      <p>{{votes}}</p>
-      <svg id="btRem" viewBox="2 7.521 26 14" on-tap="{{remVote}}" class="{{ { highlight: userValue === -1 } | tokenList }}">
-      <polygon points="23.737,8.561 15.341,17.977 6.957,8.869 5.738,9.989 15.361,20.441 24.974,9.662"></polygon>
-      </svg>
-    </div>
-  </template>
+    <template if="{{mode=='parent'}}">
+        <div vertical layout center class="voterij">
+          <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{addVote}}" class="{{ { highlight: userValue === 1 } | tokenList }}">
+          <polygon points="4.619,12.94 13.015,3.524 21.399,12.633 22.617,11.512 12.995,1.06 3.382,11.84 "/>
+          </polygon>
+          </svg>
+          <p>{{votes}}</p>
+          <svg id="btRem" viewBox="2 7.521 26 14" on-tap="{{remVote}}" class="{{ { highlight: userValue === -1 } | tokenList }}">
+          <polygon points="23.737,8.561 15.341,17.977 6.957,8.869 5.738,9.989 15.361,20.441 24.974,9.662"></polygon>
+          </svg>
+        </div>
+      </template>
 
+    <template if="{{mode=='child'}}">
+        <div vertical layout center class="voterij">
+          <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{addVote}}" class="{{ { highlight: userValue === 1 } | tokenList }}">
+          <polygon points="6.295,11.752 13.012,4.219 19.719,11.506 20.693,10.609 12.996,2.248 5.305,10.872 "/></polygon>
 
-<template if="{{mode=='child'}}">
-    <div vertical layout center class="voterij">
-      <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{addVote}}" class="{{ { highlight: userValue === 1 } | tokenList }}">
-      <polygon points="6.295,11.752 13.012,4.219 19.719,11.506 20.693,10.609 12.996,2.248 5.305,10.872 "/>
+          </svg>
+          <small>{{votes}}</small>
+          <svg id="btRem" viewBox="2 7.521 26 14" on-tap="{{remVote}}" class="{{ { highlight: userValue === -1 } | tokenList }}">
+          <polygon points="22.061,9.749 15.344,17.281 8.636,9.995 7.662,10.892 15.36,19.253 23.05,10.629"></polygon>
+          </svg>
+        </div>
+    </template>
 
-      </svg>
-      <small>{{votes}}</small>
-      <svg id="btRem" viewBox="2 7.521 26 14" on-tap="{{remVote}}" class="{{ { highlight: userValue === -1 } | tokenList }}">
-      <polygon points="22.061,9.749 15.344,17.281 8.636,9.995 7.662,10.892 15.36,19.253 23.05,10.629"></polygon>
-      </svg>
-    </div>
-  </template>
-
-
-  </template>
+</template>
 
   <script>
     (function () {
       'use strict';
 
       Polymer({
-
-
-
         // define element prototype here
         ready: function(){
         },
 
+        keyChanged: function(){
+          console.log(this.key);
+          console.log(this.$.globals.values.userkey);
+        },
+
+        userVoting: function(vote){
+          var key = that.votingkeys[0];
+          console.log('hello voter! You have chosen '+vote+'. Excellent! New voting data is '+this.votingdata[key]);
+        },
+
+        votingResponse: function(){
+          console.log('key: ',this.item);
+          console.log('Votes from this user '+this.$.globals.values.user.data.id+': '+JSON.stringify(this.votingdata));
+        },
+
         FBAddVote: function(){
+          this.userVoting(1);
           var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes/');
           addPlay.transaction(function(currentRank) {
             return currentRank+1;
           });
+
         },
 
         FBRemVote: function(){
-          var addPlay = new Firebase('blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
+
+          var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
           addPlay.transaction(function(currentRank) {
             return currentRank-1;
           });

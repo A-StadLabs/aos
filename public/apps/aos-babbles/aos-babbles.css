@@ -1,0 +1,15 @@
+:host {
+	display: block;
+}
+
+.item.core-selected {
+    background: #eee;
+  }
+
+ .item2.core-selected {
+    background: #eee;
+  }
+
+  .item2 {
+    margin-left: 20px;
+  }

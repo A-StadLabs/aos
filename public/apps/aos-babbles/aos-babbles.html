@@ -1,0 +1,63 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../elements/aos-globals/aos-globals.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="ba-elements/ba-user/ba-user.html">
+<link rel="import" href="ba-elements/ba-poster/ba-poster.html">
+<link rel="import" href="ba-elements/ba-subposts/ba-subposts.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+
+<polymer-element name="aos-babbles" attributes="">
+  <template>
+    <link rel="stylesheet" href="aos-babbles.css" />
+
+    <aos-globals id="globals"></aos-globals>
+    <h1>Babbles.</h1>
+    <ol>
+      <li>Het eerst wat ik te weten moet komen is of een user hier mag posten of niet.</li>
+      <li>Dan moet ik een post element voorzien.</li>
+      <li>Ik ga de OPs weergeven: <i>Misschien is het wel een goed idee om 1 babbel element te maken met verschillende modi: mainpost only, mainpost+subposts</i></li>
+      <li>Dan moet ik ervoor zorgen dat de posts altijd inspringen, zo krijgen we vanzelf een boomstructuur indien nodig</li>
+      <li>Dan is het tijd voor de voting: dit element moet een key hebben, en een userid. Verder moet het helemaal autonoom werken.</li>
+      <li>En we zijn vertrokken.</li>
+    </ol>
+
+    <h3>Mag een user hier posten?</h3>
+    <p>Om te beginnen checken wie de user is: <b>{{$.globals.values.user ? $.globals.values.user.data.firstName : 'anoniem'}}</b>.</p>
+    <p>Dan check ik of de user al bij 'Babbles' bestaat: <b>{{bauser}}</b>.</p>
+    <p>Indien niet, dan maken we hem aan.</p>
+    <template if="{{bauser}}">Bauser has arrived.</template>
+    <ba-user bauser="{{bauser}}"></ba-user>
+    <p>We hebben dus een user, prima!</p>
+    <p>Dan gaan we nu de posts weergeven (limit to 10)</p>
+
+    <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+    <ba-poster path="/"></ba-poster>
+
+    <core-selector id="parent" style="height: 300px;" valueAttr="key" selected="{{key}}">
+    <template repeat="{{k in keys}}">
+       <div class="item" key="{{k}}"> {{data[k].text}} {{data.[k].children.length}}</div>
+       <ba-poster path="{{k}}" mode="child"></ba-poster>
+        <template if="{{key==k&&data[k].children}}">
+          <ba-subposts key="{{k}}"></ba-subposts>
+        </template>
+    </template>
+    </core-selector>
+
+
+
+  </template>
+  <script>
+    Polymer({
+      ready: function() {
+      	console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r'); 
+
+        var that = this;
+
+        document.addEventListener('user-changed', function(e){
+          console.log('Values changed', e.detail.data);
+        });
+
+      },
+    });
+  </script>
+</polymer-element>

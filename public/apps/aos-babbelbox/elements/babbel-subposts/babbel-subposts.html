@@ -6,7 +6,7 @@
 <link rel="import" href="../babbel-babbel/babbel-babbel.html">
 <link rel="import" href="../babbel-postcomment/postcomment-babbel.html">
 
-<polymer-element name="babbel-subposts" attributes="mother">
+<polymer-element name="babbel-subposts" attributes="mother roles">
 
 <template>
 
@@ -14,20 +14,20 @@
   
 <div id="sortsubs"><button class="sortbtn" on-tap="{{sortthis}}">Sorteer op meeste votes</button></div>
 
-<babbel-postcomment op="0" tags="child" mother="{{mother}}"></babbel-postcomment>
+<babbel-postcomment op="0" tags="child" mother="{{mother}}" roles="betatest_betty"></babbel-postcomment>
 
 <template repeat="{{ l, i in childdata }}">
   <babbel-babbel key="{{l.key}}" object="{{l}}" mode="child" childOf="{{mother}}"></babbel-babbel>
 </template>
   
-<firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}" log></firebase-element>
+<firebase-element id="FBanswer" location="https://blazing-fire-6426.firebaseio.com/babbelbox/babbels/" orderByChild="mother" equalTo="{{mother}}" data="{{answerdata}}" keys="{{answerkeys}}" id="fbBabbelboxanswer" on-data-change="{{handleResponse}}"></firebase-element>
 </template>
 
 <script>
 Polymer({
 
      ready: function() {
-      	console.log('Babbelbox entry loaded.');
+      	//console.log('Babbelbox entry loaded.');
 
         var that = this;
 
@@ -38,7 +38,7 @@ Polymer({
     },
 
     iChanged: function(){
-    	console.log('i changed ',this.i);
+    	//console.log('i changed ',this.i);
     },
 
     motherChanged: function(){
@@ -54,19 +54,19 @@ Polymer({
       },
 
       sortthis: function(){
-        console.log('sorteren', this.childdata);
+        //console.log('sorteren', this.childdata);
         this.childdata.sort(this.sorting);
         this.childdata.reverse();
-        console.log('gesorteerd', this.childdata);
+        //console.log('gesorteerd', this.childdata);
       },
 
      handleResponse: function(){
-        console.log('answerdata: ',this.answerdata);
+        //console.log('answerdata: ',this.answerdata);
         var childdata = [];
         var answerkeys = this.answerkeys;
 
         for (var i = answerkeys.length - 1; i >= 0; i--) {
-          console.log('answer: ',this.answerdata[answerkeys[i]]);
+          //console.log('answer: ',this.answerdata[answerkeys[i]]);
           //console.log(this.name);
           childdata.push({ 'key': answerkeys[i],
                         'title': this.answerdata[answerkeys[i]].title,
@@ -80,7 +80,7 @@ Polymer({
         };
         this.childdata = childdata;
         this.numChildren = i;
-        console.log('childdata :',this.childdata);
+        //console.log('childdata :',this.childdata);
         this.sortthis();
     	}
 

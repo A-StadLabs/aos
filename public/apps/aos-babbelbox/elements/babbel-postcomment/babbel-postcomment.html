@@ -1,30 +1,34 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 
-<polymer-element name="babbel-postcomment" attributes="tags op mother">
 
+<polymer-element name="babbel-postcomment" attributes="tags op mother roles">
+
+   <link rel="stylesheet" href="../../aos-babbelroot.css" />
   <template>
-
-
 <!--     <link rel="stylesheet" href="babbel-postcomment.css" />
- -->        <link rel="stylesheet" href="../../aos-babbelroot.css" />
+ -->     
 
+        <aos-globals id="globals"></aos-globals>
+
+
+
+
+<div if="{{unlocked}}">
 
     <core-ajax 
   id="ajaxBabbelbox" 
-  url="https://blazing-fire-6426.firebaseio.com/babbelbox/.json"
+  url="https://blazing-fire-6426.firebaseio.com/babbelbox/babbels/.json"
   method="POST" 
   handleAs="json" 
   response="{{postResponse}}"
   on-core-response="{{handleResponse}}">
   </core-ajax>
 
-
-
 <div id="newitem" vertical layout start>
 
   <div horizontal layout center wrap>
-
 
 
     <input autofocus placeholder="Begin een gesprek" value="{{newConversation}}" id="newConv">
@@ -43,8 +47,11 @@
       <button class="itemaddons">bestand toevoegen</button>
     </div> -->
 
+</div>
+</div>
 
-
+<div if="{{!unlocked}}">
+<h1>niet de juiste rechten, (je hebt {{roles}} nodig).</h1>
 </div>
 
   </template>
@@ -54,11 +61,35 @@
     Polymer({
 
       ready: function() {
-
       	console.log('Babbelbox entry loaded.'); 
+        this.unlocked = false;
+
+        var that = this;
+        
+        document.addEventListener('user-changed', function(){
+          console.log('value changed from postcomment');
+          console.log('HELLOO//////     \n\n'+that.roles+' vs '+that.$.globals.values.user);
+          var givenroles = that.$.globals.values.user.data.roles;
+          var askedroles = that.roles;
+
+          // ga door de roles en vind een match
+          for (var i = givenroles.length - 1; i >= 0; i--) {
+            if(givenroles[i]==askedroles){
+              console.log('granted!');
+              that.unlocked = true;
+            } else {
+              console.log('cant post here');
+
+            }
+          };
 
 
+        });
       },
+
+     
+
+
 
       // Nieuwe conversatie opslaan
       submitNewConversation: function(){
@@ -68,26 +99,15 @@
           this.$.ajaxBabbelbox.go();
           this.$.newConv.value = '';
 
-        
-            var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.mother+'/children/');
+           var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/babbels/'+this.mother+'/children/');
           addPlay.transaction(function(currentRank) {
             return currentRank+1;
           });
 
-          
-          
 
-          //Add child on mother children value
-
-      },
+      }
       
-      FBAddVote: function(){
-
-          var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.mother+'/children/');
-          addPlay.transaction(function(currentRank) {
-            return currentRank+1;
-          });
-        },
+      
 
     });
 

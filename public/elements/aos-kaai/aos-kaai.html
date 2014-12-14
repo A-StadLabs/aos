@@ -154,7 +154,7 @@
         this.locsearchresult = 'Zoekresultaten voor';
         //this.$.notif.notify();
         this.$.lanselect.addEventListener('core-activate', function(e){
-          console.log(e.detail.item.label);
+          //console.log(e.detail.item.label);
           this.language = e.detail.item.label;
         });
 
@@ -194,12 +194,14 @@
       },
 
       handleResponseUserCheck: function(){
-        console.log('reactie van /user: ',JSON.stringify(this.responseUser));
+        //console.log('reactie van /user: ',JSON.stringify(this.responseUser));
         if(this.responseUser&&this.responseUser.status==='E'){
-          console.log('Sessie bestaat niet, user is leeg');
+          //console.log('Sessie bestaat niet, user is leeg');
           delete this.$.globals.values.user;
         } else {
           this.$.globals.values.user = this.responseUser;
+          //console.log('ik heb een user');
+          this.fire('user-changed', this.responseUser);
         }
       },
 
@@ -213,13 +215,13 @@
 
       handleFocus: function(){
         this.searchFocused = true;
-        console.log(this.searchFocused);
+        //console.log(this.searchFocused);
         location.href('/search');
       },
 
       handleBlur: function(){
         this.searchFocused = false;
-        console.log(this.searchFocused);
+        //console.log(this.searchFocused);
       },
 
       notificationChanged: function(){
@@ -247,13 +249,13 @@
 
       handleResponseUser: function(){
         this.user = this.userresult;
-        console.log(this.userresult);
+        //console.log(this.userresult);
       },
 
       selectAction: function(e, detail) {
         if (detail.isSelected) {
           var selectedItem = detail.item;
-          console.log(selectedItem);
+          //console.log(selectedItem);
         }
       }
 
