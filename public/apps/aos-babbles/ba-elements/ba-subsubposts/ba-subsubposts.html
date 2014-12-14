@@ -4,12 +4,13 @@
 <link rel="import" href="../ba-poster/ba-poster.html">
 <link rel="import" href="../ba-subposts/ba-subposts.html">
 
-<polymer-element name="ba-subsubposts" attributes="key">
+<Polymer-element name="ba-subsubposts" attributes="key">
   <template>
     <link rel="stylesheet" href="ba-subsubposts.css" />
     <firebase-element id="children" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/children/" data="{{cdata}}" keys="{{ckeys}}"></firebase-element>
           
           <core-selector style="height: 300px;" valueAttr="ckey" selected="{{ckey}}">
+          <template>
             <template repeat="{{c in ckeys}}">
               <div class="item2" ckey="{{c}}"> hey {{cdata[c].text}} </div>
               <ba-poster path="{{key}}/children/{{c}}/" mode="child"></ba-poster>
@@ -17,6 +18,7 @@
               	<ba-subposts key="{{c}}/children/"></ba-subposts>
               </template>
             </template>
+          </template>
         </core-selector>
 </template>
 <script>

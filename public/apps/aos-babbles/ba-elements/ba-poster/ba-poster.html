@@ -3,7 +3,7 @@
 <polymer-element name="ba-poster" attributes="path mode">
   <template>
     <link rel="stylesheet" href="ba-poster.css" />
-    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ iets en druk enter." />  
+    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="{{path}}" />  
 </template>
 <script>
     Polymer({
@@ -27,17 +27,26 @@
     			var path = this.path
     			var valuek = this.valuek;
     			console.log('Saven maar: ', this.valuek);
-    			if(this.mode=='child'){
-    			var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+path+"/children/");
-    		} else {
+    			var name = '';
     			var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/");
-    		}
-	    		userFB.push({"text":valuek}, function(e){
-	    			that.valuek = '';
-	    		});
+	    		var newpostRef = userFB.push({"text":valuek, "parent":path});
+	    		var newKey = newpostRef.key();
+	    		if(this.mode=='child'){
+	    			// var userFB1 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/parents/"+path+"/children/"+newKey+"/");
+	    			// var newpostRef1 = userFB1.set({"text":valuek, "parent":path});
+
+					var userFB2 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+path+"/children/"+newKey+"/");
+					userFB2.set({"child": true});
+				};
+				// if(this.mode=='parent'){
+				// 	var userFB2 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/parents/"+newKey+"/");
+				// 	userFB2.set({"parent": true});
+				// }
+	    		
 	    		delete userFB;
 	    		delete this.valuek;
 	    		delete path;
+	    		delete this.path;
 
 	    		
     		}

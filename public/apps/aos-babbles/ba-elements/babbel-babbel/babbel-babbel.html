@@ -1,0 +1,74 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../ba-poster/ba-poster.html">
+
+<polymer-element name="babbel-babbel" attributes="key mode parent">
+
+<template>
+
+  <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
+  <template if="{{mode=='parent'}}">
+    <h2 on-tap="{{fireSelect}}">{{data.text}} - par.{{data.parent}}</h2>
+      <template if="{{data.parent!='/'}}">
+        <button on-tap="{{fireTerug}}">terug papa</button>
+      </template>
+      <template if="{{data.parent=='/'}}">
+        <button on-tap="{{fireHome}}">terug root</button>
+      </template>
+      
+      <ba-poster path="{{key}}" mode="child"></ba-poster>
+  </template>
+
+  <template if="{{mode=='child'}}">
+    <h4 on-tap="{{fireSelect}}">{{data.text}} - par.{{data.parent}}</h4>
+  </template>
+
+  <template if="{{mode=='previous'}}">
+    <h5 on-tap="{{fireTerug}}">{{data.text}} - par.{{data.parent}}</h5>
+  </template>
+
+  <template if="{{mode=='super'}}">
+    <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
+  </template>
+
+</template>
+
+  <script>
+
+    
+
+    Polymer({
+
+      ready: function(){
+        //this.parent = this.data.parent;
+      },
+
+      handleResponse: function(){
+        this.parent = this.data.parent;
+        console.log('mijn pa is ', this.parent);
+      },
+
+      fireTerug: function(){
+        this.fire('babbel-terug', {key: this.key, parent: this.parent});
+        delete this.key;
+      },
+
+      fireHome: function(){
+        this.fire('babbel-home');
+        delete this.key;
+      },
+
+      fireSelect: function(){
+        console.log(this.parent);
+        this.fire('babbel-select', {key: this.key, parent: this.parent});
+        delete this.key;
+      }
+
+      
+
+
+    });
+
+  </script>
+
+</polymer-element>

@@ -1,0 +1,22 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="ba-getchildren" attributes="parent">
+	<template>
+	<style>
+	:host{
+		display: inline-block;
+	}	
+	</style>
+	<p>getting kids for {{parent}}</p>
+	<core-ajax id="getkids"></core-ajax>	
+	</template>
+	<script>
+	    Polymer({
+
+	    	ready: function(){
+	    		//this.children = "children of";
+	    	}
+	    });
+	</script>
+</polymer-element>
