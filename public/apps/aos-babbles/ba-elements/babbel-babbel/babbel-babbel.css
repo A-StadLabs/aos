@@ -1,6 +1,12 @@
 :host {
   display: block;
+  font-size: 1em;
 }
+
+h1 {
+	font-size: 1.2em;
+}
+
 /*
 .convitem {
 	border-bottom: 1px solid #f5f5f5;

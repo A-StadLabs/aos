@@ -29,7 +29,7 @@
 	    	checkUser: function(){
 	    		console.log('ik heb globals.');
 	    		var userid = this.$.globals.values.user.data.id;
-	    		var ref = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/users/'+userid+'/');
+	    		var ref = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/users/'+userid+'/');
 	    		var that = this;
 				ref.once('value', function(snap) {
   				var result = snap.val();
@@ -45,7 +45,7 @@
 
 	    	createUser: function(){
 	    		var userid = this.$.globals.values.user.data.id;
-	    		var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbelbox/users/"+userid+'/');
+	    		var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+userid+'/');
 	    		userFB.set(true);
 	    		//this.$.FBuser.requery();
 	    	},

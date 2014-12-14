@@ -2,29 +2,31 @@
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../ba-poster/ba-poster.html">
 
-<polymer-element name="babbel-babbel" attributes="key mode parent">
+<polymer-element name="babbel-babbel" attributes="key mode parent kids">
 
 <template>
+    <link rel="stylesheet" href="babbel-babbel.css" />
 
   <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
   <template if="{{mode=='parent'}}">
-    <h2 on-tap="{{fireSelect}}">{{data.text}} - par.{{data.parent}}</h2>
-      <template if="{{data.parent!='/'}}">
+  <template if="{{data.parent!='/'}}">
         <button on-tap="{{fireTerug}}">terug papa</button>
       </template>
       <template if="{{data.parent=='/'}}">
         <button on-tap="{{fireHome}}">terug root</button>
       </template>
+
+    <h2>{{data.text}}</h2>
       
       <ba-poster path="{{key}}" mode="child"></ba-poster>
   </template>
 
   <template if="{{mode=='child'}}">
-    <h4 on-tap="{{fireSelect}}">{{data.text}} - par.{{data.parent}}</h4>
+    <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
   </template>
 
   <template if="{{mode=='previous'}}">
-    <h5 on-tap="{{fireTerug}}">{{data.text}} - par.{{data.parent}}</h5>
+    <h5 on-tap="{{fireTerug}}">Vorige: {{data.text}}</h5>
   </template>
 
   <template if="{{mode=='super'}}">
@@ -34,9 +36,7 @@
 </template>
 
   <script>
-
-    
-
+  
     Polymer({
 
       ready: function(){
@@ -45,7 +45,14 @@
 
       handleResponse: function(){
         this.parent = this.data.parent;
-        console.log('mijn pa is ', this.parent);
+        if(this.mode=='parent'){
+        if(!this.data.children){
+          this.fire('has-no-kids', {key: this.key, parent: this.parent});
+        };
+        if(this.data.children){
+          this.fire('has-kids', {key: this.key, parent: this.parent});
+        };
+      };
       },
 
       fireTerug: function(){
@@ -59,14 +66,10 @@
       },
 
       fireSelect: function(){
-        console.log(this.parent);
         this.fire('babbel-select', {key: this.key, parent: this.parent});
         delete this.key;
       }
-
-      
-
-
+   
     });
 
   </script>

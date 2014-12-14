@@ -1,7 +1,20 @@
 :host {
 	display: block;
+	width: 50vw;
+	margin: 0px auto 0px auto;
+	background-color: #eeeeee;
+	height: 100%;
+	padding: 20px;
+	min-width: 400px;
 }
-
+core-animated-pages {
+	display: block;
+	overflow: hidden;
+	/*width: 50vw;*/
+	margin: 0px auto 0px auto;
+	background-color: #eeeeee;
+	height: 100%;
+}
 .item.core-selected {
     background: #eee;
   }

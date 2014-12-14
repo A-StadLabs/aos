@@ -1,83 +1,70 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../elements/aos-globals/aos-globals.html">
-<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
-<link rel="import" href="ba-elements/ba-user/ba-user.html">
-<link rel="import" href="ba-elements/ba-getchildren/ba-getchildren.html">
-<link rel="import" href="ba-elements/ba-poster/ba-poster.html">
-<link rel="import" href="ba-elements/ba-subposts/ba-subposts.html">
-<link rel="import" href="ba-elements/babbel-babbel/babbel-babbel.html">
-
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+
+<link rel="import" href="../../elements/aos-globals/aos-globals.html">
+
+<link rel="import" href="ba-elements/ba-user/ba-user.html">
+<link rel="import" href="ba-elements/babbel-babbel/babbel-babbel.html">
 
 <polymer-element name="aos-babbles" attributes="">
   <template>
     <link rel="stylesheet" href="aos-babbles.css" />
 
     <aos-globals id="globals"></aos-globals>
-
-    <p>Om te beginnen checken wie de user is: <b>{{$.globals.values.user ? $.globals.values.user.data.firstName : 'anoniem'}}</b>.</p>
-    <p>Dan check ik of de user al bij 'Babbles' bestaat: <b>{{bauser}}</b>.</p>
-    <p>Indien niet, dan maken we hem aan.</p>
-    <template if="{{bauser}}">Bauser has arrived.</template>
     <ba-user bauser="{{bauser}}"></ba-user>
-    <p>We hebben dus een user, prima!</p>
-    <p>Dan gaan we nu de posts weergeven (limit to 10)</p>
 
-
-<p>Dus we vergelijken het even met een metafoor. Stel dat je alle mensen ter wereld bij elkaar brengt, en ze wil structureren als 1 grote familie. Je kan dan twee dingen doen; tegen iedereen zeggen "zoek uw kinderen en breng ze bij u", of "ga bij uw ouders staan".
-Het eerste gaat heel lang duren, het tweede gaat erg snel en is zeer accuraat. Ok. Dus we vragen "ga bij uw ouders staan." Maar hoe zorg ik ervoor dat ik niet tegen iedereen individueel moet gaan zeggen "ga bij uw ouders staan"? Ik heb een manier nodig om dat inherent te maken aan die persoon, dat em bij zijn ouders moet gaan staan. Dan hoef ik die instructie niet te geven. Dus, onze persoon moet weten dat als hij ouders heeft, hij erbij moet gaan staan. 
-
-</p>
     <core-animated-pages selected="0" id="scenes" transitions="slide-from-right">
 
     <section>
     <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" orderByChild="parent" equalto="/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
     <ba-poster path="/" mode="parent"></ba-poster>
-
     <template repeat="{{k in keys}}">
-      
-        
         <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>
-          <!-- 
-          <firebase-element id="children" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{data[k].parent}}/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element> -->
-        
-    
     </template>
-
     </section>
 
     <section>
         <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
-        <babbel-babbel key="{{selectedItem}}" mode="parent"></babbel-babbel>
-        <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
-        <template repeat="{{c in ckeys}}">
-          <p>sel.item.{{selectedItem}}</p>
-          <babbel-babbel key="{{c}}" mode="child" parent=""></babbel-babbel>  
+        <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
+        <template if="{{kidsOk}}">
+          <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
+          <template repeat="{{c in ckeys}}">
+            <babbel-babbel key="{{c}}" mode="child"></babbel-babbel>  
+          </template>
         </template>
     </section>
 
     </core-animated-pages>
-
-
-
   </template>
+
   <script>
     Polymer({
 
-
       ready: function() {
-      	console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r'); 
+      	console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
+
+        this.kidsOk = true; 
 
         var that = this;
+
+        this.haschildren = this.$.parent.kids;
 
         document.addEventListener('user-changed', function(e){
           console.log('Values changed', e.detail.data);
         });
 
+        document.addEventListener('has-no-kids', function(e){
+          that.kidsOk = false;
+        });
+
+        document.addEventListener('has-kids', function(e){
+          that.kidsOk = true;
+        });
+
         document.addEventListener('babbel-select', function(e){
           that.previousItem = that.selectedItem;
-          console.log('Child Selected', e.detail.key);
           that.selectedItem = e.detail.key;
           that.parentItem = e.detail.parent;
           that.$.scenes.selected = 1;
@@ -86,7 +73,6 @@ Het eerste gaat heel lang duren, het tweede gaat erg snel en is zeer accuraat. O
         document.addEventListener('babbel-terug', function(e){
           //that.previousItem = that.selectedItem;
           if(e.detail.parent){
-          console.log('Child Selected', e.detail.key);
           that.selectedItem = e.detail.parent;
           that.parentItem = that.selectedItem;
           that.$.scenes.selected = 1;
@@ -98,36 +84,11 @@ Het eerste gaat heel lang duren, het tweede gaat erg snel en is zeer accuraat. O
         document.addEventListener('babbel-home', function(e){
           that.$.scenes.selected = 0;
         });
-
-
-
       },
 
-      requery: function(){
-        var fb = this.$.kids;
-        console.log(fb);
-        this.$.kids.requery();
-        delete this.ckeys;
-        delete this.cdata;
-      },
-
-      selectedItemChanged: function(){
-        //this.requery();
-      },
-
-      goDetail: function(e, detail, sender){
-        console.log(sender.attributes);
-        this.selectedConversation = sender.attributes[1].value;
-        this.$.scenes.selected = 1;
-      },
-
-      goBack: function(e, detail, sender){
-        console.log(e, detail, sender);
-        //this.fire('babbel-select', {key: this.data.parent, data: this.object, parent: this.data.parent});
+      datachange: function(){
+        this.keys.reverse();
       }
-
-
-
     });
   </script>
 </polymer-element>
