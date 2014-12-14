@@ -51,6 +51,8 @@
         };
         if(this.data.children){
           this.fire('has-kids', {key: this.key, parent: this.parent});
+          var kids = this.data.children;
+          console.log('hoeveel kinderen? ',kids);
         };
       };
       },
