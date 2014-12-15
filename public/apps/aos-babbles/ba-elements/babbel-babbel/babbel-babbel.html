@@ -23,12 +23,13 @@
 
     <h2>{{data.text}}</h2>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
-    <template if="{{!usercanpost}}">
-    <p><img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.</p>
-    </template>
-    <template if="{{usercanpost}}">
-    <p>Jij kan reageren.</p>
-    </template>
+    <p>{{data.numchildren}} reacties -
+      <template if="{{!usercanpost}}">
+      <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+      </template>
+      <template if="{{usercanpost}}">
+       Jij kan reageren.
+      </template></p>
       <template if="{{$.globals.values.user}}">
       <ba-poster path="{{key}}" mode="child" role="{{data.role}}"></ba-poster>
       </template>

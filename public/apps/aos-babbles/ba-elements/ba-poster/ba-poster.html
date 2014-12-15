@@ -106,6 +106,9 @@
 	    		var newpostRef = userFB.push({"text":valuek, "parent":path, "role":role});
 	    		var newKey = newpostRef.key();
 
+	    		var userFB3 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+newKey+"/numchildren/");
+	    		var newpostRef3 = userFB3.set(0);
+
 	    		
 
 	    		if(this.mode=='child'){
