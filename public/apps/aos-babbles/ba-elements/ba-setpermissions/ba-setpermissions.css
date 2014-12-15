@@ -1,3 +1,43 @@
 :host {
 	display: block;
+	background-color: #F5F5F5;
+	color: #666666;
+	padding: 20px 30px 20px 30px; 
+	font-weight: 300;
+	margin: 0px 0px 20px 0px;
+	font-size: 1em;
+}
+
+h3 {
+	font-weight: 400;
+	font-size: 1em;
+	margin: 0px 0px 10px 0px;
+	padding: 0px;
+}
+
+
+h4 {
+	font-weight: 300;
+	font-size: 1em;
+	margin: 0px;
+	padding: 0px;
+}
+
+input {
+	border: none;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	opacity: 0.8;
+
+}
+
+
+input:focus {
+	opacity: 1;
+}
+
+
+
+.shortinput {
+	width: 15px;
 }

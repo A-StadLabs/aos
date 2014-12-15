@@ -6,19 +6,17 @@
   <template>
     <link rel="stylesheet" href="ba-setpermissions.css" />
     <h3>Wie mag antwoorden?{{roleselected}}</h3>
-    	<h4>Rollen</h4>
     	<core-selector selected="{{roleselected}}" valueattr="role">
     		<div role="anon">anoniem</div>
     		<template repeat="{{r in globs.user.data.roles}}">
     			<div role="{{r}}">{{r}}</div>
     		</template>
     	</core-selector>
-    	<h4>Locatie</h4>
     	<core-ajax id="findstreet" on-core-response="{{streetresp}}" response="{{streetresponse}}"></core-ajax>
     	District: <input id="district" value="" />
     	Straat: <input id="straat" value="{{streetvalue}}" />
-    	Huisnummer van: <input id="numfrom" value="{{numfrom}}" />
-    	Huisnummer tot: <input id="numto" value="{{numto}}" />
+    	Huisnummer van: <input class="shortinput" id="numfrom" value="{{numfrom}}" />
+    	tot: <input class="shortinput" id="numto" value="{{numto}}" />
     	<p>{{selstreet}}</p>
     	<template repeat="{{s, i in streets}}">
     		<core-selector valueattr="key" selected="{{streetvalue}}">

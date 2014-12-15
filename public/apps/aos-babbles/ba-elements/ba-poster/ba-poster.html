@@ -12,11 +12,17 @@
   	<ba-user bauser="{{bauser}}"></ba-user>
 
     <link rel="stylesheet" href="ba-poster.css" />
+    <div vertical layout start>
     <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" />
-    <core-icon-button icon="{{ roleselected ? 'lock-outline' : 'lock-open'}}" on-tap="{{toggleRoles}}"></core-icon-button> 
+
+    <core-collapse id="roledefinition">
+    	<small>Iedereen mag dit zien. Alle A-profielen kunnen reageren.<button class="bewerkbtn" icon="{{ roleselected ? 'lock-outline' : 'lock-open'}}" on-tap="{{toggleRoles}}">bewerken</button></small>
+     </core-collapse>
+
     <core-collapse id="rolescoll">
     	<ba-setpermissions permissions="{{permissions}}"></ba-setpermissions>
     </core-collapse>
+	</div>
     <template if="{{!$.globals.values.user&&!usercanpost}}">
     	<p>Je mag hier niet posten.</p>
     </template> 
@@ -26,11 +32,13 @@
 
     	toggleRoles: function(){
     		this.$.rolescoll.toggle();
+    		this.$.roledefinition.toggle();
     	},
 
     	ready: function(){
     		this.postdata = '';
     		this.valuek = '';
+    		this.$.roledefinition.toggle();
 
     		this.usercanpost = false;
 
