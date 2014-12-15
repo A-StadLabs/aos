@@ -48,13 +48,15 @@
 
   <template if="{{mode=='super'}}">
     <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-    <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
+    
+    <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{data.numchildren}} reacties - 
     <template if="{{!usercanpost}}">
-    <p><img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.</p>
+    <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
     </template>
     <template if="{{usercanpost}}">
-    <p>Jij kan reageren.</p>
+    Jij kan reageren.
     </template>
+    </p>
 
     <hr>
   </template>

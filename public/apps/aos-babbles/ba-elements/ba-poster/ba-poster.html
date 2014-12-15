@@ -105,12 +105,22 @@
     			var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/");
 	    		var newpostRef = userFB.push({"text":valuek, "parent":path, "role":role});
 	    		var newKey = newpostRef.key();
+
+	    		
+
 	    		if(this.mode=='child'){
 	    			// var userFB1 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/parents/"+path+"/children/"+newKey+"/");
 	    			// var newpostRef1 = userFB1.set({"text":valuek, "parent":path});
 
 					var userFB2 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+path+"/children/"+newKey+"/");
 					userFB2.set({"child": true});
+
+					var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/messages/'+path+'/numchildren/');
+          				addPlay.transaction(function(currentRank) {
+           				 return currentRank+1;
+          		});
+
+
 				};
 				// if(this.mode=='parent'){
 				// 	var userFB2 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/parents/"+newKey+"/");
