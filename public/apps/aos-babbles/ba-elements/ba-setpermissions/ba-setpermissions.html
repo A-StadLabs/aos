@@ -25,6 +25,8 @@
     			<p key="{{streets[i].street}}">{{streets[i].street}} - {{streets[i].district}}</p>
     		</core-selector>
     	</template>
+    	<h4>Persoon</h4>
+
    
 </template>
 <script>
@@ -37,10 +39,10 @@
 	    		if (e.keyCode == 13) {
 	      			
 	        		//that.enter();
-	        		ajax.go();
+	        		//ajax.go();
 	      			
 	    		};
-	    		// ajax.go();
+	    		ajax.go();
 	    		that.$.findstreet.url = "/adres?search="+that.streetvalue;
 	    		
 	  		});
