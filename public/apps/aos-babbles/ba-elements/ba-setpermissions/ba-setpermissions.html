@@ -5,26 +5,35 @@
 <polymer-element name="ba-setpermissions" attributes="">
   <template>
     <link rel="stylesheet" href="ba-setpermissions.css" />
+    <div vertical layout>
+
     <h3>Wie mag antwoorden?{{roleselected}}</h3>
+    <div>
     	<core-selector selected="{{roleselected}}" valueattr="role">
     		<div role="anon">anoniem</div>
     		<template repeat="{{r in globs.user.data.roles}}">
     			<div role="{{r}}">{{r}}</div>
     		</template>
     	</core-selector>
+    </div>
+
     	<core-ajax id="findstreet" on-core-response="{{streetresp}}" response="{{streetresponse}}"></core-ajax>
-    	District: <input id="district" value="" />
-    	Straat: <input id="straat" value="{{streetvalue}}" />
-    	Huisnummer van: <input class="shortinput" id="numfrom" value="{{numfrom}}" />
-    	tot: <input class="shortinput" id="numto" value="{{numto}}" />
-    	<p>{{selstreet}}</p>
+    
+    <div horizontal layout center start-justified><p>District: </p><input id="district" value="" /></div>
+    <div horizontal layout center start-justified><p>Straat: <input id="straat" value="{{streetvalue}}" /></div>
+    <div><p>Huisnummer van: <input class="shortinput" id="numfrom" value="{{numfrom}}" />
+    	tot: <input class="shortinput" id="numto" value="{{numto}}" /></div>
+    <h6>{{selstreet}}</h6>
+    <div>
     	<template repeat="{{s, i in streets}}">
     		<core-selector valueattr="key" selected="{{streetvalue}}">
     			<p key="{{streets[i].street}}">{{streets[i].street}} - {{streets[i].district}}</p>
     		</core-selector>
     	</template>
+    </div>
     	<h4>Persoon</h4>
         <button class="closebtn" on-tap="{{closeThis}}">Bevestigen</button>
+    </div>
 
    
 </template>
@@ -57,7 +66,6 @@
 
         closeThis: function(){
             this.fire('closethisthing');
-            console.log('Cheeeeeekkeeeerrsss');
         }
     });
 </script>
