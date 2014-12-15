@@ -1,6 +1,8 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../ba-poster/ba-poster.html">
+<link rel="import" href="../ba-getpermissions/ba-getpermissions.html">
+
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 
 <polymer-element name="babbel-babbel" attributes="key mode parent kids">
@@ -20,9 +22,19 @@
       </template>
 
     <h2>{{data.text}}</h2>
-      
+      <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
+    <template if="{{!usercanpost}}">
+    <p><img class="lock" src="../../images/locked.svg">Enkel ... kunnen reageren.</p>
+    </template>
+    <template if="{{usercanpost}}">
+    <p>Jij kan reageren.</p>
+    </template>
+      <template if="{{$.globals.values.user}}">
       <ba-poster path="{{key}}" mode="child" role="{{data.role}}"></ba-poster>
-      <small>Roles: {{data.role}}</small>
+      </template>
+      <template if="{{!$.globals.values.user}}">  
+      <h3><a href="/#/profiel">Meld je aan</a> met je A-profiel om zelf iets te schrijven.</h3>
+    </template>
   </template>
 
   <template if="{{mode=='child'}}">
@@ -35,7 +47,14 @@
 
   <template if="{{mode=='super'}}">
     <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-    <p><img class="lock" src="../../images/locked.svg">Antwoorden beperkt</p>
+    <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
+    <template if="{{!usercanpost}}">
+    <p><img class="lock" src="../../images/locked.svg">Enkel ... kunnen reageren.</p>
+    </template>
+    <template if="{{usercanpost}}">
+    <p>Jij kan reageren.</p>
+    </template>
+
     <hr>
   </template>
 

@@ -30,13 +30,19 @@
 
     <section>
     <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" orderByChild="parent" equalto="/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
-    
-    <ba-poster path="/" mode="parent" role="root"></ba-poster>
+
+
+    <template if="{{$.globals.values.user}}">  
+      <ba-poster path="/" mode="parent" role="root"></ba-poster>
+    </template>
+    <template if="{{!$.globals.values.user}}">  
+      <h3><a href="/#/profiel">Meld je aan</a> met je A-profiel om zelf iets te schrijven.</h3>
+    </template>
     <template repeat="{{k in keys}}">
         <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>
     </template>
     </section>
-    
+
     <section>
         <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
         <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
