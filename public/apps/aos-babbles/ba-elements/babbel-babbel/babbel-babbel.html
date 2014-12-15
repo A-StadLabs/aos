@@ -13,7 +13,7 @@
   <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
   <template if="{{mode=='parent'}}">
   <template if="{{data.parent!='/'}}">
-        <button on-tap="{{fireTerug}}">terug papa</button>
+        <button on-tap="{{fireTerug}}">Naar vorig gesprek</button>
       </template>
       <template if="{{data.parent=='/'}}">
         <button class="backbtn" on-tap="{{fireHome}}">terug naar overzicht</button>
