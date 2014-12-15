@@ -1,4 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../../../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../../../bower_components/core-icon-button/core-icon-button.html">
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../ba-user/ba-user.html">
 
@@ -8,13 +11,27 @@
   	<ba-user bauser="{{bauser}}"></ba-user>
 
     <link rel="stylesheet" href="ba-poster.css" />
-    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" /> 
+    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" />
+    <core-icon-button icon="{{ roleselected ? 'lock-outline' : 'lock-open'}}" on-tap="{{toggleRoles}}"></core-icon-button> 
+    <core-collapse id="rolescoll">
+    	<h3>Wie mag antwoorden?{{roleselected}}</h3>
+    	<core-selector selected="{{roleselected}}" valueattr="role">
+    		<div role="anon">anoniem</div>
+    	<template repeat="{{r in globs.user.data.roles}}">
+    		<div role="{{r}}">{{r}}</div>
+    	</template>
+    	</core-selector>
+    </core-collapse>
     <template if="{{!$.globals.values.user&&!usercanpost}}">
     	<p>Je mag hier niet posten.</p>
     </template> 
 </template>
 <script>
     Polymer({
+
+    	toggleRoles: function(){
+    		this.$.rolescoll.toggle();
+    	},
 
     	ready: function(){
     		this.postdata = '';
@@ -41,7 +58,7 @@
 
     	checkPermissions: function(roles){
     		console.log('check permissions', roles);
-    		//var roles = this.globs.user.data.roles;
+    		var roles = this.globs.user.data.roles;
       		for (var i = roles.length - 1; i >= 0; i--) {
       			console.log(roles[i]);
       			console.log(this.role);
