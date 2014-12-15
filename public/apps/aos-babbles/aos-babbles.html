@@ -35,7 +35,8 @@
       <ba-poster path="/" mode="parent" role="root"></ba-poster>
     </template>
     <template if="{{!$.globals.values.user}}">  
-      <h3><a href="/#/profiel">Meld je aan</a> met je A-profiel om zelf iets te schrijven.</h3>
+    <div id="roledefinition">
+    <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small></div>
     </template>
     <template repeat="{{k in keys}}">
         <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>

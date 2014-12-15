@@ -10,7 +10,10 @@ core-animated-pages {
 
 }
 
-
+a {
+	text-decoration: none;
+	color: #333333;
+}
 /*
 .item.core-selected {
     background: #eee;
@@ -24,7 +27,21 @@ core-animated-pages {
     margin-left: 20px;
   }*/
 
+#roledefinition {
+	padding: 5px 10px 5px 10px;
+	margin: 0px 0px 20px 0px;
+	background-color: #F5F5F5;
+}
 
+
+
+
+small {
+	font-size: 0.75em;
+	color: #666666;
+	font-weight: 400;
+/*	padding: 5px 10px 5px 10px;	*/
+}
 
 #canvas {
 	display: block;
