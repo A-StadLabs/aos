@@ -19,3 +19,33 @@
 	border: 2px solid #60BF95;
 }
 
+#roledefinition {
+	padding: 5px 10px 5px 10px;
+	margin: 0px 0px 0px 0px;
+	background-color: #F5F5F5;
+}
+
+
+
+
+small {
+	font-size: 0.75em;
+	color: #666666;
+	font-weight: 400;
+/*	padding: 5px 10px 5px 10px;	*/
+}
+
+.bewerkbtn {
+	font-family: 'Open sans', sans-serif;
+	color: #666666;
+	border: none;
+	font-weight: 600;
+	text-decoration: underline;
+	margin: 0px;
+	padding: 5px 0px 0px 5px;
+	-webkit-appearance: none;
+	outline: 0;
+	cursor: pointer;
+	background-color: #F5F5F5;
+
+}
