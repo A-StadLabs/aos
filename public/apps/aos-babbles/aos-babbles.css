@@ -1,20 +1,22 @@
 :host {
 	display: block;
-	width: 50vw;
+/*	width: 50vw;
 	margin: 0px auto 0px auto;
 	background-color: #eeeeee;
-	height: 100%;
+
 	padding: 20px;
-	min-width: 300px;
+	min-width: 300px;*/
+	height: 100%;
+	margin: 0px;
+padding: 0px;
+
 }
 core-animated-pages {
-	display: block;
-	overflow: hidden;
-	/*width: 50vw;*/
-	margin: 0px auto 0px auto;
-	background-color: #eeeeee;
-	height: 100%;
+
 }
+
+
+/*
 .item.core-selected {
     background: #eee;
   }
@@ -25,4 +27,53 @@ core-animated-pages {
 
   .item2 {
     margin-left: 20px;
-  }
+  }*/
+
+
+
+#canvas {
+	display: block;
+	overflow: hidden;
+	height: 100%;
+	background-color: white;
+	margin: 0px;
+	padding: 0px 12% 0px 12%;
+	width: 76%;
+}
+
+
+
+.leaderboard {
+	width: 76vw;
+	padding: 0vw 12vw 20px 12vw;
+	background-color: #95d2b7;
+	margin: 0px;
+}
+
+.stralendeA {
+	width: 4vw;
+	min-width: 50px;
+	background-color: rgba(0,0,0,0.1);
+	padding: 10px;
+	margin: 0px;
+}
+
+
+.searchbox {
+	margin: 0px 0px 0px 10px;
+	padding: 0px;
+	border: none;
+}
+
+.leaderboard h1 {
+	font-weight: 300;
+	color: #333333;
+	font-size: 28px;
+
+}
+
+.appicon {
+	width: 35px;
+	margin-right: 10px;
+	opacity: 0.5;
+}
