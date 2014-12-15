@@ -1,6 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../ba-poster/ba-poster.html">
+<link rel="import" href="../cl-voteitem/cl-voteitem.html">
 <link rel="import" href="../ba-getpermissions/ba-getpermissions.html">
 
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
@@ -20,8 +21,9 @@
       <template if="{{data.parent=='/'}}">
         <button class="backbtn" on-tap="{{fireHome}}">terug naar overzicht</button>
       </template>
-
+      
     <h2>{{data.text}}</h2>
+    <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
     <p>{{data.numchildren}} reacties -
       <template if="{{!usercanpost}}">
@@ -48,7 +50,10 @@
   </template>
 
   <template if="{{mode=='super'}}">
+
     <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
+
+    <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
     
     <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{data.numchildren}} reacties - 
     <template if="{{!usercanpost}}">

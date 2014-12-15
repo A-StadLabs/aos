@@ -98,6 +98,87 @@ small {
 /*	padding: 5px 10px 5px 10px;	*/
 }
 
+.convcontent {
+	border-left: 1px solid #EBEBEB;
+	margin: 0px 10px 0px 0px;
+	padding: 0px 0px 0px 15px;
+}
+
+
+/* PARENTMODE */
+:host([mode=parent]) .convitem {
+/*	border-bottom: 1px solid #f5f5f5; */
+	margin: 0px;
+	padding: 20px 12vw 20px 12vw;
+	background-color: white;
+}
+
+
+
+:host([mode=parent]) .convitem h1 {
+	font-weight: 300;
+	color: #60BF95;
+	font-size: 24px;
+	margin: 0px;
+	padding: 0px;
+	max-width: 60vw;
+}
+
+
+
+
+
+/* CHILDMODE */
+:host([mode=child]) .convitem  {
+	padding: 8px 12vw 14px 14vw;
+}
+
+:host([mode=child]) .convitem p {
+	font-weight: 400;
+	color: #333333;
+	font-size: 16px;
+	margin: 5px 0px 0px 0px;
+	padding: 0px;
+	max-width: 60vw;
+
+}
+
+:host([mode=child]) hr {
+/*	color: #f00;
+*/
+	background-color: #EBEBEB;
+	height: 1px;
+	padding: 0px;
+	margin: 0px 12vw 0px 12vw;
+	border: none;
+	width: 76vw;
+}
+
+
+
+
+.convitem p {
+	font-weight: 300;
+	color: #333333;
+	font-size: 14px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+}
+
+
+
+.convitem small {
+	font-weight: 400;
+	color: #999999;
+	font-size: 13px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	margin-top: 5px;
+
+}
+
 /*
 .convitem {
 	border-bottom: 1px solid #f5f5f5;

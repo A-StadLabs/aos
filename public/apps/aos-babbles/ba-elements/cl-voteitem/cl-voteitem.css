@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+/*p {
+	margin: 10px  0px  5px  0px;
+	padding: 0px  0px  0px  0px;
+		color: #666666;
+
+}
+*/
+
+
+/* STYLING VOTE-ITEM */
+
+.voterij svg {
+  display: block;
+  fill: #666666;
+  height: 10px;
+  overflow: hidden;
+  width: 20px;
+}
+
+.voterijdis svg {
+  display: block;
+  fill: #999999;
+  height: 10px;
+  overflow: hidden;
+  width: 20px;
+}
+
+.voterij svg.highlight {
+  fill: #95d2b7;
+  width: 20px;
+}
+
+
+.voterij p {
+  margin: 5px 0px 5px 0px;
+  padding: 0px;
+  color: black;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  width: 20px;
+}
+
+
+.voterij {
+  margin: 6px 15px 0px 0px;
+}
+
+
+
+.voterij small {
+  margin: 3px 0px 3px 0px;
+  color: #666666;
+  font-weight: 600;
+
+}
