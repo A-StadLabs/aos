@@ -20,7 +20,7 @@
      </core-collapse>
 
     <core-collapse id="rolescoll">
-    	<ba-setpermissions permissions="{{permissions}}"></ba-setpermissions>
+    	<ba-setpermissions id="permissions" permissions="{{permissions}}"></ba-setpermissions>
     </core-collapse>
 	</div>
     <template if="{{!$.globals.values.user&&!usercanpost}}">
@@ -42,6 +42,10 @@
 
     		this.usercanpost = false;
 
+
+
+
+
 	  		this.$.poster.addEventListener('keypress', function(e) {
 	    		if (e.keyCode == 13) {
 	      			this.async(function() {
@@ -52,11 +56,22 @@
 
     		var that = this;
 
+
+
 			document.addEventListener('user-changed', function(e){
           		console.log('Values changed', e.detail.data);
           		console.log('roles: ', e.detail.data.roles);
           		that.checkPermissions(e.detail.data.roles);
         	});
+
+	  		this.$.permissions.addEventListener('closethisthing', function() {
+    			that.$.rolescoll.toggle();
+    			that.$.roledefinition.toggle();
+	  		});
+
+
+
+
     	},
 
     	checkPermissions: function(roles){

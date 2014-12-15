@@ -41,3 +41,18 @@ input:focus {
 .shortinput {
 	width: 15px;
 }
+
+
+.closebtn {
+	font-size: 0.75em;
+	font-family: 'Open sans', sans-serif;
+	color: #666666;
+	border: none;
+	font-weight: 600;
+	text-decoration: underline;
+	-webkit-appearance: none;
+	outline: 0;
+	cursor: pointer;
+	background-color: #F5F5F5;
+
+}

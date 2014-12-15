@@ -24,6 +24,7 @@
     		</core-selector>
     	</template>
     	<h4>Persoon</h4>
+        <button class="closebtn" on-tap="{{closeThis}}">Bevestigen</button>
 
    
 </template>
@@ -52,7 +53,12 @@
     		console.log(JSON.stringify(this.streets.data));
     		this.streets = this.streets.data;
 
-    	}
+    	},
+
+        closeThis: function(){
+            this.fire('closethisthing');
+            console.log('Cheeeeeekkeeeerrsss');
+        }
     });
 </script>
 </polymer-element>
