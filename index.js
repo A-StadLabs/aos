@@ -80,6 +80,15 @@ app.get('/crs-persoon', function(req, res){
   });
 });
 
+// CRS medewerker
+app.get('/crs-medewerker', function(req, res){
+  //console.log(val);
+  req.session.userobject;
+  request.get({url: 'https://www.antwerpen.be/srv/user/d/account/crsklant/info', jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
 // Find address  
 app.get('/adres', function(req, res){
   var val = req.query.search;

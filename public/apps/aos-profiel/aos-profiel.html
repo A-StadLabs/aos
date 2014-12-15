@@ -20,12 +20,14 @@
    <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}">
    </core-ajax>
    </template>
-   <template if="{{$.globals.values.user}}" bind>
+   <template if="{{$.globals.values.user.data}}">
     <h1>{{$.globals.values.user.data.firstName}}</h1>
     <h3>JSON userobject</h3>
     <p>{{$.globals.values.userJSON}}</p>
     <h3>CRS gegevens</h3>
     <p>{{$.globals.values.crsuserJSON}}</p>
+    <h3>CRS medewerker gegevens</h3>
+    <p>{{$.globals.values.crsmedewerkerJSON}}</p>
     <button on-tap="{{logout}}">Logout</button>
     
    </template>
@@ -33,6 +35,8 @@
    <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
 
    <core-ajax method="GET" id="getCRS" handleAs="json" url="/crs-persoon" response="{{responseCRS}}" on-core-response="{{handleResponseCRS}}">
+
+   <core-ajax method="GET" id="getCRSmedewerker" handleAs="json" url="/crs-medewerker" response="{{responseCRSmedewerker}}" on-core-response="{{handleResponseCRSmedewerker}}">
 
   </template>
 
@@ -62,8 +66,9 @@
           this.$.globals.values.userJSON = JSON.stringify(this.$.globals.values.user.data);
           console.log('UID: ',this.responseUser.data.uid);
           this.$.getCRS.go();
-
-
+          if(this.responseUser.data.ADAccount){
+            this.$.getCRSmedewerker.go();
+          };
         },
 
         handleResponseCRS: function(){
@@ -72,6 +77,15 @@
             console.log('We hebben een eid user!');
             this.$.globals.values.crsuser = this.responseCRS.data;
             this.$.globals.values.crsuserJSON = JSON.stringify(this.responseCRS.data);
+          };
+        },
+
+        handleResponseCRSmedewerker: function(){
+          console.log('CRS? ', this.responseCRSmedewerker.success);
+          if(this.responseCRSmedewerker.success){
+            console.log('We hebben een eid user!');
+            this.$.globals.values.crsmedewerker = this.responseCRSmedewerker.data;
+            this.$.globals.values.crsmedewerkerJSON = JSON.stringify(this.responseCRSmedewerker.data);
           };
         }
 
