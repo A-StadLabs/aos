@@ -1,23 +1,9 @@
 :host {
 	display: block;
-<<<<<<< HEAD
-	width: 70vw;
-=======
-/*	width: 50vw;
->>>>>>> ecdb66ab645fa30b5e422b51b19a4a2153ea23dd
-	margin: 0px auto 0px auto;
-	background-color: #eeeeee;
-
-	padding: 20px;
-<<<<<<< HEAD
-	min-width: 320px;
-=======
-	min-width: 300px;*/
 	height: 100%;
 	margin: 0px;
 padding: 0px;
 
->>>>>>> ecdb66ab645fa30b5e422b51b19a4a2153ea23dd
 }
 core-animated-pages {
 
