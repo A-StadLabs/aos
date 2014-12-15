@@ -31,9 +31,8 @@
     <section>
     <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" orderByChild="parent" equalto="/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
 
-
     <template if="{{$.globals.values.user}}">  
-      <ba-poster path="/" mode="parent" role="user"></ba-poster>
+      <ba-poster path="/" mode="parent" role="root"></ba-poster>
     </template>
     <template if="{{!$.globals.values.user}}">  
       <h3><a href="/#/profiel">Meld je aan</a> met je A-profiel om zelf iets te schrijven.</h3>

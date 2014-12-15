@@ -1,16 +1,19 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 
 <polymer-element name="ba-setpermissions" attributes="">
   <template>
     <link rel="stylesheet" href="ba-setpermissions.css" />
+
+      	<aos-globals id="globals" values="{{globs}}"></aos-globals>
+
     <div vertical layout>
 
     <h3>Wie mag antwoorden?{{roleselected}}</h3>
     <div>
     	<core-selector selected="{{roleselected}}" valueattr="role">
-    		<div role="anon">anoniem</div>
     		<template repeat="{{r in globs.user.data.roles}}">
     			<div role="{{r}}">{{r}}</div>
     		</template>
