@@ -24,7 +24,7 @@
     <h2>{{data.text}}</h2>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
     <template if="{{!usercanpost}}">
-    <p><img class="lock" src="../../images/locked.svg">Enkel ... kunnen reageren.</p>
+    <p><img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.</p>
     </template>
     <template if="{{usercanpost}}">
     <p>Jij kan reageren.</p>
@@ -49,7 +49,7 @@
     <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
     <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
     <template if="{{!usercanpost}}">
-    <p><img class="lock" src="../../images/locked.svg">Enkel ... kunnen reageren.</p>
+    <p><img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.</p>
     </template>
     <template if="{{usercanpost}}">
     <p>Jij kan reageren.</p>
