@@ -12,9 +12,20 @@
   <template>
     <link rel="stylesheet" href="aos-babbles.css" />
 
+<div class="leaderboard">
+  <img class="stralendeA" src="images/astadlabs.svg">
+  <div horizontal layout wrap center start-justified>
+    <div horizontal layout wrap center start-justified flex>
+      <img class="appicon" src="images/babbelbox.svg">
+      <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+    </div>
+  </div>
+</div>
+
     <aos-globals id="globals"></aos-globals>
     <ba-user bauser="{{bauser}}"></ba-user>
 
+<div id="canvas">
     <core-animated-pages selected="0" id="scenes" transitions="slide-from-right">
 
     <section>
@@ -38,6 +49,8 @@
     </section>
 
     </core-animated-pages>
+
+</div>
   </template>
 
   <script>

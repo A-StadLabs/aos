@@ -16,7 +16,7 @@
         <button on-tap="{{fireTerug}}">terug papa</button>
       </template>
       <template if="{{data.parent=='/'}}">
-        <button on-tap="{{fireHome}}">terug root</button>
+        <button class="backbtn" on-tap="{{fireHome}}">terug naar overzicht</button>
       </template>
 
     <h2>{{data.text}}</h2>
@@ -30,7 +30,7 @@
   </template>
 
   <template if="{{mode=='previous'}}">
-    <h5 on-tap="{{fireTerug}}">Vorige: {{data.text}}</h5>
+    <small on-tap="{{fireTerug}}">Vorige: {{data.text}}</small>
   </template>
 
   <template if="{{mode=='super'}}">
