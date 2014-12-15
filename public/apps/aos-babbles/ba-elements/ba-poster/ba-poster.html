@@ -4,6 +4,7 @@
 <link rel="import" href="../../../../bower_components/core-icon-button/core-icon-button.html">
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../ba-user/ba-user.html">
+<link rel="import" href="../ba-setpermissions/ba-setpermissions.html">
 
 <polymer-element name="ba-poster" attributes="path mode role">
   <template>
@@ -14,13 +15,7 @@
     <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" />
     <core-icon-button icon="{{ roleselected ? 'lock-outline' : 'lock-open'}}" on-tap="{{toggleRoles}}"></core-icon-button> 
     <core-collapse id="rolescoll">
-    	<h3>Wie mag antwoorden?{{roleselected}}</h3>
-    	<core-selector selected="{{roleselected}}" valueattr="role">
-    		<div role="anon">anoniem</div>
-    	<template repeat="{{r in globs.user.data.roles}}">
-    		<div role="{{r}}">{{r}}</div>
-    	</template>
-    	</core-selector>
+    	<ba-setpermissions permissions="{{permissions}}"></ba-setpermissions>
     </core-collapse>
     <template if="{{!$.globals.values.user&&!usercanpost}}">
     	<p>Je mag hier niet posten.</p>

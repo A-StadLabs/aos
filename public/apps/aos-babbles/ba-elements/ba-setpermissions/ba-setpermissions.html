@@ -1,0 +1,58 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="ba-setpermissions" attributes="">
+  <template>
+    <link rel="stylesheet" href="ba-setpermissions.css" />
+    <h3>Wie mag antwoorden?{{roleselected}}</h3>
+    	<h4>Rollen</h4>
+    	<core-selector selected="{{roleselected}}" valueattr="role">
+    		<div role="anon">anoniem</div>
+    		<template repeat="{{r in globs.user.data.roles}}">
+    			<div role="{{r}}">{{r}}</div>
+    		</template>
+    	</core-selector>
+    	<h4>Locatie</h4>
+    	<core-ajax id="findstreet" on-core-response="{{streetresp}}" response="{{streetresponse}}"></core-ajax>
+    	District: <input id="district" value="" />
+    	Straat: <input id="straat" value="{{streetvalue}}" />
+    	Huisnummer van: <input id="numfrom" value="{{numfrom}}" />
+    	Huisnummer tot: <input id="numto" value="{{numto}}" />
+    	<p>{{selstreet}}</p>
+    	<template repeat="{{s, i in streets}}">
+    		<core-selector valueattr="key" selected="{{streetvalue}}">
+    			<p key="{{streets[i].street}}">{{streets[i].street}} - {{streets[i].district}}</p>
+    		</core-selector>
+    	</template>
+   
+</template>
+<script>
+    Polymer({
+    	ready: function(){
+    		var that = this;
+    		this.$.straat.addEventListener('keypress', function(e) {
+    			var ajax = that.$.findstreet;
+    			console.log('value: ', that.streetvalue);
+	    		if (e.keyCode == 13) {
+	      			
+	        		//that.enter();
+	        		//ajax.go();
+	      			
+	    		};
+	    		ajax.go();
+	    		that.$.findstreet.url = "/adres?search="+that.streetvalue;
+	    		
+	  		});
+    	},
+
+    	streetresp: function(){
+    		console.log('got response', JSON.parse(this.streetresponse));
+    		this.streets = JSON.parse(this.streetresponse);
+    		console.log(JSON.stringify(this.streets.data));
+    		this.streets = this.streets.data;
+
+    	}
+    });
+</script>
+</polymer-element>

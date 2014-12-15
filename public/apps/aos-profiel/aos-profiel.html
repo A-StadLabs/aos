@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="aos-profiel.css" />
 
   <template if="{{!$.globals.values.user}}">
+
   <div vertical layout center center-justified fit>
     <h1>Aanmelden</h1>
     user: {{responseUser}}
@@ -21,18 +22,21 @@
    </template>
    <template if="{{$.globals.values.user}}" bind>
     <h1>{{$.globals.values.user.data.firstName}}</h1>
+    <h3>JSON userobject</h3>
     <p>{{$.globals.values.userJSON}}</p>
+    <h3>CRS gegevens</h3>
+    <p>{{$.globals.values.crsuserJSON}}</p>
     <button on-tap="{{logout}}">Logout</button>
     
    </template>
 
    <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
 
+   <core-ajax method="GET" id="getCRS" handleAs="json" url="/crs-persoon" response="{{responseCRS}}" on-core-response="{{handleResponseCRS}}">
+
   </template>
 
   <script>
-
-
 
     Polymer({
 
@@ -44,7 +48,7 @@
 
         logout: function(){
           this.$.logoutAjax.go();
-          delete this.$.globals.values;
+          delete this.$.globals.values.user;
         },
 
         loginSubmit: function(){
@@ -56,6 +60,19 @@
         handleResponseUser: function(){
           this.$.globals.values.user = this.responseUser;
           this.$.globals.values.userJSON = JSON.stringify(this.$.globals.values.user.data);
+          console.log('UID: ',this.responseUser.data.uid);
+          this.$.getCRS.go();
+
+
+        },
+
+        handleResponseCRS: function(){
+          console.log('CRS? ', this.responseCRS.success);
+          if(this.responseCRS.success){
+            console.log('We hebben een eid user!');
+            this.$.globals.values.crsuser = this.responseCRS.data;
+            this.$.globals.values.crsuserJSON = JSON.stringify(this.responseCRS.data);
+          };
         }
 
     });

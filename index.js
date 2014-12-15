@@ -69,8 +69,27 @@ app.get('/user', function(req, res){
     // cannot access session here
   });
 	}
-
 });
+
+// CRS persoon 
+app.get('/crs-persoon', function(req, res){
+  //console.log(val);
+  req.session.userobject;
+  request.get({url: 'https://www.antwerpen.be/srv/user/d/account/crsklant/crspersoon', jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
+// Find address  
+app.get('/adres', function(req, res){
+  var val = req.query.search;
+  //req.session.userobject;
+  request.get({url: 'https://www.antwerpen.be/srv/d/astad/location/search/'+val, jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
+https://www.antwerpen.be/srv/d/astad/location/search/
 
 // Notificaties 
 app.get('/notifications', function(req, res){
