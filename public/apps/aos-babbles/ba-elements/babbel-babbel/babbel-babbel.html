@@ -1,11 +1,14 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../ba-poster/ba-poster.html">
+<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 
 <polymer-element name="babbel-babbel" attributes="key mode parent kids">
 
 <template>
-    <link rel="stylesheet" href="babbel-babbel.css" />
+  <link rel="stylesheet" href="babbel-babbel.css" />
+
+  <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
   <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
   <template if="{{mode=='parent'}}">
@@ -18,7 +21,8 @@
 
     <h2>{{data.text}}</h2>
       
-      <ba-poster path="{{key}}" mode="child"></ba-poster>
+      <ba-poster path="{{key}}" mode="child" role="{{data.role}}"></ba-poster>
+      <small>Roles: {{data.role}}</small>
   </template>
 
   <template if="{{mode=='child'}}">

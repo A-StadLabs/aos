@@ -19,7 +19,8 @@
 
     <section>
     <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" orderByChild="parent" equalto="/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
-    <ba-poster path="/" mode="parent"></ba-poster>
+    
+    <ba-poster path="/" mode="parent" role="root"></ba-poster>
     <template repeat="{{k in keys}}">
         <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>
     </template>

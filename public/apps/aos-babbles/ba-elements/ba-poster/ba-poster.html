@@ -1,9 +1,17 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
+<link rel="import" href="../ba-user/ba-user.html">
 
-<polymer-element name="ba-poster" attributes="path mode">
+<polymer-element name="ba-poster" attributes="path mode role">
   <template>
+  	<aos-globals id="globals" values="{{globs}}"></aos-globals>
+  	<ba-user bauser="{{bauser}}"></ba-user>
+
     <link rel="stylesheet" href="ba-poster.css" />
-    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" />  
+    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" /> 
+    <template if="{{!$.globals.values.user&&!usercanpost}}">
+    	<p>Je mag hier niet posten.</p>
+    </template> 
 </template>
 <script>
     Polymer({
@@ -11,14 +19,37 @@
     	ready: function(){
     		this.postdata = '';
     		this.valuek = '';
-    		var that = this;
+
+    		this.usercanpost = false;
+
 	  		this.$.poster.addEventListener('keypress', function(e) {
 	    		if (e.keyCode == 13) {
 	      			this.async(function() {
 	        		that.enter();
 	      			});
-	    		}
+	    		};
 	  		});
+
+    		var that = this;
+
+			document.addEventListener('user-changed', function(e){
+          		console.log('Values changed', e.detail.data);
+          		console.log('roles: ', e.detail.data.roles);
+          		that.checkPermissions(e.detail.data.roles);
+        	});
+    	},
+
+    	checkPermissions: function(roles){
+    		console.log('check permissions', roles);
+    		//var roles = this.globs.user.data.roles;
+      		for (var i = roles.length - 1; i >= 0; i--) {
+      			console.log(roles[i]);
+      			console.log(this.role);
+      			if(roles[i]==this.role){
+      				console.log('found match');
+      				this.usercanpost = true;
+      			};
+      		};
     	},
 
     	enter: function(){
@@ -26,10 +57,11 @@
     		if(!this.postdata==''){
     			var path = this.path
     			var valuek = this.valuek;
+    			var role = this.role;
     			console.log('Saven maar: ', this.valuek);
     			var name = '';
     			var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/");
-	    		var newpostRef = userFB.push({"text":valuek, "parent":path});
+	    		var newpostRef = userFB.push({"text":valuek, "parent":path, "role":role});
 	    		var newKey = newpostRef.key();
 	    		if(this.mode=='child'){
 	    			// var userFB1 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/parents/"+path+"/children/"+newKey+"/");

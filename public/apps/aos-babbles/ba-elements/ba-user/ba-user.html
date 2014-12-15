@@ -45,8 +45,10 @@
 
 	    	createUser: function(){
 	    		var userid = this.$.globals.values.user.data.id;
+	    		var roles = this.$.globals.values.user.data.roles;
 	    		var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+userid+'/');
 	    		userFB.set(true);
+	    		userFB.set({"roles": roles});
 	    		//this.$.FBuser.requery();
 	    	},
 
