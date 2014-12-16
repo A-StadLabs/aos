@@ -9,6 +9,16 @@
 	font-size: 1em;
 }
 
+
+
+h1 {
+	font-weight: 300;
+	font-size: 1.85em;
+	margin: 0px 0px 10px 0px;
+	padding: 0px;
+}
+
+
 h3 {
 	font-weight: 400;
 	font-size: 1em;
@@ -26,13 +36,13 @@ h4 {
 
 
 p {
-	font-size: 0.75em;
+/*	font-size: 0.75em;*/
 	font-family: 'Open sans', sans-serif;
 	color: #666666;
 	border: none;
 	font-weight: 400;
 	margin: 0px;
-	padding: 0px;
+	padding: 3px 6px 3px 6px;
 }
 
 
@@ -41,6 +51,7 @@ input {
 	border-radius: 0px;
 	-webkit-appearance: none;
 	opacity: 0.8;
+	outline: 0;
 
 }
 
@@ -49,23 +60,45 @@ input:focus {
 	opacity: 1;
 }
 
-
-
-.shortinput {
-	width: 15px;
+.roleselector {
 }
 
 
-.closebtn {
-	font-size: 0.75em;
-	font-family: 'Open sans', sans-serif;
-	color: #666666;
-	border: none;
-	font-weight: 600;
-	text-decoration: underline;
-	-webkit-appearance: none;
-	outline: 0;
-	cursor: pointer;
-	background-color: #F5F5F5;
+.roleselector p {
+/*	border-bottom: 1px solid #999999;*/
+	margin: 5px 0px 5px 0px;
+	background-color: #F5F17D;
+
 
 }
+
+
+
+
+.shortinput input {
+/*	min-width: 20px;*/
+	width: 20px;
+	padding: 4px 6px 4px 6px;
+}
+
+
+
+.formfield {
+	margin: 5px 0px 5px 0px;
+}
+
+
+
+.formfield p {
+	min-width: 60px;
+	padding-right: 5px;
+}
+
+
+
+.formfield input {
+/*	min-width: 100px;
+*/	padding: 4px;
+}
+
+
