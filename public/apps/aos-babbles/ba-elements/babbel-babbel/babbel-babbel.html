@@ -28,7 +28,9 @@
 
     <div horizontal layout center>
       <div>
+      <template if="{{usercanpost}}">
         <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
+        </template>
       </div>
 
       <div vertical layout start flex>
@@ -60,7 +62,11 @@
   <template if="{{mode=='super'}}">
     <div horizontal layout center>
       <!-- <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem> -->
-      <div><cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem></div>
+      <div>
+      <template if="{{usercanpost}}">
+      <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
+      </template>
+      </div>
 
       <div vertical layout start flex>
         <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
