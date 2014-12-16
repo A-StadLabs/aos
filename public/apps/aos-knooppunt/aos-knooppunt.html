@@ -1,14 +1,19 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 
 <polymer-element name="aos-knooppunt" attributes="">
 
   <template>
 
     <link rel="stylesheet" href="aos-knooppunt.css" />
+    <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
  
 <div id="favos">
+
+<template if="{{$.globals.values.user}}">
 <div id="container" vertical layout start center-justified>
+
 <div horizontal layout center start-justified class="grouptitle">
   <div flex><h1>Favorieten</h1></div>
   <div class="switcher" end-justified>
@@ -16,6 +21,7 @@
   <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
   </div>
 </div>
+
 
   <div id="group" horizontal layout wrap start start-justified>
 
@@ -74,7 +80,7 @@
 </div>
 
 
-
+</template>
 
 
 
