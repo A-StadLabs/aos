@@ -27,29 +27,22 @@
       </div>
 
     <div horizontal layout center>
-
-    <div>
-
-      <div>V<cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem></div>
-
-      <div flex>
-        <h2>{{data.text}}</h2>
+      <div>
+        <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
       </div>
 
-    </div>
-
-    <div>
-      <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
-      <p>{{data.numchildren}} reacties -
+      <div vertical layout start flex>
+        <h2>{{data.text}}</h2>
+        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
+        <p>{{data.numchildren}} reacties -
         <template if="{{!usercanpost}}">
           <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
           </template>
         <template if="{{usercanpost}}">
           Jij kan reageren.
         </template>
-      </p>
-    </div>
-
+        </p>
+      </div>
     </div>
 
     <template if="{{$.globals.values.user}}">
@@ -64,6 +57,28 @@
 
   </template>
 
+  <template if="{{mode=='super'}}">
+    <div horizontal layout center>
+      <!-- <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem> -->
+      <div><cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem></div>
+
+      <div vertical layout start flex>
+        <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
+        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{data.numchildren}} reacties - 
+        <template if="{{!usercanpost}}">
+          <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+        </template>
+        <template if="{{usercanpost}}">
+          Jij kan reageren.
+          </template>
+        </p>
+      </div>
+
+  </div>
+
+  <hr>
+  </template>
+
   <template if="{{mode=='child'}}">
     <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
   </template>
@@ -72,28 +87,7 @@
     <small on-tap="{{fireTerug}}">Vorige: {{data.text}}</small>
   </template>
 
-  <template if="{{mode=='super'}}">
-    <div horizontal layout center>
-      <!-- <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem> -->
 
-      <div vertical layout start>
-        <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-        <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
-
-        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{data.numchildren}} reacties - 
-        <template if="{{!usercanpost}}">
-          <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
-        </template>
-        <template if="{{usercanpost}}">
-          Jij kan reageren.
-        </template>
-      </p>
-
-    </div>
-  </div>
-
-  <hr>
-</template>
 
 </template>
 
