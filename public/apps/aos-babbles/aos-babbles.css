@@ -6,26 +6,13 @@
 	padding: 0px;
 
 }
-core-animated-pages {
 
-}
 
 a {
 	text-decoration: none;
 	color: #333333;
 }
-/*
-.item.core-selected {
-    background: #eee;
-  }
 
- .item2.core-selected {
-    background: #eee;
-  }
-
-  .item2 {
-    margin-left: 20px;
-  }*/
 
 #roledefinition {
 	padding: 5px 10px 5px 10px;
@@ -39,7 +26,6 @@ small {
 	font-size: 0.75em;
 	color: #666666;
 	font-weight: 400;
-/*	padding: 5px 10px 5px 10px;	*/
 }
 
 #canvas {
@@ -48,7 +34,7 @@ small {
 	height: 100%;
 	background-color: white;
 	margin: 0px;
-	padding: 40px 12% 0px 12%;
+	padding: 20px 12% 0px 12%;
 	width: 76%;
 }
 
@@ -90,6 +76,10 @@ small {
 }
 
 
+
+
+/*
+
 ba-poster {
-	margin-bottom: 20px;
-}
+	margin: 20px 0px 20px 0px;
+}*/

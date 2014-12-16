@@ -38,12 +38,12 @@
 
 
 .voterij svg.highlight {
-  fill: #95d2b7;
+  fill: #00A291;
   width: 20px;
 }
 
 .voterij p {
-  margin: 5px 0px 5px 0px;
+  margin: 4px 0px 4px 0px;
   padding: 0px;
   color: black;
   font-size: 14px;
@@ -53,11 +53,11 @@
 }
 
 .voterij {
-  margin: 6px 15px 0px 0px;
+  margin: 0px 15px 0px 0px;
 }
 
 .voterij small {
-  margin: 3px 0px 3px 0px;
+  margin: 2px 0px 2px 0px;
   color: #666666;
   font-weight: 600;
 

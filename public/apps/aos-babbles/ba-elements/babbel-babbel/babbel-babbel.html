@@ -18,15 +18,15 @@
   <template if="{{mode=='parent'}}">
     <template if="{{data.parent!='/'}}">
       <div vertical layout start>
-        <button on-tap="{{fireTerug}}">Naar vorig gesprek</button>
+        <button class="prevbtn" on-tap="{{fireTerug}}">Naar vorig gesprek</button>
       </template>
       <template if="{{data.parent=='/'}}">
-        <button class="backbtn" on-tap="{{fireHome}}">terug naar overzicht</button>
+        <button class="backbtn" on-tap="{{fireHome}}">naar overzicht</button>
       </template>
       <!-- <h2>{{data.text}} {{data.votes}}</h2> -->
       </div>
 
-    <div horizontal layout center>
+    <div horizontal layout start>
       <div>
       <template if="{{usercanpost}}">
         <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
@@ -86,14 +86,18 @@
   </template>
 
   <template if="{{mode=='child'}}">
-    <div horizontal layout center>
+    <div horizontal layout start>
       <div>
       <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
       </div>
       <div vertical layout start flex>
         <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
+        <p>{{data.numchildren}} reacties</p>
       </div>
     </div>
+  <hr>
+
+    
   </template>
 
   <template if="{{mode=='previous'}}">

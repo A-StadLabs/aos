@@ -17,7 +17,7 @@
 
     <ba-getpermissions role="{{role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
 
-    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}" />
+    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}"  hidden?="{{!usercanpost}}" />
 
     <core-collapse id="roledefinition">
     <template if="{{usercanpost}}">
