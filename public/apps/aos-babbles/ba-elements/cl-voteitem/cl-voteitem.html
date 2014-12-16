@@ -42,33 +42,20 @@
 
       Polymer({
 
-        publish: {
-        votes: {
-          reflect: true,
-          value: false
-        },
-        
-      },
-        // define element prototype here
         ready: function(){
 
-          this.$.btAdd.active = false;
-          this.$.btRem.active = false;
-          //this.userValue = '';
-          //https://blazing-fire-6426.firebaseio.com/babbles/users/{{$.globals.values.user.data.id}}/votes/{{key}}/
           var that = this;
-          document.addEventListener('values-changed', function(e){
-          var getVoteFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+that.$.globals.values.user.data.id+"/votes/"+that.key+"/");
-          var userValue = getVoteFB.once('value', function(dataSnapshot) {
-  // store dataSnapshot for use in below examples.
-  var fredSnapshot = dataSnapshot;
-  that.userValue = fredSnapshot.val();
-});
-        });
+            
+            document.addEventListener('values-changed', function(e){
+              var getVoteFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+that.$.globals.values.user.data.id+"/votes/"+that.key+"/");
+              var userValue = getVoteFB.once('value', function(dataSnapshot) {
+                var fredSnapshot = dataSnapshot;
+                that.userValue = fredSnapshot.val();
+              });
+            });
         },
 
         userValueChanged: function(){
-          console.log("uservalue: ", this.userValue); 
           var key = this.key;
           var val = this.userValue;
           var userFB3 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+this.$.globals.values.user.data.id+"/votes/"+key+"/");
@@ -76,13 +63,11 @@
         },
 
         keyChanged: function(){
-          console.log(this.key);
-          console.log(this.$.globals.values.userkey);
+          //console.log(this.key);
+          //console.log(this.$.globals.values.userkey);
         },
 
         userVoting: function(vote){
-          //var key = this.votingkeys[0];
-          //console.log('hello voter! You have chosen '+vote+'. Excellent! New voting data is '+this.votingdata[key]);
           
         },
 
@@ -91,7 +76,7 @@
           var userval = this.userValue;
           for (var i = keys.length - 1; i >= 0; i--) {
             var key = keys[i];
-            console.log('saved vote: ',JSON.stringify(this.data[key]));
+            //console.log('saved vote: ',JSON.stringify(this.data[key]));
             userval = this.data[key];
             break;
           };
@@ -101,16 +86,9 @@
         FBAddVote: function(){
           this.userVoting(1);
           var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/messages/'+this.key+'/votes/');
-          //console.log(addPlay);
-          var up = this.userValue;
           addPlay.transaction(function(currentRank) {
-             return currentRank+up;
+             return currentRank+1;
           });
-          // var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes/');
-          // addPlay.transaction(function(currentRank) {
-          //   return currentRank+1;
-          // });
-
         },
 
         FBRemVote: function(){
@@ -120,37 +98,21 @@
           addPlay.transaction(function(currentRank) {
              return currentRank+up;
           });
-          // var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
-          // addPlay.transaction(function(currentRank) {
-          //   return currentRank-1;
-          // });
         },
-
-        // FBAddVote: function(){
-        //   this.votes++;
-        // },
-
-        // FBRemVote: function(){
-        //   this.votes--;
-        // },
 
         DeactivatePlus: function(){
           var that = this;
-          //that.votes--;
           this.FBRemVote();
           this.$.btAdd.active = false;
         },
 
         DeactivateMin: function(){
           var that = this;
-          //that.votes++;
           this.FBAddVote();
           this.$.btRem.active = false;
         },
 
         addVote: function(){
-
-          console.log('btadd: ',this.$.btAdd.active);
           var that = this;
           this.userValue = 1;
 
@@ -158,37 +120,33 @@
             this.DeactivatePlus();
             this.userValue = 0;
           } else {
-            if(that.$.btRem.active){
-              this.DeactivateMin();
-            }
-            this.$.btAdd.active = true;
-            this.$.btRem.active = false;
+              if(that.$.btRem.active){
+                this.DeactivateMin();
+              }
+            that.$.btAdd.active = true;
+            that.$.btRem.active = false;
             console.log('Deze button was NIET actief en geklikt');
-            //that.votes++;
             this.FBAddVote();
-          }
+          };
         },
 
         remVote: function(){
           var that = this;
-
           this.userValue = -1;
 
           if(that.$.btRem.active){
             this.DeactivateMin();
             this.userValue = 0;
           } else {
-            if(that.$.btAdd.active){
-              this.DeactivatePlus();
-            }
+              if(that.$.btAdd.active){
+                this.DeactivatePlus();
+              }
             that.$.btRem.active = true;
             that.$.btAdd.active = false;
-            console.log('Deze button was NIET actief en geklikt');
-            //that.votes--;
             this.FBRemVote();
-          }
-        },
-    
+          };
+        }
+
       });
 
     })();
