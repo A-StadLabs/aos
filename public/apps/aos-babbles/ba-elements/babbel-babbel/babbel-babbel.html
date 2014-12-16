@@ -91,10 +91,20 @@
   <template if="{{mode=='child'}}">
     <div horizontal layout center>
       <div>
+      <template if="{{usercanpost}}">
       <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
+      </template>
       </div>
       <div vertical layout start flex>
         <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
+        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - 
+        <template if="{{!usercanpost}}">
+          <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+        </template>
+        <template if="{{usercanpost}}">
+          Jij kan reageren.
+          </template>
+        </p>
       </div>
     </div>
   </template>
