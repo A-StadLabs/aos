@@ -22,7 +22,7 @@
         <button class="backbtn" on-tap="{{fireHome}}">terug naar overzicht</button>
       </template>
       
-    <h2>{{data.text}}</h2>
+    <h2>{{data.text}} {{data.votes}}</h2>
     <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
     <p>{{data.numchildren}} reacties -
@@ -52,7 +52,6 @@
   <template if="{{mode=='super'}}">
 
     <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-
     <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
     
     <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{data.numchildren}} reacties - 
