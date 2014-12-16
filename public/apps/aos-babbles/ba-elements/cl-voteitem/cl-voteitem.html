@@ -4,38 +4,37 @@
 
 <!--     <link rel="stylesheet" href="cl-voteitem.css"> -->
 
-<link rel="stylesheet" href="cl-voteitem.css" />
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 
 <polymer-element name="cl-voteitem" attributes="key item votes mode">
 <template>
 
+  <link rel="stylesheet" href="cl-voteitem.css" />
+
   <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
-  <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/users/{{$.globals.values.user.data.id}}/votes/{{key}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
+ 
 
-    <template>
-        <div vertical layout center class="voterij">
+  <div vertical layout center class="voterij">
+    <p>KEY: {{key}}</p>
 
-          <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{FBAddVote}}" class="{{ { highlight: vote=1 } | tokenList }}">
-          <polygon points="4.619,12.94 13.015,3.524 21.399,12.633 22.617,11.512 12.995,1.06 3.382,11.84 "/>
-          </polygon>
-          </svg>
-          <p>{{votes}} - {{vote}}</p>
-          <svg id="btRem" viewBox="2 7.521 26 14" on-tap="{{FBRemVote}}" class="{{ { highlight: votee == '-1' } | tokenList }}">
-          <polygon points="23.737,8.561 15.341,17.977 6.957,8.869 5.738,9.989 15.361,20.441 24.974,9.662"></polygon>
+    <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{addVote}}" class="{{ { highlight: userValue == 1 } | tokenList }}">
 
-          <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{addVote}}" class="{{ { highlight: userValue === 1 } | tokenList }}">
-          <polygon points="4.619,12.94 13.015,3.524 21.399,12.633 22.617,11.512 12.995,1.06 3.382,11.84"/></polygon>
-          </svg>
-          <p>{{votes}}</p>
-          <svg id="btRem" viewBox="2 7.521 26 14" on-tap="{{remVote}}" class="{{ { highlight: userValue === -1 } | tokenList }}">
-          <polygon points="23.737,8.561 15.341,17.977 6.957,8.869 5.738,9.989 15.361,20.441 24.974,9.662"/></polygon>
-          </svg>
+      <polygon points="4.619,12.94 13.015,3.524 21.399,12.633 22.617,11.512 12.995,1.06 3.382,11.84 "/>
+      </polygon>
 
-        </div>
-    </template>
+    </svg>
 
+    <p>{{votes}} u {{userValue}}</p>
+
+    <svg id="btRem" viewBox="2 7.521 26 14" on-tap="{{remVote}}" class="{{ { highlight: userValue == -1 } | tokenList }}">
+     
+      <polygon points="23.737,8.561 15.341,17.977 6.957,8.869 5.738,9.989 15.361,20.441 24.974,9.662">
+      </polygon>
+
+    </svg>
+
+  </div>
 
 </template>
 
@@ -54,45 +53,140 @@
       },
         // define element prototype here
         ready: function(){
-          this.vote = 'hello';
+          //this.userValue = '';
+          //https://blazing-fire-6426.firebaseio.com/babbles/users/{{$.globals.values.user.data.id}}/votes/{{key}}/
+          var that = this;
+          document.addEventListener('values-changed', function(e){
+          var getVoteFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+that.$.globals.values.user.data.id+"/votes/"+that.key+"/");
+          var userValue = getVoteFB.once('value', function(dataSnapshot) {
+  // store dataSnapshot for use in below examples.
+  var fredSnapshot = dataSnapshot;
+  that.userValue = fredSnapshot.val();
+});
+        });
         },
 
-        FBAddVote: function(){
-          var userFB3 = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/users/'+this.$.globals.values.user.data.id+'/votes/'+this.key+'/');
-          var newpostRef3 = userFB3.set(1);
-
-          var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/messages/'+this.key+'/votes/');
-          addPlay.transaction(function(currentRank) {
-            return currentRank+1;
-          });
-
-          this.$.btAdd.active = true;
+        userValueChanged: function(){
+          console.log("uservalue: ", this.userValue); 
+          var key = this.key;
+          var val = this.userValue;
+          var userFB3 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+this.$.globals.values.user.data.id+"/votes/"+key+"/");
+          var newpostRef3 = userFB3.set(val);
         },
 
-        FBRemVote: function(){
-          var userFB4 = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/users/'+this.$.globals.values.user.data.id+'/votes/'+this.key+'/');
-          var newpostRef4 = userFB4.set(-1);
-
-          var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/messages/'+this.key+'/votes/');
-          addPlay.transaction(function(currentRank) {
-            return currentRank-1;
-          });
+        keyChanged: function(){
+          console.log(this.key);
+          console.log(this.$.globals.values.userkey);
         },
 
-        FBNoVote: function(){
-          var userFB4 = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/users/'+this.$.globals.values.user.data.id+'/votes/'+this.key+'/');
-          var newpostRef4 = userFB4.set(0);
+        userVoting: function(vote){
+          //var key = this.votingkeys[0];
+          //console.log('hello voter! You have chosen '+vote+'. Excellent! New voting data is '+this.votingdata[key]);
+          
         },
 
         handleResponse: function(){
-          console.log(this.data);
-          var votee = this.data[this.keys];
-          console.log('vote: ', votee);
-          this.vote = votee;
-          console.log('vote: ', this.vote);
-        }
-        
-     
+          var keys = this.keys;
+          var userval = this.userValue;
+          for (var i = keys.length - 1; i >= 0; i--) {
+            var key = keys[i];
+            console.log('saved vote: ',JSON.stringify(this.data[key]));
+            userval = this.data[key];
+            break;
+          };
+          
+        },
+
+        FBAddVote: function(){
+          this.userVoting(1);
+          var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/messages/'+this.key+'/votes/');
+          //console.log(addPlay);
+          var up = this.userValue;
+          addPlay.transaction(function(currentRank) {
+             return currentRank+up;
+          });
+          // var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes/');
+          // addPlay.transaction(function(currentRank) {
+          //   return currentRank+1;
+          // });
+
+        },
+
+        FBRemVote: function(){
+          var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/messages/'+this.key+'/votes/');
+          //console.log(addPlay);
+          var up = this.userValue;
+          addPlay.transaction(function(currentRank) {
+             return currentRank+up;
+          });
+          // var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbelbox/'+this.key+'/votes');
+          // addPlay.transaction(function(currentRank) {
+          //   return currentRank-1;
+          // });
+        },
+
+        // FBAddVote: function(){
+        //   this.votes++;
+        // },
+
+        // FBRemVote: function(){
+        //   this.votes--;
+        // },
+
+        DeactivatePlus: function(){
+          var that = this;
+          //that.votes--;
+          this.FBRemVote();
+          this.$.btAdd.active = false;
+        },
+
+        DeactivateMin: function(){
+          var that = this;
+          //that.votes++;
+          this.FBAddVote();
+          this.$.btRem.active = false;
+        },
+
+        addVote: function(){
+          var that = this;
+
+          this.userValue = 1;
+
+          if(that.$.btAdd.active){
+            this.DeactivatePlus();
+            this.userValue = 0;
+          } else {
+            if(that.$.btRem.active){
+              this.DeactivateMin();
+            }
+            this.$.btAdd.active = true;
+            this.$.btRem.active = false;
+            console.log('Deze button was NIET actief en geklikt');
+            //that.votes++;
+            this.FBAddVote();
+          }
+        },
+
+        remVote: function(){
+          var that = this;
+
+          this.userValue = -1;
+
+          if(that.$.btRem.active){
+            this.DeactivateMin();
+            this.userValue = 0;
+          } else {
+            if(that.$.btAdd.active){
+              this.DeactivatePlus();
+            }
+            that.$.btRem.active = true;
+            that.$.btAdd.active = false;
+            console.log('Deze button was NIET actief en geklikt');
+            //that.votes--;
+            this.FBRemVote();
+          }
+        },
+    
       });
 
     })();

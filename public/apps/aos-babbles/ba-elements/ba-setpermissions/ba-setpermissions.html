@@ -3,7 +3,7 @@
 <link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 
-<polymer-element name="ba-setpermissions" attributes="">
+<polymer-element name="ba-setpermissions" attributes="permissions">
   <template>
     <link rel="stylesheet" href="ba-setpermissions.css" />
 
@@ -12,16 +12,16 @@
     <div vertical layout>
 
     <h3>Wie mag antwoorden?</h3>
-    <h1>{{roleselected}}</h1>
+    <h1>{{permissions}}</h1>
     <div class="roleselector">
-    	<core-selector selected="{{roleselected}}" valueattr="role">
+    	<core-selector selected="{{permissions}}" valueattr="role">
     		<template repeat="{{r in globs.user.data.roles}}">
     			<div role="{{r}}"><p>{{r}}</p></div>
     		</template>
     	</core-selector>
     </div>
 
-    	<core-ajax id="findstreet" on-core-response="{{streetresp}}" response="{{streetresponse}}"></core-ajax>
+    <core-ajax id="findstreet" on-core-response="{{streetresp}}" response="{{streetresponse}}"></core-ajax>
     
     <div horizontal layout center start-justified class="formfield"><p>District </p><input id="district" value="" /></div>
     <div horizontal layout center start-justified class="formfield"><p>Straat </p><input id="straat" value="{{streetvalue}}" /></div>
@@ -42,8 +42,20 @@
 </template>
 <script>
     Polymer({
+
+    	publish: {
+    		permissions: {
+    			reflect: true,
+    			value: false
+    		},
+    		
+    	},
+
     	ready: function(){
     		var that = this;
+
+    		this.permissions = 'user';
+
     		this.$.straat.addEventListener('keypress', function(e) {
     			var ajax = that.$.findstreet;
     			console.log('value: ', that.streetvalue);

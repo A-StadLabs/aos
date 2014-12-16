@@ -14,7 +14,7 @@
   <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
   <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
-  
+
   <template if="{{mode=='parent'}}">
     <template if="{{data.parent!='/'}}">
       <div vertical layout start>
@@ -24,24 +24,32 @@
         <button class="backbtn" on-tap="{{fireHome}}">terug naar overzicht</button>
       </template>
       <!-- <h2>{{data.text}} {{data.votes}}</h2> -->
-    </div>
+      </div>
 
     <div horizontal layout center>
 
-      <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
+    <div>
 
-      <div vertical layout>
+      <div>V<cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem></div>
+
+      <div flex>
         <h2>{{data.text}}</h2>
-        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
-        <p>{{data.numchildren}} reacties -
-          <template if="{{!usercanpost}}">
-            <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
-          </template>
-          <template if="{{usercanpost}}">
-            Jij kan reageren.
-          </template>
-        </p>
       </div>
+
+    </div>
+
+    <div>
+      <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
+      <p>{{data.numchildren}} reacties -
+        <template if="{{!usercanpost}}">
+          <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+          </template>
+        <template if="{{usercanpost}}">
+          Jij kan reageren.
+        </template>
+      </p>
+    </div>
+
     </div>
 
     <template if="{{$.globals.values.user}}">

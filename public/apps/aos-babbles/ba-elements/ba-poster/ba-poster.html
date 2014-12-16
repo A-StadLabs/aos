@@ -20,7 +20,7 @@
     <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}" />
 
     <core-collapse id="roledefinition">
-    	<small>Iedereen mag dit zien, iedereen met {{role}} mag reageren.<button class="bewerkbtn" icon="{{ roleselected ? 'lock-outline' : 'lock-open'}}" on-tap="{{toggleRoles}}">bewerken</button></small>
+    	<small>Iedereen mag dit zien, iedereen met {{permissions}} mag reageren.<button class="bewerkbtn" icon="{{ roleselected ? 'lock-outline' : 'lock-open'}}" on-tap="{{toggleRoles}}">bewerken</button></small>
      </core-collapse>
 
     <core-collapse id="rolescoll">
@@ -46,10 +46,6 @@
     		this.$.roledefinition.toggle();
 
     		this.usercanpost = false;
-
-
-
-
 
 	  		this.$.poster.addEventListener('keypress', function(e) {
 	    		if (e.keyCode == 13) {
