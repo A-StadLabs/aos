@@ -16,7 +16,6 @@
  
 
   <div vertical layout center class="voterij">
-    <p>KEY: {{key}}</p>
 
     <svg id="btAdd" viewBox="0 0 26 14" on-tap="{{addVote}}" class="{{ { highlight: userValue == 1 } | tokenList }}">
 
@@ -25,7 +24,7 @@
 
     </svg>
 
-    <p>{{votes}} u {{userValue}}</p>
+    <p>{{votes}}</p>
 
     <svg id="btRem" viewBox="2 7.521 26 14" on-tap="{{remVote}}" class="{{ { highlight: userValue == -1 } | tokenList }}">
      
