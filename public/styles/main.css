@@ -38,9 +38,9 @@ app-router {
 	margin-top: 60px;
 }
 
-/*core-scroll-header-panel {
-	max-height: 60px;
-}*/
+core-scroll-header-panel {
+	height: 100%;
+}
 
 
 core-toolbar {
