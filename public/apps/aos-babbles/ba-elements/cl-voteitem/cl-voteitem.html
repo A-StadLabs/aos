@@ -7,12 +7,13 @@
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 
 <polymer-element name="cl-voteitem" attributes="key item votes mode">
-<template>
+<template bind>
 
   <link rel="stylesheet" href="cl-voteitem.css" />
 
   <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
+  <firebase location="https://blazing-fire-6426.firebaseio.com/babbles/users/{{$.globals.values.user.data.id}}/votes/{{key}}/" on-data-change="{{handleResponse}}" data="{{data}}" keys="{{keys}}" log></firebase>
 
   <div vertical layout center class="voterij">
 
@@ -45,94 +46,104 @@
         ready: function(){
 
           var that = this;
+
+            document.addEventListener('data-change', function(){
+              console.log('data changed');
+            });
             
             document.addEventListener('values-changed', function(e){
+              console.log('values changed triggered');
               var getVoteFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+that.$.globals.values.user.data.id+"/votes/"+that.key+"/");
               var userValue = getVoteFB.once('value', function(dataSnapshot) {
                 var fredSnapshot = dataSnapshot;
                 that.userValue = fredSnapshot.val();
-                switch(that.userValue){
-                  case 1: 
-                    that.$.btAdd.active = true;
-                    that.$.btRem.active = false;
-                    break;
-                  case 0:
-                    that.$.btAdd.active = false;
-                    that.$.btRem.active = false;
-                  case -1:
-                    that.$.btAdd.active = false;
-                    that.$.btRem.active = true;
-                };
+                console.log('heb vote');
+                that.checkActives();
               });
             });
         },
 
-        addVote: function(){
-          var that = this;
-          this.userValue = 1;
+        checkActives: function(){
+          console.log('checking actives');
+          switch(this.userValue){
+                  case 1: 
+                    this.$.btAdd.active = true;
+                    this.$.btRem.active = false;
+                    break;
+                  case 0:
+                    this.$.btAdd.active = false;
+                    this.$.btRem.active = false;
+                  case -1:
+                    this.$.btAdd.active = false;
+                    this.$.btRem.active = true;
+                  case null:
+                    this.$.btAdd.active = false;
+                    this.$.btRem.active = false;
+                };
+        },
 
-          if(that.$.btAdd.active){
-            this.DeactivatePlus();
-            this.userValue = 0;
-          } else {
-            if(that.$.btRem.active){
-                this.DeactivateMin();
-            };
-            that.$.btAdd.active = true;
-            that.$.btRem.active = false;
-            that.FBAddVote();
+        addVote: function(){
+      
+              if(this.$.btAdd.active){
+                this.userValue = 0;
+                this.FBRemVote();
+              } else {
+                if(this.$.btRem.active){
+                  this.FBAddVote();
+                };
+                this.userValue = 1;
+                this.FBAddVote();
           };
+          
         },
 
         remVote: function(){
-          var that = this;
-          this.userValue = -1;
+          // var that = this;
 
-          if(that.$.btRem.active){
-            this.DeactivateMin();
+          if(this.$.btRem.active){
             this.userValue = 0;
+            this.FBAddVote();
           } else {
-              if(that.$.btAdd.active){
-                this.DeactivatePlus();
-              };
-            that.$.btRem.active = true;
-            that.$.btAdd.active = false;
-            that.FBRemVote();
+            if(this.$.btAdd.active){
+                  this.FBRemVote();
+                };
+            this.userValue = -1;
+            this.FBRemVote();
           };
+
+
+
+        },
+
+        cancelVote: function(){
+          this.userValue = 0;
         },
 
         userValueChanged: function(){
+          switch(this.userValue){
+            case 0:
+              this.$.btAdd.active = false;
+              this.$.btRem.active = false;
+              break;
+            case 1:
+              this.$.btAdd.active = true;
+              this.$.btRem.active = false;
+              break;
+            case -1: 
+              this.$.btAdd.active = false;
+              this.$.btRem.active = true;
+              break;
+          };
+
           var key = this.key;
           var val = this.userValue;
           var userFB3 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+this.$.globals.values.user.data.id+"/votes/"+key+"/");
           var newpostRef3 = userFB3.set(val);
         },
 
-        keyChanged: function(){
-          //console.log(this.key);
-          //console.log(this.$.globals.values.userkey);
-        },
 
-        userVoting: function(vote){
-          
-        },
-
-        handleResponse: function(){
-          var keys = this.keys;
-          var userval = this.userValue;
-          for (var i = keys.length - 1; i >= 0; i--) {
-            var key = keys[i];
-            //console.log('saved vote: ',JSON.stringify(this.data[key]));
-            userval = this.data[key];
-            break;
-          };
-          
-
-          
-        },
 
         FBAddVote: function(){
-          this.userVoting(1);
           var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/messages/'+this.key+'/votes/');
           var up = this.userValue;
           addPlay.transaction(function(currentRank) {
