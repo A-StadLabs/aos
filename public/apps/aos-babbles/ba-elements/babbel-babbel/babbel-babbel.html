@@ -80,7 +80,14 @@
   </template>
 
   <template if="{{mode=='child'}}">
-    <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
+    <div horizontal layout center>
+      <div>
+      <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
+      </div>
+      <div vertical layout start flex>
+        <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
+      </div>
+    </div>
   </template>
 
   <template if="{{mode=='previous'}}">

@@ -92,7 +92,8 @@
         // },
 
         DeactivatePlus: function(){
-          var that = this;
+
+          
           //that.votes--;
           this.FBRemVote();
           that.$.btAdd.active = false;
@@ -106,10 +107,13 @@
         },
 
         addVote: function(){
+          //var btAdd = document.getElementById('btAdd');
+        
           var that = this;
 
           this.userValue = 1;
-
+           var that = this;
+          
           if(that.$.btAdd.active){
             this.DeactivatePlus();
             this.userValue = 0;

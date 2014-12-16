@@ -13,7 +13,6 @@
 
   <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
- 
 
   <div vertical layout center class="voterij">
 
@@ -52,6 +51,9 @@
       },
         // define element prototype here
         ready: function(){
+
+          this.$.btAdd.active = false;
+          this.$.btRem.active = false;
           //this.userValue = '';
           //https://blazing-fire-6426.firebaseio.com/babbles/users/{{$.globals.values.user.data.id}}/votes/{{key}}/
           var that = this;
@@ -147,8 +149,9 @@
         },
 
         addVote: function(){
-          var that = this;
 
+          console.log('btadd: ',this.$.btAdd.active);
+          var that = this;
           this.userValue = 1;
 
           if(that.$.btAdd.active){
