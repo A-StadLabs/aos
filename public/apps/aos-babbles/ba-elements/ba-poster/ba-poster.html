@@ -104,7 +104,7 @@
     			console.log('Saven maar: ', this.valuek);
     			var name = '';
     			var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/");
-	    		var newpostRef = userFB.push({"text":valuek, "parent":path, "role":role});
+	    		var newpostRef = userFB.push({"text":valuek, "parent":path, "role":role, "time":Firebase.ServerValue.TIMESTAMP});
 	    		var newKey = newpostRef.key();
 
 	    		var userFB3 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+newKey+"/numchildren/");
@@ -116,12 +116,18 @@
 	    		var userFB5 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+newKey+"/votes/");
 	    		var newpostRef5 = userFB5.set(0);
 
+	    		var userFB6 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+newKey+"/lastpost/");
+	    		var newpostRef6 = userFB6.set(Firebase.ServerValue.TIMESTAMP);
+
 	    		if(this.mode=='child'){
 	    			// var userFB1 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/parents/"+path+"/children/"+newKey+"/");
 	    			// var newpostRef1 = userFB1.set({"text":valuek, "parent":path});
 
 					var userFB2 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+path+"/children/"+newKey+"/");
 					userFB2.set({"child": true});
+
+					var userFB6 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+path+"/lastpost/");
+					userFB6.set(Firebase.ServerValue.TIMESTAMP);
 
 					var addPlay = new Firebase('https://blazing-fire-6426.firebaseio.com/babbles/messages/'+path+'/numchildren/');
           				addPlay.transaction(function(currentRank) {
