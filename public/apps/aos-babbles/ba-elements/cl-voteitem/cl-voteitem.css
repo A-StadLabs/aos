@@ -2,16 +2,6 @@
   display: block;
 }
 
-/*p {
-	margin: 10px  0px  5px  0px;
-	padding: 0px  0px  0px  0px;
-		color: #666666;
-
-}
-*/
-
-
-/* STYLING VOTE-ITEM */
 
 .voterij svg {
   display: block;
@@ -19,14 +9,15 @@
   height: 10px;
   overflow: hidden;
   width: 20px;
+/*  margin: 5px 0px 5px 0px;
+*/
 }
 
-.voterijdis svg {
-  display: block;
-  fill: #999999;
-  height: 10px;
-  overflow: hidden;
-  width: 20px;
+
+
+p {
+  margin: 0px;
+  padding: 0px;
 }
 
 .voterij svg.highlight {
@@ -36,13 +27,14 @@
 
 
 .voterij p {
-  margin: 5px 0px 5px 0px;
+  margin: 0px;
   padding: 0px;
   color: black;
   font-size: 14px;
   font-weight: 400;
   text-align: center;
   width: 20px;
+  background-color: yellow;
 }
 
 
@@ -58,3 +50,5 @@
   font-weight: 600;
 
 }
+
+

@@ -16,28 +16,39 @@
   <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
   <template if="{{mode=='parent'}}">
   <template if="{{data.parent!='/'}}">
+<div vertical layout start>
         <button on-tap="{{fireTerug}}">Naar vorig gesprek</button>
       </template>
       <template if="{{data.parent=='/'}}">
         <button class="backbtn" on-tap="{{fireHome}}">terug naar overzicht</button>
       </template>
-      
-    <h2>{{data.text}}</h2>
+ </div>
+ <div horizontal layout center>
+
     <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
+  
+  <div vertical layout>
+        <h2>{{data.text}}</h2>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
     <p>{{data.numchildren}} reacties -
       <template if="{{!usercanpost}}">
-      <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+        <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
       </template>
       <template if="{{usercanpost}}">
-       Jij kan reageren.
-      </template></p>
+        Jij kan reageren.
+      </template>
+    </p>
+  </div>
+</div>
+
       <template if="{{$.globals.values.user}}">
       <ba-poster path="{{key}}" mode="child" role="{{data.role}}"></ba-poster>
       </template>
+
       <template if="{{!$.globals.values.user}}">  
       <div id="roledefinition">
-    <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small></div>
+    <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small>
+    </div>
     </template>
   </template>
 
@@ -50,19 +61,22 @@
   </template>
 
   <template if="{{mode=='super'}}">
-
-    <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-
+<div horizontal layout center>
     <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
-    
-    <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{data.numchildren}} reacties - 
-    <template if="{{!usercanpost}}">
-    <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
-    </template>
-    <template if="{{usercanpost}}">
-    Jij kan reageren.
-    </template>
-    </p>
+
+    <div vertical layout start>
+    <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
+      <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
+      <p>{{data.numchildren}} reacties - 
+      <template if="{{!usercanpost}}">
+      <img class="lock" src="../../images/locked.svg">Enkel een {{data.role}} kan reageren.
+      </template>
+      <template if="{{usercanpost}}">
+      Jij kan reageren.
+      </template>
+      </p>
+    </div>
+</div>
 
     <hr>
   </template>
