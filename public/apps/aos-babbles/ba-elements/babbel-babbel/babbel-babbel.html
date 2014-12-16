@@ -3,8 +3,11 @@
 <link rel="import" href="../ba-poster/ba-poster.html">
 <link rel="import" href="../cl-voteitem/cl-voteitem.html">
 <link rel="import" href="../ba-getpermissions/ba-getpermissions.html">
+<link rel="import" href="../time-ago/src/time-ago.html">
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
+  <script src="../../functions.js"></script>
 
 <polymer-element name="babbel-babbel" attributes="key mode parent kids">
 
@@ -36,7 +39,7 @@
       <div vertical layout start flex>
         <h2>{{data.text}}</h2>
         <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
-        <p>{{data.numchildren}} reacties -
+        <p><time-ago datetime="{{realtime}}" refresh delay="1000"></time-ago> -  reacties -
         <template if="{{!usercanpost}}">
           <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
           </template>
@@ -70,7 +73,7 @@
 
       <div vertical layout start flex>
         <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{data.numchildren}} reacties - 
+        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - 
         <template if="{{!usercanpost}}">
           <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
         </template>
@@ -88,11 +91,21 @@
   <template if="{{mode=='child'}}">
     <div horizontal layout start>
       <div>
+      <template if="{{usercanpost}}">
       <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
+      </template>
       </div>
       <div vertical layout start flex>
         <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
-        <p>{{data.numchildren}} reacties</p>
+
+        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - 
+        <template if="{{!usercanpost}}">
+          <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+        </template>
+        <template if="{{usercanpost}}">
+          Jij kan reageren.
+          </template>
+        </p>
       </div>
     </div>
   <hr>
@@ -110,14 +123,30 @@
 
 <script>
 
+
+
   Polymer({
 
     ready: function(){
         //this.parent = this.data.parent;
+        //this.realtime = '2014 12 16 22:28:33';
+
       },
+
+      convertTimestamp: function(timestamp) {
+        var dateTime = new Date(timestamp);
+         // Returns "2013-05-31T11:54:44.000Z"
+        return dateTime.toISOString();
+  //return 'michael'+timestamp;
+      },
+
 
       handleResponse: function(){
         this.parent = this.data.parent;
+        if(this.data.time){
+          this.realtime = this.convertTimestamp(this.data.time);
+        };
+        console.log('tijd: ', this.realtime);
         if(this.mode=='parent'){
           if(!this.data.children){
             this.fire('has-no-kids', {key: this.key, parent: this.parent});
@@ -128,6 +157,10 @@
             console.log('hoeveel kinderen? ',kids);
           };
         };
+      },
+
+      dataChanged: function(){
+        //this.realtime = this.convertTimestamp(this.data.time);
       },
 
       fireTerug: function(){
