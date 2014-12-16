@@ -20,7 +20,12 @@
     <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}" />
 
     <core-collapse id="roledefinition">
+    <template if="{{usercanpost}}">
     	<small>Iedereen mag dit zien, iedereen met {{permissions}} mag reageren.<button class="bewerkbtn" icon="{{ roleselected ? 'lock-outline' : 'lock-open'}}" on-tap="{{toggleRoles}}">bewerken</button></small>
+    </template>
+    <template if="{{!usercanpost}}">
+    	<small>Je kan niet reageren.</small>
+    </template>
      </core-collapse>
 
     <core-collapse id="rolescoll">
