@@ -113,8 +113,8 @@ small {
 .share {
 	width: 12px;
 	margin-left: 10px;
-	background-color: green;
-}
+/*	background-color: green;
+*/}
 
 .share svg {
 	fill: red;
