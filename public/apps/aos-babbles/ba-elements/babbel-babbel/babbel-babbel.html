@@ -1,17 +1,21 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
-<link rel="import" href="../ba-poster/ba-poster.html">
+<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
+
 <link rel="import" href="../cl-voteitem/cl-voteitem.html">
 <link rel="import" href="../ba-getpermissions/ba-getpermissions.html">
 <link rel="import" href="../time-ago/src/time-ago.html">
+
+<link rel="import" href="../ba-poster/ba-poster.html">
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
-
-<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
-  <script src="../../functions.js"></script>
-
+<script src="../../functions.js"></script>
 <polymer-element name="babbel-babbel" attributes="key mode parent kids">
 
 <template>
+  
+
+
   <link rel="stylesheet" href="babbel-babbel.css" />
 
   <aos-globals id="globals" values="{{globs}}"></aos-globals>
@@ -26,7 +30,6 @@
       <template if="{{data.parent=='/'}}">
         <button class="backbtn" on-tap="{{fireHome}}">naar overzicht</button>
       </template>
-      <!-- <h2>{{data.text}} {{data.votes}}</h2> -->
       </div>
 
     <div horizontal layout start>
@@ -64,7 +67,6 @@
 
   <template if="{{mode=='super'}}">
     <div horizontal layout center>
-      <!-- <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem> -->
       <div>
       <template if="{{usercanpost}}">
       <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
