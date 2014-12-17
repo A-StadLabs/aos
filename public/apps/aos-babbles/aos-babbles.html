@@ -100,7 +100,7 @@
           that.previousItem = that.selectedItem;
           that.selectedItem = e.detail.key;
           //window.location.hash = '#/babbles/'+that.selectedItem;
-          that.mainkey = e.detail.key;
+          //that.mainkey = e.detail.key;
           that.parentItem = e.detail.parent;
           that.$.scenes.selected = 1;
         });
@@ -120,7 +120,7 @@
         });
 
         document.addEventListener('babbel-home', function(e){
-          window.location.hash = '#/babbles/';
+          //window.location.hash = '#/babbles/';
           that.$.scenes.selected = 0;
           
         });
