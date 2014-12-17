@@ -48,7 +48,7 @@
           </template>
         <template if="{{usercanpost}}">
           Jij kan reageren.
-        </template>
+        </template> 
         </p>
       </div>
     </div>
@@ -148,7 +148,7 @@
         if(this.data.time){
           this.realtime = this.convertTimestamp(this.data.time);
         };
-        console.log('tijd: ', this.realtime);
+        //console.log('tijd: ', this.realtime);
         if(this.mode=='parent'){
           if(!this.data.children){
             this.fire('has-no-kids', {key: this.key, parent: this.parent});
@@ -156,7 +156,7 @@
           if(this.data.children){
             this.fire('has-kids', {key: this.key, parent: this.parent});
             var kids = this.data.children;
-            console.log('hoeveel kinderen? ',kids);
+            //console.log('hoeveel kinderen? ',kids);
           };
         };
       },

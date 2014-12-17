@@ -48,23 +48,23 @@
           var that = this;
 
             document.addEventListener('data-change', function(){
-              console.log('data changed');
+              //console.log('data changed');
             });
             
             document.addEventListener('values-changed', function(e){
-              console.log('values changed triggered');
+              //console.log('values changed triggered');
               var getVoteFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/users/"+that.$.globals.values.user.data.id+"/votes/"+that.key+"/");
               var userValue = getVoteFB.once('value', function(dataSnapshot) {
                 var fredSnapshot = dataSnapshot;
                 that.userValue = fredSnapshot.val();
-                console.log('heb vote');
+                //console.log('heb vote');
                 that.checkActives();
               });
             });
         },
 
         checkActives: function(){
-          console.log('checking actives');
+          //console.log('checking actives');
           switch(this.userValue){
                   case 1: 
                     this.$.btAdd.active = true;
