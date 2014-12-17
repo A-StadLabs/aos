@@ -7,9 +7,9 @@
 <link rel="import" href="../time-ago/src/time-ago.html">
 
 <link rel="import" href="../ba-poster/ba-poster.html">
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 <script src="../../functions.js"></script>
+
 <polymer-element name="babbel-babbel" attributes="key mode parent kids">
 
 <template>
@@ -35,6 +35,10 @@
       <template if="{{usercanpost}}">
         <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
         </template>
+        <template if="{{!usercanpost}}">
+        <div>{{data.votes}}</div>
+        </template>
+
       </div>
 
       <div vertical layout start flex>
@@ -69,6 +73,9 @@
       <template if="{{usercanpost}}">
       <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
       </template>
+      <template if="{{!usercanpost}}">
+        <div>{{data.votes}}</div>
+        </template>
       </div>
 
       <div vertical layout start flex>
@@ -94,6 +101,9 @@
       <template if="{{usercanpost}}">
       <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
       </template>
+      <template if="{{!usercanpost}}">
+        <div>{{data.votes}}</div>
+        </template>
       </div>
       <div vertical layout start flex>
         <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
