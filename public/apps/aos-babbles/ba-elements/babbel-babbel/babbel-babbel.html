@@ -40,7 +40,7 @@
       <div vertical layout start flex>
         <h2>{{data.text}}</h2>
         <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
-        <p><time-ago datetime="{{realtime}}" refresh delay="1000"></time-ago> -  reacties -
+        <p><img src="../../images/share.svg" class="share"><time-ago datetime="{{realtime}}" refresh delay="1000"></time-ago> -  reacties -
         <template if="{{!usercanpost}}">
           <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
           </template>
@@ -73,7 +73,7 @@
 
       <div vertical layout start flex>
         <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - 
+        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p><img src="../../images/share.svg" class="share"> {{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - 
         <template if="{{!usercanpost}}">
           <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
         </template>

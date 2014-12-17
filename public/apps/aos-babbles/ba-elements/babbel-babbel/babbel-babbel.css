@@ -110,6 +110,15 @@ small {
 	margin-right: 5px;
 }
 
+.share {
+	width: 12px;
+	margin-left: 10px;
+	background-color: green;
+}
+
+.share svg {
+	fill: red;
+}
 
 
 

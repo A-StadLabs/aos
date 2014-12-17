@@ -8,7 +8,7 @@
 <link rel="import" href="ba-elements/ba-user/ba-user.html">
 <link rel="import" href="ba-elements/babbel-babbel/babbel-babbel.html">
 
-<polymer-element name="aos-babbles" attributes="mainkey">
+<polymer-element name="aos-babbles-widget" attributes="key">
   <template>
     <link rel="stylesheet" href="aos-babbles.css" />
 
@@ -26,35 +26,16 @@
     <ba-user bauser="{{bauser}}"></ba-user>
 
 <div id="canvas">
-    <core-animated-pages selected="0" id="scenes" transitions="slide-from-right">
+    
 
-    <section>
-    <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" orderByChild="parent" equalto="/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
-
-    <template if="{{$.globals.values.user}}">  
-      <ba-poster path="/" mode="parent" role="root"></ba-poster>
-    </template>
-    <template if="{{!$.globals.values.user}}">  
-    <div id="roledefinition">
-    <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small></div>
-    </template>
-    <template repeat="{{k in keys}}">
-        <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>
-    </template>
-    </section>
-
-    <section>
-        <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
-        <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
+        <babbel-babbel key="{{key}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
         <template if="{{kidsOk}}">
-          <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
+          <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/children/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
           <template repeat="{{c in ckeys}}">
             <babbel-babbel key="{{c}}" mode="child"></babbel-babbel>  
           </template>
         </template>
-    </section>
 
-    </core-animated-pages>
 
 </div>
   </template>
@@ -70,11 +51,13 @@
     Polymer({
 
       ready: function() {
-      	console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
+      	console.log('\r\r\n\naos: Babbles widget loaded.\n\n\r\r');
 
         this.kidsOk = true; 
 
         var that = this;
+
+        this.selectedItem = this.key;
 
         
         this.haschildren = this.$.parent.kids;
@@ -101,23 +84,11 @@
         });
 
         document.addEventListener('babbel-terug', function(e){
-          //that.previousItem = that.selectedItem;
-          
-          if(e.detail.parent){
-          that.selectedItem = e.detail.parent;
-          that.parentItem = that.selectedItem;
-          //window.location.hash = '#/babbles/'+that.selectedItem;
-          that.$.scenes.selected = 1;
-        } else {
-          that.$.scenes.selected = 0;
-          //window.location.hash = '#/babbles/';
-        }
+          document.location = '/#/babbles';
         });
 
         document.addEventListener('babbel-home', function(e){
-          window.location.hash = '#/babbles/';
-          that.$.scenes.selected = 0;
-          
+          document.location = '/#/babbles';
         });
       },
 
