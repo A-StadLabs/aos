@@ -25,10 +25,11 @@
     <aos-globals id="globals"></aos-globals>
     <ba-user bauser="{{bauser}}"></ba-user>
 
-<div id="canvas">
     <core-animated-pages selected="0" id="scenes" transitions="slide-from-right">
 
     <section>
+    <div class="canvas">
+
     <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" orderByChild="parent" equalto="/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
 
     <template if="{{$.globals.values.user}}">  
@@ -41,9 +42,13 @@
     <template repeat="{{k in keys}}">
         <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>
     </template>
+
+    </div>
     </section>
 
     <section>
+    <div class="canvas">
+
         <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
         <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
         <template if="{{kidsOk}}">
@@ -52,11 +57,11 @@
             <babbel-babbel key="{{c}}" mode="child"></babbel-babbel>  
           </template>
         </template>
+    </div>
     </section>
 
     </core-animated-pages>
 
-</div>
   </template>
 
   <script>

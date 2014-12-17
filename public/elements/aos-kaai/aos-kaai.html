@@ -30,13 +30,14 @@
 
     <aos-globals id="globals"></aos-globals>
 
-   <template if="{{!$.globals.values.user}}">
 
-    <core-toolbar horizontal center center-justified layout fit class="{{ {gefocused: searchFocused } | tokenList}}">
+
+   <template if="{{!$.globals.values.user}}">
+    <core-toolbar horizontal center center-justified layout fit>
 
       <div class="helpings" horizontal layout >
 
- <core-dropdown-menu label="Taal" class="lan">
+        <core-dropdown-menu label="Taal" class="lan">
           <core-dropdown class="dropdown">
             <core-selector selected="0" id="lanselect" valueattr="label">
               <core-item label="NL"></core-item>
@@ -50,31 +51,42 @@
         <a href="/help" class="helpbtn" ><core-icon-button label="help" id="bthelp" src="images/kaai-help.svg">
         </core-icon-button></a>
 
-</div>
+      </div>
+
 
       <div class="tools" horizontal center end-justified layout>
 
-        <a href="/#/profiel"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
-        </core-icon-button></a>
+        <a href="/#/profiel">
+          <core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
+          </core-icon-button>
+        </a>
 
-        <a href="/#/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
-        </core-icon-button></a>
+        <a href="/#/knooppunt">
+          <core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
+          </core-icon-button>
+        </a>
         
-        <a href="/#/profiel "><core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel2.svg">
-        </core-icon-button></a>
+        <a href="/#/profiel ">
+          <core-icon-button class="kaaibtns" label="profiel" id="btaccount" src="images/kaai-profiel2.svg">
+          </core-icon-button>
+        </a>
+      
       </div>
+      
       <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}">
+
     </core-toolbar>
     </template>
 
+
+
+
     <template if="{{$.globals.values.user}}">
 
-    <core-toolbar horizontal center center-justified layout fit class="{{ {gefocused: searchFocused } | tokenList}}">
-
-
+    <core-toolbar horizontal center center-justified layout fit>
       <div class="helpings" horizontal layout >
 
- <core-dropdown-menu label="Taal" class="lan">
+         <core-dropdown-menu label="Taal" class="lan">
           <core-dropdown class="dropdown">
             <core-selector selected="0" id="lanselect" valueattr="label">
               <core-item label="NL"></core-item>
@@ -87,24 +99,31 @@
 
         <a href="/help" class="helpbtn" ><core-icon-button label="help" id="bthelp" src="images/kaai-help.svg">
         </core-icon-button></a>
-
-</div>
-
-
+      </div>
 
       <div class="tools" horizontal center end-justified layout>
 
-        <a href="/#/profiel"><core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
-        </core-icon-button></a>
+        <a href="/#/profiel">
+          <core-icon-button  class="kaaibtns" label="profiel" id="btsearch" src="images/kaai-searchloop.svg">
+          </core-icon-button>
+        </a>
 
-        <a href="/#/knooppunt"><core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
-        </core-icon-button></a>
+        <a href="/#/knooppunt">
+          <core-icon-button class="kaaibtns" label="knooppunt" id="btdock" src="images/kaai-knooppunt.svg">
+          </core-icon-button>
+        </a>
 
-        <a href="/#/notificaties"><core-icon-button class="kaaibtns" label="notificaties" id="btnot" src="images/kaai-notifications.svg">
-        </core-icon-button></a>
+        <a href="/#/notificaties">
+          <core-icon-button class="kaaibtns" label="notificaties" id="btnot" src="images/kaai-notifications.svg">
+          </core-icon-button>
+        </a>
     
-        <a href="/#/profiel "><img src="{{$.globals.values.user.data.avatarUrl}}" class="avatar"></a>
+        <a href="/#/profiel ">
+          <img src="{{$.globals.values.user.data.avatarUrl}}" class="avatar">
+        </a>
+
       </div>
+
     </core-toolbar>
     </template>
 
