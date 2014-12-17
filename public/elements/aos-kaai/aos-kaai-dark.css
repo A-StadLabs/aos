@@ -1,6 +1,6 @@
 :host {
   display: block;
-  color: gray;
+  color: #999999;
   font-size: 11px;
   font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
   font-weight: 100;
@@ -22,14 +22,6 @@ core-dropdown {
 
 core-item {
 	padding: 5px 14px 0px 18px;
-}
-
-.avatar {
-	width: 25px;
-	height: 25px;
-	border-radius:50%;
-	margin: 0px 8px 0px 8px;
-	padding: 0px;
 }
 
 .dropdown {
@@ -73,36 +65,31 @@ h1 {
 }
 
 
-.gefocused {
-	height: 100px;
-		-webkit-transition: height 0.35s;
-	-moz-transition: height 0.35s;
-	transition: height 0.35s;
-}
-
-
-
-
-.dropdown {
-	background-color: #333333;
-	border-top: 1px solid #555555;
-	padding: 0px;
-	margin: 0px;
-}
 
 
 
 .kaaibtns {
+	width: 24px;
+	height: 24px;
 	margin: 0px 8px 0px 8px;
 	padding: 0px;
 
 }
 
 
-.helpbtn {
-	margin: 0px;
+
+.avatar {
+	width: 24px;
+	height: 24px;
+	border-radius:50%;
+	margin: 0px 8px 0px 8px;
 	padding: 0px;
 }
+
+
+
+
+
 
 .searchclass {
 	padding: 6px;
