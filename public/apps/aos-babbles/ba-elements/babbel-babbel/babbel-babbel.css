@@ -111,10 +111,17 @@ small {
 }
 
 .share {
+<<<<<<< HEAD
 	width: 12px;
 	margin-left: 10px;
 /*	background-color: green;
 */}
+=======
+	width: 14px;
+	margin-right: 4px;
+	background-color: white;
+}
+>>>>>>> FETCH_HEAD
 
 .share svg {
 	fill: red;
