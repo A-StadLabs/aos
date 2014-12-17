@@ -39,6 +39,7 @@
     	},
 
     	checkPermissions: function(){
+        if(this.$.globals.values.user){
     		var role = this.role;
     		//console.log('check permissions for ',role,' vs ', this.$.globals.values.user.data.roles);
     		var roles = this.$.globals.values.user.data.roles;
@@ -54,6 +55,7 @@
       				this.usercanpost = false;
       			}
       		};
+        };
     	}
 
     });

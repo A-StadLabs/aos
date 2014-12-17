@@ -18,7 +18,9 @@
 
   <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
-  <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
+  <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" log></firebase-element>
+
+  <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
 
   <template if="{{mode=='parent'}}">
     <template if="{{data.parent!='/'}}">
@@ -36,9 +38,8 @@
         <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
         </template>
         <template if="{{!usercanpost}}">
-        <div>{{data.votes}}</div>
+        <div class="voterij"><p>{{data.votes}}</p></div>
         </template>
-
       </div>
 
       <div vertical layout start flex>
@@ -74,7 +75,7 @@
       <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
       </template>
       <template if="{{!usercanpost}}">
-        <div>{{data.votes}}</div>
+        <div class="voterij"><p>{{data.votes}}</p></div>
         </template>
       </div>
 
@@ -102,7 +103,7 @@
       <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
       </template>
       <template if="{{!usercanpost}}">
-        <div>{{data.votes}}</div>
+        <div class="voterij"><p>{{data.votes}}</p></div>
         </template>
       </div>
       <div vertical layout start flex>
@@ -157,6 +158,7 @@
 
       handleResponse: function(){
         this.parent = this.data.parent;
+
         if(this.data.time){
           this.realtime = this.convertTimestamp(this.data.time);
         };

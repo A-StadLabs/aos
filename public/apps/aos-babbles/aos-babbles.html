@@ -58,7 +58,7 @@
         <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
         <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
         <template if="{{kidsOk}}">
-          <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
+          <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" childEvents="true" orderByChild="votes" on-data-change="{{cdatachange}}" log></firebase-element>
           <template repeat="{{c in ckeys}}">
             <babbel-babbel key="{{c}}" mode="child"></babbel-babbel>  
           </template>
