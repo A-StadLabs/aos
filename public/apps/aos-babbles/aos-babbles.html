@@ -12,13 +12,6 @@
   <template>
     <link rel="stylesheet" href="aos-babbles.css" />
 
-
-
-    <aos-globals id="globals"></aos-globals>
-    <ba-user bauser="{{bauser}}"></ba-user>
-
-
-
 <div class="leaderboard">
   <img class="stralendeA" src="images/astadlabs.svg">
   <div horizontal layout wrap center start-justified>
@@ -29,44 +22,29 @@
   </div>
 </div>
 
+    <aos-globals id="globals"></aos-globals>
+    <ba-user bauser="{{bauser}}"></ba-user>
 
-
-
-
-
+<div id="canvas">
     <core-animated-pages selected="0" id="scenes" transitions="slide-from-right">
+
     <section>
-
-
-<div class="canvas">
-
     <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" orderByChild="parent" equalto="/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
-    <div>
+
     <template if="{{$.globals.values.user}}">  
       <ba-poster path="/" mode="parent" role="root"></ba-poster>
     </template>
-        </div>
-            <div>
     <template if="{{!$.globals.values.user}}">  
     <div id="roledefinition">
     <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small></div>
     </template>
-        </div>
-            <div>
     <template repeat="{{k in keys}}">
         <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>
     </template>
-        </div>
-</div>
-
-
-
     </section>
 
     <section>
-
-<div class="canvas">
-
+        <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
         <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
         <template if="{{kidsOk}}">
           <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
@@ -74,14 +52,11 @@
             <babbel-babbel key="{{c}}" mode="child"></babbel-babbel>  
           </template>
         </template>
-
-</div>
-
-
     </section>
 
     </core-animated-pages>
 
+</div>
   </template>
 
   <script>
@@ -128,7 +103,7 @@
 
         document.addEventListener('babbel-home', function(e){
           that.$.scenes.selected = 0;
-          that.$.berichten.requery();
+          
         });
       },
 
