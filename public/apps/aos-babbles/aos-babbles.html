@@ -27,8 +27,8 @@
     <aos-globals id="globals"></aos-globals>
     <ba-user bauser="{{bauser}}"></ba-user>
 
-    <core-overlay id="sharelink">
-      <input value="{{sharelinkurl}}" />
+    <core-overlay id="sharelink" layered backdrop>
+      <input value="{{sharelinkurl}}" onFocus="this.select();" />
     </core-overlay>
 
     <core-animated-pages selected="0" id="scenes" transitions="slide-from-right">
