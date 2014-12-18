@@ -11,12 +11,14 @@
     <aos-globals id="globals"></aos-globals>
 
   <template if="{{!$.globals.values.user}}">
+    <div vertical layout center center-justified id="canvas">
     <h1>Aanmelden</h1>
     <small>{{error}}</small>
     <input placeholder="Gebruikersnaam" required  value="{{username}}"></input>
     <input placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
     <h3 hidden?="{{!loading}}">Laden...</h3>
     <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button>
+  </div>
 
    <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
    </core-ajax>

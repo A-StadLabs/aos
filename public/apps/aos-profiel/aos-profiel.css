@@ -1,15 +1,44 @@
 :host {
 	display: block;
 	  height: 100%;
+	  	background-color: #3D3D3D;
+
+}
+
+#canvas {
+	min-height: 50%;
 }
 
 
 h1 {
 	font-weight: 300;
-	color: #333333;
+	color: white;
 }
 
 input {
-	width: 50vw;
+	width: 30%;
+	margin-bottom: 10px;
 	height: 30px;
+	border: none;
+	border-radius: none;
+	padding: 10px;
+	outline: 0;
+	opacity: 0.8;
+}
+
+input:focus {
+	opacity: 1;
+}
+
+
+button {
+	border: none;
+	border-radius: none;
+	background-color: #219dc8;
+	color: white;
+	font-weight: 300;
+	font-size: 14px;
+	padding: 10px;
+	min-width: 100px;
+	margin: 20px 0px 0px 0px;
 }
