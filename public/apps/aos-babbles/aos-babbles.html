@@ -12,43 +12,45 @@
 
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 
+<link rel="import" href="ba-elements/ba-poster/ba-poster.html">
+
+
 <link rel="import" href="ba-elements/ba-user/ba-user.html">
 <link rel="import" href="ba-elements/babbel-babbel/babbel-babbel.html">
 
-<polymer-element name="aos-babbles" attributes="mainkey">
-  <template>
-    <link rel="stylesheet" href="aos-babbles.css" />
+<polymer-element name="aos-babbles" attributes="key">
+<template>
+  <link rel="stylesheet" href="aos-babbles.css" />
 
-<div class="leaderboard">
-  <img class="stralendeA" src="images/astadlabs.svg">
-  <div horizontal layout wrap center start-justified>
-    <div horizontal layout wrap center start-justified flex>
-      <img class="appicon" src="images/babbelbox.svg">
-      <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+  <div class="leaderboard">
+    <img class="stralendeA" src="images/astadlabs.svg">
+    <div horizontal layout wrap center start-justified>
+      <div horizontal layout wrap center start-justified flex>
+        <img class="appicon" src="images/babbelbox.svg">
+        <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+      </div>
     </div>
   </div>
-</div>
 
-    <aos-globals id="globals"></aos-globals>
-    <ba-user bauser="{{bauser}}"></ba-user>
+  <aos-globals id="globals"></aos-globals>
+  <ba-user bauser="{{bauser}}"></ba-user>
 
-    <core-overlay id="sharelink" layered backdrop>
-      <input value="{{sharelinkurl}}" onFocus="this.select();" />
-    </core-overlay>
+  <core-overlay id="sharelink" layered backdrop>
+  <input value="{{sharelinkurl}}" onFocus="this.select();" />
+</core-overlay>
 
-    <div class="canvas">
+<div class="canvas">
 
-    <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+  <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
 
-    <babbel-babbel key="{{selectedItem}}" object="{{selectedObject}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
+  <babbel-babbel hidden?="{{selectedItem=='home'}}" key="{{selectedItem}}" object="{{selectedObject}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
 
-
-    <template if="{{$.globals.values.user}}">  
-      <ba-poster path="/" mode="parent" role="user"></ba-poster>
-    </template>
-    <template if="{{!$.globals.values.user}}">  
+  <template if="{{$.globals.values.user}}">  
+    <ba-poster path="/" mode="parent" role="user"></ba-poster>
+  </template>
+  <template if="{{!$.globals.values.user}}">  
     <div id="roledefinition">
-    <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small></div>
+      <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small></div>
     </template>
 
     <!-- Sorteer dingen -->
@@ -56,90 +58,94 @@
       <p>Sorteer op</p>
       
       <core-selector valueattr="sort" selected="{{sorter}}" id="sorting">
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="votes">Meeste votes</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="time">Meest recent gepost</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="numchildren">Meeste antwoorden</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent beantwoord</button>
-      </core-selector>
-    </div>
+      <button class="sortbtn" active?="{{sorter==this.sort}}" sort="votes">Meeste votes</button>
+      <button class="sortbtn" active?="{{sorter==this.sort}}" sort="time">Meest recent gepost</button>
+      <button class="sortbtn" active?="{{sorter==this.sort}}" sort="numchildren">Meeste antwoorden</button>
+      <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent beantwoord</button>
+    </core-selector>
+  </div>
 
-    <template repeat="{{k in messages | orderBy(sorter, true) }}">
-      <babbel-babbel key="{{k.key}}" object="{{k}}" mode="super"></babbel-babbel>
-    </template>
-
-    </div>
-
-  
-
+  <template repeat="{{k in messages | orderBy(sorter, true) }}">
+    <babbel-babbel key="{{k.key}}" object="{{k}}" mode="super"></babbel-babbel>
   </template>
 
-  <script>
-    Polymer({
+</div>
 
-      ready: function() {
-      	console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
+</template>
 
-        this.kidsOk = true; 
+<script>
+  Polymer({
 
-        this.$.sorting.selected = 'votes';
+    ready: function() {
+     console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
 
-        this.selectedItem = "/";
+     this.kidsOk = true; 
 
-        var that = this;
+     this.$.sorting.selected = 'votes';
 
-        this.haschildren = this.$.parent.kids;
+     
 
-        document.addEventListener('user-changed', function(e){
-          console.log('Values changed', e.detail.data);
-        });
+    console.log('selItem: ', this.selectedItem);
 
-        document.addEventListener('has-no-kids', function(e){
-          that.kidsOk = false;
-        });
+     this.selectedItem = this.key;
 
-        document.addEventListener('has-kids', function(e){
-          that.kidsOk = true;
-        });
+     var that = this;
 
-        document.addEventListener('babbel-select', function(e){
-          that.previousItem = that.selectedItem;
-          that.selectedItem = e.detail.key;
-          that.selectedObject = e.detail.object;
-          console.log(that.selectedObject);
-          //window.location.hash = '#/babbles/'+that.selectedItem;
+     this.haschildren = this.$.parent.kids;
+
+     document.addEventListener('user-changed', function(e){
+      console.log('Values changed', e.detail.data);
+    });
+
+     document.addEventListener('has-no-kids', function(e){
+      that.kidsOk = false;
+    });
+
+     document.addEventListener('has-kids', function(e){
+      that.kidsOk = true;
+    });
+
+     document.addEventListener('babbel-select', function(e){
+      that.previousItem = that.selectedItem;
+      that.selectedItem = e.detail.key;
+      that.selectedObject = e.detail.object;
+      that.datachange();
+      console.log(that.selectedObject);
+      window.location.hash = '#/babbles/'+that.selectedItem;
           //that.mainkey = e.detail.key;
           that.parentItem = e.detail.parent;
-          that.$.scenes.selected = 1;
+          //that.$.scenes.selected = 1;
         });
 
-        document.addEventListener('babbel-terug', function(e){
+     document.addEventListener('babbel-terug', function(e){
           //that.previousItem = that.selectedItem;
           
           if(e.detail.parent){
             that.selectedItem = e.detail.parent;
             that.parentItem = that.selectedItem;
-
             //window.location.hash = '#/babbles/'+that.selectedItem;
-            that.$.scenes.selected = 1;
+            //that.$.scenes.selected = 1;
           } else {
-            that.$.scenes.selected = 0;
+            //that.$.scenes.selected = 0;
             //window.location.hash = '#/babbles/';
+            this.selectedItem = "/";
           }
         });
 
-        document.addEventListener('babbel-home', function(e){
+     document.addEventListener('babbel-home', function(e){
           //window.location.hash = '#/babbles/';
-          that.$.scenes.selected = 0;
+          //that.$.scenes.selected = 0;
+          this.selectedItem = "/";
         });
 
-        document.addEventListener('share-link', function(e){
-          that.sharelinkurl = 'https://astad.herokuapp.com/#/babbles/'+e.detail.linkurl;
-          that.$.sharelink.toggle();
-        });
-      },
+     document.addEventListener('share-link', function(e){
+      that.sharelinkurl = 'https://astad.herokuapp.com/#/babbles/'+e.detail.linkurl;
+      that.$.sharelink.toggle();
+    });
+   },
 
-       convertTimestamp: function(timestamp) {
-var date = new Date(timestamp);
+   convertTimestamp: function(timestamp) {
+    var date = new Date(timestamp);
 // hours part from the timestamp
 var day = date.getDate();
 var month = date.getMonth();
@@ -153,28 +159,28 @@ var seconds = "0" + date.getSeconds();
 // will display time in 10:30:23 format
 return formattedTime = year + '-' + (month+1) + '-'+ day + ' ' + (hours-2) + ':' + minutes.substr(minutes.length-2) + ':' + seconds.substr(seconds.length-2);},
 
-      datachange: function(){
-        var messages = [];
-        var data = this.data;
-        var keys = this.keys;
-        var selectedItem = this.selectedItem;
-        for (var i = keys.length - 1; i >= 0; i--) {
+datachange: function(){
+  var messages = [];
+  var data = this.data;
+  var keys = this.keys;
+  var selectedItem = this.selectedItem;
+  for (var i = keys.length - 1; i >= 0; i--) {
           //console.log(data[keys[i]]);
           if(data[keys[i]].parent==selectedItem){
-        var tijd = this.convertTimestamp(data[keys[i]].time);
-        var lastpost = this.convertTimestamp(data[keys[i]].lastpost);
-          messages.push({ 
-                            'key': keys[i],
-                            'children': data[keys[i]].children,
-                            'lastpost': lastpost,
-                            'numchildren': data[keys[i]].numchildren,
-                            'numvotes': data[keys[i]].numvotes,
-                            'parent': data[keys[i]].parent,
-                            'role': data[keys[i]].role,
-                            'text': data[keys[i]].text,
-                            'time': tijd,
-                            'votes': data[keys[i]].votes 
-                        });
+            var tijd = this.convertTimestamp(data[keys[i]].time);
+            var lastpost = this.convertTimestamp(data[keys[i]].lastpost);
+            messages.push({ 
+              'key': keys[i],
+              'children': data[keys[i]].children,
+              'lastpost': lastpost,
+              'numchildren': data[keys[i]].numchildren,
+              'numvotes': data[keys[i]].numvotes,
+              'parent': data[keys[i]].parent,
+              'role': data[keys[i]].role,
+              'text': data[keys[i]].text,
+              'time': tijd,
+              'votes': data[keys[i]].votes 
+            });
           };
         };
         //console.log(messages);
@@ -182,34 +188,13 @@ return formattedTime = year + '-' + (month+1) + '-'+ day + ' ' + (hours-2) + ':'
         //this.keys.reverse();
       },
 
-      cdatachange: function(){
-        //console.log('got it?');
-        var answers = [];
-        var cdata = this.cdata;
-        var ckeys = this.ckeys;
-        for (var i = ckeys.length - 1; i >= 0; i--) {
-          console.log(JSON.stringify(cdata[ckeys[i]]));
-          if(cdata[ckeys[i]].parent=='/'){
-            var tijd = this.convertTimestamp(data[keys[i]].time);
-            var lastpost = this.convertTimestamp(data[keys[i]].lastpost);
-          answers.push({ 
-                            'key': ckeys[i],
-                            'children': cdata[ckeys[i]].children,
-                            'lastpost': lastpost,
-                            'numchildren': cdata[ckeys[i]].numchildren,
-                            'numvotes': cdata[ckeys[i]].numvotes,
-                            'parent': cdata[ckeys[i]].parent,
-                            'role': cdata[ckeys[i]].role,
-                            'text': cdata[ckeys[i]].text,
-                            'time': tijd,
-                            'votes': cdata[ckeys[i]].votes 
-                        });
-          };
-        };
-        console.log(answers);
-        this.answers = answers;
-        //this.keys.reverse();
+      keyChanged: function(){
+      
+        this.selectedItem = this.key;
+      
+        this.datachange();
+
       }
     });
-  </script>
+</script>
 </polymer-element>

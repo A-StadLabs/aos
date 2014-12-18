@@ -6,7 +6,6 @@
 <link rel="import" href="../ba-getpermissions/ba-getpermissions.html">
 <link rel="import" href="../time-ago/src/time-ago.html">
 
-<link rel="import" href="../ba-poster/ba-poster.html">
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 <script src="../../functions.js"></script>
 
@@ -56,9 +55,7 @@
       </div>
     </div>
 
-    <template if="{{$.globals.values.user}}">
-      <ba-poster path="{{key}}" mode="child" role="{{object.role}}"></ba-poster>
-    </template>
+
 
     <template if="{{!$.globals.values.user}}">  
       <div id="roledefinition">
@@ -178,8 +175,8 @@
       },
 
       fireSelect: function(){
-        console.log('babbel-select: ', this.key);
-        this.fire('babbel-select', {key: this.key, parent: this.parent, object: this.object});
+        console.log('babbel-select: ', this.object);
+        this.fire('babbel-select', {key: this.key, parent: this.parent, object: this.object });
         delete this.key;
       }
 
