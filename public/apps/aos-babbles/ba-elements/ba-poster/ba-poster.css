@@ -59,11 +59,27 @@ small {
 }
 
 
+.attach {
+	margin: 5px 0px 20px 0px;
+}
 
-.addattach {
-	font-size: 0.75em;
-	font-weight: 600;
-	text-decoration: underline;
-	margin: 10px 0px 20px 0px;
-	color: #219dc8;
+
+.attach img{
+	width: 20px;
+	margin: 0px;
+	padding: 8px 6px 8px 0px;
+}
+
+
+
+.attach a {
+	margin: 0px;
+	padding: 0px;
+	opacity: 0.5;
+}
+
+
+
+.attach a:hover {
+	opacity: 1;
 }
