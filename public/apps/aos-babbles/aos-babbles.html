@@ -39,15 +39,15 @@
     <div id="generalsort" horizontal layout center start-justified wrap>
       <p>Sorteer op</p>
       <core-selector valueattr="sort" selected="{{sort}}" id="sorting">
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="votes">Meeste votes</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="time">Meest recent gepost</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="numchildren">Meeste antwoorden</button>
+        <button class="sortbtn" active?="{{sort==this.sort}}" sort="votes">Meeste votes</button>
+        <button class="sortbtn" active?="{{sort==this.sort}}" sort="time">Meest recent gepost</button>
+        <button class="sortbtn" active?="{{sort==this.sort}}" sort="numchildren">Meeste antwoorden</button>
         <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent beantwoord</button>
       </core-selector>
     </div>
 
     <!-- De lijst -->
-    <template repeat="{{k in messages | orderBy(sorter, true) }}">
+    <template repeat="{{k in messages | orderBy(sort, true) }}">
       <babbel-babbel key="{{k.key}}" data="{{k}}" mode="parent" sort="{{sort}}"></babbel-babbel>
       <hr>
     </template>
@@ -59,11 +59,7 @@
 
     ready: function() {
       console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
-      if(this.sort){
-      this.$.sorting.selected = this.sort;
-    } else {
-      this.$.sorting.selected = 'votes';
-    }
+     
 
     }
   });
