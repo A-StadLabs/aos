@@ -76,9 +76,8 @@ small {
 
 #generalsort {
 	background-color: white;
-	width: 76vw;
-	padding: 30px 12vw 5px 12vw;
-	margin: 0px;
+	padding: 0px;
+	margin: 10px 0px 20px 0px;
 }
 
 
@@ -101,22 +100,19 @@ small {
 }
 
 .sortbtn:hover {
-	border: 1px solid rgba(149,210,183,0.5);
-	border-bottom: 1px solid #6EB897;
-	color: #6EB897;
+	border: 1px solid rgba(0,162,145,0.35);
+	border-bottom: 1px solid #00A291;
+	color: #00A291;
 }
 
 .sortbtn[active] {
-	border: 1px solid rgba(149,210,183,0.5);
-	border-bottom: 1px solid #6EB897;
-	color: #6EB897;
+	border: 1px solid rgba(0,162,145,0.35);
+	border-bottom: 1px solid #00A291;
+	color: #00A291;
 }
 
 
 
-#generalsort {
-	background-color: red;
-}
 
 /*
 
