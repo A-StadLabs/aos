@@ -54,15 +54,15 @@
       <p>Sorteer op</p>
 
       <core-selector valueattr="sort" selected="{{sorter}}" id="sorting">
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="votes">meeste votes</button>
+        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="votes">Meeste votes</button>
         <button class="sortbtn" active?="{{sorter==this.sort}}" sort="time">Meest recent gepost</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="numchildren">Meest antwoord</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent antwoord</button>
+        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="numchildren">Meeste antwoorden</button>
+        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent beantwoord</button>
       </core-selector>
     </div>
 
     <template repeat="{{k in messages | orderBy(sorter, true) }}">
-      <babbel-babbel key="{{k.key}}" mode="super"></babbel-babbel>
+      <babbel-babbel key="{{k.key}}" object="{{k}}" mode="super"></babbel-babbel>
     </template>
 
     </div>
@@ -72,11 +72,11 @@
     <div class="canvas">
 
         <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
-        <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
+        <babbel-babbel key="{{selectedItem}}" object="{{selectedObject}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
         <template if="{{kidsOk}}">
           <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" childEvents="true" orderByChild="votes" on-data-change="{{cdatachange}}"></firebase-element>
-          <template repeat="{{c in ckeys}}">
-            <babbel-babbel key="{{c}}" mode="child"></babbel-babbel>  
+          <template repeat="{{c in answers}}">
+            <babbel-babbel key="{{c.key}}" object="{{c}}" mode="child"></babbel-babbel>  
           </template>
         </template>
     </div>
@@ -115,6 +115,8 @@
         document.addEventListener('babbel-select', function(e){
           that.previousItem = that.selectedItem;
           that.selectedItem = e.detail.key;
+          that.selectedObject = e.detail.object;
+          console.log(that.selectedObject);
           //window.location.hash = '#/babbles/'+that.selectedItem;
           //that.mainkey = e.detail.key;
           that.parentItem = e.detail.parent;
@@ -127,6 +129,7 @@
           if(e.detail.parent){
             that.selectedItem = e.detail.parent;
             that.parentItem = that.selectedItem;
+
             //window.location.hash = '#/babbles/'+that.selectedItem;
             that.$.scenes.selected = 1;
           } else {
@@ -146,6 +149,21 @@
         });
       },
 
+       convertTimestamp: function(timestamp) {
+var date = new Date(timestamp);
+// hours part from the timestamp
+var day = date.getDate();
+var month = date.getMonth();
+var year = date.getFullYear();
+var hours = date.getHours();
+// minutes part from the timestamp
+var minutes = "0" + date.getMinutes();
+// seconds part from the timestamp
+var seconds = "0" + date.getSeconds();
+
+// will display time in 10:30:23 format
+return formattedTime = year + '-' + (month+1) + '-'+ day + ' ' + (hours-2) + ':' + minutes.substr(minutes.length-2) + ':' + seconds.substr(seconds.length-2);},
+
       datachange: function(){
         var messages = [];
         var data = this.data;
@@ -153,16 +171,18 @@
         for (var i = keys.length - 1; i >= 0; i--) {
           //console.log(data[keys[i]]);
           if(data[keys[i]].parent=='/'){
+        var tijd = this.convertTimestamp(data[keys[i]].time);
+        var lastpost = this.convertTimestamp(data[keys[i]].lastpost);
           messages.push({ 
                             'key': keys[i],
                             'children': data[keys[i]].children,
-                            'lastpost': data[keys[i]].lastpost,
+                            'lastpost': lastpost,
                             'numchildren': data[keys[i]].numchildren,
                             'numvotes': data[keys[i]].numvotes,
                             'parent': data[keys[i]].parent,
                             'role': data[keys[i]].role,
                             'text': data[keys[i]].text,
-                            'time': data[keys[i]].time,
+                            'time': tijd,
                             'votes': data[keys[i]].votes 
                         });
           };
@@ -174,7 +194,31 @@
 
       cdatachange: function(){
         //console.log('got it?');
-        this.ckeys.reverse();
+        var answers = [];
+        var cdata = this.cdata;
+        var ckeys = this.ckeys;
+        for (var i = ckeys.length - 1; i >= 0; i--) {
+          console.log(JSON.stringify(cdata[ckeys[i]]));
+          if(cdata[ckeys[i]].parent=='/'){
+            var tijd = this.convertTimestamp(data[keys[i]].time);
+            var lastpost = this.convertTimestamp(data[keys[i]].lastpost);
+          answers.push({ 
+                            'key': ckeys[i],
+                            'children': cdata[ckeys[i]].children,
+                            'lastpost': lastpost,
+                            'numchildren': cdata[ckeys[i]].numchildren,
+                            'numvotes': cdata[ckeys[i]].numvotes,
+                            'parent': cdata[ckeys[i]].parent,
+                            'role': cdata[ckeys[i]].role,
+                            'text': cdata[ckeys[i]].text,
+                            'time': tijd,
+                            'votes': cdata[ckeys[i]].votes 
+                        });
+          };
+        };
+        console.log(answers);
+        this.answers = answers;
+        //this.keys.reverse();
       }
     });
   </script>

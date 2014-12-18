@@ -10,7 +10,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment-with-locales.min.js"></script>
 <script src="../../functions.js"></script>
 
-<polymer-element name="babbel-babbel" attributes="key mode parent kids">
+<polymer-element name="babbel-babbel" attributes="key object mode parent kids">
 
 <template>
 
@@ -18,7 +18,7 @@
 
   <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
-  <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
+  <!-- <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element> -->
 
   <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
 
@@ -38,16 +38,16 @@
         <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="{{mode}}"></cl-voteitem>
         </template>
         <template if="{{!usercanpost}}">
-        <div class="voterij"><p>{{data.votes}}</p></div>
+        <div class="voterij"><p>{{object.votes}}</p></div>
         </template>
       </div>
 
       <div vertical layout start flex>
-        <h2>{{data.text}}</h2>
+        <h2>{{object.text}}</h2>
         <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
-        <p><img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}"><time-ago datetime="{{realtime}}" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - laatste reactie {{data.lastpost}} - 
+        <p><img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}"><time-ago datetime="{{object.time}}" refresh delay="1000"></time-ago> - {{object.numchildren}} reacties - laatste reactie <time-ago datetime="{{object.lastpost}}" refresh delay="1000"></time-ago> - 
         <template if="{{!usercanpost}}">
-          <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+          <img class="lock" src="../../images/locked.svg">Enkel {{object.role}} kan reageren.
           </template>
         <template if="{{usercanpost}}">
           Jij kan reageren.
@@ -57,7 +57,7 @@
     </div>
 
     <template if="{{$.globals.values.user}}">
-      <ba-poster path="{{key}}" mode="child" role="{{data.role}}"></ba-poster>
+      <ba-poster path="{{key}}" mode="child" role="{{object.role}}"></ba-poster>
     </template>
 
     <template if="{{!$.globals.values.user}}">  
@@ -72,18 +72,18 @@
     <div horizontal layout center>
       <div>
       <template if="{{usercanpost}}">
-      <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
+      <cl-voteitem key="{{key}}" votes="{{object.votes}}" mode="parent"></cl-voteitem>
       </template>
       <template if="{{!usercanpost}}">
-        <div class="voterij"><p>{{data.votes}}</p></div>
+        <div class="voterij"><p>{{object.votes}}</p></div>
         </template>
       </div>
 
       <div vertical layout start flex>
-        <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p><img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}"> {{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - laatste reactie {{data.lastpost}} - 
+        <h1 on-tap="{{fireSelect}}">{{object.text}}</h1>
+        <ba-getpermissions role="{{object.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p><img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}"><time-ago datetime="{{object.time}}" refresh delay="1000"></time-ago> - {{object.numchildren}} reacties - laatste reactie: <time-ago datetime="{{object.lastpost}}" refresh delay="1000"></time-ago> - 
         <template if="{{!usercanpost}}">
-          <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+          <img class="lock" src="../../images/locked.svg">Enkel {{object.role}} kan reageren.
         </template>
         <template if="{{usercanpost}}">
           Jij kan reageren.
@@ -100,18 +100,18 @@
     <div horizontal layout start>
       <div>
       <template if="{{usercanpost}}">
-      <cl-voteitem key="{{key}}" votes="{{data.votes}}" mode="parent"></cl-voteitem>
+      <cl-voteitem key="{{key}}" votes="{{object.votes}}" mode="parent"></cl-voteitem>
       </template>
       <template if="{{!usercanpost}}">
-        <div class="voterij"><p>{{data.votes}}</p></div>
+        <div class="voterij"><p>{{object.votes}}</p></div>
         </template>
       </div>
       <div vertical layout start flex>
-        <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
+        <h4 on-tap="{{fireSelect}}">{{object.text}}</h4>
 
-        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - laatste reactie {{data.lastpost}} -
+        <ba-getpermissions role="{{object.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p><time-ago datetime="{{object.time}}" refresh delay="1000"></time-ago> - {{object.numchildren}} reacties - laatste reactie <time-ago datetime="{{object.lastpost}}" refresh delay="1000"></time-ago> -
         <template if="{{!usercanpost}}">
-          <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
+          <img class="lock" src="../../images/locked.svg">Enkel {{object.role}} kan reageren.
         </template>
         <template if="{{usercanpost}}">
           Jij kan reageren.
@@ -125,7 +125,7 @@
   </template>
 
   <template if="{{mode=='previous'}}">
-    <small on-tap="{{fireTerug}}">Vorige: {{data.text}}</small>
+    <small on-tap="{{fireTerug}}">Vorige: {{object.text}}</small>
   </template>
 
 
@@ -133,12 +133,10 @@
 
 <script>
 
-
-
   Polymer({
 
     ready: function(){
-        //this.parent = this.data.parent;
+        //this.parent = this.object.parent;
         //this.realtime = '2014 12 16 22:28:33';
 
       },
@@ -147,21 +145,12 @@
         this.fire('share-link', { linkurl: this.key })
       },
 
-      convertTimestamp: function(timestamp) {
-        var dateTime = new Date(timestamp);
-         // Returns "2013-05-31T11:54:44.000Z"
-        return dateTime.toISOString();
-  //return 'michael'+timestamp;
-      },
+    
 
 
       handleResponse: function(){
-        this.parent = this.data.parent;
+        this.parent = this.object.parent;
 
-        if(this.data.time){
-          this.realtime = this.convertTimestamp(this.data.time);
-        };
-        //console.log('tijd: ', this.realtime);
         if(this.mode=='parent'){
           if(!this.data.children){
             this.fire('has-no-kids', {key: this.key, parent: this.parent});
@@ -174,8 +163,8 @@
         };
       },
 
-      dataChanged: function(){
-        //this.realtime = this.convertTimestamp(this.data.time);
+      objectChanged: function(){
+       
       },
 
       fireTerug: function(){
@@ -190,7 +179,7 @@
 
       fireSelect: function(){
         console.log('babbel-select: ', this.key);
-        this.fire('babbel-select', {key: this.key, parent: this.parent});
+        this.fire('babbel-select', {key: this.key, parent: this.parent, object: this.object});
         delete this.key;
       }
 
