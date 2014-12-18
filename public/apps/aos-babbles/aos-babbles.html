@@ -1,9 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
 
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+
+<link rel="import" href="../../bower_components/polymer-filters/polymer-filters.html">
 
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 
@@ -36,7 +39,7 @@
     <section>
     <div class="canvas">
 
-    <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" orderByChild="parent" equalto="/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+    <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
 
     <template if="{{$.globals.values.user}}">  
       <ba-poster path="/" mode="parent" role="user"></ba-poster>
@@ -49,15 +52,17 @@
     <!-- Sorteer dingen -->
     <div id="generalsort" horizontal layout center start-justified wrap>
       <p>Sorteer op</p>
-      <button class="sortbtn" on-tap="{{sortthis}}">Meeste votes</button>
-      <button class="sortbtn" on-tap="{{sorttime}}">Meest recent gepost</button>
-      <button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
-      <button class="sortbtn" on-tap="{{sortanswer}}">Meest recent antwoord</button>
-    </div>
-    <!-- //Sorteer dingen -->
 
-    <template repeat="{{k in keys}}">
-        <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>
+      <core-selector valueattr="sort" selected="{{sorter}}" id="sorting">
+        <button class="sortbtn" sort="votes">meeste votes</button>
+        <button class="sortbtn" sort="time">Meest recent gepost</button>
+        <button class="sortbtn" sort="numchildren">Meest antwoord</button>
+        <button class="sortbtn" sort="lastpost">Meest recent antwoord</button>
+      </core-selector>
+    </div>
+
+    <template repeat="{{k in messages | orderBy(sorter, true) }}">
+      <babbel-babbel key="{{k.key}}" mode="super"></babbel-babbel>
     </template>
 
     </div>
@@ -69,18 +74,7 @@
         <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
         <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
         <template if="{{kidsOk}}">
-          <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" childEvents="true" orderByChild="votes" on-data-change="{{cdatachange}}" log></firebase-element>
-          
-          <!-- Sorteer dingen -->
-          <div id="generalsort" horizontal layout center start-justified wrap>
-            <p>Sorteer op</p>
-            <button class="sortbtn" on-tap="{{sortthis}}">Meeste votes</button>
-            <button class="sortbtn" on-tap="{{sorttime}}">Meest recent gepost</button>
-            <button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
-            <button class="sortbtn" on-tap="{{sortanswer}}">Meest recent antwoord</button>
-          </div>
-          <!-- //Sorteer dingen -->
-
+          <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" childEvents="true" orderByChild="votes" on-data-change="{{cdatachange}}"></firebase-element>
           <template repeat="{{c in ckeys}}">
             <babbel-babbel key="{{c}}" mode="child"></babbel-babbel>  
           </template>
@@ -102,7 +96,6 @@
 
         var that = this;
 
-        
         this.haschildren = this.$.parent.kids;
 
         document.addEventListener('user-changed', function(e){
@@ -130,14 +123,14 @@
           //that.previousItem = that.selectedItem;
           
           if(e.detail.parent){
-          that.selectedItem = e.detail.parent;
-          that.parentItem = that.selectedItem;
-          //window.location.hash = '#/babbles/'+that.selectedItem;
-          that.$.scenes.selected = 1;
-        } else {
-          that.$.scenes.selected = 0;
-          //window.location.hash = '#/babbles/';
-        }
+            that.selectedItem = e.detail.parent;
+            that.parentItem = that.selectedItem;
+            //window.location.hash = '#/babbles/'+that.selectedItem;
+            that.$.scenes.selected = 1;
+          } else {
+            that.$.scenes.selected = 0;
+            //window.location.hash = '#/babbles/';
+          }
         });
 
         document.addEventListener('babbel-home', function(e){
@@ -146,13 +139,35 @@
         });
 
         document.addEventListener('share-link', function(e){
-          that. sharelinkurl = 'https://astad.herokuapp.com/#/babbles/'+e.detail.linkurl;
+          that.sharelinkurl = 'https://astad.herokuapp.com/#/babbles/'+e.detail.linkurl;
           that.$.sharelink.toggle();
         });
       },
 
       datachange: function(){
-        this.keys.reverse();
+        var messages = [];
+        var data = this.data;
+        var keys = this.keys;
+        for (var i = keys.length - 1; i >= 0; i--) {
+          //console.log(data[keys[i]]);
+          if(data[keys[i]].parent=='/'){
+          messages.push({ 
+                            'key': keys[i],
+                            'children': data[keys[i]].children,
+                            'lastpost': data[keys[i]].lastpost,
+                            'numchildren': data[keys[i]].numchildren,
+                            'numvotes': data[keys[i]].numvotes,
+                            'parent': data[keys[i]].parent,
+                            'role': data[keys[i]].role,
+                            'text': data[keys[i]].text,
+                            'time': data[keys[i]].time,
+                            'votes': data[keys[i]].votes 
+                        });
+          };
+        };
+        //console.log(messages);
+        this.messages = messages;
+        //this.keys.reverse();
       },
 
       cdatachange: function(){

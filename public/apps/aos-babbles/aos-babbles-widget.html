@@ -76,17 +76,18 @@
         });
 
         document.addEventListener('babbel-select', function(e){
-          that.previousItem = that.selectedItem;
+          //that.previousItem = that.selectedItem;
           that.selectedItem = e.detail.key;
-          //window.location.hash = '#/babbles/'+that.selectedItem;
+          window.location.hash = '#/babbles/'+that.selectedItem;
           //that.mainkey = e.detail.key;
-          that.parentItem = e.detail.parent;
-          that.$.scenes.selected = 1;
+          //that.parentItem = e.detail.parent;
+          //that.$.scenes.selected = 1;
         });
 
         document.addEventListener('babbel-terug', function(e){
           document.location = '/#/babbles';
           delete that.mainkey;
+          delete that.selectedItem;
         });
 
         document.addEventListener('babbel-home', function(e){

@@ -18,7 +18,7 @@
 
   <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
-  <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}" log></firebase-element>
+  <firebase-element id="bericht" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" orderByChild="votes" data="{{data}}" keys="{{keys}}" on-data-change="{{handleResponse}}"></firebase-element>
 
   <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
 
@@ -45,7 +45,7 @@
       <div vertical layout start flex>
         <h2>{{data.text}}</h2>
         <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
-        <p><img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}"><time-ago datetime="{{realtime}}" refresh delay="1000"></time-ago> -  reacties -
+        <p><img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}"><time-ago datetime="{{realtime}}" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - laatste reactie {{data.lastpost}} - 
         <template if="{{!usercanpost}}">
           <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
           </template>
@@ -81,7 +81,7 @@
 
       <div vertical layout start flex>
         <h1 on-tap="{{fireSelect}}">{{data.text}}</h1>
-        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p><img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}"> {{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - 
+        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p><img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}"> {{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - laatste reactie {{data.lastpost}} - 
         <template if="{{!usercanpost}}">
           <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
         </template>
@@ -109,7 +109,7 @@
       <div vertical layout start flex>
         <h4 on-tap="{{fireSelect}}">{{data.text}}</h4>
 
-        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - 
+        <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions><p>{{realtime}}<time-ago datetime="realtime" refresh delay="1000"></time-ago> - {{data.numchildren}} reacties - laatste reactie {{data.lastpost}} -
         <template if="{{!usercanpost}}">
           <img class="lock" src="../../images/locked.svg">Enkel {{data.role}} kan reageren.
         </template>
@@ -127,7 +127,6 @@
   <template if="{{mode=='previous'}}">
     <small on-tap="{{fireTerug}}">Vorige: {{data.text}}</small>
   </template>
-
 
 
 </template>
@@ -190,6 +189,7 @@
       },
 
       fireSelect: function(){
+        console.log('babbel-select: ', this.key);
         this.fire('babbel-select', {key: this.key, parent: this.parent});
         delete this.key;
       }
