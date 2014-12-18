@@ -102,7 +102,7 @@
             // Als er iets is doen we er wat mee. 
             var userFB0 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/things/");
             var newpostRef0 = userFB0.push({"type":"link", "object":link, "time":Firebase.ServerValue.TIMESTAMP});
-          var newThingKey = newpostRef0.key();
+            var newThingKey = newpostRef0.key();
 
           };
     			console.log('Saven maar: ', this.valuek);
@@ -114,6 +114,9 @@
           if(newThingKey){
             var userFBa = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+newKey+"/things/"+newThingKey);
           var newpostRefa = userFBa.set(true);
+
+          var userFBb = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/things/"+newThingKey+"/parent/");
+          var newpostRefb = userFBb.set(newKey);
           };
 
 	    		var userFB3 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+newKey+"/numchildren/");
