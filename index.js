@@ -47,7 +47,11 @@ app.get('/login', function(req, res){
   		url:     'https://www.antwerpen.be/srv/user/d/auth',
   		json: {"username": user, "password": pass}
 	}, function(error, response, body){
-		req.session.userobject = body;
+		  //req.session.userobject = body;
+      console.log(body.success);
+      if(body.success==true){
+        req.session.userobject = body;
+      };
   		res.send(body);
 	});
 });

@@ -1,5 +1,6 @@
 :host {
 	display: block;
+	  height: 100%;
 }
 
 
@@ -9,12 +10,6 @@ h1 {
 }
 
 input {
-	background-color: white;
-	border:none;
-	border-radius: none;
-	height: 10px;
-	padding: 20px;
-	width: 240px;
-	min-width: 30vw;
-	margin-bottom: 10px; 
+	width: 50vw;
+	height: 30px;
 }

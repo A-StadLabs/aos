@@ -34,11 +34,6 @@
 
    <template if="{{!$.globals.values.user}}">
 
-
-
-
-
-
     <div id="kaai" horizontal center start-justified layout fit>
 
       <div class="helpings" flex>
@@ -62,26 +57,20 @@
 
 
       <div class="tools">
-        <core-selector>
-          <img class="kaaibtns" src="images/kaai-searchloop.svg">
-          <img class="kaaibtns" src="images/kaai-knooppunt.svg">
-          <img class="kaaibtns" src="images/kaai-profiel2.svg">
-        </core-selector>
+          <a href="/#/search">
+            <img class="kaaibtns" src="images/kaai-searchloop.svg">
+          </a>
+          <a href="/#/knooppunt">
+            <img class="kaaibtns" src="images/kaai-knooppunt.svg">
+          </a>
+          <a href="/#/profiel">
+            <img class="kaaibtns" src="images/kaai-profiel2.svg">
+          </a>
       </div>
 
       <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}">
 
     </div>
-
-
-
-
-
-
-
-<!-- 
-    <div class="panes">
-    </div> -->
 
     </template>
 
@@ -114,12 +103,17 @@
 
 
       <div class="tools">
-        <core-selector>
-          <img class="kaaibtns" src="images/kaai-searchloop.svg">
-          <img class="kaaibtns" src="images/kaai-knooppunt.svg">
-          <img src="{{$.globals.values.user.data.avatarUrl}}" class="avatar">
-        </core-selector>
+          <a href="/#/search">
+            <img class="kaaibtns" src="images/kaai-searchloop.svg">
+          </a>
+          <a href="/#/knooppunt">
+            <img class="kaaibtns" src="images/kaai-knooppunt.svg">
+          </a>
+          <a href="/#/profiel">
+            <img class="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
+          </a>
       </div>
+
 
     </template>
 
@@ -127,35 +121,9 @@
 
   <script>
 
-    // function getParameterByName(name) {
-    //   name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    //   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    //   results = regex.exec(location.search);
-    //   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    // }
-
-    // var userobject;
-
     Polymer({
 
       ready: function() {
-
-        //         this.searchFocused = false;
-
-        // this.bigSearchbar = false;
-        // this.smallSearchbar = true;
-
-        // if(window.innerWidth < 401){
-        //   this.bigSearchbar = true;
-        //   this.smallSearchbar = false;
-        // };
-
-
-        // var tokenn = getParameterByName('access_token');
-        // if(tokenn){
-        //   console.log('hey! ',tokenn);
-
-        // };
 
         // Localisation voorlopig
         this.locusername = 'Gebruikersnaam';
@@ -171,40 +139,6 @@
           //console.log(e.detail.item.label);
           this.language = e.detail.item.label;
         });
-
-        // this.$.envselect.addEventListener('core-activate', function(e){
-        //   console.log(e.detail.item.label);
-        //   this.environment = e.detail.item.label;
-        //   switch(this.environment){
-        //     case 'Antwerpen.be':
-        //       var loc = "https://www.antwerpen.be";
-        //       break;
-        //     case 'Wilrijk.be':
-        //       var loc = "https://www.wilrijk.be";
-        //       break;
-        //     case 'Visit Antwerpen':
-        //       var loc = "http://www.visitantwerpen.be/bzn.net?id=1464";
-        //       break;
-        //     case 'Ondernemen':
-        //       var loc = "http://www.ondernemeninantwerpen.be";
-        //       break;
-        //     case 'Oostende':
-        //       var loc = "http://www.oostende.be/";
-        //       break;
-        //     case 'Stedelijk Onderwijs':
-        //       var loc = "http://www.stedelijkonderwijs.be/";
-        //       break;
-
-
-              
-
-                   
-
-        //   }
-          
-        //   document.getElementById('canvas').src = loc;
-        // });
-
       },
 
       handleResponseUserCheck: function(){
@@ -217,14 +151,6 @@
           //console.log('ik heb een user');
           this.fire('user-changed', this.responseUser);
         }
-      },
-
-      openAuth: function(){
-        //if(!userobject){
-          window.open("https://services.antwerpen.be/authorize?scope=default&response_type=token&client_id=_07mr9GBEvhvd_iG0Jd1rbSWfW4a&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2F%23%2Flogin%2F", "myWindow", "scrollbars=yes, resizable=yes, width=400, height=570");
-       // } else {
-        //  this.loginPane = !this.loginPane;
-        //}
       },
 
       handleFocus: function(){
@@ -275,10 +201,6 @@
 
     });
 
-
- 
-
   </script>
-
 
 </polymer-element>

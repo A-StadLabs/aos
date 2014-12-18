@@ -17,9 +17,6 @@ h1 {
 	font-weight: 100;
 }
 
-
-
-
 core-dropdown-menu {
 	background-color: #333333;
 	text-transform: uppercase;
@@ -109,17 +106,21 @@ core-field {
 
 }
 */
+#paneBar {
+	width: 100%;
+	position: absolute;
+	top: 60px;
+	background-color: green;
+	height: 100px;
+}
 
-.panes {
-		position: absolute;
-
-	background-color: yellow;
-	z-index: 999;
-	height: 300px;
-	color: blue;
-	width: 300px;
-	padding: 0px;
-	margin: 28px 0px 0px -12px;
+#aanmelden {
+	display: block;
+	margin-left:auto; 
+	margin-right:5vw;
+	padding: 10px;
+	width: 200px;
+	background-color: #333333;
 }
 
 
