@@ -54,10 +54,10 @@
       <p>Sorteer op</p>
 
       <core-selector valueattr="sort" selected="{{sorter}}" id="sorting">
-        <button class="sortbtn" sort="votes">meeste votes</button>
-        <button class="sortbtn" sort="time">Meest recent gepost</button>
-        <button class="sortbtn" sort="numchildren">Meest antwoord</button>
-        <button class="sortbtn" sort="lastpost">Meest recent antwoord</button>
+        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="votes">meeste votes</button>
+        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="time">Meest recent gepost</button>
+        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="numchildren">Meest antwoord</button>
+        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent antwoord</button>
       </core-selector>
     </div>
 
@@ -93,6 +93,8 @@
       	console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
 
         this.kidsOk = true; 
+
+        this.$.sorting.selected = 'votes';
 
         var that = this;
 

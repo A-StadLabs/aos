@@ -106,6 +106,12 @@ small {
 	color: #6EB897;
 }
 
+.sortbtn[active] {
+	border: 1px solid rgba(149,210,183,0.5);
+	border-bottom: 1px solid #6EB897;
+	color: #6EB897;
+}
+
 
 
 /*
