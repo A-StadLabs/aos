@@ -56,12 +56,18 @@
 
 
 <script>
-  
+  function toTop(){
+  document.querySelector('#mainContainer').scroller.scrollTop = 0;
+}
 
   Polymer({
 
     ready: function() {
       console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
+    },
+
+    keyChanged: function(){
+      toTop();
     }
 
   });
