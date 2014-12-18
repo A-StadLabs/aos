@@ -45,6 +45,17 @@
     <div id="roledefinition">
     <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small></div>
     </template>
+
+    <!-- Sorteer dingen -->
+    <div id="generalsort" horizontal layout center start-justified wrap>
+      <p>Sorteer op</p>
+      <button class="sortbtn" on-tap="{{sortthis}}">Meeste votes</button>
+      <button class="sortbtn" on-tap="{{sorttime}}">Meest recent gepost</button>
+      <button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
+      <button class="sortbtn" on-tap="{{sortanswer}}">Meest recent antwoord</button>
+    </div>
+    <!-- //Sorteer dingen -->
+
     <template repeat="{{k in keys}}">
         <babbel-babbel key="{{k}}" mode="super"></babbel-babbel>
     </template>
@@ -59,6 +70,17 @@
         <babbel-babbel key="{{selectedItem}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
         <template if="{{kidsOk}}">
           <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" childEvents="true" orderByChild="votes" on-data-change="{{cdatachange}}" log></firebase-element>
+          
+          <!-- Sorteer dingen -->
+          <div id="generalsort" horizontal layout center start-justified wrap>
+            <p>Sorteer op</p>
+            <button class="sortbtn" on-tap="{{sortthis}}">Meeste votes</button>
+            <button class="sortbtn" on-tap="{{sorttime}}">Meest recent gepost</button>
+            <button class="sortbtn" on-tap="{{sortchild}}">Meest antwoord</button>
+            <button class="sortbtn" on-tap="{{sortanswer}}">Meest recent antwoord</button>
+          </div>
+          <!-- //Sorteer dingen -->
+
           <template repeat="{{c in ckeys}}">
             <babbel-babbel key="{{c}}" mode="child"></babbel-babbel>  
           </template>
@@ -71,13 +93,6 @@
   </template>
 
   <script>
-  function getHash(){
-      var hash = window.location.hash;
-      return hash;
-    }
-
-
-
     Polymer({
 
       ready: function() {

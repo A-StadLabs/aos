@@ -74,6 +74,37 @@ small {
 	opacity: 0.5;
 }
 
+#generalsort {
+	background-color: white;
+	width: 76vw;
+	padding: 30px 12vw 5px 12vw;
+	margin: 0px;
+}
+
+
+#generalsort p {
+	color: #666666;
+	font-size: 11px;
+	margin: 0px 10px 0px 0px;
+}
+
+.sortbtn {
+	border: 1px solid #EBEBEB;
+	border-bottom: 1px solid #999999;
+	color: #666666;
+	background-color: white;
+	border-radius: 0px;
+	font-family: 'Open Sans', sans-serif;
+	padding: 4px 6px 4px 6px;
+	outline: 0;
+	margin: 0px 5px 0px 0px;
+}
+
+.sortbtn:hover {
+	border: 1px solid rgba(149,210,183,0.5);
+	border-bottom: 1px solid #6EB897;
+	color: #6EB897;
+}
 
 
 
