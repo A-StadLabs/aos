@@ -36,12 +36,12 @@
       <input value="{{sharelinkurl}}" onFocus="this.select();" />
     </core-overlay>
 
-    <core-animated-pages selected="0" id="scenes" transitions="hero-transition">
-
-    <section>
     <div class="canvas">
 
     <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+
+    <babbel-babbel key="{{selectedItem}}" object="{{selectedObject}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
+
 
     <template if="{{$.globals.values.user}}">  
       <ba-poster path="/" mode="parent" role="user"></ba-poster>
@@ -68,23 +68,8 @@
     </template>
 
     </div>
-    </section>
 
-    <section>
-    <div class="canvas">
-
-        <babbel-babbel key="{{previousItem}}" mode="previous"></babbel-babbel>
-        <babbel-babbel key="{{selectedItem}}" object="{{selectedObject}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
-        <template if="{{kidsOk}}">
-          <firebase-element id="kids" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{selectedItem}}/children/" data="{{cdata}}" keys="{{ckeys}}" childEvents="true" orderByChild="votes" on-data-change="{{cdatachange}}"></firebase-element>
-          <template repeat="{{c in answers}}">
-            <babbel-babbel key="{{c.key}}" object="{{c}}" mode="child"></babbel-babbel>  
-          </template>
-        </template>
-    </div>
-    </section>
-
-    </core-animated-pages>
+  
 
   </template>
 
@@ -97,6 +82,8 @@
         this.kidsOk = true; 
 
         this.$.sorting.selected = 'votes';
+
+        this.selectedItem = "/";
 
         var that = this;
 
@@ -170,9 +157,10 @@ return formattedTime = year + '-' + (month+1) + '-'+ day + ' ' + (hours-2) + ':'
         var messages = [];
         var data = this.data;
         var keys = this.keys;
+        var selectedItem = this.selectedItem;
         for (var i = keys.length - 1; i >= 0; i--) {
           //console.log(data[keys[i]]);
-          if(data[keys[i]].parent=='/'){
+          if(data[keys[i]].parent==selectedItem){
         var tijd = this.convertTimestamp(data[keys[i]].time);
         var lastpost = this.convertTimestamp(data[keys[i]].lastpost);
           messages.push({ 
