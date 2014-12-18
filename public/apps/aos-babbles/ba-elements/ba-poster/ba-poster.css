@@ -57,3 +57,13 @@ small {
 	background-color: #F5F5F5;
 
 }
+
+
+
+.addattach {
+	font-size: 0.75em;
+	font-weight: 600;
+	text-decoration: underline;
+	margin: 10px 0px 20px 0px;
+	color: #219dc8;
+}
