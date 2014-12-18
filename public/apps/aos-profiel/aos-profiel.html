@@ -10,9 +10,10 @@
   <link rel="stylesheet" href="aos-profiel.css" />
     <aos-globals id="globals"></aos-globals>
 
-  <template if="{{!$.globals.values.user}}">
+  <template if="{{!$.globals.values.user}}" id="inlog">
     <div vertical layout center center-justified id="canvas">
     <h1>Aanmelden</h1>
+    <p>Met A-profiel of AD account.</p>
     <small>{{error}}</small>
     <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
     <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
@@ -52,11 +53,27 @@
       ready: function() {
 
       	console.log('profiel app loaded.');
+
+        this.addEventListener('keypress', function(e) {
+          
+          if (e.keyCode == 13) {
+              
+              //that.enter();
+              //ajax.go();
+              this.loginSubmit();
+          };
+          
+        });
+
+
         },
 
         logout: function(){
-          this.$.logoutAjax.go();
+          delete this.$.globals.values;
           delete this.$.globals.values.user;
+          delete this.username;
+          delete this.password;
+          this.$.logoutAjax.go();
         },
 
         loginSubmit: function(){
@@ -80,6 +97,8 @@
             console.log('inlog error');
             this.error = "Er ging iets fout bij het aanmelden.";
             //delete this.$.globals.values.user;
+            delete this.username;
+            delete this.password;
           };
         },
 

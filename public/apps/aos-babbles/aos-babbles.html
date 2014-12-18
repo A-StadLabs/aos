@@ -2,7 +2,7 @@
 <link rel="import" href="elements.html">
 
 <polymer-element name="aos-babbles" attributes="key sort">
-<template>
+<template id="aos-babbles">
   <link rel="stylesheet" href="aos-babbles.css" />
   <div class="leaderboard">
     <img class="stralendeA" src="images/astadlabs.svg">
@@ -13,22 +13,39 @@
       </div>
     </div>
   </div>
+
+  <!--  Globale variabelen gelijk user en zo inladen. -->
   <aos-globals id="globals"></aos-globals>
+
+  <!--  Checken of we die user al in onze app hebben zitten of nie.
+        Indien niet, aanmaken die user. -->
   <ba-user bauser="{{bauser}}"></ba-user>
+
+  <!--  Hier trekken we al ons data uit firebase binnen. 
+        Wordt opnieuw geformatteerd om makkelijker te kunnen handlen in Polymer. -->
   <ba-data key="{{key}}" response="{{messages}}" headline="{{head}}"></ba-data>
 
+  <!--  Dit elementje is de link die je kan gebruiken om te sharen. 
+        Wordt later vervangen door social media sharing buttons. -->
   <core-overlay id="sharelink" layered backdrop>
     <input value="{{sharelinkurl}}" onFocus="this.select();" />
   </core-overlay>
 
+  <!-- Hier begint onze canvas. -->
   <div class="canvas">
     
+    <!-- Hier laten we de head zien, of niet. Hangt ervan af of je op de "home" zit of niet. -->
     <template if="{{key!='home'}}">
     <babbel-babbel key="{{head.key}}" data="{{head.data}}" id="parent"></babbel-babbel>
     </template>
+
+    <!-- Hier laten we de "poster" zien. Hangt ervan af of je mag posten of niet.  -->
     <template if="{{$.globals.values.user}}">  
       <ba-poster path="{{key}}" mode="parent" role="user"></ba-poster>
     </template>
+
+<!-- Als we geen user vinden is hij niet aangemeld dus vragen we vriendelijk om aan te melden.
+ -->    
     <template if="{{!$.globals.values.user}}">  
       <div id="roledefinition">
         <small><a is="pushstate-anchor" href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small>
@@ -39,33 +56,34 @@
     <div id="generalsort" horizontal layout center start-justified wrap>
       <p>Sorteer op</p>
       <core-selector valueattr="sort" selected="{{sort}}" id="sorting">
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="votes">Meeste votes</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="time">Meest recent gepost</button>
-        <button class="sortbtn" active?="{{sorter==this.sort}}" sort="numchildren">Meeste antwoorden</button>
+        <button class="sortbtn" active?="{{sort==this.sort}}" sort="votes">Meeste votes</button>
+        <button class="sortbtn" active?="{{sort==this.sort}}" sort="time">Meest recent gepost</button>
+        <button class="sortbtn" active?="{{sort==this.sort}}" sort="numchildren">Meeste antwoorden</button>
         <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent beantwoord</button>
       </core-selector>
     </div>
 
     <!-- De lijst -->
-    <template repeat="{{k in messages | orderBy(sorter, true) }}">
+    <template repeat="{{k in messages | orderBy(sort, true) }}">
       <babbel-babbel key="{{k.key}}" data="{{k}}" mode="parent" sort="{{sort}}"></babbel-babbel>
       <hr>
     </template>
   </div>
 </template>
 
+
 <script>
+ 
   Polymer({
 
     ready: function() {
       console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
-      if(this.sort){
-      this.$.sorting.selected = this.sort;
-    } else {
-      this.$.sorting.selected = 'votes';
+    },
+
+    keyChanged: function(){
+      this.fire('to-Top');
     }
 
-    }
   });
 </script>
 </polymer-element>

@@ -15,6 +15,19 @@ h1 {
 	color: white;
 }
 
+p {
+	font-weight: 300;
+	color: white;
+}
+
+small {
+	margin-bottom: 10px;
+	font-size: 0.75em;
+	color: #dddddd;
+	font-weight: 400;
+/*	padding: 5px 10px 5px 10px;	*/
+}
+
 input {
 	width: 30%;
 	margin-bottom: 10px;
