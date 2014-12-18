@@ -55,8 +55,6 @@
       </div>
     </div>
 
-
-
     <template if="{{!$.globals.values.user}}">  
       <div id="roledefinition">
         <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small>
@@ -132,46 +130,20 @@
 
   Polymer({
 
-    ready: function(){
+      ready: function(){
         //this.parent = this.object.parent;
-        //this.realtime = '2014 12 16 22:28:33';
-
       },
 
       sharelink: function(){
         this.fire('share-link', { linkurl: this.key })
       },
 
-    
-
-
       handleResponse: function(){
         this.parent = this.object.parent;
-
-        if(this.mode=='parent'){
-          if(!this.data.children){
-            this.fire('has-no-kids', {key: this.key, parent: this.parent});
-          };
-          if(this.data.children){
-            this.fire('has-kids', {key: this.key, parent: this.parent});
-            var kids = this.data.children;
-            //console.log('hoeveel kinderen? ',kids);
-          };
-        };
       },
 
       objectChanged: function(){
        
-      },
-
-      fireTerug: function(){
-        this.fire('babbel-terug', {key: this.key, parent: this.parent});
-        delete this.key;
-      },
-
-      fireHome: function(){
-        this.fire('babbel-home');
-        delete this.key;
       },
 
       fireSelect: function(){

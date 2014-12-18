@@ -2,26 +2,18 @@
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
-
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/hero-transition.html">
-
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
-
 <link rel="import" href="../../bower_components/polymer-filters/polymer-filters.html">
-
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
-
 <link rel="import" href="ba-elements/ba-poster/ba-poster.html">
-
-
 <link rel="import" href="ba-elements/ba-user/ba-user.html">
 <link rel="import" href="ba-elements/babbel-babbel/babbel-babbel.html">
 
 <polymer-element name="aos-babbles" attributes="key">
 <template>
   <link rel="stylesheet" href="aos-babbles.css" />
-
   <div class="leaderboard">
     <img class="stralendeA" src="images/astadlabs.svg">
     <div horizontal layout wrap center start-justified>
@@ -31,170 +23,117 @@
       </div>
     </div>
   </div>
-
   <aos-globals id="globals"></aos-globals>
   <ba-user bauser="{{bauser}}"></ba-user>
-
   <core-overlay id="sharelink" layered backdrop>
-  <input value="{{sharelinkurl}}" onFocus="this.select();" />
-</core-overlay>
+    <input value="{{sharelinkurl}}" onFocus="this.select();" />
+  </core-overlay>
 
-<div class="canvas">
-
-  <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
-
-  <babbel-babbel hidden?="{{selectedItem=='home'}}" key="{{selectedItem}}" object="{{selectedObject}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
-
-  <template if="{{$.globals.values.user}}">  
-    <ba-poster path="/" mode="parent" role="user"></ba-poster>
-  </template>
-  <template if="{{!$.globals.values.user}}">  
-    <div id="roledefinition">
-      <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small></div>
+  <div class="canvas">
+    <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+    <babbel-babbel hidden?="{{selectedItem=='home'}}" key="{{selectedItem}}" object="{{selectedObject}}" mode="parent" id="parent" kids="{{kids}}"></babbel-babbel>
+    <template if="{{$.globals.values.user}}">  
+      <ba-poster path="/" mode="parent" role="user"></ba-poster>
+    </template>
+    <template if="{{!$.globals.values.user}}">  
+      <div id="roledefinition">
+        <small><a href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small>
+      </div>
     </template>
 
     <!-- Sorteer dingen -->
     <div id="generalsort" horizontal layout center start-justified wrap>
       <p>Sorteer op</p>
-      
       <core-selector valueattr="sort" selected="{{sorter}}" id="sorting">
       <button class="sortbtn" active?="{{sorter==this.sort}}" sort="votes">Meeste votes</button>
       <button class="sortbtn" active?="{{sorter==this.sort}}" sort="time">Meest recent gepost</button>
       <button class="sortbtn" active?="{{sorter==this.sort}}" sort="numchildren">Meeste antwoorden</button>
       <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent beantwoord</button>
-    </core-selector>
+      </core-selector>
+    </div>
+
+    <template repeat="{{k in messages | orderBy(sorter, true) }}">
+      <babbel-babbel key="{{k.key}}" object="{{k}}" mode="super"></babbel-babbel>
+    </template>
   </div>
-
-  <template repeat="{{k in messages | orderBy(sorter, true) }}">
-    <babbel-babbel key="{{k.key}}" object="{{k}}" mode="super"></babbel-babbel>
-  </template>
-
-</div>
-
 </template>
 
 <script>
   Polymer({
 
     ready: function() {
-     console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
+      console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
+      this.$.sorting.selected = 'votes';
+      console.log('selItem: ', this.selectedItem);
+      this.selectedItem = this.key;
 
-     this.kidsOk = true; 
+      var that = this;
 
-     this.$.sorting.selected = 'votes';
+      this.haschildren = this.$.parent.kids;
 
-     
+      document.addEventListener('user-changed', function(e){
+        console.log('Values changed', e.detail.data);
+      });
 
-    console.log('selItem: ', this.selectedItem);
+      document.addEventListener('babbel-select', function(e){
+        that.previousItem = that.selectedItem;
+        that.selectedItem = e.detail.key;
+        that.selectedObject = e.detail.object;
+        that.datachange();
+        console.log(that.selectedObject);
+        window.location.hash = '#/babbles/'+that.selectedItem;
+        //that.mainkey = e.detail.key;
+        that.parentItem = e.detail.parent;
+        //that.$.scenes.selected = 1;
+      });
 
-     this.selectedItem = this.key;
+      document.addEventListener('share-link', function(e){
+        that.sharelinkurl = 'https://astad.herokuapp.com/#/babbles/'+e.detail.linkurl;
+        that.$.sharelink.toggle();
+      });
+    },
 
-     var that = this;
+    convertTimestamp: function(timestamp) {
+      var date = new Date(timestamp);
+      var day = date.getDate();
+      var month = date.getMonth();
+      var year = date.getFullYear();
+      var hours = date.getHours();
+      var minutes = "0" + date.getMinutes();
+      var seconds = "0" + date.getSeconds();
+      return formattedTime = year + '-' + (month+1) + '-'+ day + ' ' + (hours-2) + ':' + minutes.substr(minutes.length-2) + ':' + seconds.substr(seconds.length-2);
+    },
 
-     this.haschildren = this.$.parent.kids;
-
-     document.addEventListener('user-changed', function(e){
-      console.log('Values changed', e.detail.data);
-    });
-
-     document.addEventListener('has-no-kids', function(e){
-      that.kidsOk = false;
-    });
-
-     document.addEventListener('has-kids', function(e){
-      that.kidsOk = true;
-    });
-
-     document.addEventListener('babbel-select', function(e){
-      that.previousItem = that.selectedItem;
-      that.selectedItem = e.detail.key;
-      that.selectedObject = e.detail.object;
-      that.datachange();
-      console.log(that.selectedObject);
-      window.location.hash = '#/babbles/'+that.selectedItem;
-          //that.mainkey = e.detail.key;
-          that.parentItem = e.detail.parent;
-          //that.$.scenes.selected = 1;
-        });
-
-     document.addEventListener('babbel-terug', function(e){
-          //that.previousItem = that.selectedItem;
-          
-          if(e.detail.parent){
-            that.selectedItem = e.detail.parent;
-            that.parentItem = that.selectedItem;
-            //window.location.hash = '#/babbles/'+that.selectedItem;
-            //that.$.scenes.selected = 1;
-          } else {
-            //that.$.scenes.selected = 0;
-            //window.location.hash = '#/babbles/';
-            this.selectedItem = "/";
-          }
-        });
-
-     document.addEventListener('babbel-home', function(e){
-          //window.location.hash = '#/babbles/';
-          //that.$.scenes.selected = 0;
-          this.selectedItem = "/";
-        });
-
-     document.addEventListener('share-link', function(e){
-      that.sharelinkurl = 'https://astad.herokuapp.com/#/babbles/'+e.detail.linkurl;
-      that.$.sharelink.toggle();
-    });
-   },
-
-   convertTimestamp: function(timestamp) {
-    var date = new Date(timestamp);
-// hours part from the timestamp
-var day = date.getDate();
-var month = date.getMonth();
-var year = date.getFullYear();
-var hours = date.getHours();
-// minutes part from the timestamp
-var minutes = "0" + date.getMinutes();
-// seconds part from the timestamp
-var seconds = "0" + date.getSeconds();
-
-// will display time in 10:30:23 format
-return formattedTime = year + '-' + (month+1) + '-'+ day + ' ' + (hours-2) + ':' + minutes.substr(minutes.length-2) + ':' + seconds.substr(seconds.length-2);},
-
-datachange: function(){
-  var messages = [];
-  var data = this.data;
-  var keys = this.keys;
-  var selectedItem = this.selectedItem;
-  for (var i = keys.length - 1; i >= 0; i--) {
-          //console.log(data[keys[i]]);
-          if(data[keys[i]].parent==selectedItem){
-            var tijd = this.convertTimestamp(data[keys[i]].time);
-            var lastpost = this.convertTimestamp(data[keys[i]].lastpost);
-            messages.push({ 
-              'key': keys[i],
-              'children': data[keys[i]].children,
-              'lastpost': lastpost,
-              'numchildren': data[keys[i]].numchildren,
-              'numvotes': data[keys[i]].numvotes,
-              'parent': data[keys[i]].parent,
-              'role': data[keys[i]].role,
-              'text': data[keys[i]].text,
-              'time': tijd,
-              'votes': data[keys[i]].votes 
-            });
-          };
+    datachange: function(){
+      var messages = [];
+      var data = this.data;
+      var keys = this.keys;
+      var selectedItem = this.selectedItem;
+      for (var i = keys.length - 1; i >= 0; i--) {
+        if(data[keys[i]].parent==selectedItem){
+          var tijd = this.convertTimestamp(data[keys[i]].time);
+          var lastpost = this.convertTimestamp(data[keys[i]].lastpost);
+          messages.push({ 
+          'key': keys[i],
+          'children': data[keys[i]].children,
+          'lastpost': lastpost,
+          'numchildren': data[keys[i]].numchildren,
+          'numvotes': data[keys[i]].numvotes,
+          'parent': data[keys[i]].parent,
+          'role': data[keys[i]].role,
+          'text': data[keys[i]].text,
+          'time': tijd,
+          'votes': data[keys[i]].votes 
+          });
         };
-        //console.log(messages);
-        this.messages = messages;
-        //this.keys.reverse();
-      },
+      };
+      this.messages = messages;
+    },
 
-      keyChanged: function(){
-      
-        this.selectedItem = this.key;
-      
-        this.datachange();
-
-      }
-    });
+    keyChanged: function(){
+      this.selectedItem = this.key;
+      this.datachange();
+    }
+  });
 </script>
 </polymer-element>
