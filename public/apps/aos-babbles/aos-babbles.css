@@ -19,7 +19,12 @@ a {
 	margin: 0px 0px 20px 0px;
 	background-color: #F5F5F5;
 }
-
+hr {
+	color: #EBEBEB;
+	background-color: #EBEBEB;
+	height: 1px;
+	border: none;
+}
 
 small {
 	font-size: 0.75em;

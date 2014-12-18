@@ -14,8 +14,8 @@
     <div vertical layout center center-justified id="canvas">
     <h1>Aanmelden</h1>
     <small>{{error}}</small>
-    <input placeholder="Gebruikersnaam" required  value="{{username}}"></input>
-    <input placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
+    <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
+    <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
     <h3 hidden?="{{!loading}}">Laden...</h3>
     <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button>
 
