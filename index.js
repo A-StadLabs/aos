@@ -5,6 +5,7 @@ var toughcookie = require('tough-cookie');
 var session = require('express-session');
 
 
+app.set('port', (process.env.PORT || 5000));
 
 // serveer de polymeer
 app.use(express.static(__dirname + '/public'));
