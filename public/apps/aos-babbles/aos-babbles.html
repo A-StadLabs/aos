@@ -22,9 +22,7 @@
   </core-overlay>
 
   <div class="canvas">
-    <!-- <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/" data="{{data}}" orderByChild="parent" equalTo="{{key}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
-
-    <firebase-element id="berichten" location="https://blazing-fire-6426.firebaseio.com/babbles/messages/{{key}}/" data="{{pdata}}" keys="{{pkeys}}" on-data-change="{{pdatachange}}" log></firebase-element> -->
+    
     <template if="{{key!='home'}}">
     <babbel-babbel key="{{head.key}}" data="{{head.data}}" id="parent"></babbel-babbel>
     </template>
@@ -50,7 +48,7 @@
 
     <!-- De lijst -->
     <template repeat="{{k in messages | orderBy(sorter, true) }}">
-      <a is="pushstate-anchor" href="#/babbles/{{k.key}}"><babbel-babbel key="{{k.key}}" data="{{k}}" mode="parent"></babbel-babbel></a>
+      <babbel-babbel key="{{k.key}}" data="{{k}}" mode="parent"></babbel-babbel>
       <hr>
     </template>
   </div>

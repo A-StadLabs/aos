@@ -25,7 +25,7 @@
       <div class="voterij"><p>{{data.votes}}</p></div>
     </template>
     <div vertical layout start>
-      <h2>{{data.text}}</h2>
+      <h2><a is="pushstate-anchor" href="#/babbles/{{key}}">{{data.text}}</a></h2>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
       <p>
         <img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}">
