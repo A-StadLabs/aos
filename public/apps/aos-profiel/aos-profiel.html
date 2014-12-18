@@ -18,9 +18,10 @@
     <img src="{{responseUser.data.avatarUrl}}">
     <input placeholder="Gebruikersnaam" required  value="{{username}}"></input>
     <input placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
+    <h3 hidden?="{{!loading}}">Laden...</h3>
     <button id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button>
 
-   <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}">
+   <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
    </core-ajax>
    </template>
 
