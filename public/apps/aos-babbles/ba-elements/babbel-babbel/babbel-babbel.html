@@ -5,7 +5,7 @@
 <link rel="import" href="../ba-getpermissions/ba-getpermissions.html">
 <link rel="import" href="../time-ago/src/time-ago.html">
 
-<polymer-element name="babbel-babbel" attributes="key data mode parent kids">
+<polymer-element name="babbel-babbel" attributes="key data mode parent kids sort">
 
 <template>
 
@@ -25,7 +25,7 @@
       <div class="voterij"><p>{{data.votes}}</p></div>
     </template>
     <div vertical layout start>
-      <h2><a is="pushstate-anchor" href="#/babbles/{{key}}">{{data.text}}</a></h2>
+      <h2><a is="pushstate-anchor" href="#/babbles/{{key}}/?sort={{sort}}">{{data.text}}</a></h2>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
       <p>
         <img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}">
