@@ -11,21 +11,20 @@
     <aos-globals id="globals"></aos-globals>
 
   <template if="{{!$.globals.values.user}}">
-
-
     <h1>Aanmelden</h1>
     <small>{{error}}</small>
-    <img src="{{responseUser.data.avatarUrl}}">
     <input placeholder="Gebruikersnaam" required  value="{{username}}"></input>
     <input placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
     <h3 hidden?="{{!loading}}">Laden...</h3>
-    <button id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button>
+    <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button>
 
    <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
    </core-ajax>
    </template>
 
-   <template if="{{$.globals.values.user}}">
+   <template if="{{$.globals.values.user.data}}">
+   <button on-tap="{{logout}}">Logout</button>
+   <img class="avatar" src="{{responseUser.data.avatarUrl}}">
     <h1>{{$.globals.values.user.data.firstName}}</h1>
     <h3>JSON userobject</h3>
     <p>{{$.globals.values.userJSON}}</p>
@@ -33,8 +32,6 @@
     <p>{{$.globals.values.crsuserJSON}}</p>
     <h3>CRS medewerker gegevens</h3>
     <p>{{$.globals.values.crsmedewerkerJSON}}</p>
-    <button on-tap="{{logout}}">Logout</button>
-    
    </template>
 
    <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
@@ -52,7 +49,6 @@
       ready: function() {
 
       	console.log('profiel app loaded.');
-        
         },
 
         logout: function(){
