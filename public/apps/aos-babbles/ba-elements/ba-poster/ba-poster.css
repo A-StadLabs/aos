@@ -34,6 +34,12 @@
 }
 
 
+.permission {
+	font-weight: 600;
+		color: #333333;
+
+}
+
 small {
 	font-size: 0.75em;
 	color: #666666;
@@ -42,31 +48,32 @@ small {
 }
 
 .bewerkbtn {
-	font-family: 'Open sans', sans-serif;
-	color: #666666;
-	border: none;
-	font-weight: 600;
-	text-decoration: underline;
+	width: 16px;
 	margin: 0px;
-	padding: 5px 0px 0px 5px;
+	padding: 5px 0px 5px 8px;
 	-webkit-appearance: none;
 	outline: 0;
-	cursor: pointer;
-	background-color: #F5F5F5;
+		cursor: pointer;
 
 }
 
 
+.bewerkbtn:hover {
+	cursor: pointer;
+}
+
+
+
 .attach {
-	margin: 5px 0px 10px 0px;
+	margin: 8px 0px 8px 0px;
 }
 
 
 .attach img{
-	width: 22px;
+	width: 28px;
 	margin: 0px;
-	padding: 8px 8px 8px 0px;
-		opacity: 0.5;
+	padding: 10px;	
+	opacity: 0.85;
 }
 
 

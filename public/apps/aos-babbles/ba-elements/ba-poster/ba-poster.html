@@ -16,15 +16,17 @@
     <div vertical layout start>
 
     <ba-getpermissions role="{{role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
+    
 
+    <div  vertical layout>
+      <div  horizontal layout wrap>
     <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}"  hidden?="{{!usercanpost}}" />
 
-
-    <div class="attach" vertical layout>
-      <div horizontal layout>
+      <div class="attach" horizontal layout center>
     <div on-tap="{{toggleattach}}"><img src="../../images/upload-link.svg"></div>
     <div on-tap="{{togglefoto}}"><img src="../../images/upload-foto.svg"></div>
     <div on-tap="{{togglevideo}}"><img src="../../images/upload-video.svg"></div>
+      </div>
       </div>
 
     <core-collapse id="attach">
@@ -34,7 +36,7 @@
 
     <core-collapse id="roledefinition">
     <template if="{{usercanpost}}">
-    	<small>Iedereen mag dit zien, iedereen met {{permissions}} mag reageren.<button class="bewerkbtn" icon="{{ roleselected ? 'lock-outline' : 'lock-open'}}" on-tap="{{toggleRoles}}">bewerken</button></small>
+    	<div horizontal layout center><small>Alle <span class="permission">{{permissions}}s</span> mogen reageren.</small><img src="../../images/locked.svg" class="bewerkbtn" on-tap="{{toggleRoles}}"></div>
     </template>
     <template if="{{!usercanpost}}">
     	<small>Je kan niet reageren.</small>
