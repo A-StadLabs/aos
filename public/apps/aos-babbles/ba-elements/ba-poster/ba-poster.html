@@ -7,7 +7,7 @@
 <link rel="import" href="../ba-setpermissions/ba-setpermissions.html">
 <link rel="import" href="../ba-getpermissions/ba-getpermissions.html">
 
-<polymer-element name="ba-poster" attributes="path mode role">
+<polymer-element name="ba-poster" attributes="path mode role hasAttach">
   <template>
   	<aos-globals id="globals" values="{{globs}}"></aos-globals>
   	<ba-user bauser="{{bauser}}"></ba-user>
@@ -18,8 +18,10 @@
     <ba-getpermissions role="{{role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
 
     <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}"  hidden?="{{!usercanpost}}" />
-    <div on-tap="" class="addattach">een bestand toevoegen</div>
-
+    <div on-tap="{{toggleattach}}" class="addattach">iets toevoegen</div>
+    <core-collapse id="attach">
+      <p>link: <input value="{{link}}" placeholder="Plak een link" id="addlink" /></p>
+    </core-collapse>
 
     <core-collapse id="roledefinition">
     <template if="{{usercanpost}}">
@@ -47,6 +49,11 @@
     		this.$.roledefinition.toggle();
     	},
 
+      toggleattach: function(){
+        this.$.attach.toggle();
+        this.hasAttach = !this.hasAttach;
+      },
+
     	ready: function(){
     		this.postdata = '';
     		this.valuek = '';
@@ -66,36 +73,12 @@
 
     	},
 
+      enterbeta: function(){
+        if(this.hasAttach){
+            console.log('heeft attach ', this.link);
+          };
+      },
 
-
-			// document.addEventListener('user-changed', function(e){
-   //        		console.log('Values changed', e.detail.data);
-   //        		console.log('roles: ', e.detail.data.roles);
-   //        		that.checkPermissions(e.detail.data.roles);
-   //      	});
-
-	  // 		this.$.permissions.addEventListener('closethisthing', function() {
-   //  			that.$.rolescoll.toggle();
-   //  			that.$.roledefinition.toggle();
-	  // 		});
-
-
-
-
-   //  	},
-
-   //  	checkPermissions: function(roles){
-   //  		console.log('check permissions', roles);
-   //  		var roles = this.globs.user.data.roles;
-   //    		for (var i = roles.length - 1; i >= 0; i--) {
-   //    			console.log(roles[i]);
-   //    			console.log(this.role);
-   //    			if(roles[i]==this.role){
-   //    				console.log('found match');
-   //    				this.usercanpost = true;
-   //    			};
-   //    		};
-   //  	},
 
     	enter: function(){
     		var that = this;
@@ -103,11 +86,26 @@
     			var path = this.path
     			var valuek = this.valuek;
     			var role = this.permissions;
+          // Checken of er een attach is
+          if(this.hasAttach){
+            console.log('heeft attach ', this.link);
+            var link = this.link;
+            // Als er iets is doen we er wat mee. 
+            var userFB0 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/things/");
+            var newpostRef0 = userFB0.push({"type":"link", "object":link, "time":Firebase.ServerValue.TIMESTAMP});
+          var newThingKey = newpostRef0.key();
+
+          };
     			console.log('Saven maar: ', this.valuek);
     			var name = '';
     			var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/");
 	    		var newpostRef = userFB.push({"text":valuek, "parent":path, "role":role, "time":Firebase.ServerValue.TIMESTAMP});
 	    		var newKey = newpostRef.key();
+
+          if(newThingKey){
+            var userFBa = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+newKey+"/things/"+newThingKey);
+          var newpostRefa = userFBa.set(true);
+          };
 
 	    		var userFB3 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+newKey+"/numchildren/");
 	    		var newpostRef3 = userFB3.set(0);
@@ -123,10 +121,6 @@
 	    		var userFB7 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+path+"/lastpost/");
 	    		var newpostRef7 = userFB7.set(Firebase.ServerValue.TIMESTAMP);
 
-	   
-	    			// var userFB1 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/parents/"+path+"/children/"+newKey+"/");
-	    			// var newpostRef1 = userFB1.set({"text":valuek, "parent":path});
-
 					var userFB2 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/messages/"+path+"/children/"+newKey+"/");
 					userFB2.set({"child": true});
 
@@ -137,13 +131,6 @@
           				addPlay.transaction(function(currentRank) {
            				 return currentRank+1;
           		});
-
-
-			
-				// if(this.mode=='parent'){
-				// 	var userFB2 = new Firebase("https://blazing-fire-6426.firebaseio.com/babbles/parents/"+newKey+"/");
-				// 	userFB2.set({"parent": true});
-				// }
 	    		
 	    		delete userFB;
 	    		delete this.valuek;

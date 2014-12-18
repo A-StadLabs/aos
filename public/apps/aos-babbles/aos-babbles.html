@@ -13,22 +13,39 @@
       </div>
     </div>
   </div>
+
+  <!--  Globale variabelen gelijk user en zo inladen. -->
   <aos-globals id="globals"></aos-globals>
+
+  <!--  Checken of we die user al in onze app hebben zitten of nie.
+        Indien niet, aanmaken die user. -->
   <ba-user bauser="{{bauser}}"></ba-user>
+
+  <!--  Hier trekken we al ons data uit firebase binnen. 
+        Wordt opnieuw geformatteerd om makkelijker te kunnen handlen in Polymer. -->
   <ba-data key="{{key}}" response="{{messages}}" headline="{{head}}"></ba-data>
 
+  <!--  Dit elementje is de link die je kan gebruiken om te sharen. 
+        Wordt later vervangen door social media sharing buttons. -->
   <core-overlay id="sharelink" layered backdrop>
     <input value="{{sharelinkurl}}" onFocus="this.select();" />
   </core-overlay>
 
+  <!-- Hier begint onze canvas. -->
   <div class="canvas">
     
+    <!-- Hier laten we de head zien, of niet. Hangt ervan af of je op de "home" zit of niet. -->
     <template if="{{key!='home'}}">
     <babbel-babbel key="{{head.key}}" data="{{head.data}}" id="parent"></babbel-babbel>
     </template>
+
+    <!-- Hier laten we de "poster" zien. Hangt ervan af of je mag posten of niet.  -->
     <template if="{{$.globals.values.user}}">  
       <ba-poster path="{{key}}" mode="parent" role="user"></ba-poster>
     </template>
+
+<!-- Als we geen user vinden is hij niet aangemeld dus vragen we vriendelijk om aan te melden.
+ -->    
     <template if="{{!$.globals.values.user}}">  
       <div id="roledefinition">
         <small><a is="pushstate-anchor" href="/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small>
@@ -56,10 +73,7 @@
 
 
 <script>
-  function toTop(){
-  document.querySelector('#mainContainer').scroller.scrollTop = 0;
-}
-
+ 
   Polymer({
 
     ready: function() {
@@ -67,7 +81,7 @@
     },
 
     keyChanged: function(){
-      toTop();
+      this.fire('to-Top');
     }
 
   });
