@@ -6,7 +6,6 @@
   document.addEventListener('polymer-ready', function() {
     // Perform some behaviour
     console.log('aOS is ready to rock!');
-
   });
 
 // wrap document so it plays nice with other libraries

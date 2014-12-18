@@ -1,3 +1,16 @@
+:unresolved {
+    display: flex;
+    justify-content: center;
+    background: rgba(255,255,255,0.5);
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+  }
+  :unresolved:after {
+    padding: 15px;
+    content: 'loading...';
+    color: #ccc;
+  }
+
 :host {
 	display: block;
 /*	height: 100%;

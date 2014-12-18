@@ -2,7 +2,7 @@
 <link rel="import" href="elements.html">
 
 <polymer-element name="aos-babbles" attributes="key sort">
-<template>
+<template id="aos-babbles">
   <link rel="stylesheet" href="aos-babbles.css" />
   <div class="leaderboard">
     <img class="stralendeA" src="images/astadlabs.svg">
@@ -54,14 +54,16 @@
   </div>
 </template>
 
+
 <script>
+  
+
   Polymer({
 
     ready: function() {
       console.log('\r\r\n\naos: Babbles loaded.\n\n\r\r');
-     
-
     }
+
   });
 </script>
 </polymer-element>
