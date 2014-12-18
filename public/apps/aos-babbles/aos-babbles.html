@@ -27,7 +27,7 @@
     <babbel-babbel key="{{head.key}}" data="{{head.data}}" id="parent"></babbel-babbel>
     </template>
     <template if="{{$.globals.values.user}}">  
-      <ba-poster path="home" mode="parent" role="user"></ba-poster>
+      <ba-poster path="{{key}}" mode="parent" role="user"></ba-poster>
     </template>
     <template if="{{!$.globals.values.user}}">  
       <div id="roledefinition">
