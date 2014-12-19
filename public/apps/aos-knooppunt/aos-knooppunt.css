@@ -60,6 +60,12 @@ button {
 
 }
 
+.avataricon {
+	height: 30px;
+	margin: 4px 15px 0px 0px;
+	border-radius: 50%;
+}
+
 
 /* TILE desktop !!!!!!!!!!! */
 
