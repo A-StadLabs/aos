@@ -4,8 +4,8 @@
 <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="28px" height="28px" viewBox="0 0 28 28" enable-background="new 0 0 28 28" xml:space="preserve">
 <g>
-	<path fill="#00A291" d="M20.795,13.718v12.156H2.126V13.718H20.795 M22.921,11.592H0V28h22.921V11.592L22.921,11.592z"/>
+	<path fill="#333333" d="M20.795,13.718v12.156H2.126V13.718H20.795 M22.921,11.592H0V28h22.921V11.592L22.921,11.592z"/>
 </g>
-<path fill="none" stroke="#00A291" stroke-width="2.126" stroke-miterlimit="10" d="M5.061,11.791V8.057
-	c0,0-0.521-7.057,6.109-7.057h0.157c6.63,0,6.109,7.057,6.109,7.057v3.734"/>
+<path fill="none" stroke="#333333" stroke-width="2.126" stroke-miterlimit="10" d="M5.061,11.791V8.057C5.061,8.057,4.54,1,11.17,1
+	h0.157c6.63,0,6.108,7.057,6.108,7.057v3.734"/>
 </svg>
