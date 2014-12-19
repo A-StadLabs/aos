@@ -34,28 +34,40 @@
       </template>
       </template>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
+      
+
       <p horizontal layout center>
-                        <template if="{{data.time}}"><time-ago datetime="{{data.time}}" refresh delay="1000"></time-ago></template>
-<span class="commentvak">
-         <span class="green bold"> {{data.numchildren}}
-          <img class="babble" src="../../images/babble.svg"></span>
-          <template if="{{usercanpost}}">
-          <span class="green"> Jij kan reageren</span>
+
+        <template if="{{usercanpost}}">
+        <span class="commentvak2">
+         <span class="bold green"> {{data.numchildren}}
+            <img class="smallicon" src="../../images/babbles2.svg"></span>
+            <span class="green"> Jij kan reageren</span>
+          </span>
         </template>
-</span>
 
         <template if="{{!usercanpost}}">
-         <img class="lock" src="../../images/locked.svg">alle {{data.role}}s
+        <span class="commentvak1">
+         <span class="bold"> {{data.numchildren}}
+          <img class="smallicon" src="../../images/babbles.svg"></span>
+            <span class="transpar">
+              <img class="smallicon" src="../../images/locked.svg">Enkel {{data.role}}s
+            </span> 
+          </span>
         </template>
 
+        <template if="{{data.time}}"><span><time-ago datetime="{{data.time}}" refresh delay="1000"></time-ago></span></template>
 
-        <span class="grey">
-        Laatste reactie: 
+        <span class="lastpost">
+        - Laatste reactie: 
          <template if="{{data.lastpost}}"><time-ago datetime="{{data.lastpost}}" refresh delay="1000"></time-ago></template>
         </span>
+
         <img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}">
 
       </p>
+
+
     </div>
   </div>
 
