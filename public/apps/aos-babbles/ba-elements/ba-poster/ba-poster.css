@@ -1,6 +1,12 @@
 :host {
 	display: block;
-	margin: 20px 0px 50px 0px;
+}
+
+
+.posty {
+	margin: 20px 0px 30px 0px;
+	width: 100%;
+/*	background-color: yellow;*/
 }
 
 
@@ -14,18 +20,21 @@
 #poster {
 	background-color: white;
 	border: 1px solid #cccccc;
-	padding: 10px;
-	max-width: 70%;
+	padding: 10px 10px 10px 14px;
 	border-radius: 0px;
 	outline: 0;
 	border-style:solid;
 	-webkit-appearance: none;
+	width: 80%;
+	max-width: 600px;
 }
 
 
 #poster:focus {
 	border: 2px solid #00A291;
 }
+/*
+*/
 
 
 small {
@@ -45,15 +54,14 @@ small {
 
 
 
-#settingspane {
-	padding: 5px 10px 5px 10px;
-	margin: 0px 0px 0px 0px;
-	background-color: #F5F5F5;
+.settingstrigger {
+	padding: 0px;
+	margin: 2px 0px 0px 0px;
 }
 
 
 
-
+/*
 .bewerkbtn {
 	width: 16px;
 	margin: 0px;
@@ -67,17 +75,47 @@ small {
 .bewerkbtn:hover {
 	cursor: pointer;
 }
+*/
 
 
 
+.nostyle {
+	border: none;
+	-webkit-appearance: none;
+	background-color: inherit;
+	outline: 0;
+	cursor: pointer;
+}
+
+.settingsbtn {
+/*	background-color: #EBEBEB;*/
+	border: 1px solid #EBEBEB;
+	padding: 1px 10px 1px 10px;
+	margin: 0px 2px 0px 0px;
+}
+
+.settingsbtn:hover {
+background-color: #00A291;
+	border: 1px solid #00A291;
+
+/*	border: 1px solid rgba(0,162,145,0.35);
+	border-bottom: 1px solid #00A291;*/
+}
 
 
-.attach {
+.settingsbtn img {
+	width: 20px;
+	padding: 6px 2px 6px 2px;
+}
+
+
+
+.attachcoll {
 	margin: 8px 0px 8px 0px;
 }
 
 
-.attach img{
+/*.attachcoll img{
 	width: 28px;
 	margin: 0px;
 	padding: 10px;	
@@ -87,4 +125,4 @@ small {
 
 .attach img:hover {
 	opacity: 1;
-}
+}*/

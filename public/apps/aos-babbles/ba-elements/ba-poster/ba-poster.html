@@ -18,24 +18,36 @@
     <ba-getpermissions role="{{role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
     
 
-    <div  vertical layout>
+    <div  vertical layout class="posty">
       <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}"  hidden?="{{!usercanpost}}" />
 
 
       <core-collapse id="settingspane">
         <template if="{{usercanpost}}">
-    	   <div horizontal layout center on-tap="{{toggleRoles}}"><small>Alle <span class="permission">{{permissions}}s</span> mogen reageren.</small><img src="../../images/locked.svg" class="bewerkbtn"></div>
+    	   <div horizontal layout center class="settingstrigger">
+
+          <button class="nostyle settingsbtn" on-tap="{{toggleAttach}}"><img src="../../images/attach.svg"></button>
+          <button class="nostyle settingsbtn" on-tap="{{toggleRoles}}"><img src="../../images/locked2.svg"></button>
+
+        </div>
         </template>
+
         <template if="{{!usercanpost}}">
     	   <small>Je kan niet reageren.</small>
         </template>
+
      </core-collapse>
 
     <core-collapse id="rolescoll">
     	<div on-tap="{{toggleRoles}}">x</div>
-      <p>link: <input value="{{link}}" placeholder="Plak een link" id="addlink" /></p>
     	<ba-setpermissions id="permissions" permissions="{{permissions}}"></ba-setpermissions>
     </core-collapse>
+
+    <core-collapse id="attachcoll">
+      <div on-tap="{{toggleAttach}}">x</div>
+      <p>link: <input value="{{link}}" placeholder="Plak een link" id="addlink" /></p>
+    </core-collapse>
+
 
 	</div>
     <template if="{{!$.globals.values.user&&!usercanpost}}">
@@ -50,8 +62,10 @@
     		this.$.settingspane.toggle();
     	},
 
-      toggleattach: function(){
-        this.$.attach.toggle();
+      toggleAttach: function(){
+        this.$.attachcoll.toggle();
+        this.$.settingspane.toggle();
+
         this.hasAttach = !this.hasAttach;
       },
 

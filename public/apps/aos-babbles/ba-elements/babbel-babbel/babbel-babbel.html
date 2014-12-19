@@ -36,8 +36,8 @@
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
       <p>
         <template if="{{usercanpost}}">
-         <span class="green"> {{data.numchildren}}
-            <img class="babble" src="../../images/babbles2.svg"></span><!--  Jij kan reageren |  -->
+         <span class="grey"> {{data.numchildren}}
+            <img class="babble" src="../../images/babbles.svg"><!--  Jij kan reageren  --></span>
 
              <template if="{{data.time}}"><time-ago datetime="{{data.time}}" refresh delay="1000"></time-ago></template>
 
@@ -53,7 +53,7 @@
         <template if="{{!usercanpost}}">
          <span class="grey"> {{data.numchildren}}
           <img class="babble" src="../../images/babbles.svg">
-              /<img class="lock" src="../../images/locked.svg">Enkel {{data.role}}s </span>
+              -<img class="lock" src="../../images/locked.svg">Enkel {{data.role}}s </span>
 
    <template if="{{data.time}}"><span><time-ago datetime="{{data.time}}" refresh delay="1000"></time-ago></span></template>
 
