@@ -1,31 +1,104 @@
 :host {
 	display: block;
-	background-color: #F5F5F5;
-	min-width: 40vw;
-	color: #666666;
-	padding: 20px 30px 20px 30px; 
-	font-weight: 300;
-	margin: 0px 0px 20px 0px;
 	font-size: 1em;
+	width: 100%;
 }
 
 
 
 h1 {
 	font-weight: 300;
-	font-size: 1.85em;
-	margin: 0px 0px 10px 0px;
-	padding: 0px;
+	font-size: 1.35em;
+	margin: 0px 0px 20px 0px;
+	padding: 0px 0px 20px 0px;
+	border-bottom: 1px solid #cccccc;
 }
 
 
 h3 {
 	font-weight: 400;
-	font-size: 1em;
-	margin: 0px 0px 10px 0px;
+	font-size: 0.8em;
+	margin: 0px 0px 0px 0px;
 	padding: 0px;
+	color: #666666;
 }
 
+
+.bold {
+	font-weight: 400;
+}
+
+
+.itemselector {
+	width: 45%;
+	min-width: 200px;
+	margin-right: 20px;
+}
+
+
+
+
+.itemselector p {
+/*	background-color: rgba(0,0,0,0.05);
+*/	margin: 5px 0px 5px 0px;
+	padding: 4px;
+	font-size: 0.8em;
+	color: black;
+}
+
+
+.item.core-selected p {
+	background-color: rgba(0,0,0,0.05);
+	font-weight: 600;
+	color: black;
+}
+
+
+
+.item:hover {
+	background-color: rgba(0,0,0,0.05);
+	font-weight: 600;
+	color: black;
+}
+
+.nostyle {
+	border: none;
+	-webkit-appearance: none;
+	background-color: inherit;
+	outline: 0;
+}
+
+
+.large {
+	padding: 6px 10px 6px 10px;
+	margin: 0px 4px 0px 4px;
+	background-color: white;
+	width: 150px;
+}
+
+
+.small {
+	padding: 6px;
+	margin: 0px 4px 0px 4px;
+	background-color: white;
+	width: 20px;
+}
+
+
+.overflower {
+	height: 150px;
+	padding: 5px;
+	overflow: scroll;
+	background-color: rgba(255,255,255,0.35);
+	border-radius: 5px;
+}
+
+
+
+
+
+
+/*
 
 h4 {
 	font-weight: 300;
@@ -36,7 +109,6 @@ h4 {
 
 
 p {
-/*	font-size: 0.75em;*/
 	font-family: 'Open sans', sans-serif;
 	color: #666666;
 	border: none;
@@ -65,7 +137,6 @@ input:focus {
 
 
 .roleselector p {
-/*	border-bottom: 1px solid #999999;*/
 	margin: 5px 0px 5px 0px;
 	background-color: #F5F17D;
 
@@ -76,7 +147,6 @@ input:focus {
 
 
 .shortinput input {
-/*	min-width: 20px;*/
 	width: 20px;
 	padding: 4px 6px 4px 6px;
 }
@@ -97,8 +167,7 @@ input:focus {
 
 
 .formfield input {
-/*	min-width: 100px;
-*/	padding: 4px;
+	padding: 4px;
 }
-
+*/
 

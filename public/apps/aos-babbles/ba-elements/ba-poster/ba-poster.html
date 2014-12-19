@@ -39,13 +39,17 @@
      </core-collapse>
 
     <core-collapse id="rolescoll">
-    	<div on-tap="{{toggleRoles}}">x</div>
+    <div vertical layout start class="settingscollapse">
+    	<button class="nostyle close" on-tap="{{toggleRoles}}" self-end>x</button>
     	<ba-setpermissions id="permissions" permissions="{{permissions}}"></ba-setpermissions>
+    </div>
     </core-collapse>
 
     <core-collapse id="attachcoll">
-      <div on-tap="{{toggleAttach}}">x</div>
+    <div vertical layout start class="settingscollapse">
+      <div on-tap="{{toggleAttach}}" self-end>x</div>
       <p>link: <input value="{{link}}" placeholder="Plak een link" id="addlink" /></p>
+    </div>
     </core-collapse>
 
 

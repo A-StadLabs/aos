@@ -11,30 +11,42 @@
 
     <div vertical layout>
 
-    <h3>Wie mag antwoorden?</h3>
-    <h1>{{permissions}}</h1>
-    <div class="roleselector">
+    <h1>Gebruikers met rol <span class="bold">{{permissions}}</span> mogen antwoorden.</h1>
+
+
+<!--     <h3>Rol?</h3> -->
+<div horizontal layout start wrap>
+    <div class="itemselector">
     	<core-selector selected="{{permissions}}" valueattr="role">
     		<template repeat="{{r in globs.user.data.roles}}">
-    			<div role="{{r}}"><p>{{r}}</p></div>
+    			<div class="item" role="{{r}}"><p>{{r}}</p></div>
     		</template>
     	</core-selector>
     </div>
+    <div class="itemselector">
 
     <core-ajax id="findstreet" on-core-response="{{streetresp}}" response="{{streetresponse}}"></core-ajax>
     
-    <div horizontal layout center start-justified class="formfield"><p>District </p><input id="district" value="" /></div>
-    <div horizontal layout center start-justified class="formfield"><p>Straat </p><input id="straat" value="{{streetvalue}}" /></div>
-    <div  class="shortinput"><p>Huisnummer van <input id="numfrom" value="{{numfrom}}" />
-    	tot <input class="shortinput" id="numto" value="{{numto}}" /></div>
-    <h6>{{selstreet}}</h6>
-    <div>
+<!--     <div horizontal layout center start-justified><p>District </p><input class="inputLarge" id="district" value="" /></div> -->
+    <div horizontal layout center start-justified><p>Straat </p><input class="nostyle large" id="straat" value="{{streetvalue}}" /></div>
+    <div><p>Huisnummer van <input class="nostyle small" id="numfrom" value="{{numfrom}}" />
+    	tot <input class="nostyle small" id="numto" value="{{numto}}" /></div>
+<!--     <h6>{{selstreet}}</h6>
+ -->   
+
+<div class="overflower">
     	<template repeat="{{s, i in streets}}">
     		<core-selector valueattr="key" selected="{{streetvalue}}">
-    			<p key="{{streets[i].street}}">{{streets[i].street}} - {{streets[i].district}}</p>
+    			<div class="item"><p key="{{streets[i].street}}">{{streets[i].street}} - {{streets[i].district}}</p></div>
     		</core-selector>
     	</template>
     </div>
+
+        
+    </div>
+    </div>
+
+
 
     </div>
 

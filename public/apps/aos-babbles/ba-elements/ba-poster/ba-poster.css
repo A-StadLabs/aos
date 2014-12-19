@@ -61,22 +61,6 @@ small {
 
 
 
-/*
-.bewerkbtn {
-	width: 16px;
-	margin: 0px;
-	padding: 5px 0px 5px 8px;
-	-webkit-appearance: none;
-	outline: 0;
-	cursor: pointer;
-}
-
-
-.bewerkbtn:hover {
-	cursor: pointer;
-}
-*/
-
 
 
 .nostyle {
@@ -109,10 +93,29 @@ background-color: #00A291;
 }
 
 
-
-.attachcoll {
-	margin: 8px 0px 8px 0px;
+.settingscollapse {
+	width: 80%;
+	max-width: 580px;
+	background-color: #F5F5F5;
+	padding: 10px 20px 10px 20px;
+	border: 1px solid #F5F5F5;
 }
+
+
+.close {
+	padding: 0px 8px 2px 8px;
+	font-size: 20px;
+	font-weight: 300;
+}
+
+.close:hover {
+	background-color: #cccccc;
+}
+
+
+/*.attachcoll {
+	margin: 8px 0px 8px 0px;
+}*/
 
 
 /*.attachcoll img{
