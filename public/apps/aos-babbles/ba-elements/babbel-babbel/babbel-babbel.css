@@ -65,8 +65,8 @@ p {
 
 
 .grey {
-	color: #333333;
-	font-weight: 600;
+	color: #666666;
+	font-weight: 400;
 	font-size: 1em;
 	background-color: #F5F5F5;
 	padding: 4px 4px 2px 4px;
@@ -77,7 +77,6 @@ p {
 
 .URL {
 	text-decoration: underline;
-		font-weight: 600;
 
 }
 
