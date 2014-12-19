@@ -26,7 +26,7 @@
       <div class="voterij"><p>{{data.votes}}</p></div>
     </template>
     <div vertical layout start>
-      <h2 on-tap="{{gorouter}}">{{data.text}}</h2>
+      <h2><a is="pushstate-anchor" href="#/babbles/{{key}}/?sort={{sort}}">{{data.text}}</a></h2>
       <ba-getthings key="{{key}}" response="{{things}}"></ba-getthings>
       <template if="{{things!=true}}">
       <template repeat="{{ t in things}}">
@@ -83,7 +83,10 @@
       },
 
       gorouter: function(){
-        this.fire('router-go', { naarwaar: '/babbles/'+this.key+'/?sort='+this.sort });
+        console.log('fired');
+        //window.location.href("#/babbles/"+this.key);
+        //location.replace("#/babbles/"+this.key);
+        //this.fire('router-go', { naarwaar: '/babbles/'+this.key+'/?sort='+this.sort });
       }
 
     });
