@@ -43,34 +43,43 @@ h4 {
 
 
 p {
-		color: #999999;
-
+	color: #666666;
 	min-height: 20px;
-	font-size: 0.7em;
-	font-weight: 400;
+	font-size: 0.75em;
+	font-weight: 300;
 	padding: 0px;
-	margin: 5px 0px 10px 0px;
+	margin: 4px 0px 10px 0px;
 }
 
 
 .green {
 	color: #00A291;
+	font-weight: 600;
+	font-size: 1em;
+	background-color: #F5FAF7;
+	padding: 4px 4px 2px 4px;
+	margin-right: 4px;
 }
+
+
 
 
 .grey {
-	color: #CCCCCC;
-}
-
-
-.bold {
+	color: #333333;
 	font-weight: 600;
+	font-size: 1em;
+	background-color: #F5F5F5;
+	padding: 4px 4px 2px 4px;
+	margin-right: 4px;
 }
 
-.transpar {
-	opacity: 0.5;
-}
 
+
+.URL {
+	text-decoration: underline;
+		font-weight: 600;
+
+}
 
 
 hr {
@@ -139,11 +148,12 @@ small {
   margin: 0px 15px 0px 0px;
 }
 
-.smallicon {
+
+
+.babble {
 	width: 14px;
-	margin: 2px 5px 0px 3px;
-/*	opacity: 0.9;
-*/}
+	margin: 2px 2px 0px 2px;
+}
 
 
 
@@ -152,6 +162,12 @@ small {
 	border-radius: 2px;
 	margin: 0px 0px 0px 5px;
 }
+
+.lock {
+	width: 14px;
+	margin: 2px 0px 0px 2px;
+}
+
 
 
 
