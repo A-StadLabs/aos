@@ -39,6 +39,8 @@
     <app-route path="/babbles/:key" import="apps/aos-babbles/aos-babbles.html"></app-route>
     <app-route path="/*" import="apps/aos-404/aos-404.html"></app-route>
   </app-router>
+
+  <paper-toast id="toast" text="{{toastText}}" duration="5000"></paper-toast>
   
   <!-- div id="hangouts">
   <hangout-module from="Paul Irish" profile="118075919496626375791"></hangout-module>

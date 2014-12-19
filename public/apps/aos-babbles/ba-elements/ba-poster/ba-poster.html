@@ -153,6 +153,8 @@
           				addPlay.transaction(function(currentRank) {
            				 return currentRank+1;
           		});
+
+          this.fire('show-toast', {bericht: 'Bericht werd gepost.'})
 	    		
 	    		delete userFB;
 	    		delete this.valuek;

@@ -4,7 +4,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
-<polymer-element name="aos-profiel" attributes="yoyo">
+<polymer-element name="aos-profiel" attributes="yoyo return">
 
   <template>
   <link rel="stylesheet" href="aos-profiel.css" />
@@ -74,6 +74,7 @@
           delete this.username;
           delete this.password;
           this.$.logoutAjax.go();
+          this.fire('show-toast', {bericht: 'Je bent afgemeld.'});
         },
 
         loginSubmit: function(){
@@ -91,6 +92,10 @@
             this.$.getCRS.go();
             if(this.responseUser.data.ADAccount){
               this.$.getCRSmedewerker.go();
+            };
+            this.fire('show-toast', {bericht: 'Je bent aangemeld.'});
+            if(this.return){
+              this.fire('router-go', { naarwaar: this.return });
             };
           };
           if(this.responseUser.success==false){

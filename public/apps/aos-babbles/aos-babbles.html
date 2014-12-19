@@ -9,7 +9,8 @@
     <div horizontal layout wrap center start-justified>
       <div horizontal layout wrap center start-justified flex>
         <img class="appicon" src="images/babbelbox.svg">
-        <h1>Babbles</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+        <h1>Babbles</h1>
+        <!-- <input type="text" on-keyup="{{filter}}" class="searchbox"> -->
       </div>
     </div>
   </div>
@@ -48,7 +49,7 @@
  -->    
     <template if="{{!$.globals.values.user}}">  
       <div class="notloggedin">
-        <small><a is="pushstate-anchor" href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small>
+        <small><a is="pushstate-anchor" href="/#/profiel/?return=/babbles/{{key}}/?sort={{sort}}"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small>
       </div>
     </template>
 
@@ -81,7 +82,7 @@
     },
 
     keyChanged: function(){
-
+      //this.fire('show-toast', {bericht: 'De key is veranderd.'+this.key});
     }
 
   });

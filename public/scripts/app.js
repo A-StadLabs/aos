@@ -15,6 +15,13 @@
     document.getElementById('router').go(e.detail.naarwaar);
   });
 
+  document.addEventListener('show-toast', function(e) {
+    // Perform some behaviour
+    console.log('Toast: ', e.detail.bericht);
+    document.getElementById('toast').text = e.detail.bericht;
+    document.getElementById('toast').show();
+  });
+
 
 
   
