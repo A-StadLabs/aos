@@ -34,16 +34,12 @@
       </template>
       </template>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
-      
-
       <p>
-
         <template if="{{usercanpost}}">
          <span class="green"> {{data.numchildren}}
             <img class="babble" src="../../images/babbles2.svg"></span><!--  Jij kan reageren |  -->
 
              <template if="{{data.time}}"><time-ago datetime="{{data.time}}" refresh delay="1000"></time-ago></template>
-
 
         , Laatste reactie: 
          <template if="{{data.lastpost}}"><time-ago datetime="{{data.lastpost}}" refresh delay="1000"></time-ago>|</template>
