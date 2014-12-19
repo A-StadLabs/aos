@@ -47,7 +47,7 @@
 <!-- Als we geen user vinden is hij niet aangemeld dus vragen we vriendelijk om aan te melden.
  -->    
     <template if="{{!$.globals.values.user}}">  
-      <div id="roledefinition">
+      <div class="notloggedin">
         <small><a is="pushstate-anchor" href="/#/profiel"><b>Meld je aan</b></a> om een onderwerp te starten of om te reageren.</small>
       </div>
     </template>

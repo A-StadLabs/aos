@@ -134,17 +134,19 @@ small {
 }
 
 .voterij p {
-  margin: 4px 0px 4px 0px;
-  padding: 0px;
-  color: black;
+/*  margin: 4px 0px 4px 0px;
+*/  padding: 0px;
+  color: #999999;
   font-size: 14px;
   font-weight: 400;
   text-align: center;
-  width: 20px;
+/*  width: 20px;*/
 }
 
 .voterij {
-  margin: 0px 15px 0px 0px;
+  margin: 0px;
+    min-width: 35px;
+
 }
 
 
@@ -201,6 +203,10 @@ small {
 .lastpost {
 	margin: 0px 3px 0px 5px;
 }
+
+
+
+
 
 
 /* 

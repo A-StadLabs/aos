@@ -19,34 +19,24 @@
     
 
     <div  vertical layout>
-      <div  horizontal layout wrap>
-    <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}"  hidden?="{{!usercanpost}}" />
+      <input id="poster" is="core-input" value="{{valuek}}" committedValue="{{postdata}}" placeholder="Typ + enter" disabled?="{{!usercanpost}}"  hidden?="{{!usercanpost}}" />
 
-      <div class="attach" horizontal layout center>
-    <div on-tap="{{toggleattach}}"><img src="../../images/upload-link.svg"></div>
-    <div on-tap="{{togglefoto}}"><img src="../../images/upload-foto.svg"></div>
-    <div on-tap="{{togglevideo}}"><img src="../../images/upload-video.svg"></div>
-      </div>
-      </div>
 
-    <core-collapse id="attach">
-      <p>link: <input value="{{link}}" placeholder="Plak een link" id="addlink" /></p>
-    </core-collapse>
-    </div>
-
-    <core-collapse id="roledefinition">
-    <template if="{{usercanpost}}">
-    	<div horizontal layout center><small>Alle <span class="permission">{{permissions}}s</span> mogen reageren.</small><img src="../../images/locked.svg" class="bewerkbtn" on-tap="{{toggleRoles}}"></div>
-    </template>
-    <template if="{{!usercanpost}}">
-    	<small>Je kan niet reageren.</small>
-    </template>
+      <core-collapse id="settingspane">
+        <template if="{{usercanpost}}">
+    	   <div horizontal layout center on-tap="{{toggleRoles}}"><small>Alle <span class="permission">{{permissions}}s</span> mogen reageren.</small><img src="../../images/locked.svg" class="bewerkbtn"></div>
+        </template>
+        <template if="{{!usercanpost}}">
+    	   <small>Je kan niet reageren.</small>
+        </template>
      </core-collapse>
 
     <core-collapse id="rolescoll">
     	<div on-tap="{{toggleRoles}}">x</div>
+      <p>link: <input value="{{link}}" placeholder="Plak een link" id="addlink" /></p>
     	<ba-setpermissions id="permissions" permissions="{{permissions}}"></ba-setpermissions>
     </core-collapse>
+
 	</div>
     <template if="{{!$.globals.values.user&&!usercanpost}}">
     	
@@ -57,7 +47,7 @@
 
     	toggleRoles: function(){
     		this.$.rolescoll.toggle();
-    		this.$.roledefinition.toggle();
+    		this.$.settingspane.toggle();
     	},
 
       toggleattach: function(){
@@ -68,7 +58,7 @@
     	ready: function(){
     		this.postdata = '';
     		this.valuek = '';
-    		this.$.roledefinition.toggle();
+    		this.$.settingspane.toggle();
 
     		this.usercanpost = false;
 

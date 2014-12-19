@@ -24,28 +24,35 @@
 
 
 #poster:focus {
-	border: 2px solid #60BF95;
+	border: 2px solid #00A291;
 }
 
-#roledefinition {
+
+small {
+	font-size: 0.75em;
+	color: #666666;
+	font-weight: 400;
+}
+
+
+.permission {
+	font-weight: 600;
+	color: #333333;
+}
+
+
+
+
+
+
+#settingspane {
 	padding: 5px 10px 5px 10px;
 	margin: 0px 0px 0px 0px;
 	background-color: #F5F5F5;
 }
 
 
-.permission {
-	font-weight: 600;
-		color: #333333;
 
-}
-
-small {
-	font-size: 0.75em;
-	color: #666666;
-	font-weight: 400;
-/*	padding: 5px 10px 5px 10px;	*/
-}
 
 .bewerkbtn {
 	width: 16px;
@@ -53,14 +60,15 @@ small {
 	padding: 5px 0px 5px 8px;
 	-webkit-appearance: none;
 	outline: 0;
-		cursor: pointer;
-
+	cursor: pointer;
 }
 
 
 .bewerkbtn:hover {
 	cursor: pointer;
 }
+
+
 
 
 
