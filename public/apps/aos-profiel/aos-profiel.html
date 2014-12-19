@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/core-field/core-field.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<script src="../../bower_components/color-thief/src/color-thief.js"></script>
 
 <polymer-element name="aos-profiel" attributes="yoyo return">
 
@@ -11,6 +12,7 @@
     <aos-globals id="globals"></aos-globals>
 
   <template if="{{!$.globals.values.user}}" id="inlog">
+
     <div vertical layout center center-justified id="canvas">
     <h1>Aanmelden</h1>
     <p>Met A-profiel of AD account.</p>
@@ -18,8 +20,8 @@
     <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
     <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
     <h3 hidden?="{{!loading}}">Laden...</h3>
-    <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button>
-
+    <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button><br>
+    <small>Gegevens vergeten?</small>
    <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
    </core-ajax>
      </div>
@@ -27,9 +29,22 @@
    </template>
 
    <template if="{{$.globals.values.user.data}}">
-   <button on-tap="{{logout}}">Logout</button>
-   <img class="avatar" src="{{responseUser.data.avatarUrl}}">
-    <h1>{{$.globals.values.user.data.firstName}}</h1>
+   <div class="leaderboard">
+      <div horizontal layout wrap center start-justified flex>
+        <div vertical layout flex>
+          <div horizontal layout wrap center><img class="avatar" id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
+        <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
+        <!-- <input type="text" on-keyup="{{filter}}" class="searchbox"> --></div>
+        </div>
+        <div vertical layout wrap center end-justified>
+        <button on-tap="{{logout}}" class="logoutbtn">Afmelden</button>
+      </div>
+      </div>
+      
+
+  </div>
+   
+    <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
     <h3>JSON userobject</h3>
     <p>{{$.globals.values.userJSON}}</p>
     <h3>CRS gegevens</h3>
@@ -48,6 +63,13 @@
 
   <script>
 
+function colorthief(){
+  var colorThief = new ColorThief();
+  var avatar = document.getElementById('avatar');
+  console.log(avatar);
+  var colorT = colorThief.getColor(avatar);
+  console.log('colorthief: ', colorT);
+}
     Polymer({
 
       ready: function() {
@@ -123,6 +145,10 @@
             this.$.globals.values.crsmedewerker = this.responseCRSmedewerker.data;
             this.$.globals.values.crsmedewerkerJSON = JSON.stringify(this.responseCRSmedewerker.data);
           };
+        },
+
+        colorthief: function(){
+          colorthief();
         }
 
     });

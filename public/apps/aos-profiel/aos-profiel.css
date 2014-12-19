@@ -28,6 +28,49 @@ small {
 /*	padding: 5px 10px 5px 10px;	*/
 }
 
+.leaderboard {
+	width: 76vw;
+	padding: 2vw 12vw 20px 12vw;
+	background-color: #dddddd;
+	margin: 0px;
+}
+
+.stralendeA {
+	width: 4vw;
+	min-width: 50px;
+	background-color: rgba(0,0,0,0.1);
+	padding: 10px;
+	margin: 0px;
+}
+
+.avatar {
+	width: 45px;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+
+.searchbox {
+	margin: 0px 0px 0px 10px;
+	padding: 0px;
+	border: none;
+}
+
+.leaderboard h1 {
+	font-weight: 300;
+	color: #333333;
+	font-size: 28px;
+}
+
+.appicon {
+	width: 35px;
+	margin-right: 10px;
+	opacity: 0.5;
+}
+
+.logoutbtn {
+	margin-top: 0;
+}
+
 input {
 	width: 30vw;
 	margin-bottom: 10px;
