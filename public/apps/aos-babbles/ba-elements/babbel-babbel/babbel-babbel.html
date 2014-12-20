@@ -30,7 +30,7 @@
       <ba-getthings key="{{key}}" response="{{things}}"></ba-getthings>
       <template if="{{things!=true}}">
       <template repeat="{{ t in things}}">
-        <p><a href="//{{t.object}}" target="blank">{{t.object}}</a></p>
+        <p><a href="{{t.object}}" target="blank">{{t.object}}</a></p>
       </template>
       </template>
       <ba-getpermissions role="{{data.role}}" usercanpost="{{usercanpost}}"></ba-getpermissions>
