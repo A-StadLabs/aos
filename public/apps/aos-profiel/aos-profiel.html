@@ -39,12 +39,32 @@
         <div vertical layout wrap center end-justified>
         <button on-tap="{{logout}}" class="logoutbtn">Afmelden</button>
       </div>
-      </div>
-      
-
+    </div>
   </div>
    
     <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
+    <h2>Gebruikersgegevens</h2>
+    <p>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</p>
+    <p>{{$.globals.values.user.data.username}}</p>
+    <p>{{$.globals.values.user.data.email}}</p>
+    <p>{{$.globals.values.user.data.phone}}</p>
+    <p>{{$.globals.values.user.data.birthDate}}</p>
+    <p>{{$.globals.values.user.data.birthPlace}}</p>
+    <p>{{$.globals.values.user.data.gender}}</p>
+    <p>{{$.globals.values.user.data.maritalStatus}}</p>
+
+    <h2>Email adressen</h2>
+
+    <template repeat="{{ i in $.globals.values.user.data.secondaryEmails}}">
+      <p>{{i.email}}</p>
+    </template>
+
+    <h2>Rollen:</h2>
+
+    <template repeat="{{ i in $.globals.values.user.data.roles}}">
+      <p>{{i}}</p>
+    </template>
+
     <h3>JSON userobject</h3>
     <p>{{$.globals.values.userJSON}}</p>
     <h3>CRS gegevens</h3>
