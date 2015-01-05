@@ -1,41 +1,23 @@
 :host {
 	display: block;
-	background-color: #D9D9D9;
+	  height: 100%;
+	  	background-color: #3D3D3D;
+
 }
 
-
-.avataricon {
-	height: 30px;
-	margin: 4px 15px 0px 0px;
-	border-radius: 50%;
-}
-
-
-
-
-
-
-
-/*#canvas {
+#canvas {
 	min-height: 50%;
 }
-*/
+
 
 h1 {
-	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-	color: #333333;
-	font-size: 26px;
-	padding: 0px;
-	margin: 0px 15px 0px 0px;
+	color: white;
 }
 
-
-
-
 p {
-	color: #333333;
-	font-size: 14px;
+	font-weight: 300;
+	color: white;
 }
 
 small {
@@ -46,11 +28,11 @@ small {
 /*	padding: 5px 10px 5px 10px;	*/
 }
 
-.canvas {
-/*	background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(http://fc02.deviantart.net/fs71/i/2011/274/6/f/ocean__sky__stars__and_you_by_muddymelly-d4bg1ub.png);*/
+.leaderboard {
 	width: 76vw;
-	margin: 0px 12vw 0px 12vw;
-	padding: 45px 0px 0px 0px;
+	padding: 2vw 12vw 20px 12vw;
+	background-color: #dddddd;
+	margin: 0px;
 }
 
 .stralendeA {
@@ -62,12 +44,10 @@ small {
 }
 
 .avatar {
-	width: 60px;
-	margin-right: 20px;
-	border-radius: 30px;
+	width: 45px;
+	margin-right: 10px;
+	border-radius: 50%;
 }
-
-
 
 .searchbox {
 	margin: 0px 0px 0px 10px;
@@ -119,16 +99,3 @@ button {
 	min-width: 100px;
 	margin: 20px 0px 0px 0px;
 }
-
-
-
-
-
-
-
-
-.basicprof {
-	background-color: red;
-}
-
-
