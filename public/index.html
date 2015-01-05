@@ -7,7 +7,7 @@
   <title>aOS</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-
+<meta name="twitter:widgets:csp" content="on">
   <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
 <link rel="apple-touch-icon" href="images/astadlabs.png">
     <!-- 3. responsive-sh*t. -->
@@ -40,14 +40,16 @@
     <app-route path="/*" import="apps/aos-404/aos-404.html"></app-route>
   </app-router>
 
-  <aos-sharing id="share" link="{{shareLink}}"></aos-sharing>
+  <core-overlay backdrop layered id="overlay">
+    <aos-sharing id="share" link="{{shareLink}}"></aos-sharing>
+  </core-overlay>
 
   <paper-toast id="toast" text="{{toastText}}" duration="5000"></paper-toast>
   
-  <!-- div id="hangouts">
-  <hangout-module from="Paul Irish" profile="118075919496626375791"></hangout-module>
-  </div>
- -->
+  <div id="hangouts">
+<!--   <hangout-module from="Paul Irish" profile="118075919496626375791"></hangout-module>
+ -->  </div>
+
 
   </core-scroll-header-panel>
   <!-- build:js scripts/app.js -->
