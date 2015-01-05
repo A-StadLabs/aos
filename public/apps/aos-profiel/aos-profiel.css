@@ -128,7 +128,8 @@ button {
 
 
 .basicprof {
-	background-color: red;
+	min-width: 70%;
+	padding-bottom: 20px;
 }
 
 

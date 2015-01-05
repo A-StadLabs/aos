@@ -7,9 +7,13 @@
 }
 
 
+
+
 a {
 	color: white;
 	text-decoration: none;
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
 }
 
 h1 {
@@ -24,6 +28,9 @@ core-dropdown-menu {
 	font-weight: 600;
 	color: #808080;
 }
+
+
+
 
 core-dropdown {
 	background-color: #333333;
@@ -67,10 +74,29 @@ core-field {
 }
 
 
+#mobilekaai {
+	background-color:  #333333;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	height: 60px;
+			-webkit-transition: height 0.35s;
+	-moz-transition: height 0.35s;
+	transition: height 0.35s;
+}
+
 .kaaibtns {
 	width: 24px;
 	height: 24px;
 	margin: 0px 8px 0px 8px;
+	padding: 0px;
+
+}
+ 
+.mobilekaaibtns {
+	width: 28px;
+	height: 28px;
+	margin: 2px 10px 2px 10px;
 	padding: 0px;
 }
 
@@ -85,13 +111,23 @@ core-field {
 }
 
 
-.avatar {
+.avatardesktop {
 	width: 24px;
 	height: 24px;
 	border-radius:50%;
 	margin: 0px 8px 0px 8px;
 	padding: 0px;
 }
+
+
+.avatarmobile {
+	width: 30px;
+	height: 30px;
+	border-radius:50%;
+	margin: 2px 8px 2px 8px;
+	padding: 0px;
+}
+
 
 /*.lan {
 	margin: 0px 0px 0px 0px;

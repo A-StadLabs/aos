@@ -22,15 +22,134 @@
 
 <polymer-element name="aos-kaai" attributes="environment theme language notification user">
 
-  <template>
 
+<template>
     <link rel="stylesheet" href="aos-kaai-dark.css" />
+
 
     <core-ajax method="GET" id="checkUser" handleAs="json" url="/user" response="{{responseUser}}" on-core-response="{{handleResponseUserCheck}}" auto></core-ajax>
 
     <aos-globals id="globals"></aos-globals>
 
 
+
+
+
+
+  <template if="{{kaaimobile}}">
+   <template if="{{!$.globals.values.user}}">
+
+    <div id="mobilekaai" horizontal center start-justified layout fit>
+
+      <div class="helpings">
+
+        <core-dropdown-menu label="Taal" class="lan">
+          <core-dropdown class="dropdown">
+            <core-selector selected="0" id="lanselect" valueattr="label">
+              <core-item label="NL"></core-item>
+              <core-item label="FR"></core-item>
+              <core-item label="EN"></core-item>
+              <core-item label="DE"></core-item>
+            </core-selector>
+          </core-dropdown>
+        </core-dropdown-menu>
+
+        <a href="/help" class="helpbtn" >
+          <img class="mobilekaaibtns" src="images/kaai-help.svg">
+        </a>
+
+      </div>
+
+
+      <div class="tools">
+          <a href="/#/search">
+            <img class="mobilekaaibtns" src="images/kaai-searchloop.svg">
+          </a>
+          <a href="/#/knooppunt">
+            <img class="mobilekaaibtns" src="images/kaai-knooppunt.svg">
+          </a>
+          <a href="/#/profiel">
+            <img class="mobilekaaibtns" src="images/kaai-profiel2.svg">
+          </a>
+      </div>
+
+      <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}">
+
+    </div>
+
+    </template>
+
+
+
+
+    <template if="{{$.globals.values.user}}">
+
+    <div id="kaai" horizontal center center-justified layout fit>
+      <div class="helpings" horizontal layout>
+
+         <core-dropdown-menu label="Taal" class="lan">
+          <core-dropdown class="dropdown">
+            <core-selector selected="0" id="lanselect" valueattr="label">
+              <core-item label="NL"></core-item>
+              <core-item label="FR"></core-item>
+              <core-item label="EN"></core-item>
+              <core-item label="DE"></core-item>
+            </core-selector>
+          </core-dropdown>
+        </core-dropdown-menu>
+
+
+        <a href="/help" class="helpbtn" >
+<!--           <core-icon-button label="help" id="bthelp" src="images/kaai-help.svg">
+          </core-icon-button> -->
+          <img class="mobilekaaibtns" src="images/kaai-help.svg">
+        </a>
+    </div>
+
+
+      <div class="tools">
+          <a href="/#/search">
+            <img class="mobilekaaibtns" src="images/kaai-searchloop.svg">
+          </a>
+          <a href="/#/knooppunt">
+            <img class="mobilekaaibtns" src="images/kaai-knooppunt.svg">
+          </a>
+          <a href="/#/profiel">
+            <img class="avatarmobile" src="{{$.globals.values.user.data.avatarUrl}}">
+          </a>
+      </div>
+
+
+    </template>
+
+  </template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <template if="{{!kaaimobile}}">
+
+<!--     <link rel="stylesheet" href="aos-kaai-dark.css" />
+
+    <core-ajax method="GET" id="checkUser" handleAs="json" url="/user" response="{{responseUser}}" on-core-response="{{handleResponseUserCheck}}" auto></core-ajax>
+
+    <aos-globals id="globals"></aos-globals>
+
+ -->
 
    <template if="{{!$.globals.values.user}}">
 
@@ -110,7 +229,7 @@
             <img class="kaaibtns" src="images/kaai-knooppunt.svg">
           </a>
           <a href="/#/profiel">
-            <img class="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
+            <img class="avatardesktop" src="{{$.globals.values.user.data.avatarUrl}}">
           </a>
       </div>
 
@@ -119,11 +238,30 @@
 
   </template>
 
+  </template>
+
+
+
   <script>
 
     Polymer({
 
       ready: function() {
+
+      // this.kaaimobile = false;
+
+        if(window.innerWidth < 410){
+          console.log("Meeeeeeeuuuuuubbiiiilllleee kaai");
+        this.kaaimobile = true;
+        this.kaaidesktop = false;
+          } else {
+                      console.log("Geweeeeeeeuuuuuuneee kaai");
+
+        this.kaaidesktop = true;
+        this.kaaimobile = false;
+      };
+
+
 
         // Localisation voorlopig
         this.locusername = 'Gebruikersnaam';

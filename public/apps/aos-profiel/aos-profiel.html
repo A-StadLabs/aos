@@ -30,12 +30,14 @@
 
    <template if="{{$.globals.values.user.data}}">
    <div class="canvas">
-      <div horizontal layout wrap center start-justified>
-        <div horizontal layout wrap center flex class="basicprof">
+      <div horizontal layout wrap start start-justified>
+        <div horizontal layout start start-justified flex class="basicprof">
           <img class="avataricon" id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
           <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
         </div>
+        <div>
           <button on-tap="{{logout}}" class="logoutbtn">Afmelden</button>
+        </div>
     </div>
      <!-- <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
    <h2>Gebruikersgegevens</h2>  

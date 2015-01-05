@@ -134,8 +134,8 @@ small {
 }
 
 .voterij p {
-/*  margin: 4px 0px 4px 0px;
-*/  padding: 0px;
+  margin: 4px 0px 4px 0px;
+  padding: 0px;
   color: #999999;
   font-size: 14px;
   font-weight: 400;
@@ -145,10 +145,19 @@ small {
 
 .voterij {
   margin: 0px;
-    min-width: 35px;
+  width: 20px;
+  margin: 8px 15px 0px 0px;
 
 }
 
+
+.voterij svg {
+  display: block;
+  fill: #EBEBEB;
+  height: 10px;
+  overflow: hidden;
+  width: 20px;
+}
 
 
 /*.babble {
