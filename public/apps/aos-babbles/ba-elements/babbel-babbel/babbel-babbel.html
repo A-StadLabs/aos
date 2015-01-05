@@ -80,7 +80,8 @@
       },
 
       sharelink: function(){
-        this.fire('show-sharing', { url: 'testenURL' });
+        this.url = encodeURIComponent('https://astad.herokuapp.com/#/babbles/'+this.key+'?sort='+this.sort);
+        this.fire('show-sharing', { url: this.url, tekst: this.data.text });
       },
 
       gorouter: function(){
