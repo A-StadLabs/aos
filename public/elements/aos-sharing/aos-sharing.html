@@ -1,0 +1,23 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-overlay/core-overlay.html">
+
+<polymer-element name="aos-sharing" attributes="link">
+  <template>
+    <link rel="stylesheet" href="aos-sharing.css" />
+    <core-overlay backdrop layered id="overlay">
+    	<div>
+    	<h3>SHARING!</h3>
+    	<p>{{link}}</p>
+    	</div>
+    </core-overlay>
+</template>
+<script>
+    Polymer({
+
+    	showOverlay: function(){
+    		this.$.overlay.toggle();
+    	}
+
+    });
+</script>
+</polymer-element>
