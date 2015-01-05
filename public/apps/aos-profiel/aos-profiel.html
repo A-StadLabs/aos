@@ -29,22 +29,17 @@
    </template>
 
    <template if="{{$.globals.values.user.data}}">
-   <div class="leaderboard">
-      <div horizontal layout wrap center start-justified flex>
-        <div vertical layout flex>
-          <div horizontal layout wrap center><img class="avatar" id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
-        <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
-        <!-- <input type="text" on-keyup="{{filter}}" class="searchbox"> --></div>
+   <div class="canvas">
+      <div horizontal layout wrap center start-justified>
+        <div horizontal layout wrap center flex class="basicprof">
+          <img class="avataricon" id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
+          <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
         </div>
-        <div vertical layout wrap center end-justified>
-        <button on-tap="{{logout}}" class="logoutbtn">Afmelden</button>
-      </div>
+          <button on-tap="{{logout}}" class="logoutbtn">Afmelden</button>
     </div>
-  </div>
-   
-    <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
-    <h2>Gebruikersgegevens</h2>
-    <p>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</p>
+     <!-- <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
+   <h2>Gebruikersgegevens</h2>  
+    <p>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</p> -->
     <p>{{$.globals.values.user.data.username}}</p>
     <p>{{$.globals.values.user.data.email}}</p>
     <p>{{$.globals.values.user.data.phone}}</p>
@@ -78,6 +73,8 @@
    <core-ajax method="GET" id="getCRS" handleAs="json" url="/crs-persoon" response="{{responseCRS}}" on-core-response="{{handleResponseCRS}}">
 
    <core-ajax method="GET" id="getCRSmedewerker" handleAs="json" url="/crs-medewerker" response="{{responseCRSmedewerker}}" on-core-response="{{handleResponseCRSmedewerker}}">
+</div>
+
 
   </template>
 

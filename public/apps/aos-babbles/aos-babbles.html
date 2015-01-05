@@ -54,6 +54,25 @@
     </template>
 
     <!-- Sorteer dingen -->
+    <template if="{{mobile}}">  
+    <div id="mobilesort" horizontal layout center start-justified wrap>
+      <p>Sorteer op</p>
+<core-dropdown-menu label="">
+    <core-dropdown class="dropdown">
+      <core-selector valueattr="sort" selected="{{sort}}" id="sorting">
+        <core-item class="sortbtn" active?="{{sort==this.sort}}" sort="votes">Meeste votes</core-item>
+        <core-item class="sortbtn" active?="{{sort==this.sort}}" sort="time">Meest recent gepost</core-item>
+        <core-item class="sortbtn" active?="{{sort==this.sort}}" sort="numchildren">Meeste antwoorden</core-item>
+        <core-item class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent beantwoord</core-item>
+      </core-selector>
+        </core-dropdown>
+</core-dropdown-menu>
+
+    </div>
+    </template>
+
+
+    <template if="{{!mobile}}">  
     <div id="generalsort" horizontal layout center start-justified wrap>
       <p>Sorteer op</p>
       <core-selector valueattr="sort" selected="{{sort}}" id="sorting">
@@ -63,6 +82,8 @@
         <button class="sortbtn" active?="{{sorter==this.sort}}" sort="lastpost">Meest recent beantwoord</button>
       </core-selector>
     </div>
+    </template>
+
 
     <!-- De lijst -->
     <template repeat="{{k in messages | orderBy(sort, true) }}">
@@ -79,6 +100,19 @@
 
     ready: function() {
       console.log('\r\r\n\naos: Babbles locked and loaded.\n\n\r\r');
+      this.mobile = false;
+
+
+        if(window.innerWidth < 410){
+        this.mobile = true;
+      };
+
+//         document.addEventListener(function() {
+//       if(window.innerWidth < 410){
+//         console.log("KKLLLEEEEINNEEERR DANN");
+//       };
+// });
+
     },
 
     keyChanged: function(){
