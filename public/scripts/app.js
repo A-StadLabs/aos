@@ -22,6 +22,13 @@
     document.getElementById('toast').show();
   });
 
+  document.addEventListener('show-sharing', function(e) {
+    // Perform some behaviour
+    console.log('Share: ', e.detail.url);
+    document.getElementById('share').link = e.detail.url;
+    document.getElementById('share').showOverlay();
+  });
+
 
 
   
