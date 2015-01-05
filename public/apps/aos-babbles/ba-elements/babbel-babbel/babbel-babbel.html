@@ -39,7 +39,7 @@
          <span class="grey"> {{data.numchildren}}
             <img class="smallicon" src="../../images/babbles.svg"></span>
              <template if="{{data.time}}"><time-ago datetime="{{data.time}}" refresh delay="1000"></time-ago></template>- Laatste reactie: 
-         <template if="{{data.lastpost}}"><time-ago datetime="{{data.lastpost}}" refresh delay="1000"></time-ago>|</template>
+         <template if="{{data.lastpost}}"><time-ago datetime="{{data.lastpost}}" refresh delay="1000"></time-ago></template>
 
         <img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}">
 <!-- <span class="URL" on-tap="{{sharelink}}">gesprek delen</span>
@@ -55,7 +55,7 @@
    <template if="{{data.time}}"><span><time-ago datetime="{{data.time}}" refresh delay="1000"></time-ago></span></template>
 
         , Laatste reactie: 
-         <template if="{{data.lastpost}}"><time-ago datetime="{{data.lastpost}}" refresh delay="1000"></time-ago>|</template>
+         <template if="{{data.lastpost}}"><time-ago datetime="{{data.lastpost}}" refresh delay="1000"></time-ago></template>
 
         <img src="../../images/share3.svg" class="share" on-tap="{{sharelink}}">
 <!-- <span class="URL" on-tap="{{sharelink}}">gesprek delen</span>
