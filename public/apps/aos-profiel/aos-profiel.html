@@ -3,7 +3,6 @@
 <link rel="import" href="../../bower_components/core-field/core-field.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
-<script src="../../bower_components/color-thief/src/color-thief.js"></script>
 
 <polymer-element name="aos-profiel" attributes="yoyo return">
 
@@ -42,7 +41,6 @@
     </div>
   </div>
    
-    <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
     <h2>Gebruikersgegevens</h2>
     <p>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</p>
     <p>{{$.globals.values.user.data.username}}</p>
@@ -83,13 +81,7 @@
 
   <script>
 
-function colorthief(){
-  var colorThief = new ColorThief();
-  var avatar = document.getElementById('avatar');
-  console.log(avatar);
-  var colorT = colorThief.getColor(avatar);
-  console.log('colorthief: ', colorT);
-}
+
     Polymer({
 
       ready: function() {
@@ -167,9 +159,7 @@ function colorthief(){
           };
         },
 
-        colorthief: function(){
-          colorthief();
-        }
+     
 
     });
 
