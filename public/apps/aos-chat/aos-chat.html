@@ -41,6 +41,10 @@
 
         var that = this;
 
+        document.addEventListener('chat-accept', function(e){
+          console.log('accepted! '+e.detail.chat);
+        });
+
         this.$.gebruikercheck.addEventListener('keypress', function(e) {
           var ajax = that.$.finduser;
           console.log('value: ', that.uservalue);

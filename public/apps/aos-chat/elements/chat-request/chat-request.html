@@ -4,13 +4,18 @@
   <template>
     <link rel="stylesheet" href="chat-request.css" />
 <p>{{object.from}} wil met u chatten</p>
-    <button>accept</button>
-    <button>reject</button>
+    <button on-tap="{{accept}}">accept</button>
+    <button on-tap="{{reject}}">reject</button>
 
 </template>
 <script>
     Polymer({
-
+    	accept: function(){
+    		this.fire('chat-accept', { chat: this.object.key });
+    		this.fire('show-toast', { bericht: 'U heeft deze chat geaccepteerd.' });
+    		var FBrequest = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/requests/"+this.object.key);
+			FBrequest.remove();
+    	}
     });
 </script>
 </polymer-element>
