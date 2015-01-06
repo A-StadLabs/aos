@@ -3,7 +3,7 @@
 
 <polymer-element name="chat-data" attributes="user response">
 <template>
-	<firebase-element id="chatrequests" location="https://blazing-fire-6426.firebaseio.com/chat/requests/" data="{{data}}" orderByChild="to" equalTo="{{user}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+	<firebase-element id="chatrequests" location="https://blazing-fire-6426.firebaseio.com/chat/requests/" data="{{data}}" orderByChild="to_id" equalTo="{{user}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
 </template>
 <script>
 	Polymer({
