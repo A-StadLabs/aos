@@ -9,7 +9,7 @@
 	<firebase-element id="chatrequests" location="https://blazing-fire-6426.firebaseio.com/chat/requests/" data="{{data}}" keys="{{keys}}" orderBy="to_id" equalTo="{{user}}" on-data-change="{{datachange}}"></firebase-element>
 
 	<!-- Chats -->
-	<firebase-element id="chats" location="https://blazing-fire-6426.firebaseio.com/chat/chats/{{user}}/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}"></firebase-element>
+	<firebase-element id="chats" location="https://blazing-fire-6426.firebaseio.com/chat/chats/{{user}}/chats/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}"></firebase-element>
 
 </template>
 <script>
@@ -95,16 +95,16 @@
 	  	cdatachange: function(){
 			console.log('cdata has changed',this.cdata);
 			var chats = [];
-			var data = this.cdata.chats;
+			var data = this.cdata;
 			var keys = this.ckeys;
 			//var selectedItem = this.selectedItem;
 
 			for (var i = keys.length - 1; i >= 0; i--) {
-				var tijd = this.convertTimestamp(data.time);
+				var tijd = this.convertTimestamp(data[keys[i]].time);
 					chats.push({ 
 						'key': keys[i],
-						'parent': data.parent,
-						'with': data.with,
+						'parent': data[keys[i]].parent,
+						'with': data[keys[i]].with,
 						'time': tijd
 					});
 			};
