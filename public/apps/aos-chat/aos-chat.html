@@ -40,17 +40,7 @@
     <h2>Huidige chats</h2>
     <template repeat="{{c, i in chats}}">
       <!-- hier komt dus de chatmodule -->
-      <div vertical layout start>
-        <div horizontal layout center start-justified>
-          <img class="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
-          <p>Lorem ipsum hhhmmmmkaaaaayy</p>
-        </div>
-        
-        <div>
-          <input type="text" id="" value="" placeholder="Ja man, typt dan iet é!" />
-        </div>
-
-      </div>
+      <chat-module key="{{c.key}}"></chat-module>
 
 
 
