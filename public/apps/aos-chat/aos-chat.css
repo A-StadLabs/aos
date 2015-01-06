@@ -3,15 +3,9 @@
 	margin: 0px !important;
 	background-color: white;
 
+
 }
 
-
-.leaderboard {
-	width: 76%;
-	padding: 0px 12% 20px 12%;
-	background-color: #E87C6F;
-	margin: 0px;
-}
 
 
 .canvas {
@@ -25,18 +19,21 @@
 }
 
 
-.stralendeA {
-	width: 4vw;
-	min-width: 50px;
-	background-color: rgba(0,0,0,0.1);
-	padding: 10px;
-	margin: 0px;
-}
 
-
-.leaderboard h1 {
+h1 {
 	font-weight: 300;
 	color: #333333;
 	font-size: 28px;
+	margin: 0px;
+	padding: 0px;
+
+}
+
+
+
+h2 {
+	font-weight: 600;
+	color: #333333;
+	font-size: 20px;
 
 }
