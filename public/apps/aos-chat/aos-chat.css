@@ -1,4 +1,42 @@
 :host {
 	display: block;
-	margin-top: 60px !important;
+	margin: 0px !important;
+	background-color: white;
+
+}
+
+
+.leaderboard {
+	width: 76%;
+	padding: 0px 12% 20px 12%;
+	background-color: #E87C6F;
+	margin: 0px;
+}
+
+
+.canvas {
+	display: block;
+	/*overflow: hidden;
+	height: 100%;*/
+	background-color: white;
+	margin: 0px;
+	padding: 20px 12% 0px 12%;
+	width: 76%;
+}
+
+
+.stralendeA {
+	width: 4vw;
+	min-width: 50px;
+	background-color: rgba(0,0,0,0.1);
+	padding: 10px;
+	margin: 0px;
+}
+
+
+.leaderboard h1 {
+	font-weight: 300;
+	color: #333333;
+	font-size: 28px;
+
 }

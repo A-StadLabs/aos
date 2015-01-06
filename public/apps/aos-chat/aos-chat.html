@@ -11,6 +11,19 @@
 
     <aos-globals id="globals"></aos-globals>
 
+  <div class="leaderboard">
+    <img class="stralendeA" src="images/astadlabs.svg">
+    <div horizontal layout wrap center start-justified>
+      <div horizontal layout wrap center start-justified flex>
+        <img class="appicon" src="images/babbelbox.svg">
+        <h1>Chat maar lekker weg</h1>
+        <!-- <input type="text" on-keyup="{{filter}}" class="searchbox"> -->
+      </div>
+    </div>
+  </div>
+
+
+<div class="canvas">
     <h1>TEST DE chat APP</h1>
 
     <chat-data user="{{ $.globals.values.user.data.id }}" response="{{ requests }}"></chat-data>
@@ -29,6 +42,9 @@
           <div class="item" key="{{users[i].id}}"><p key="{{users[i].id}}">{{users[i].username}}</p></div>
         </core-selector>
       </template>
+
+</div>
+
   </template>
 
   <script>
