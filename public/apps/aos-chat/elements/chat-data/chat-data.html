@@ -3,6 +3,7 @@
 
 <polymer-element name="chat-data" attributes="user response">
 <template>
+	<h1>USER IN DATA IS {{user}}</h1>
 	<firebase-element id="chatrequests" location="https://blazing-fire-6426.firebaseio.com/chat/requests/" data="{{data}}" orderByChild="to_id" equalTo="{{user}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
 </template>
 <script>
@@ -59,16 +60,20 @@
 			var data = this.data;
 			var keys = this.keys;
 			//var selectedItem = this.selectedItem;
+
 			for (var i = keys.length - 1; i >= 0; i--) {
 				var tijd = this.convertTimestamp(data[keys[i]].time);
-				requests.push({ 
-					'key': keys[i],
-					'to_id': data[keys[i]].to_id,
-					'to': data[keys[i]].to,
-					'from_id': data[keys[i]].from_id,
-					'from': data[keys[i]].from,
-					'time': tijd,
-				});
+				if(data[keys[i]].to_id==this.user){
+					requests.push({ 
+						'key': keys[i],
+						'to_id': data[keys[i]].to_id,
+						'to': data[keys[i]].to,
+						'from_id': data[keys[i]].from_id,
+						'from': data[keys[i]].from,
+						'time': tijd,
+					});
+				};
+
 	          console.log(requests);
 	      };
 	       this.response = requests;
