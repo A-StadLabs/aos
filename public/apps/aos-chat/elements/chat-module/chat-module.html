@@ -6,7 +6,7 @@
   <template>
     <link rel="stylesheet" href="chat-module.css" />
     <aos-globals id="globals"></aos-globals>
-    <firebase-element id="chatdata" location="https://blazing-fire-6426.firebaseio.com/chat/things/"  data="{{data}}" keys="{{keys}}" orderByChild="parent" equalTo="{{key}}" on-data-change="{{datachange}}"></firebase-element>
+    <firebase-element id="chatdata" location="https://blazing-fire-6426.firebaseio.com/chat/things/"  data="{{data}}" keys="{{keys}}" orderByChild="parent" equalTo="{{key}}" on-data-change="{{datachange}}" log></firebase-element>
     <div vertical layout start>
     <div>
           <input type="text" id="chatmsg" value="{{chatmsg}}" placeholder="Ja man, typt dan iet é!" />
@@ -65,8 +65,8 @@
             var keys = this.keys;
             //var selectedItem = this.selectedItem;
 
-            for (var i = keys.length - 1; i >= 0; i--) {
-                var tijd = this.convertTimestamp(data[keys[i]].time);
+            for (var i = 10 - 1; i >= 0; i--) {
+                //var tijd = this.convertTimestamp(data[keys[i]].time);
                 
                     chatmsgs.push({ 
                         'key': keys[i],
@@ -75,7 +75,7 @@
                         'user': data[keys[i]].user,
                         'avatar': data[keys[i]].avatar,
                         'msg': data[keys[i]].msg,
-                        'time': tijd,
+                        'time': data[keys[i]].time,
                     });
               
 

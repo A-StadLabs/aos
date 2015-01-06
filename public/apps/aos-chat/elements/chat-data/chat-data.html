@@ -6,10 +6,10 @@
 	<h1>USER IN DATA IS {{user}}</h1>
 
 	<!-- Requests -->
-	<firebase-element id="chatrequests" location="https://blazing-fire-6426.firebaseio.com/chat/requests/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+	<firebase-element id="chatrequests" location="https://blazing-fire-6426.firebaseio.com/chat/requests/" data="{{data}}" keys="{{keys}}" orderBy="to_id" equalTo="{{user}}" on-data-change="{{datachange}}"></firebase-element>
 
 	<!-- Chats -->
-	<firebase-element id="chats" location="https://blazing-fire-6426.firebaseio.com/chat/chats/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}"></firebase-element>
+	<firebase-element id="chats" location="https://blazing-fire-6426.firebaseio.com/chat/chats/{{user}}/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}"></firebase-element>
 
 </template>
 <script>
@@ -87,23 +87,24 @@
 
 	          console.log(requests);
 	      };
-	       this.response = requests;
+	       this.requests = requests;
 	       delete data;
 	       delete tijd;
 	  	},
 
 	  	cdatachange: function(){
-			console.log('cdata has changed');
+			console.log('cdata has changed',this.cdata);
 			var chats = [];
-			var data = this.cdata;
+			var data = this.cdata.chats;
 			var keys = this.ckeys;
 			//var selectedItem = this.selectedItem;
 
 			for (var i = keys.length - 1; i >= 0; i--) {
-				var tijd = this.convertTimestamp(data[keys[i]].time);
+				var tijd = this.convertTimestamp(data.time);
 					chats.push({ 
 						'key': keys[i],
-						'participants': data[keys[i]].participants,
+						'parent': data.parent,
+						'with': data.with,
 						'time': tijd
 					});
 			};
