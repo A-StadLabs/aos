@@ -17,13 +17,12 @@
 <div class="canvas">
 <!--     <h1>TEST DE chat APP</h1>
  -->
-    <template if="{{ requests.length > 0 }}">
-    <h2>Chat requests:</h2>
     
+    <h2>Chat requests:</h2>
     <template repeat="{{ r in requests }}">
     <chat-request object="{{r}}"></chat-request>
     </template>
-    </template>
+   
 
     <h2>Start een nieuwe chat</h2>
     <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
@@ -31,7 +30,6 @@
     <button on-tap="{{senduserrequest}}">Vraag toestemming om te chatten</button>
     <core-ajax id="finduser" on-core-response="{{userresp}}" response="{{userresponse}}"></core-ajax>
     <template repeat="{{s, i in users}}">
-
       <core-selector valueattr="key" selected="{{uservalue}}">
         <div class="item" key="{{users[i].id}}"><p key="{{users[i].id}}">{{users[i].username}}</p></div>
       </core-selector>
@@ -42,11 +40,6 @@
       <!-- hier komt dus de chatmodule -->
       <h1>{{i}}</h1>
       <chat-module key="{{c.key}}"></chat-module>
-
-
-
-
-<!--       <p>{{i}} - er is iets</p> -->
     </template>
 
        
