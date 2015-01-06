@@ -13,6 +13,17 @@
     <chat-data user="{{ $.globals.values.user.data.id }}" requests="{{ requests }}" chats="{{ chats }}"></chat-data>
 
 
+  <div class="leaderboard">
+    <img class="stralendeA" src="images/astadlabs.svg">
+    <div horizontal layout wrap center start-justified>
+      <div horizontal layout wrap center start-justified flex>
+        <img class="appicon" src="images/babbelbox.svg">
+        <h1>Chat maar lekker weg</h1>
+        <!-- <input type="text" on-keyup="{{filter}}" class="searchbox"> -->
+      </div>
+    </div>
+  </div>
+
 
 <div class="canvas">
     <h1>TEST DE chat APP</h1>
@@ -39,6 +50,7 @@
 
     <h2>Huidige chats</h2>
     <template repeat="{{c, i in chats}}">
+      <!-- hier komt dus de chatmodule -->
       <p>{{i}} - er is iets</p>
     </template>
 
