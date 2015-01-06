@@ -194,4 +194,14 @@ app.get('/helpcenter-item', function(req, res){
   });
 });
 
+// Chat
+// Vind een gebruiker
+app.get('/gebruiker', function(req, res){
+  //console.log(val);
+  var val = req.query.gebruiker;
+  request.get({url: 'https://www.antwerpen.be/srv/usermgmt/d/autocomplete/'+val, jar: true}, function(error, response, body){
+      res.send(body);
+  });
+});
+
 

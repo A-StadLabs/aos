@@ -1,0 +1,85 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="elements.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+
+<polymer-element name="aos-chat" attributes="">
+
+  <template>
+
+
+    <link rel="stylesheet" href="aos-chat.css" />
+
+    <aos-globals id="globals"></aos-globals>
+
+    <h1>TEST DE chat APP</h1>
+
+    <chat-data user="{{ $.globals.values.user.data.id }}" response="{{ requests }}"></chat-data>
+    <h2>Chat requests:</h2>
+    <template repeat="{{ r in requests }}">
+    <p>{{r.from}} wil met u chatten</p>
+    <button>accept</button>
+    <button>reject</button>
+    </template>
+
+    <h2>Start een nieuwe chat</h2>
+    <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
+
+    <button on-tap="{{senduserrequest}}">Vraag toestemming om te chatten</button>
+    <core-ajax id="finduser" on-core-response="{{userresp}}" response="{{userresponse}}"></core-ajax>
+    <template repeat="{{s, i in users}}">
+        <core-selector valueattr="key" selected="{{uservalue}}">
+          <div class="item" key="{{users[i].id}}"><p key="{{users[i].id}}">{{users[i].username}}</p></div>
+        </core-selector>
+      </template>
+  </template>
+
+  <script>
+
+    Polymer({
+
+      ready: function() {
+
+      	console.log('chat app loaded.'); 
+
+        var that = this;
+
+        this.$.gebruikercheck.addEventListener('keypress', function(e) {
+          var ajax = that.$.finduser;
+          console.log('value: ', that.uservalue);
+          if (e.keyCode == 13) {
+              
+              //that.enter();
+              //ajax.go();
+              
+          };
+          ajax.go();
+          that.$.finduser.url = "/gebruiker/?gebruiker="+that.uservalue;
+          
+        }); 
+
+        },
+
+      userresp: function(){
+        console.log('got response', JSON.parse(this.userresponse));
+        this.users = JSON.parse(this.userresponse);
+        console.log(JSON.stringify(this.users.data));
+        this.users = this.users.data;
+
+      },
+
+      senduserrequest: function(){
+        var from_id = this.$.globals.values.user.data.id;
+        var from = this.$.globals.values.user.data.username;
+        var to = this.uservalue;
+        var FBrequest = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/requests/");
+        var FBPostRef = FBrequest.push({"to_id":to, "to": "gebruikersnaam", "from_id":from_id, "from": from, "time":Firebase.ServerValue.TIMESTAMP});
+        var newKey = FBPostRef.key();
+        console.log('Saved: '+this.newKey);
+      }
+
+
+    });
+
+  </script>
+
+</polymer-element>
