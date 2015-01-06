@@ -10,13 +10,16 @@
     <link rel="stylesheet" href="aos-chat.css" />
 
     <aos-globals id="globals"></aos-globals>
+    <chat-data user="{{ $.globals.values.user.data.id }}" requests="{{ requests }}" chats="{{ chats }}"></chat-data>
+
 
     <h1>TEST DE chat APP</h1>
-
-    <chat-data user="{{ $.globals.values.user.data.id }}" response="{{ requests }}"></chat-data>
+    <template if="{{ requests.length > 0 }}">
     <h2>Chat requests:</h2>
+    
     <template repeat="{{ r in requests }}">
     <chat-request object="{{r}}"></chat-request>
+    </template>
     </template>
 
     <h2>Start een nieuwe chat</h2>
@@ -25,10 +28,15 @@
     <button on-tap="{{senduserrequest}}">Vraag toestemming om te chatten</button>
     <core-ajax id="finduser" on-core-response="{{userresp}}" response="{{userresponse}}"></core-ajax>
     <template repeat="{{s, i in users}}">
-        <core-selector valueattr="key" selected="{{uservalue}}">
-          <div class="item" key="{{users[i].id}}"><p key="{{users[i].id}}">{{users[i].username}}</p></div>
-        </core-selector>
-      </template>
+      <core-selector valueattr="key" selected="{{uservalue}}">
+        <div class="item" key="{{users[i].id}}"><p key="{{users[i].id}}">{{users[i].username}}</p></div>
+      </core-selector>
+    </template>
+
+    <h2>Huidige chats</h2>
+    <template repeat="{{c, i in chats}}">
+      <p>{{i}} - er is iets</p>
+    </template>
   </template>
 
   <script>
@@ -42,7 +50,19 @@
         var that = this;
 
         document.addEventListener('chat-accept', function(e){
-          console.log('accepted! '+e.detail.chat);
+          console.log('accepted! '+e.detail.chat+' between '+e.detail.from+' and '+that.$.globals.values.user.data.username);
+          var FBrequest = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/requests/"+e.detail.chat);
+          FBrequest.remove();
+          // Start a new chat
+          var parti1 = that.$.globals.values.user.data.id;
+          // var from = this.$.globals.values.user.data.username;
+          var parti2 = e.detail.from_id;
+          var participants = [ parti1, parti2 ];
+
+          var FBchat = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/chats/");
+          var FBPostRef = FBchat.push({"participants":participants, "time":Firebase.ServerValue.TIMESTAMP});
+          var newKey = FBPostRef.key();
+          console.log('New chat saved at: '+newKey);
         });
 
         this.$.gebruikercheck.addEventListener('keypress', function(e) {

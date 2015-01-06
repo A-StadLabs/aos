@@ -11,10 +11,9 @@
 <script>
     Polymer({
     	accept: function(){
-    		this.fire('chat-accept', { chat: this.object.key });
+
+			this.fire('chat-accept', { chat: this.object.key, from_id: this.object.from_id, from: this.object.from });
     		this.fire('show-toast', { bericht: 'U heeft deze chat geaccepteerd.' });
-    		var FBrequest = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/requests/"+this.object.key);
-			FBrequest.remove();
     	}
     });
 </script>

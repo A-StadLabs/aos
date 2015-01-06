@@ -1,17 +1,27 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="chat-data" attributes="user response">
+<polymer-element name="chat-data" attributes="user requests chats">
 <template>
 	<h1>USER IN DATA IS {{user}}</h1>
-	<firebase-element id="chatrequests" location="https://blazing-fire-6426.firebaseio.com/chat/requests/" data="{{data}}" orderByChild="to_id" equalTo="{{user}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+
+	<!-- Requests -->
+	<firebase-element id="chatrequests" location="https://blazing-fire-6426.firebaseio.com/chat/requests/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
+
+	<!-- Chats -->
+	<firebase-element id="chats" location="https://blazing-fire-6426.firebaseio.com/chat/chats/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}"></firebase-element>
+
 </template>
 <script>
 	Polymer({
 
-
 		publish: {
-    		response: {
+    		requests: {
+    			reflect: true,
+    			value: true
+    		},
+
+    		chats: {
     			reflect: true,
     			value: true
     		},
@@ -56,6 +66,7 @@
 		// },
 
 		datachange: function(){
+			console.log('data has changed');
 			var requests = [];
 			var data = this.data;
 			var keys = this.keys;
@@ -77,11 +88,32 @@
 	          console.log(requests);
 	      };
 	       this.response = requests;
-	  //     delete data;
-			// delete head;
-			// delete tijd;
-			// delete lastpost;
-	  }
+	       delete data;
+	       delete tijd;
+	  	},
+
+	  	cdatachange: function(){
+			console.log('cdata has changed');
+			var chats = [];
+			var data = this.cdata;
+			var keys = this.ckeys;
+			//var selectedItem = this.selectedItem;
+
+			for (var i = keys.length - 1; i >= 0; i--) {
+				var tijd = this.convertTimestamp(data[keys[i]].time);
+					chats.push({ 
+						'key': keys[i],
+						'participants': data[keys[i]].participants,
+						'time': tijd
+					});
+			};
+
+	        console.log(chats);
+	       	this.chats = chats;
+	       	delete data;
+	  	},
+
+
 	});
 </script>
 </polymer-element>
