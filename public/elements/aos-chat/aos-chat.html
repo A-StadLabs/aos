@@ -46,13 +46,17 @@
 
           <firebase-element id="conversations" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/" data="{{data}}" keys="{{keys}}" on-data-change="{{convchange}}" log></firebase-element>
 
+          <core-selector id="convselector" valueattr="conversation" selected="{{selectedConversation}}">
+
             <template repeat="{{k, i in keys}}">
-              <div class="chatlistitem" horizontal layout center start-justified >
+              <div class="chatlistitem" horizontal layout center start-justified conversation="{{k}}">
               <img class="chatavatar" src="{{data[k].avatar}}">
               <p>{{data[k].with}}</p>
               <small>{{data[k].lastpost}}</small>
               </div>
             </template>
+
+          </core-selector>
             <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
                                         <button on-tap="{{toScene2}}">hier</button>
 
@@ -163,6 +167,10 @@
           that.selectedConversation = newKey;
           
         });
+
+                that.$.convselector.addEventListener('core-select', function(e){
+                  console.log(e.detail);
+                })
         
       },
 
