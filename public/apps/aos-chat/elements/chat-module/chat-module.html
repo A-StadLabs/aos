@@ -8,21 +8,17 @@
     <aos-globals id="globals"></aos-globals>
     <firebase-element id="chatdata" location="https://blazing-fire-6426.firebaseio.com/chat/things/"  data="{{data}}" keys="{{keys}}" orderByChild="parent" equalTo="{{key}}" on-data-change="{{datachange}}" log></firebase-element>
     <div vertical layout start>
-    <div>
-          <input type="text" id="chatmsg" value="{{chatmsg}}" placeholder="Ja man, typt dan iet é!" />
+        <div>
+            <input type="text" id="chatmsg" value="{{chatmsg}}" placeholder="Ja man, typt dan iet é!" />
         </div>
-    <template repeat="{{c in chatmsgs}}">
-        <div horizontal layout center start-justified>
-          <img class="avatar" src="{{c.avatar}}">
-          <p>{{c.msg}}</p>
-          <small>{{c.time}}</small>
+        <template repeat="{{c in chatmsgs}}">
+            <div horizontal layout center start-justified>
+              <img class="avatar" src="{{c.avatar}}">
+              <p>{{c.msg}}</p>
+              <small>{{c.time}}</small>
+            </div>
+        </template>
         </div>
-    </template>
-
-        
-        
-
-    </div>
 </template>
 <script>
     Polymer({
