@@ -9,11 +9,11 @@
 <polymer-element name="aos-sharing" attributes="link tekst">
   <template>
     <link rel="stylesheet" href="aos-sharing.css" />
+    <div vertical layout center start-justified>
     	<h3>Delen via:</h3>
-    	<p><gplus-one></gplus-one></p>
     	<p><twitter-button type="share" text="{{tekst}}" user="astadlabs" href="{{link}}"></twitter-button></p>
-    	<p><a href="mailto:?subject={{tekst}}&amp;body={{link}}" title="Via e-mail"><img src="http://png-2.findicons.com/files/icons/573/must_have/48/mail.png"/></a></p>
-    	
+    	<p><a href="mailto:?subject={{tekst}}&amp;body={{link}}" title="Via e-mail"><img src="images/enveloppe.svg"/></a></p>
+    </div>	
     	
 </template>
 <script>
