@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 
 <link rel="import" href="../aos-globals/aos-globals.html">
+<link rel="import" href="elements/chat-useritem/chat-useritem.html">
 
 <polymer-element name="aos-chat" attributes="user">
   <template>
@@ -44,7 +45,7 @@
             <template repeat="{{s, i in users}}">
               <core-selector valueattr="key" selected="{{uservalue}}">
                 <div class="item" key="{{users[i].id}}">
-                  <p key="{{users[i].id}}">{{users[i].username}}</p>
+                  <chat-useritem user="{{users[i]}}"></chat-useritem>
                 </div>
               </core-selector>
             </template>
@@ -189,6 +190,7 @@ HIER WAS IK BEZIG AAN DIE AFZONDERLIJKE CHATS. JUIST ZO?
         var firstname = this.$.globals.values.user.data.firstName;
         var lastname = this.$.globals.values.user.data.lastName;
         var email = this.$.globals.values.user.data.email;
+        var avatar = this.$.globals.values.user.data.avatarUrl;
 
         var FBsaveuser = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+userid+"/");
         var DirectoryResult = FBsaveuser.set({
@@ -197,6 +199,7 @@ HIER WAS IK BEZIG AAN DIE AFZONDERLIJKE CHATS. JUIST ZO?
           "firstname":firstname, 
           "lastname": lastname, 
           "email": email,
+          "avatar": avatar,
           "time":Firebase.ServerValue.TIMESTAMP
         });
 

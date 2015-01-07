@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="chat-useritem" attributes="user">
+
+  <template>
+
+
+    <link rel="stylesheet" href="chat-useritem.css" />
+
+    <div>{{user.username}} - {{user.firstname}} -{{user.avatar}}</div>
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      ready: function() {
+
+      	console.log('Knooppunt app loaded.'); 
+
+        }
+
+
+    });
+
+  </script>
+
+</polymer-element>
