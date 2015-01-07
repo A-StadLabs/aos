@@ -8,7 +8,9 @@
   <template>
     <link rel="stylesheet" href="aos-chat.css">
     <aos-globals id="globals" on-values-changed="{{test}}" values="{{globs}}"></aos-globals>
-     <core-ajax id="finduser" on-core-response="{{userresp}}" response="{{userresponse}}"></core-ajax>
+
+    <core-ajax id="finduser" on-core-response="{{userresp}}" response="{{userresponse}}"></core-ajax>
+
     <template if="{{$.globals.values.user}}">
       <div id="chatcontainer" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
 
@@ -39,10 +41,10 @@
           <div class="chatlist" hidden?="{{!chatopened}}">
             <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
             <template repeat="{{s, i in users}}">
-      <core-selector valueattr="key" selected="{{uservalue}}">
-        <div class="item" key="{{users[i].id}}"><p key="{{users[i].id}}">{{users[i].username}}</p></div>
-      </core-selector>
-    </template>
+              <core-selector valueattr="key" selected="{{uservalue}}">
+                <div class="item" key="{{users[i].id}}"><p key="{{users[i].id}}">{{users[i].username}}</p></div>
+              </core-selector>
+            </template>
           </div>
 
           <!-- <div id="chatlist" hidden?="{{!chatopened}}">
@@ -100,19 +102,20 @@
           var ajax = that.$.finduser;
           console.log('value: ', that.uservalue);
           if (e.keyCode == 13) {
-
           };
-          that.$.finduser.url = "/gebruiker/?gebruiker="+that.uservalue;
+
+          that.$.finduser.url = "/gebruiker/?search="+that.uservalue;
           ajax.go();
+          
+          
+          
         });
         
       },
 
       userresp: function(){
-        console.log('got response', JSON.parse(this.userresponse));
         this.users = JSON.parse(this.userresponse);
-        console.log(JSON.stringify(this.users.data));
-        this.users = this.users.data;
+        //this.users = this.users.data;
       },
 
       checkUserChatActive: function(userid){
@@ -127,7 +130,6 @@
 
       toggle: function() {
         this.chatopened = !this.chatopened;
-        console.log('Wow, how open is this?', this.chatopened);
       },
 
       activateChat: function(){
@@ -136,8 +138,6 @@
         var firstname = this.$.globals.values.user.data.firstName;
         var lastname = this.$.globals.values.user.data.lastName;
         var email = this.$.globals.values.user.data.email;
-
-        console.log('start chat functie voor user '+userid);
 
         var FBchat = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/users/"+userid+"/");
         var newpostRefa = FBchat.set(true);
@@ -154,7 +154,6 @@
           "email": email,
           "time":Firebase.ServerValue.TIMESTAMP
         });
-
 
         //var newKey = newpostRefa.key();
         //console.log('New chatmessage saved at: '+newKey);

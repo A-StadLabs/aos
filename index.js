@@ -3,7 +3,7 @@ var app = express();
 var request = require('request');
 var toughcookie = require('tough-cookie');
 var session = require('express-session');
-
+var Firebase = require('firebase');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -103,8 +103,6 @@ app.get('/adres', function(req, res){
   });
 });
 
-https://www.antwerpen.be/srv/d/astad/location/search/
-
 // Notificaties 
 app.get('/notifications', function(req, res){
  	//console.log(val);
@@ -198,10 +196,17 @@ app.get('/helpcenter-item', function(req, res){
 // Vind een gebruiker
 app.get('/gebruiker', function(req, res){
   //console.log(val);
-  var val = req.query.gebruiker;
-  request.get({url: 'https://www.antwerpen.be/srv/usermgmt/d/autocomplete/'+val, jar: true}, function(error, response, body){
-      res.send(body);
-  });
+  var searchstring = req.query.search;
+  var users =[];
+  var findUser = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/");
+          findUser.on("child_added", function(snapshot) {
+            if(snapshot.val().username.substr(0, searchstring.length) == searchstring){
+              users.push({ "username": snapshot.val().username, "userid": snapshot.val().userid });
+              console.log(users);
+            };
+          });
+
+          res.send(users);
 });
 
 // Notificaties
