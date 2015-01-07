@@ -30,20 +30,6 @@ paper-toast {
   left: auto;
 } 
 
-#hangouts {
-  position: absolute;
-  bottom: 0;
-  right: 10px;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: flex-end;
-  align-items: flex-end;
-}
-
-hangout-module {
-  margin-left: 10px;
-}
-
 .container {
 	display: inline-block;
 	margin-top: 60px;

@@ -204,4 +204,27 @@ app.get('/gebruiker', function(req, res){
   });
 });
 
+// Notificaties
 
+// Een notificatie versturen
+app.get('/notificatie', function(req, res){
+  //console.log(val);
+  var user = req.query.user;
+  var app = req.query.app;
+  var msg = req.query.msg;
+  var link = req.query.link;
+
+  request.post({
+    headers: {'Content-Type' : 'application/json'},
+    method: 'post',
+    url: 'https://www.antwerpen.be/srv/notification/d/add-notification', 
+    jar: true,
+    json: {app: app, // welke app verzend het
+    user: username,  // naar wie moet dat
+    message: msg, // wat is je bericht
+    link: link},
+    }, function(error, response, body){
+      res.send(body);
+      console.log(body);
+  });
+});
