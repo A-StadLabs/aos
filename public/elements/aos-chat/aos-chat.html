@@ -5,7 +5,38 @@
     <link rel="stylesheet" href="aos-chat.css">
     <aos-globals id="globals"></aos-globals>
     <template  if="{{$.globals.values.user}}">
-      <div id="chatcontainer"><p>King Flurkel <b>online</b></p></div>
+      <div id="chatcontainer"  class="container {{ {open: chatopened} | tokenList}}" on-tap="{{toggle}}" vertical layout start start-justified>
+
+
+
+        <div>
+        
+        <div id="chatstatus">
+          <p>Je bent online</p>
+        </div>
+
+        <div id="chatlist" hidden?="{{!chatopened}}">
+          <div class="chatlistitem" horizontal layout center start-justified>
+            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+            <p>Username</p>
+          </div>
+          <div class="chatlistitem" horizontal layout center start-justified>
+            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+            <p>Username</p>
+          </div>
+          <div class="chatlistitem" horizontal layout center start-justified>
+            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+            <p>Username</p>
+          </div>
+          <div class="chatlistitem" horizontal layout center start-justified>
+            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+            <p>Username</p>
+          </div>
+        </div>
+        </div>
+
+
+      </div>
     </template>
     <template if="{{!$.globals.values.user}}">
      
@@ -17,6 +48,19 @@
 
       Polymer({
         // define element prototype here
+
+      ready: function() {
+
+
+
+      },
+
+      toggle: function() {
+      this.chatopened = !this.chatopened;
+      console.log('Wow, how open is this?', this.chatopened);
+      }
+
+
       });
 
     })();

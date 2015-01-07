@@ -2,21 +2,67 @@
   display: block;
 }
 
-#chatcontainer {
+.container {
   position: fixed;
   z-index: 99;
   width: 200px;
-  height: 30px;
-  background-color: #219dc8;
+  height: 40px;
+  background-color: #666666;
   bottom: 0px;
   right: 25px;
   font-family: "Open Sans";
   font-weight: 300;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  padding-bottom: 20px;
   color: white;
   font-size: 1em;
-  text-align: center;
-  border-radius: 10px 10px 0px 0px;
+  text-align: start;
+  border-radius: 0px;
+  overflow: scroll;
+      -webkit-transition: height ease 0.45s;
+  -moz-transition: height ease 0.45s;
+  transition: height ease 0.45s;
+
+}
+
+.open {
+  height: 300px;
+  max-height: 70%;
+  background-color: #333333;
+      -webkit-transition: height ease 0.45s;
+  -moz-transition: height ease 0.45s;
+  transition: height ease 0.45s;
+
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+
+
+#chatstatus {
+  margin: 0px;
+  padding: 10px 15px 0px 15px;
+/*  height: 50px;*/
+}
+
+
+.chatavatar {
+  width: 30px;
+  height: 30px;
+  border-radius:50%;
+  margin: 2px 10px 2px 0px;
+  padding: 0px;
+}
+
+
+.chatlistitem {
+/*  background-color: yellow;
+  width: 180px;*/
+  border-bottom: 1px solid #666666;
+  width: 180px;
+  margin: 0px;
+  padding: 10px 15px 10px 15px;
 }
