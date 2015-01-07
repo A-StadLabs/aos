@@ -12,13 +12,12 @@
     <core-ajax id="finduser" on-core-response="{{userresp}}" response="{{userresponse}}"></core-ajax>
 
     <template if="{{$.globals.values.user}}">
+
+
+
       <div id="chatcontainer" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
 
         <div>
-
-
-
-
         <template if="{{!chatactive}}">
 
           <div id="chatstatus"  on-tap="{{toggle}}">
@@ -70,6 +69,49 @@
 
         </div>
       </div>
+
+
+
+
+
+
+
+
+  <!--     <div id="" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
+
+        <div>
+        <template>
+
+          <div id="chatstatus"  on-tap="{{toggleItem}}">
+            <p>Chat (inactief) {{user}}</p>
+          </div>
+
+          <div class="chatlist" hidden?="{{!chatopened}}">
+            <p>Vanaf nu kan je ook chatten! Wil je de chatfunctie activeren?</p>
+            <button on-tap="{{activateChat}}">Activeer chat</button>
+          </div>
+
+        </template>
+          
+        <template if="{{chatactive}}">
+        
+          <div id="chatstatus"  on-tap="{{toggleItem}}">
+            <p>naam</p>
+          </div>
+
+          <div class="chatlist" hidden?="{{!chatitemopened}}">
+            <input type="text" id="chatwindow" value="" placeholder="Hmmmmkay?" />
+          </div>
+
+        </template>
+
+        </div>
+      </div>
+
+ -->
+
+
+
     </template>
     <template if="{{!$.globals.values.user}}">
      
@@ -130,6 +172,10 @@
 
       toggle: function() {
         this.chatopened = !this.chatopened;
+      },
+
+      toggleItem: function() {
+        this.chatitemopened = !this.chatitemopened;
       },
 
       activateChat: function(){
