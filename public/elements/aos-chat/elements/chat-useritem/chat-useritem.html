@@ -7,7 +7,11 @@
 
     <link rel="stylesheet" href="chat-useritem.css" />
 
-    <div>{{user.username}} - {{user.firstname}} -{{user.avatar}}</div>
+    <div class="chatlistitem" horizontal layout center start-justified id="chatstatus" on-tap="{{toggle}}">
+            <img class="chatavatar" src="{{user.avatar}}">
+            <p>{{user.username}}</p>
+          </div>
+
 
   </template>
 

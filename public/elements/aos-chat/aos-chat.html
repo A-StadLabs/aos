@@ -43,11 +43,9 @@
           <div class="chatlist" hidden?="{{!chatopened}}">
             <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
             <template repeat="{{s, i in users}}">
-              <core-selector valueattr="key" selected="{{uservalue}}">
                 <div class="item" key="{{users[i].id}}">
                   <chat-useritem user="{{users[i]}}"></chat-useritem>
                 </div>
-              </core-selector>
             </template>
           </div>
 
