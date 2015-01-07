@@ -201,7 +201,7 @@ app.get('/gebruiker', function(req, res){
   var findUser = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/");
           findUser.on("child_added", function(snapshot) {
             if(snapshot.val().username.substr(0, searchstring.length) == searchstring){
-              users.push({ "username": snapshot.val().username, "userid": snapshot.val().userid });
+              users.push({ "username": snapshot.val().username, "userid": snapshot.val().userid, "avatar": snapshot.val().avatar, "firstname": snapshot.val().firstname });
               console.log(users);
             };
           });
