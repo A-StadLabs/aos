@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="750" height="500">
 <rect width="750" height="500" fill="#9c1f2d"/>
 <g id="castle" fill="#fcb714" stroke="#000" stroke-width="0.6904">
@@ -21,4 +21,4 @@
 <use xlink:href="#crown" x="-33.952" y="63.394"/>
 <use xlink:href="#crown" x="33.934" y="63.394"/>
 <use xlink:href="#crown" y="94.927"/>
-</svg>
+</svg>

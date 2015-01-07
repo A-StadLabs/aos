@@ -1,9 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
-
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
 <link rel="import" href="../aos-globals/aos-globals.html">
 <link rel="import" href="elements/chat-useritem/chat-useritem.html">
+<link rel="import" href="elements/chat-module/chat-module.html">
 
 <polymer-element name="aos-chat" attributes="user">
   <template>
@@ -15,13 +17,13 @@
     <template if="{{$.globals.values.user}}">
 
 
-
       <div id="chatcontainer" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
-
+<!-- <core-animated-pages id="scenes" transitions="slide-from-right">
+<section>
+ -->
         <div>
 
         <template if="{{!chatactive}}">
-
           <div id="chatstatus"  on-tap="{{toggle}}">
             <p>Chat (inactief) {{user}}</p>
           </div>
@@ -30,7 +32,6 @@
             <p>Vanaf nu kan je ook chatten! Wil je de chatfunctie activeren?</p>
             <button on-tap="{{activateChat}}">Activeer chat</button>
           </div>
-
         </template>
           
         <template if="{{chatactive}}">
@@ -38,91 +39,55 @@
           <div class="chatlistitem" horizontal layout center start-justified id="chatstatus" on-tap="{{toggle}}">
             <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
             <p>Online</p>
+
           </div>
 
           <div class="chatlist" hidden?="{{!chatopened}}">
+
+          <firebase-element id="conversations" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/" data="{{data}}" keys="{{keys}}" on-data-change="{{convchange}}" log></firebase-element>
+
+            <template repeat="{{k, i in keys}}">
+              <div class="chatlistitem" horizontal layout center start-justified >
+              <img class="chatavatar" src="{{data[k].avatar}}">
+              <p>{{data[k].with}}</p>
+              <small>{{data[k].lastpost}}</small>
+              </div>
+            </template>
             <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
+                                        <button on-tap="{{toScene2}}">hier</button>
+
             <template repeat="{{s, i in users}}">
                 <div class="item" key="{{users[i].id}}">
                   <chat-useritem user="{{users[i]}}"></chat-useritem>
                 </div>
+
             </template>
+
+
+            
+
+            
           </div>
 
-          
 
-          <!-- <div id="chatlist" hidden?="{{!chatopened}}">
-            <div class="chatlistitem" horizontal layout center start-justified>
-              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-              <p>Username</p>
-            </div>
-            <div class="chatlistitem" horizontal layout center start-justified>
-              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-              <p>Username</p>
-            </div>
-            <div class="chatlistitem" horizontal layout center start-justified>
-              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-              <p>Username</p>
-            </div>
-            <div class="chatlistitem" horizontal layout center start-justified>
-              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-              <p>Username</p>
-            </div>
-          </div> -->
 
         </template>
-
         </div>
+
+<!-- </section>
+<section> -->
+
+     <!--    Dit is de module die in section 2 van animated pages moet komen -->
+      <div id="module" class="module" vertical layout start start-justified>
+      <chat-module conversation="{{selectedConversation}}"></chat-module>
       </div>
+ </section>
+</core-animated-pages>
+              </div>
 
-
-
-
-
-
-
-
-  <!--     
-
-
-HIER WAS IK BEZIG AAN DIE AFZONDERLIJKE CHATS. JUIST ZO?
-
-
-
-
-  <div id="" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
-
-        <div>
-        <template>
-
-          <div id="chatstatus"  on-tap="{{toggleItem}}">
-            <p>Chat (inactief) {{user}}</p>
-          </div>
-
-          <div class="chatlist" hidden?="{{!chatopened}}">
-            <p>Vanaf nu kan je ook chatten! Wil je de chatfunctie activeren?</p>
-            <button on-tap="{{activateChat}}">Activeer chat</button>
-          </div>
-
-        </template>
-          
-        <template if="{{chatactive}}">
-        
-          <div id="chatstatus"  on-tap="{{toggleItem}}">
-            <p>naam</p>
-          </div>
-
-          <div class="chatlist" hidden?="{{!chatitemopened}}">
-            <input type="text" id="chatwindow" value="" placeholder="Hmmmmkay?" />
-          </div>
-
-        </template>
-
-        </div>
+              <div id="module" class="module" vertical layout start start-justified>
+      <chat-module conversation="{{selectedConversation}}"></chat-module>
       </div>
-
- -->
-
 
 
     </template>
@@ -140,6 +105,7 @@ HIER WAS IK BEZIG AAN DIE AFZONDERLIJKE CHATS. JUIST ZO?
       ready: function() {
         this.chatactive = false;
 
+
         var that = this;
 
         document.addEventListener('user-changed', function(e){
@@ -154,7 +120,54 @@ HIER WAS IK BEZIG AAN DIE AFZONDERLIJKE CHATS. JUIST ZO?
           that.$.finduser.url = "/gebruiker/?search="+that.uservalue;
           ajax.go();
         });
+
+        document.addEventListener('buddy-select',function(e){
+          //console.log('buddy selected', e.detail.buddy);
+          that.selectedUser = e.detail.buddy;
+          //start conversation
+          var userid = that.$.globals.values.user.data.id;
+          var guest = e.detail.buddy;
+          var username = that.$.globals.values.user.data.username;
+          var guestname = e.detail.username;
+          var useravatar = that.$.globals.values.user.data.avatarUrl;
+          var guestavatar = e.detail.avatar;
+          var FBstartconv = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/conversations/");
+          var newpostRef = FBstartconv.push({  "initiator": userid,
+                            "guest": guest,
+                            "initiatorname": username,
+                            "guestname": guestname,
+                            "initiatoravatar": useravatar,
+                            "guestavatar": guestavatar,
+                            "starttime":Firebase.ServerValue.TIMESTAMP,
+                            "lastpost": Firebase.ServerValue.TIMESTAMP,
+                            "participants": [guest, userid] });
+          var newKey = newpostRef.key();
+          console.log(newKey, ' - ', guest);
+
+          var FBaddpart2 = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+guest+"/chats/"+newKey+"/");
+           var userkey2 = FBaddpart2.set({ 
+                          "conversation": newKey, 
+                          "lastpost": Firebase.ServerValue.TIMESTAMP,
+                          "with": username,
+                          "avatar": useravatar
+                           });
+
+
+          var FBaddpart1 = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+userid+"/chats/"+newKey+"/");
+           var userkey = FBaddpart1.set({ 
+                          "conversation": newKey, 
+                          "lastpost": Firebase.ServerValue.TIMESTAMP,
+                          "with": guestname,
+                          "avatar": guestavatar });
+
+          that.selectedConversation = newKey;
+          
+        });
         
+      },
+
+      convchange: function(){
+        console.log(this.data);
       },
 
       userresp: function(){
@@ -176,6 +189,12 @@ HIER WAS IK BEZIG AAN DIE AFZONDERLIJKE CHATS. JUIST ZO?
         this.chatopened = !this.chatopened;
       },
 
+      toScene2:function () {
+        this.$.scenes.selected = 1;
+      },
+
+
+      
 
       //FB voor chatmsg: chat/user/kingflurkelID/chats/benadID/$KEY/message-timestamp-avatar
 

@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
 <polymer-element name="chat-useritem" attributes="user">
 
@@ -9,7 +9,10 @@
     <div class="chatlistitem" horizontal layout center start-justified id="chatstatus" on-tap="{{select}}">
       <img class="chatavatar" src="{{user.avatar}}">
       <p>{{user.username}}</p>
+      
     </div>
+
+  
 
   </template>
 
@@ -18,15 +21,13 @@
     Polymer({
 
       select: function(){
-        this.fire('buddy-select', { "buddy": this.user.id });
+        //console.log(this.user.id);
+        this.fire('buddy-select', { "buddy": this.user.userid, "username": this.user.username, "avatar": this.user.avatar });
       },
 
       ready: function() {
-
       	console.log('Knooppunt app loaded.'); 
-
-        }
-
+      }
 
     });
 
