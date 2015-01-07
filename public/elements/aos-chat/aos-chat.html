@@ -108,8 +108,9 @@
         var FBchat = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/users/"+userid+"/");
         var newpostRefa = FBchat.set(true);
 
-        var newKey = newpostRefa.key();
-        console.log('New chatmessage saved at: '+newKey);
+        //var newKey = newpostRefa.key();
+        //console.log('New chatmessage saved at: '+newKey);
+        this.checkUserChatActive(userid);
       }
 
       });
