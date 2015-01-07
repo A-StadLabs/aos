@@ -31,9 +31,12 @@
           
         <template if="{{chatactive}}">
         
-          <div id="chatstatus"  on-tap="{{toggle}}">
-            <p>Je bent online</p>
-          </div>
+          <div class="chatlistitem" horizontal layout center start-justified id="chatstatus" on-tap="{{toggle}}">
+              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+              <p>Online</p>
+            </div>
+
+       
 
           <div class="chatlist" hidden?="{{!chatopened}}">
             <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
@@ -86,6 +89,7 @@
       ready: function() {
         this.chatactive = false;
 
+
         var that = this;
 
         document.addEventListener('user-changed', function(e){
@@ -119,9 +123,10 @@
         //this.users = this.users.data;
       },
 
-      checkUserChatActive: function(userid){
+      checkUserChatActive: function(){
         var that = this;
-        var FBcheck = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/users/"+userid+"/");
+        var userid = this.$.globals.values.user.data.id;
+        var FBcheck = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+userid+"/");
           FBcheck.once('value', function(dataSnapshot) {
           // code to handle new value.
             console.log('is de chat actief? ', dataSnapshot.val());
@@ -130,6 +135,7 @@
       },
 
       toggle: function() {
+        this.checkUserChatActive();
         this.chatopened = !this.chatopened;
       },
 
@@ -140,14 +146,8 @@
         var lastname = this.$.globals.values.user.data.lastName;
         var email = this.$.globals.values.user.data.email;
 
-        var FBchat = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/users/"+userid+"/");
-        var newpostRefa = FBchat.set(true);
-
-        var FBchatuser = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/users/"+userid+"/username/");
-        var newpostRefb = FBchatuser.set(user);
-
-        var FBsaveuser = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/");
-        var DirectoryResult = FBsaveuser.push({
+        var FBsaveuser = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+userid+"/");
+        var DirectoryResult = FBsaveuser.set({
           "userid":userid, 
           "username": user, 
           "firstname":firstname, 
