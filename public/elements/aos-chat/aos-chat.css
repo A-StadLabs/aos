@@ -3,11 +3,11 @@
 }
 
 .container {
+  background-color: #595959;
   position: fixed;
   z-index: 99;
-  width: 200px;
+  width: 250px;
   height: 40px;
-  background-color: #666666;
   bottom: 0px;
   right: 25px;
   font-family: "Open Sans";
@@ -23,12 +23,16 @@
   -moz-transition: height ease 0.45s;
   transition: height ease 0.45s;
 
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+
+
 }
 
 .open {
   height: 300px;
   max-height: 70%;
-  background-color: #333333;
       -webkit-transition: height ease 0.45s;
   -moz-transition: height ease 0.45s;
   transition: height ease 0.45s;
@@ -44,8 +48,9 @@ p {
 
 #chatstatus {
   margin: 0px;
-  padding: 10px 15px 0px 15px;
-/*  height: 50px;*/
+  padding: 10px 15px 10px 15px;
+  background-color: rgba(255,255,255,0.05);
+  width: 250px;
 }
 
 
@@ -57,12 +62,36 @@ p {
   padding: 0px;
 }
 
+.chatlist {
+  margin: 0px;
+  padding: 15px 15px 10px 15px;
+}
+
 
 .chatlistitem {
-/*  background-color: yellow;
-  width: 180px;*/
   border-bottom: 1px solid #666666;
   width: 180px;
   margin: 0px;
   padding: 10px 15px 10px 15px;
+}
+
+
+
+
+
+
+input {
+  background-color: rgba(255,255,255,0.85);
+  border: 0px;
+  padding: 10px 10px 10px 10px;
+  border-radius: 0px;
+  outline: 0;
+  border-style:solid;
+  -webkit-appearance: none;
+  width: 200px;
+}
+
+
+input:focus {
+  background-color: rgba(255,255,255,1);
 }

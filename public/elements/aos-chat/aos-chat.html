@@ -23,7 +23,7 @@
             <p>Chat (inactief) {{user}}</p>
           </div>
 
-          <div id="chatlist" hidden?="{{!chatopened}}">
+          <div class="chatlist" hidden?="{{!chatopened}}">
             <p>Vanaf nu kan je ook chatten! Wil je de chatfunctie activeren?</p>
             <button on-tap="{{activateChat}}">Activeer chat</button>
           </div>
@@ -36,7 +36,7 @@
             <p>Je bent online</p>
           </div>
 
-          <div>
+          <div class="chatlist" hidden?="{{!chatopened}}">
             <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
             <template repeat="{{s, i in users}}">
       <core-selector valueattr="key" selected="{{uservalue}}">
