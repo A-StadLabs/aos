@@ -32,11 +32,9 @@
         <template if="{{chatactive}}">
         
           <div class="chatlistitem" horizontal layout center start-justified id="chatstatus" on-tap="{{toggle}}">
-              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-              <p>Online</p>
-            </div>
-
-       
+            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+            <p>Online</p>
+          </div>
 
           <div class="chatlist" hidden?="{{!chatopened}}">
             <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
@@ -89,31 +87,19 @@
       ready: function() {
         this.chatactive = false;
 
-
         var that = this;
 
         document.addEventListener('user-changed', function(e){
-          console.log('nu ken ik de user wel.', that.$.globals.values.user.data.id);
-
           var userid = that.$.globals.values.user.data.id;
-
-          console.log('en ik vertaal: ', userid);
-
           that.checkUserChatActive(userid);
-
         });
 
         document.addEventListener('keyup', function(e) {
           var ajax = that.$.finduser;
-          console.log('value: ', that.uservalue);
-          if (e.keyCode == 13) {
-          };
-
+          // keycode 13 = ENTER toets
+          if (e.keyCode == 13) {};
           that.$.finduser.url = "/gebruiker/?search="+that.uservalue;
           ajax.go();
-          
-          
-          
         });
         
       },
@@ -128,8 +114,6 @@
         var userid = this.$.globals.values.user.data.id;
         var FBcheck = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+userid+"/");
           FBcheck.once('value', function(dataSnapshot) {
-          // code to handle new value.
-            console.log('is de chat actief? ', dataSnapshot.val());
             that.chatactive = dataSnapshot.val();
           });
       },
@@ -138,6 +122,8 @@
         this.checkUserChatActive();
         this.chatopened = !this.chatopened;
       },
+
+      //FB voor chatmsg: chat/user/kingflurkelID/chats/benadID/$KEY/message-timestamp-avatar
 
       activateChat: function(){
         var userid = this.$.globals.values.user.data.id;
