@@ -1,6 +1,6 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
-<link rel="import" href="../../aos-globals/aos-globals.html">
+<link rel="import" href="../../../aos-globals/aos-globals.html">
 
 <polymer-element name="chat-module" attributes="conversation">
 
@@ -11,9 +11,11 @@
 
     <firebase-element id="chatmsgs" location="https://blazing-fire-6426.firebaseio.com/chat/things/{{conversation}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}" log></firebase-element>
 
+    <firebase-element id="convdata" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/{{conversation}}/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
+
     <div class="chatlistitem" horizontal layout center start-justified class="status">
-      <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-      <p>{{conversation}}</p>
+      <img class="chatavatar" src="{{cdata.avatar}}">
+      <p>{{cdata.with}}</p>
     </div>
     <template repeat="{{k in keys}}">
       <small>{{data[k].owner}}</small>
@@ -32,7 +34,12 @@
     Polymer({
 
       ready: function() {
+        this.userid = this.$.globals.values.user.data.id;
         var that = this;
+
+        this.$.globals.addEventListener('values-changed', function(){
+          console.log(that.$.globals.values.user.data.id);
+        });
 
         this.$.chatinput.addEventListener('keypress', function(e){
           var userid = that.$.globals.values.user.data.id;
@@ -55,7 +62,11 @@
       },
 
       datachange: function(){
-        console.log('data caged');
+        //console.log('data caged');
+      },
+
+      cdatachange: function(){
+        console.log('data caged', this.cdata);
       }
 
       

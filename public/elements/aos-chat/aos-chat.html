@@ -46,6 +46,9 @@
 
           <firebase-element id="conversations" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/" data="{{data}}" keys="{{keys}}" on-data-change="{{convchange}}" log></firebase-element>
 
+
+          <!-- deze core selector moet nog in nieuwe component zodat ik meer data kan meegeven als select event fired -->
+
           <core-selector id="convselector" valueattr="conversation" selected="{{selectedConversation}}">
 
             <template repeat="{{k, i in keys}}">
@@ -168,9 +171,7 @@
           
         });
 
-                that.$.convselector.addEventListener('core-select', function(e){
-                  console.log(e.detail);
-                })
+               
         
       },
 
