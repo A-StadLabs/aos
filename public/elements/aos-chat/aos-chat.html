@@ -15,10 +15,7 @@
       <div id="chatcontainer" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
 
         <div>
-
-
-
-
+        
         <template if="{{!chatactive}}">
 
           <div id="chatstatus"  on-tap="{{toggle}}">
@@ -42,10 +39,14 @@
             <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Gebruikersnaam" />
             <template repeat="{{s, i in users}}">
               <core-selector valueattr="key" selected="{{uservalue}}">
-                <div class="item" key="{{users[i].id}}"><p key="{{users[i].id}}">{{users[i].username}}</p></div>
+                <div class="item" key="{{users[i].id}}">
+                  <p key="{{users[i].id}}">{{users[i].username}}</p>
+                </div>
               </core-selector>
             </template>
           </div>
+
+          
 
           <!-- <div id="chatlist" hidden?="{{!chatopened}}">
             <div class="chatlistitem" horizontal layout center start-justified>
@@ -98,7 +99,7 @@
 
         });
 
-        document.addEventListener('keypress', function(e) {
+        document.addEventListener('keyup', function(e) {
           var ajax = that.$.finduser;
           console.log('value: ', that.uservalue);
           if (e.keyCode == 13) {
