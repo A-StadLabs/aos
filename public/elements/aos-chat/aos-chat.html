@@ -1,41 +1,58 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="aos-chat" attributes="">
+<link rel="import" href="../aos-globals/aos-globals.html">
+
+<polymer-element name="aos-chat" attributes="user">
   <template>
     <link rel="stylesheet" href="aos-chat.css">
-    <aos-globals id="globals"></aos-globals>
-    <template  if="{{$.globals.values.user}}">
-      <div id="chatcontainer"  class="container {{ {open: chatopened} | tokenList}}" on-tap="{{toggle}}" vertical layout start start-justified>
-
-
+    <aos-globals id="globals" on-values-changed="{{test}}" values="{{globs}}"></aos-globals>
+    <template if="{{$.globals.values.user}}">
+      <div id="chatcontainer" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
 
         <div>
+
+        <template if="{{!chatactive}}">
+
+          <div id="chatstatus"  on-tap="{{toggle}}">
+            <p>Chat (inactief) {{user}}</p>
+          </div>
+
+          <div id="chatlist" hidden?="{{!chatopened}}">
+            <p>Vanaf nu kan je ook chatten! Wil je de chatfunctie activeren?</p>
+            <button on-tap="{{activateChat}}">Activeer chat</button>
+          </div>
+
+        </template>
+          
+        <template if="{{chatactive}}">
         
-        <div id="chatstatus">
-          <p>Je bent online</p>
-        </div>
+          <div id="chatstatus"  on-tap="{{toggle}}">
+            <p>Je bent online</p>
+          </div>
 
-        <div id="chatlist" hidden?="{{!chatopened}}">
-          <div class="chatlistitem" horizontal layout center start-justified>
-            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-            <p>Username</p>
+          <div id="chatlist" hidden?="{{!chatopened}}">
+            <div class="chatlistitem" horizontal layout center start-justified>
+              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+              <p>Username</p>
+            </div>
+            <div class="chatlistitem" horizontal layout center start-justified>
+              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+              <p>Username</p>
+            </div>
+            <div class="chatlistitem" horizontal layout center start-justified>
+              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+              <p>Username</p>
+            </div>
+            <div class="chatlistitem" horizontal layout center start-justified>
+              <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
+              <p>Username</p>
+            </div>
           </div>
-          <div class="chatlistitem" horizontal layout center start-justified>
-            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-            <p>Username</p>
-          </div>
-          <div class="chatlistitem" horizontal layout center start-justified>
-            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-            <p>Username</p>
-          </div>
-          <div class="chatlistitem" horizontal layout center start-justified>
-            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-            <p>Username</p>
-          </div>
-        </div>
-        </div>
 
+        </template>
 
+        </div>
       </div>
     </template>
     <template if="{{!$.globals.values.user}}">
@@ -50,16 +67,50 @@
         // define element prototype here
 
       ready: function() {
+        this.chatactive = false;
 
+        var that = this;
 
+        document.addEventListener('user-changed', function(e){
+          console.log('nu ken ik de user wel.', that.$.globals.values.user.data.id);
 
+          var userid = that.$.globals.values.user.data.id;
+
+          console.log('en ik vertaal: ', userid);
+
+          that.checkUserChatActive(userid);
+
+        });
+        
+      },
+
+      checkUserChatActive: function(userid){
+        var that = this;
+        var FBcheck = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/users/"+userid+"/");
+          FBcheck.once('value', function(dataSnapshot) {
+          // code to handle new value.
+            console.log('is de chat actief? ', dataSnapshot.val());
+            that.chatactive = dataSnapshot.val();
+          });
       },
 
       toggle: function() {
-      this.chatopened = !this.chatopened;
-      console.log('Wow, how open is this?', this.chatopened);
-      }
+        this.chatopened = !this.chatopened;
+        console.log('Wow, how open is this?', this.chatopened);
+      },
 
+      activateChat: function(){
+        var userid = this.$.globals.values.user.data.id;
+        var user = this.$.globals.values.user.data.username;
+
+        console.log('start chat functie voor user '+userid);
+
+        var FBchat = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/users/"+userid+"/");
+        var newpostRefa = FBchat.set(true);
+
+        var newKey = newpostRefa.key();
+        console.log('New chatmessage saved at: '+newKey);
+      }
 
       });
 
