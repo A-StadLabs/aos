@@ -1,7 +1,12 @@
 :host {
 	display: block;
+  background-color: #595959;
 }
 
+.msgcont {
+  height: 250px;
+  overflow: scroll;
+}
 
 .status {
   margin: 0px;
@@ -10,6 +15,9 @@
   width: 250px;
 }
 
+small {
+  font-size: 9px;
+}
 
 .chatavatar {
   width: 30px;

@@ -17,10 +17,12 @@
       <img class="chatavatar" src="{{cdata.avatar}}">
       <p>{{cdata.with}}</p>
     </div>
+    <div class="msgcont">
     <template repeat="{{k in keys}}">
       <small>{{data[k].owner}}</small>
       <p>{{data[k].msg}}</p>
     </template>
+    </div>
     
     <div vertical layout left end-justified>
       <input type="text" id="chatinput" value="{{chatmsg}}" placeholder="Typ iets" />
@@ -63,6 +65,7 @@
 
       datachange: function(){
         //console.log('data caged');
+        this.keys.reverse();
       },
 
       cdatachange: function(){
