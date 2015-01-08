@@ -4,21 +4,23 @@
 
 .container {
   background-color: #595959;
-  position: absolute;
+  position: fixed;
   z-index: 99;
   width: 250px;
   height: 55px;
   bottom: 0px;
   right: 25px;
   font-family: "Open Sans";
-  font-weight: 300;
+  font-weight: 350;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   color: white;
   font-size: 1em;
   text-align: start;
   border-radius: 0px;
-  overflow: scroll;
+  overflow-y: scroll;
+   overflow-x: hidden;
+
       -webkit-transition: height ease 0.45s;
   -moz-transition: height ease 0.45s;
   transition: height ease 0.45s;
@@ -29,12 +31,13 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
 
 }
 
+
 .module {
-  background-color: #595959;
-  position: absolute;
+/*  background-color: #595959;
+  position: fixed;
   z-index: 99;
   width: 250px;
- height: 500px;
+ height: 350;
   max-height: 70%;
   bottom: 0px;
   right: 300px;
@@ -53,7 +56,7 @@ box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
 
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
 -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);
+box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.05);*/
 
 }
 
@@ -89,36 +92,56 @@ p {
   padding: 0px;
 }
 
-.chatlist {
-  margin: 0px;
-  padding: 15px 15px 10px 15px;
-}
 
 
-.chatlistitem {
-  border-bottom: 1px solid #666666;
-  width: 180px;
-  margin: 0px;
-  padding: 10px 15px 10px 15px;
-}
-
-
-
-
-
-
-input {
-  background-color: rgba(255,255,255,0.85);
+#gebruikercheck {
+  background-color: rgba(255,255,255,0.15);
   border: 0px;
-  padding: 10px 10px 10px 10px;
+  padding: 15px 10px 15px 12px;
   border-radius: 0px;
   outline: 0;
   border-style:solid;
   -webkit-appearance: none;
-  width: 200px;
+  width: 230px;
+  color: #EBEBEB;
+  background-image: url(images/searchloop.svg);
+  background-size: 26px 26px;
+  background-repeat: no-repeat;
+  background-position: right; 
 }
 
 
-input:focus {
+
+::-webkit-input-placeholder {
+   color: #cccccc;
+   font-weight: 300;
+   font-size: 10px;
+   font-family: 'Open Sans';
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #cccccc;
+   font-weight: 300;
+   font-size: 10px;
+   font-family: 'Open Sans';  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #cccccc;
+   font-weight: 300;
+   font-size: 10px;
+   font-family: 'Open Sans';  
+}
+
+:-ms-input-placeholder {  
+   color: #cccccc;
+   font-weight: 300;
+   font-size: 10px;
+   font-family: 'Open Sans';  
+}
+
+
+#gebruikercheck:focus {
   background-color: rgba(255,255,255,1);
+  color: #333333;
 }

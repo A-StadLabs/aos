@@ -14,6 +14,10 @@
     <firebase-element id="convdata" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/{{conversation}}/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
 
     <div class="chatlistitem" horizontal layout center start-justified class="status">
+
+      <button on-tap="{{toList}}">back</button>
+
+
       <img class="chatavatar" src="{{cdata.avatar}}">
       <p>{{cdata.with}}</p>
     </div>
@@ -70,6 +74,10 @@
 
       cdatachange: function(){
         console.log('data caged', this.cdata);
+      },
+
+      toList:function() {
+        this.fire('to-list');
       }
 
       
