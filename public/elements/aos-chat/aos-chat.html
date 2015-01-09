@@ -165,9 +165,30 @@
         });  
 
         document.addEventListener('update-lastpost', function(e){
-          console.log()
+          //console.log("conversation: ", e.detail.conversationid);
+          // Update last post timestamp
+          var conversation = e.detail.conversationid;
+          var FBUpdateLP = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/conversations/"+conversation+"/");
+          var FBUpdateLPRes = FBUpdateLP.once('value', function(snapshot){
+            var guest = snapshot.val().guest;
+            var owner = snapshot.val().initiator;
+            that.updateLastpost(guest, owner, conversation);
+          });
         });     
         
+      },
+
+      updateLastpost: function(guest, owner, conversation){
+        //console.log('Conversation: ', conversation, ' - Guest: ', guest, ' - Owner: ', owner);
+        var FBuLP = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+owner+"/chats/"+conversation+"/lastpost/");
+        var FBuLPRes = FBuLP.set(Firebase.ServerValue.TIMESTAMP);
+
+        var FBuLP2 = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+guest+"/chats/"+conversation+"/lastpost/");
+        var FBuLPRes2 = FBuLP2.set(Firebase.ServerValue.TIMESTAMP);
+
+        var FBuLP3 = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/conversations/"+conversation+"/lastpost/");
+        var FBuLPRes3 = FBuLP3.set(Firebase.ServerValue.TIMESTAMP);
+
       },
 
       convchange: function(){

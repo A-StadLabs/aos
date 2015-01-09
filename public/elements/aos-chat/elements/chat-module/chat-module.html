@@ -67,11 +67,11 @@
             console.log(that.chatmsg);
 
             var FBcheck = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/things/"+conversation+"/");
-            FBcheck.push({ "owner": userid, 
-                          "msg": msg,
-                           "time":Firebase.ServerValue.TIMESTAMP });
+            FBcheck.push({  "owner": userid, 
+                            "msg": msg,
+                            "time":Firebase.ServerValue.TIMESTAMP });
             that.chatmsg = '';
-            that.fire('update-lastpost', { "owner": owner, "guest": guest , "conversationid": conversation })
+            that.fire('update-lastpost', { "conversationid": conversation })
           };
         }); 
       },
