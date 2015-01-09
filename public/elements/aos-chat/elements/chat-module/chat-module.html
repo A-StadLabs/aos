@@ -4,6 +4,7 @@
 
 <polymer-element name="chat-module" attributes="conversation">
 
+
   <template>
 
     <link rel="stylesheet" href="chat-module.css" />
@@ -13,15 +14,23 @@
 
     <firebase-element id="convdata" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/{{conversation}}/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
 
-    <div class="chatlistitem" horizontal layout center start-justified class="status">
+    <div class="chatitem" horizontal layout center start-justified>
 
-      <button on-tap="{{toList}}">back</button>
+      <div class="nostyle" flex>
+        <button class="listbtn" on-tap="{{toList}}"><img src="../../images/list.svg"></button>
+      </div>
 
+      <div class="chatname">
+        <h1>{{cdata.with}}</h1>
+      </div>
 
-      <img class="chatavatar" src="{{cdata.avatar}}">
-      <p>{{cdata.with}}</p>
+      <div class="nostyle">
+        <img class="chatavatar" src="{{cdata.avatar}}">
+      </div>
+
     </div>
-    <div class="msgcont">
+
+    <div class="msgcont" end-justified>
     <template repeat="{{k in keys}}">
       <small>{{data[k].owner}}</small>
       <p>{{data[k].msg}}</p>
@@ -31,7 +40,6 @@
     <div vertical layout left end-justified>
       <input type="text" id="chatinput" value="{{chatmsg}}" placeholder="Typ iets" />
     </div>
-
     
   </template>
 
@@ -41,6 +49,8 @@
 
       ready: function() {
         this.userid = this.$.globals.values.user.data.id;
+        // console.log(this.chatlist.scrollHeight);
+        
         var that = this;
 
         this.$.globals.addEventListener('values-changed', function(){
@@ -55,21 +65,19 @@
           var conversation = that.conversation;
           if (e.keyCode == 13) {
             console.log(that.chatmsg);
+
             var FBcheck = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/things/"+conversation+"/");
             FBcheck.push({ "owner": userid, 
                           "msg": msg,
                            "time":Firebase.ServerValue.TIMESTAMP });
-
-            //var FBlastpost = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/conversations/"+owner+"/"+guest+"/lastpost/");
-            //FBlastpost.set(Firebase.ServerValue.TIMESTAMP);
             that.chatmsg = '';
+            that.fire('update-lastpost', { "owner": owner, "guest": guest , "conversationid": conversation })
           };
         }); 
       },
 
       datachange: function(){
         //console.log('data caged');
-        this.keys.reverse();
       },
 
       cdatachange: function(){
@@ -78,6 +86,15 @@
 
       toList:function() {
         this.fire('to-list');
+      },
+
+      updateScroll:function (){
+
+        // if(scrolled){
+        //   console.log('er werd gescrold');
+        // var element = document.getElementById("yourDivID");
+        // element.scrollTop = element.scrollHeight;
+        // };
       }
 
       

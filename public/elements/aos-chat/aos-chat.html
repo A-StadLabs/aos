@@ -3,6 +3,8 @@
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
+<link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+
 <link rel="import" href="../aos-globals/aos-globals.html">
 <link rel="import" href="elements/chat-useritem/chat-useritem.html">
 <link rel="import" href="elements/chat-module/chat-module.html">
@@ -33,25 +35,34 @@
 
         <!-- HEEFT USER CHAT GEACTIVEERD? JA! -->
         <template if="{{chatactive}}">
-          <div class="chatlistitem" horizontal layout center start-justified id="chatstatus" on-tap="{{toggle}}">
-            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}">
-            <p>Online</p>
+          <div horizontal layout center start-justified id="chatstatus">
+
+          <div horizontal layout center start-justified flex>
+            <img class="chatavatar" src="{{$.globals.values.user.data.avatarUrl}}"  on-tap="{{toggle}}">
+            <h1 on-tap="{{toggle}}">Online</h1>
+          </div>
+
+          
+          <button hidden?="{{!chatopened}}" on-tap="{{searchUser}}">+</button>
           </div>
 
           <div class="chatlist" hidden?="{{!chatopened}}">
 
             <firebase-element id="conversations" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/" data="{{data}}" keys="{{keys}}" on-data-change="{{convchange}}"></firebase-element>
-            <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Wie zoek je?" />
-
-            <template repeat="{{k, i in conversations}}">
-              <chat-convitem key="{{k.key}}" avatar="{{k.avatar}}" with="{{k.with}}" lastpost="{{k.lastpost}}"></chat-convitem>
-            </template>
-
+            <core-collapse id="collapse" opened="{{openUserSearch}}">
+              <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Wie zoek je?" />
             <template repeat="{{s, i in users}}">
               <div class="item" key="{{users[i].id}}">
                 <chat-useritem user="{{users[i]}}"></chat-useritem>
               </div>
             </template>
+            </core-collapse>
+            
+            <template repeat="{{k, i in conversations}}">
+              <chat-convitem key="{{k.key}}" avatar="{{k.avatar}}" with="{{k.with}}" lastpost="{{k.lastpost}}"></chat-convitem>
+            </template>
+
+            
           </div>
 
         </template>
@@ -83,6 +94,7 @@
       ready: function() {
         this.chatactive = false;
         this.pagery = 0;
+        this.openUserSearch = false;
 
         var that = this;
 
@@ -141,7 +153,6 @@
                           "avatar": useravatar
                            });
 
-
           var FBaddpart1 = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+userid+"/chats/"+newKey+"/");
            var userkey = FBaddpart1.set({ 
                           "conversation": newKey, 
@@ -151,7 +162,11 @@
 
           that.selectedConversation = newKey;
           
-        });       
+        });  
+
+        document.addEventListener('update-lastpost', function(e){
+          console.log()
+        });     
         
       },
 
@@ -168,7 +183,6 @@
                   "conversation": data[keys[i]].conversation,
                   "lastpost": this.convertTimestamp(data[keys[i]].lastpost),
                   "with": data[keys[i]].with,
-
           });
         };
         this.conversations = conversations;
@@ -197,6 +211,10 @@
       toList:function () {
         //console.log('toch?');
         this.pagery = 0;
+      },
+
+      searchUser:function() {
+        this.openUserSearch = !this.openUserSearch;
       },
 
       activateChat: function(){
