@@ -17,11 +17,11 @@
     "polymer": "Polymer/polymer#~0.5.1"
   },
   "homepage": "https://github.com/mateusortiz/notification-elements",
-  "_release": "84f572ef32",
+  "_release": "b8ef54f5ce",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "84f572ef32ff46d6c99d2e7be5e8fc9e6ea32d2b"
+    "commit": "b8ef54f5ce8bc7d0591a1a83c10b49e2ec2a9e48"
   },
   "_source": "git://github.com/mateusortiz/notification-elements.git",
   "_target": "*",

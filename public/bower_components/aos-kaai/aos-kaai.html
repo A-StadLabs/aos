@@ -1,0 +1,207 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-ajax/core-ajax.html">
+<link rel="import" href="../core-item/core-item.html">
+<link rel="import" href="../core-dropdown/core-dropdown.html">
+<link rel="import" href="../core-toolbar/core-toolbar.html">
+<link rel="import" href="../core-selector/core-selector.html">
+<link rel="import" href="../core-dropdown-menu/core-dropdown-menu.html">
+
+<!-- Let's load our favorite font! -->
+<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
+
+<polymer-element name="aos-kaai" attributes="theme userobject globals language">
+<template>
+
+  <link rel="stylesheet" href="aos-kaai.css" />
+
+  <div vertical layout fit>
+
+  <div id="kaai" horizontal center start-justified layout>
+    <div class="helpings" flex>
+      <core-dropdown-menu label="Taal" class="lan">
+        <core-dropdown class="dropdown">
+          <core-selector selected="{{language}}" id="lanselect" valueattr="label">
+            <template repeat="{{l in languages}}">
+              <core-item label="{{l.language}}"></core-item>
+            </template>
+          </core-selector>
+        </core-dropdown>
+      </core-dropdown-menu>
+     
+      <img class="mobilekaaibtns" src="images/kaai-help.svg" on-tap="{{toggleHelp}}">
+     
+    </div>
+
+    <div class="tools">
+
+      <h1>VERANDERING IS GOED</h1>
+     
+        <img class="mobilekaaibtns" src="images/kaai-searchloop.svg" on-tap="{{toggleSearch}}">
+
+        <img class="mobilekaaibtns" src="images/kaai-knooppunt.svg" on-tap="{{toggleKnoop}}">
+
+        <img class="mobilekaaibtns" src="images/kaai-profiel2.svg" on-tap="{{toggleLogin}}">
+
+    </div>
+
+    <core-ajax method="GET" id="loginAjax" handleAs="json" auto url="/login" response="{{responseUser}}" on-core-response="{{handleResponseUser}}"></core-ajax>
+
+  </div>
+
+  <div id="help" class="panel" hidden?="{{help}}">
+    <h1>HELP!</h1> 
+  </div>
+
+  <div id="search" class="panel" hidden?="{{search}}">
+    <h1>EARCH!</h1> 
+  </div>
+
+  <div id="knoop" class="panel" hidden?="{{knoop}}">
+    <h1>KNOOPPUNT!</h1> 
+  </div>
+
+  <div id="login" class="panel" hidden?="{{login}}">
+    <h1>LOGIN!</h1> 
+  </div>
+
+  <div id="notificaties" class="panel" hidden?="{{notificaties}}">
+    <h1>NOTIFICATIES!</h1> 
+  </div>
+
+  </div>
+
+</template>
+
+<script>
+  (function() {
+    var globals = {};
+
+    Polymer({
+      /**
+       * The `author` attribute sets an initial author
+       *
+       * @attribute author
+       * @type string
+       * @default 'Dimitri Glazkov'
+       */
+       author: 'A-StadLabs',
+
+      /**
+       * `fancy` is a property that does something fancy.
+       *
+       * @property fancy
+       * @type bool
+       * @default false
+       */
+       fancy: false,
+
+       ready: function() {
+        // Ready is a lifecycle callback.
+        // You can do setup work in here.
+        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+        this.globals = globals;
+        for (var i = 0; i < this.attributes.length; ++i) {
+          var attr = this.attributes[i];
+          globals[attr.nodeName] = attr.value;
+        };
+
+        this.search = true;
+        this.help = true;
+        this.knoop = true;
+        this.notificaties = true;
+        this.login = true;
+
+
+        this.language = "NL";
+        this.languages = [{"language": "NL"}, {"language": "FR"}, {"language": "DE"}, {"language": "EN"}];
+        this.searchQuery = "";
+      },
+
+      /**
+       * The `sayHello` method will return a greeting.
+       *
+       * @method sayHello
+       * @param {String} greeting Pass in a specific greeting.
+       * @return {String} Returns a string greeting.
+       */
+      sayHello: function(greeting) {
+        var response = greeting || 'Hello World!';
+        return 'aos-kaai says, ' + response;
+      },
+
+      globalsChanged: function(){
+        this.fire('globals-changed', {globals: this.globals});
+      },
+
+      languageChanged: function(){
+        this.fire('language-changed', {globals: this.language});
+        console.log("Language: ", this.language);
+      },
+
+      toggleSearch: function(){
+        this.search = !this.search;
+        this.help = true;
+        this.knoop = true;
+        this.notificaties = true;
+        this.login = true;
+      },
+
+      toggleHelp: function(){
+        this.help = !this.help;
+        this.search = true;
+        this.knoop = true;
+        this.notificaties = true;
+        this.login = true;
+      },
+
+      toggleLogin: function(){
+        this.search = true;
+        this.help = true;
+        this.knoop = true;
+        this.notificaties = true;
+        this.login = !this.login;
+      },
+
+      toggleNotificaties: function(){
+        this.search = true;
+        this.help = true;
+        this.knoop = true;
+        this.notificaties = !this.notificaties;
+        this.login = true;
+      },
+
+      toggleKnoop: function(){
+        this.search = true;
+        this.help = true;
+        this.knoop = !this.knoop;
+        this.notificaties = true;
+        this.login = true;
+
+      },
+
+
+      /**
+       * The `aos-kaai-lasers-success` event is fired whenever we
+       * call fireLasers.
+       *
+       * @event aos-kaai-lasers-success
+       * @param {Object} detail
+       *   @param {string} detail.sound An amazing sound.
+       */
+
+      /**
+       * The `fireLasers` method will fire the lasers. At least
+       * it will dispatch an event that claims lasers were fired :)
+       *
+       * @method fireLasers
+       */
+       fireLasers: function() {
+        this.fire('aos-kaai-lasers-success', { sound: 'Pew pew pew!' });
+      }
+
+    });
+})();
+
+</script>
+
+</polymer-element>

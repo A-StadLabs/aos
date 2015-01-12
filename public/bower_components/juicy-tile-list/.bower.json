@@ -21,14 +21,13 @@
     "Gruntfile.js"
   ],
   "dependencies": {
-    "platform": "Polymer/platform#~0.3.4",
-    "polymer": "Polymer/polymer#~0.3.4"
+    "polymer": "<0.8.0"
   },
-  "_release": "d04902bfb2",
+  "_release": "a92d898c10",
   "_resolution": {
     "type": "branch",
     "branch": "gh-pages",
-    "commit": "d04902bfb2d6142d2e6b1b435b9041179be85b5f"
+    "commit": "a92d898c10972f83c986f6e7c074514ae46f7cb6"
   },
   "_source": "git://github.com/Juicy/juicy-tile-list.git",
   "_target": "gh-pages",
