@@ -9,15 +9,18 @@
 <link rel="import" href="elements/chat-useritem/chat-useritem.html">
 <link rel="import" href="elements/chat-module/chat-module.html">
 <link rel="import" href="elements/chat-convitem/chat-convitem.html">
+<link rel="import" href="elements/chat-data/chat-data.html">
 
 <polymer-element name="aos-chat" attributes="user">
 <template>
   <link rel="stylesheet" href="aos-chat.css">
   <aos-globals id="globals" on-values-changed="{{test}}" values="{{globs}}"></aos-globals>
   <core-ajax id="finduser" on-core-response="{{userresp}}" response="{{userresponse}}"></core-ajax>
+  <chat-data id="chatdata" user="{{$.globals.values.user.data.id}}" response="{{conversations}}"></chat-data>
     <!-- IS USER INGELOGD? JA! -->
     <template if="{{$.globals.values.user}}">
-            <div id="chatcontainer" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
+
+      <div id="chatcontainer" class="container {{ {open: chatopened} | tokenList}}" vertical layout start start-justified>
 
       <core-animated-pages id="pagery" transitions="slide-from-right" selected="{{pagery}}" fit>
       <section>
@@ -46,23 +49,22 @@
           <button class="nostyle" hidden?="{{!chatopened}}" on-tap="{{searchUser}}"><img src="images/add.svg"></button>
           </div>
 
-          <div class="chatlist" hidden?="{{!chatopened}}">
+          <div class="chatlist" hidden?="{{!chatopened}}">        
 
-            <firebase-element id="conversations" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/" data="{{data}}" keys="{{keys}}" on-data-change="{{convchange}}"></firebase-element>
             <core-collapse id="collapse" opened="{{openUserSearch}}">
               <input type="text" id="gebruikercheck" value="{{uservalue}}" placeholder="Wie zoek je?" />
-            <template repeat="{{s, i in users}}">
-              <div class="item" key="{{users[i].id}}">
-                <chat-useritem user="{{users[i]}}"></chat-useritem>
-              </div>
-            </template>
+              <template repeat="{{s, i in users}}">
+                <div class="item" key="{{users[i].id}}">
+                  <chat-useritem user="{{users[i]}}"></chat-useritem>
+                </div>
+              </template>
             </core-collapse>
-            
+
+            <!-- Conversaties -->
             <template repeat="{{k, i in conversations}}">
               <chat-convitem key="{{k.key}}" avatar="{{k.avatar}}" with="{{k.with}}" lastpost="{{k.lastpost}}"></chat-convitem>
             </template>
 
-            
           </div>
 
         </template>
@@ -79,9 +81,7 @@
 
     </template>
 
-    <!-- IS USER INGELOGD? NEE! -->
-    <template if="{{!$.globals.values.user}}">
-    </template>
+   
 
 </template>
 <script>
@@ -178,6 +178,8 @@
         
       },
 
+
+
       updateLastpost: function(guest, owner, conversation){
         //console.log('Conversation: ', conversation, ' - Guest: ', guest, ' - Owner: ', owner);
         var FBuLP = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/directory/"+owner+"/chats/"+conversation+"/lastpost/");
@@ -189,25 +191,6 @@
         var FBuLP3 = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/conversations/"+conversation+"/lastpost/");
         var FBuLPRes3 = FBuLP3.set(Firebase.ServerValue.TIMESTAMP);
 
-      },
-
-      convchange: function(){
-        console.log(this.data);
-        var conversations = [];
-        var data = this.data;
-        var keys = this.keys;
-        for (var i = keys.length - 1; i >= 0; i--) {
-          //console.log(data[keys[i]]);
-          conversations.push({
-                  "key": keys[i],
-                  "avatar": data[keys[i]].avatar,
-                  "conversation": data[keys[i]].conversation,
-                  "lastpost": this.convertTimestamp(data[keys[i]].lastpost),
-                  "with": data[keys[i]].with,
-          });
-        };
-        this.conversations = conversations;
-        //console.log(this.conversations);
       },
 
       userresp: function(){
@@ -272,6 +255,13 @@
         var seconds = "0" + date.getSeconds();
         var formattedTime;
         return formattedTime = year + '-' + (month+1) + '-'+ day + ' ' + (hours-1) + ':' + minutes.substr(minutes.length-2) + ':' + seconds.substr(seconds.length-2);
+      },
+
+      pageryChanged: function(){
+        if(this.pagery==0){
+          this.$.chatdata.reloadData();
+          //this.$.conversations.requery();
+        };
       }
 
       

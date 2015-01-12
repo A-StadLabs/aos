@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="chat-module.css" />
     <aos-globals id="globals" on-values-changed="{{test}}" values="{{globs}}"></aos-globals>
 
-    <firebase-element id="chatmsgs" location="https://blazing-fire-6426.firebaseio.com/chat/things/{{conversation}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}" log></firebase-element>
+    <firebase-element id="chatmsgs" location="https://blazing-fire-6426.firebaseio.com/chat/things/{{conversation}}/" data="{{data}}" keys="{{keys}}" on-data-change="{{datachange}}"></firebase-element>
 
-    <firebase-element id="convdata" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/{{conversation}}/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" log></firebase-element>
+    <firebase-element id="convdata" location="https://blazing-fire-6426.firebaseio.com/chat/directory/{{$.globals.values.user.data.id}}/chats/{{conversation}}/" data="{{cdata}}" keys="{{ckeys}}" on-data-change="{{cdatachange}}" ></firebase-element>
 
     <div class="chatitem" horizontal layout center start-justified>
 
@@ -54,7 +54,7 @@
         var that = this;
 
         this.$.globals.addEventListener('values-changed', function(){
-          console.log(that.$.globals.values.user.data.id);
+          //console.log(that.$.globals.values.user.data.id);
         });
 
         this.$.chatinput.addEventListener('keypress', function(e){
@@ -64,7 +64,7 @@
           var msg = that.chatmsg;
           var conversation = that.conversation;
           if (e.keyCode == 13) {
-            console.log(that.chatmsg);
+            //console.log(that.chatmsg);
 
             var FBcheck = new Firebase("https://blazing-fire-6426.firebaseio.com/chat/things/"+conversation+"/");
             FBcheck.push({  "owner": userid, 
@@ -81,7 +81,7 @@
       },
 
       cdatachange: function(){
-        console.log('data caged', this.cdata);
+        //console.log('data caged', this.cdata);
       },
 
       toList:function() {

@@ -86,7 +86,6 @@
 
 <section>
 <core-ajax url="/infofichedetail?infokey={{selectedDetail}}" handleAs="json" response="{{artikel}}" on-core-response="{{handleResponseArtikel}}" auto method="GET"></core-ajax>
-
   
   <div class="container">
     <div id="canvas">
@@ -110,7 +109,7 @@
     Polymer({
 
       handleResponseArtikel: function(){
-        console.log('artikel: ', JSON.stringify(this.artikel));
+        //console.log('artikel: ', JSON.stringify(this.artikel));
       },
 
       ready: function() {
@@ -122,7 +121,7 @@
 
         this.$.scenes.selected = 0;
 
-      	console.log('info app loaded.'); 
+      	//console.log('info app loaded.'); 
 
         this.addEventListener('menureset', function(){
           this.$.scenes.selected = 0;
@@ -133,7 +132,7 @@
         });
      
         this.addEventListener('detail-tapped', function(e){
-          console.log('detail tapped: ', e.detail.slug);
+          //console.log('detail tapped: ', e.detail.slug);
           this.$.scenes.selected = 1;
           this.selectedCat = e.detail.slug;
           this.selectedTitle = e.detail.cat;
@@ -148,26 +147,26 @@
       showDetail: function(e, detail, sender){
         this.$.scenes.selected = 2;
         this.selectedDetail = sender.attributes[1].value;
-        console.log(this.selectedDetail);
+        //console.log(this.selectedDetail);
       },
 
       response: function(){
-        console.log('ajax response', this.localjson);
+        //console.log('ajax response', this.localjson);
       },
 
       openAddCat: function(){
         this.$.overlay.toggle();
-        console.log('ajax response', this.localjson);
+        //console.log('ajax response', this.localjson);
       },
 
       openAddFiche: function(){
         var that = this;
         that.$.overlay2.toggle();
-        console.log('ajax response', this.localjson);
+        //console.log('ajax response', this.localjson);
       },
       
       cattapped: function(){
-        console.log(this.$.catselector.selected);
+        //console.log(this.$.catselector.selected);
       },
 
       handleResponse: function(){

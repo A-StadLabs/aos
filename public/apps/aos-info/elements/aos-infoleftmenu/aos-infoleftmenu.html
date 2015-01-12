@@ -89,7 +89,7 @@
             that.linkType = e.detail.item.attributes[4].value;
             that.details = JSON.parse(that.details);
             that.contentType = that.details.contentType;
-            console.log(that.contentType)
+            //console.log(that.contentType)
             if(that.linkType==='tabs'){
             that.details = that.details.tabs;
             //console.log('details: ',that.details.tabs);
@@ -102,7 +102,7 @@
               var contentTags = that.details.tags;
               //console.log('channelId: ',channelId);
               that.$.AjaxContentid.url = '/content?channelId='+channelId+'&contentType='+contentType+'&contentStart=0&contentLimit=10&contentTags='+contentTags;
-              console.log('url: ',that.$.AjaxContentid.url);
+              //console.log('url: ',that.$.AjaxContentid.url);
               that.$.AjaxContentid.go();              
             };
           });
@@ -110,7 +110,7 @@
         },
 
         handleResponse1: function(){
-          console.log(JSON.stringify(this.AjaxContent.data));
+          //console.log(JSON.stringify(this.AjaxContent.data));
           this.details = this.AjaxContent.data;
         },
 
@@ -138,7 +138,7 @@
         },
 
         handleResponse: function(){
-          console.log('ajax loaded', this.tabs, ' - ', this.subCat);
+          //console.log('ajax loaded', this.tabs, ' - ', this.subCat);
         }
       });
 
