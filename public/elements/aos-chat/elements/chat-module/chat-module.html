@@ -24,16 +24,16 @@
         <h1>{{cdata.with}}</h1>
       </div>
 
-      <div class="nostyle">
         <img class="chatavatar" src="{{cdata.avatar}}">
-      </div>
 
     </div>
 
     <div class="msgcont" end-justified>
     <template repeat="{{k in keys}}">
-      <small>{{data[k].owner}}</small>
-      <p>{{data[k].msg}}</p>
+      <div vertical layout  class="comment {{ {own: ownmessage} | tokenList}}">
+        <small><time-ago datetime="{{data[k].time}}" refresh delay="1000"></time-ago></small>
+        <p>{{data[k].msg}}</p>
+      </div>
     </template>
     </div>
     
@@ -49,7 +49,6 @@
 
       ready: function() {
         this.userid = this.$.globals.values.user.data.id;
-        // console.log(this.chatlist.scrollHeight);
         
         var that = this;
 
@@ -74,6 +73,7 @@
             that.fire('update-lastpost', { "conversationid": conversation })
           };
         }); 
+
       },
 
       datachange: function(){
@@ -81,7 +81,10 @@
       },
 
       cdatachange: function(){
-        //console.log('data caged', this.cdata);
+
+        console.log('data caged', this.cdata);
+
+
       },
 
       toList:function() {
