@@ -2,8 +2,7 @@ node_modules
 dist
 test/temp
 .sass-cache
-app/bower_components
+public/bower_components
 .tmp
 test/bower_components/
-public/bower_components/color-thief
 public/apps/
