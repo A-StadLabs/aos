@@ -12,13 +12,13 @@
 
 <div id="container">
 
-<core-ajax 
+<core-ajax
 url="/homefeed"
-method="GET" 
-auto 
-handleAs="json" 
+method="GET"
+auto
+handleAs="json"
 response="{{resultaat}}"
-on-core-response="{{handleResponse}}" 
+on-core-response="{{handleResponse}}"
 >
 
 </core-ajax>
@@ -50,15 +50,15 @@ window.addEventListener('resize', resize);
 
       Polymer({
       ready: function() {
-       
+
         this.tips = true;
 
-        console.log('Homescreen app loaded.');
+        //console.log('Homescreen app loaded.');
 
         // var i = 0;
         // var items = [];
         // this.setup = {width: '100%', gutter: 20, items:items};
-        
+
         // document.addEventListener('addToFeed', function(e){
         //     items.push({index:i, priority:0.9, width: 350, heightAuto: true});
         //     this.setup = { gutter: 20, items:items};
@@ -70,23 +70,23 @@ window.addEventListener('resize', resize);
         // setTimeout(function(){ that.$.jlist.refresh(); }, 2000);
 
 
-        
+
 
         },
 
         hideTips: function(){
         //var that = this;
-        console.log('wtf?');
+        //console.log('wtf?');
         this.tips = false;
         //this.$.jlist.refresh();
       },
 
       handleResponse: function(){
-        console.log('response changed');
+        //console.log('response changed');
       },
 
       setupChanged: function(){
-        console.log('setup changed');
+        //console.log('setup changed');
       }      });
 
     })();

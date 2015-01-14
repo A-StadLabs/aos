@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="aos-knooppunt.css" />
     <aos-globals id="globals" values="{{globs}}"></aos-globals>
 
- 
+
 <div id="favos">
 
 <template if="{{$.globals.values.user}}">
@@ -96,12 +96,12 @@
 <div id="container" vertical layout start center-justified>
 
 <div horizontal layout center start-justified class="grouptitle">
-  
+
   <div flex horizontal layout start start-justified >
     <img class="groupicon" src="images/a-rgb.svg">
     <a href="/">Stad Antwerpen</a>
   </div>
-  
+
   <div class="switcher" end-justified>
   <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
   <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
@@ -173,12 +173,12 @@
 <div id="container" vertical layout start center-justified>
 
 <div horizontal layout center start-justified class="grouptitle">
-  
+
   <div flex horizontal layout start start-justified >
     <img class="groupicon" src="images/astadlabs.svg">
     <a href="/#/">AstadLabs</a>
   </div>
-  
+
   <div class="switcher" end-justified>
   <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
   <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
@@ -195,7 +195,7 @@
 
   <a href="/#/songsvanongs" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
     <img src="images/appicons/icon-songsvanongs.svg">
-    <p >Songs van Ongs</p>
+    <p>Songs van Ongs</p>
   </a>
 
   </div>
@@ -214,7 +214,7 @@
       ready: function() {
         this.tile = true;
         this.list = false;
-      	console.log('Knooppunt app loaded.'); 
+      	//console.log('Knooppunt app loaded.');
 
         },
 

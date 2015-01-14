@@ -13,17 +13,16 @@
     	<h3>Delen via:</h3>
     	<p><twitter-button type="share" text="{{tekst}}" user="astadlabs" href="{{link}}"></twitter-button></p>
     	<p><a href="mailto:?subject={{tekst}}&amp;body={{link}}" title="Via e-mail"><img src="images/enveloppe.svg"/></a></p>
-    </div>	
-    	
+    </div>
+
 </template>
 <script>
     Polymer({
 
     	linkChanged: function(){
-    		console.log(this.link);
+    		//console.log(this.link);
     	}
 
     });
 </script>
 </polymer-element>
-
