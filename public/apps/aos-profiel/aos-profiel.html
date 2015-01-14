@@ -29,45 +29,76 @@
    </template>
 
    <template if="{{$.globals.values.user.data}}">
-   <div class="canvas">
-      <div horizontal layout wrap start start-justified>
-        <div horizontal layout start start-justified flex class="basicprof">
-          <img class="avataricon" id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
+
+
+   <div class="leaderboard">
+
+        <div horizontal layout center class="basicprof" fit>
+          
+          <div class="avatarbox">
+            <img id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
+          </div>
+          
           <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
         </div>
-        <div>
-          <button on-tap="{{logout}}" class="logoutbtn">Afmelden</button>
+
+        <div class="leaderimg">
+          <img src="images/header-twitter-color.jpg">
         </div>
+
     </div>
+
+        <div horizontal layout center end-justified>
+         <button on-tap="{{logout}}" class="logoutbtn">{{$.globals.values.user.data.username}} afmelden</button>
+        </div>
+
+
+
+       <div class="canvas">
+
+
+
+
      <!-- <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
    <h2>Gebruikersgegevens</h2>  
     <p>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</p> -->
-    <p>{{$.globals.values.user.data.username}}</p>
-    <p>{{$.globals.values.user.data.email}}</p>
-    <p>{{$.globals.values.user.data.phone}}</p>
-    <p>{{$.globals.values.user.data.birthDate}}</p>
-    <p>{{$.globals.values.user.data.birthPlace}}</p>
-    <p>{{$.globals.values.user.data.gender}}</p>
-    <p>{{$.globals.values.user.data.maritalStatus}}</p>
 
-    <h2>Email adressen</h2>
+        <div horizontal layout start wrap>
 
-    <template repeat="{{ i in $.globals.values.user.data.secondaryEmails}}">
-      <p>{{i.email}}</p>
-    </template>
+          <div class="column">
+            <h2>Persoonlijke info</h2>
 
-    <h2>Rollen:</h2>
+            <p>{{$.globals.values.user.data.username}}</p>
+            <p>{{$.globals.values.user.data.phone}}</p>
+            <p>{{$.globals.values.user.data.birthDate}}</p>
+            <p>{{$.globals.values.user.data.birthPlace}}</p>
+            <p>{{$.globals.values.user.data.gender}}</p>
+            <p>{{$.globals.values.user.data.maritalStatus}}</p>
+<br>
+            <h2>Email adressen</h2>
+                        <p>{{$.globals.values.user.data.email}}</p>
 
-    <template repeat="{{ i in $.globals.values.user.data.roles}}">
-      <p>{{i}}</p>
-    </template>
+            <template repeat="{{ i in $.globals.values.user.data.secondaryEmails}}">
+              <p>{{i.email}}</p>
+            </template>
+          </div>
 
-    <h3>JSON userobject</h3>
+          <div vertical layout start start-justified class="column">
+            <h2>Rollen:</h2>
+            <template repeat="{{ i in $.globals.values.user.data.roles}}">
+              <p>{{i}}</p>
+            </template>
+          </div>
+
+
+
+
+<!--     <h3>JSON userobject</h3>
     <p>{{$.globals.values.userJSON}}</p>
     <h3>CRS gegevens</h3>
     <p>{{$.globals.values.crsuserJSON}}</p>
     <h3>CRS medewerker gegevens</h3>
-    <p>{{$.globals.values.crsmedewerkerJSON}}</p>
+    <p>{{$.globals.values.crsmedewerkerJSON}}</p> -->
    </template>
 
    <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
@@ -75,6 +106,7 @@
    <core-ajax method="GET" id="getCRS" handleAs="json" url="/crs-persoon" response="{{responseCRS}}" on-core-response="{{handleResponseCRS}}">
 
    <core-ajax method="GET" id="getCRSmedewerker" handleAs="json" url="/crs-medewerker" response="{{responseCRSmedewerker}}" on-core-response="{{handleResponseCRSmedewerker}}">
+   </div>
 </div>
 
 

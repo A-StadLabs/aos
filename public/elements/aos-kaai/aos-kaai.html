@@ -254,11 +254,14 @@
           //console.log("Meeeeeeeuuuuuubbiiiilllleee kaai");
         this.kaaimobile = true;
         this.kaaidesktop = false;
+        this.fire('desktop');
+
           } else {
                       //console.log("Geweeeeeeeuuuuuuneee kaai");
 
         this.kaaidesktop = true;
         this.kaaimobile = false;
+        this.fire('desktop');
       };
 
 
