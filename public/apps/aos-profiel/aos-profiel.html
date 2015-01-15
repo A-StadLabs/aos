@@ -157,6 +157,16 @@
             this.$.globals.values.user = this.responseUser;
             this.$.globals.values.userJSON = JSON.stringify(this.$.globals.values.user.data);
             console.log('UID: ',this.responseUser.data.uid);
+            var uid = this.responseUser.data.id;
+            var userobject = this.responseUser.data;
+
+            // First check if we already have this user locally
+            var userCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
+            var userResp = userCheck.once("value", function(snapshot){
+              var objectSave = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/aosuser/");
+              var objectResp = objectSave.set(userobject);
+            });
+
             this.$.getCRS.go();
             if(this.responseUser.data.ADAccount){
               this.$.getCRSmedewerker.go();
