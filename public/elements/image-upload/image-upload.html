@@ -15,7 +15,6 @@
     <div vertical layout center center-justified class="uploader" fit>
       <div horizontal layout center><img class="camicon" src="images/fileupload.svg"><h3 on-click="{{selectFile}}">{{label}}</h3></div>
       <div><input type="file" name="File" id="file" on-change="{{setFiles}}">
-      <img src="{{dataurl}}" hidden?="{{beeldtonen}}"></div>
     </div>
 
   </template>
@@ -169,6 +168,7 @@
                 console.log('einde: ', dataurl1);
                 that.dataurl = dataurl1;
                 that.beeldtonen = false;
+                that.fire("image-ready", { img: that.dataurl1});
               };
 
             }
