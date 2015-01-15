@@ -7,6 +7,8 @@
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 
 <link rel="import" href="../../elements/image-upload/image-upload.html">
+<link rel="import" href="../../elements/aos-globals/aos-globals.html">
+<link rel="import" href="../../elements/aos-apptile/aos-apptile.html">
 
 <polymer-element name="aos-profiel" attributes="yoyo return">
 
@@ -32,7 +34,6 @@
 
    </template>
 
-
    <template if="{{$.globals.values.user.data}}">
    <div class="leaderboard">
       <div horizontal layout center class="basicprof" fit>
@@ -40,15 +41,12 @@
             <img id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
           </div>
           <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
-          <image-upload id="img1" dataurl="{{showme1}}" label="Upload een achtergrondfoto"></image-upload>
+          <image-upload id="img1" dataurl="{{showme1}}" label=""></image-upload>
         </div>
-
 
         <div class="leaderimg">
-          <img src="{{$.globals.values.userprefs.background}}">
+          <img src="{{$.globals.values.prefs.background}}">
         </div>
-
-
     </div>
 
     <div horizontal layout center center-justified class="toptabs">
@@ -56,15 +54,11 @@
         <paper-tabs selected="{{tabby}}" noink id="tabs">
           <paper-tab>Favorieten</paper-tab>
           <paper-tab>Instellingen</paper-tab>
-          <paper-tab>Publiek</paper-tab>
-
+          <paper-tab>Publiek profiel</paper-tab>
         </paper-tabs>
       </div>
-      <button on-tap="{{logout}}" class="logoutbtn">{{$.globals.values.user.data.username}} afmelden</button>
+      <!-- <button on-tap="{{logout}}" class="logoutbtn">{{$.globals.values.user.data.username}} afmelden</button> -->
     </div>
-
-
-
 
 
 
@@ -75,19 +69,11 @@
   <div id="container" vertical layout start center-justified>
 
     <div id="group" horizontal layout wrap start start-justified>
-      <core-drag-drop></core-drag-drop>
-      <a href="/#/info" class="apptile" horizontal layout center start-justified wrap>
-        <img src="images/appicons/icon-infocenter.svg">
-        <p>Informatie opzoeken</p>
-      </a>
-      <a href="/#/babbles/home/?sort=votes" class="apptile" horizontal layout center start-justified wrap>
-        <img src="images/appicons/icon-babbelbox.svg">
-        <p>Babbles</p>
-      </a>
-      <a href="/#/chat" class="apptile" horizontal layout center start-justified wrap>
-        <img src="images/appicons/icon-babbelbox.svg">
-        <p>Chat (early)</p>
-      </a>
+
+      <template repeat="{{ a in userapps }}">
+        <aos-apptile key="{{a.id}}"></aos-apptile>
+      </template>
+
     </div>
 
   </div>
@@ -166,6 +152,7 @@
           that.$.globals.values.userprefs.background = bgImage;
         });
 
+
         this.addEventListener('keypress', function(e) {
 
           if (e.keyCode == 13) {
@@ -174,6 +161,23 @@
               //ajax.go();
               this.loginSubmit();
           };
+
+        });
+
+        document.addEventListener("user-changed", function(){
+          console.log(that.$.globals.values.user.data.id);
+          var userapps = [];
+          var userId = that.$.globals.values.user.data.id;
+
+          var userApps = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+userId+"/favapp/");
+          var userAppsResp = userApps.on("child_added", function(snap){
+            console.log(snap.key());
+            userapps.push({ 'id': snap.key() });
+          });
+
+          that.userapps = userapps;
+
+          console.log(userapps);
 
         });
 
@@ -207,22 +211,26 @@
             var userobject = this.responseUser.data;
 
             // First check if we already have this user locally
+            var that = this;
             var userCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
             var userResp = userCheck.once("value", function(snapshot){
               var objectSave = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/aosuser/");
               var objectResp = objectSave.set(userobject);
+              console.log(snapshot.val().prefs);
+              that.$.globals.values.prefs = snapshot.val().prefs;
             });
 
-            var that = this;
-
-            // Then we load the user's preferences in our globals object.
-            var prefCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/prefs/");
-            var prefResp = prefCheck.once("value", function(snapshot){
-              var userprefs = snapshot.val();
-              that.$.globals.values.userprefs = snapshot.val();
-            });
-
-            console.log(that.$.globals.values.userprefs);
+            // var that = this;
+            //
+            // // Then we load the user's preferences in our globals object.
+            // var prefCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
+            // var prefResp = prefCheck.once("value", function(snapshot){
+            //   //var userprefs = snapshot.val();
+            //   ///console.log(snapshot.val());
+            //   //this.$.globals.values.prefs = ;
+            // });
+            //
+            // console.log(this.$.globals.values.prefs);
 
             this.$.getCRS.go();
             if(this.responseUser.data.ADAccount){

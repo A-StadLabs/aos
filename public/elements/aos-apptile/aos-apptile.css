@@ -1,0 +1,45 @@
+:host {
+	display: block;
+}
+
+.apptile{	background-color: rgba(0,0,0,0.05);
+	width: 180px;
+	height: 120px;
+	padding: 30px 10px 20px 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+
+
+.apptile:active {
+	background-color: #EBEBEB;
+}
+
+
+a {
+	text-decoration: none;
+
+}
+
+.apptile p {
+	width: 160px;
+	margin: 10px 10px 14px 10px;
+	text-align: center;
+	color: #333333;
+	font-size: 14px;
+}
+
+.apptile img {
+	height: 40px;
+	width: 40px;
+	border-radius: 60px;
+	background-color: white;
+	margin: 0px 55px 10px 55px;
+	padding: 10px;
+	opacity: 0.8;
+}
+
+.apptile img:hover {
+	opacity: 1;
+}

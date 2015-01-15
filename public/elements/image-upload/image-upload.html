@@ -13,7 +13,7 @@
   }
   </style>
     <div vertical layout center center-justified class="uploader" fit>
-      <div horizontal layout center><img class="camicon" src="images/fileupload.svg"><h3 on-click="{{selectFile}}">{{label}}</h3></div>
+      <div horizontal layout center><img class="camicon" src="images/fileupload.svg" on-click="{{selectFile}}"><h3>{{label}}</h3></div>
       <div><input type="file" name="File" id="file" on-change="{{setFiles}}">
     </div>
 

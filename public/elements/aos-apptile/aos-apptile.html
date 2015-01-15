@@ -1,0 +1,35 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+
+<polymer-element name="aos-apptile" attributes="key">
+  <template>
+    <link rel="stylesheet" href="aos-apptile.css" />
+
+    <a href="/#/{{appdata.slug}}" class="apptile" horizontal layout center start-justified wrap>
+      <img src="{{appdata.icon}}">
+      <p>{{appdata.appname}}</p>
+    </a>
+
+  </div>
+</template>
+<script>
+    Polymer({
+
+      ready: function(){
+        this.loading = false;
+        var that = this;
+        var key = this.key;
+        var app;
+        var appData = new Firebase("https://blazing-fire-6426.firebaseio.com/apps/"+key+"/");
+        var appResp = appData.once("value", function(snap){
+          app = snap.val();
+          console.log(snap.val());
+          that.appdata = app;
+          that.loading = true;
+        });
+
+      }
+
+    });
+</script>
+</polymer-element>
