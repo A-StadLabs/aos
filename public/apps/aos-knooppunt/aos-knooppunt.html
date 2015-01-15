@@ -7,12 +7,11 @@
   <template>
 
     <link rel="stylesheet" href="aos-knooppunt.css" />
-    <aos-globals id="globals" values="{{globs}}"></aos-globals>
+    <aos-globals id="globals"></aos-globals>
 
 
 <div id="favos">
-
-<template if="{{$.globals.values.user}}">
+<template if="{{$.globals.values.userprefs.favorites}}">
 <div id="container" vertical layout start center-justified>
 
 <div horizontal layout center start-justified class="grouptitle">
