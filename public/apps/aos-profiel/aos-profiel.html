@@ -45,7 +45,7 @@
         </div>
 
         <div class="leaderimg">
-          <img src="images/header-twitter-color.jpg">
+          <img src="{{$.globals.values.userprefs.background}}">
         </div>
 
     </div>
@@ -122,6 +122,18 @@
 
       	console.log('profiel app loaded.');
 
+        var that = this;
+
+        document.addEventListener('image-ready', function(){
+          console.log("found image: ", that.showme1);
+          var userID = that.$.globals.values.user.data.id;
+          var bgImage = that.showme1;
+          // save image in userobjact
+          var setUserBg = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+userID+"/prefs/background/");
+          var objectResp = setUserBg.set(bgImage);
+          that.$.globals.values.userprefs.background = bgImage;
+        });
+
         this.addEventListener('keypress', function(e) {
 
           if (e.keyCode == 13) {
@@ -152,6 +164,7 @@
         },
 
         handleResponseUser: function(){
+
           console.log('user resp:', this.responseUser.success);
           if(this.responseUser.success==true){
             this.$.globals.values.user = this.responseUser;
@@ -166,6 +179,17 @@
               var objectSave = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/aosuser/");
               var objectResp = objectSave.set(userobject);
             });
+
+            var that = this;
+
+            // Then we load the user's preferences in our globals object.
+            var prefCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/prefs/");
+            var prefResp = prefCheck.once("value", function(snapshot){
+              var userprefs = snapshot.val();
+              that.$.globals.values.userprefs = snapshot.val();
+            });
+
+            console.log(that.$.globals.values.userprefs);
 
             this.$.getCRS.go();
             if(this.responseUser.data.ADAccount){
