@@ -3,7 +3,8 @@
 <link rel="import" href="../../bower_components/core-field/core-field.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
-<script src="../../bower_components/color-thief/src/color-thief.js"></script>
+
+<link rel="import" href="../../elements/image-upload/image-upload.html">
 
 <polymer-element name="aos-profiel" attributes="yoyo return">
 
@@ -34,12 +35,13 @@
    <div class="leaderboard">
 
         <div horizontal layout center class="basicprof" fit>
-          
+
           <div class="avatarbox">
             <img id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
           </div>
-          
+
           <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
+          <image-upload id="img1" dataurl="{{showme1}}" maxw="400" maxh="400" label="Kies een bestand" fit></image-upload>
         </div>
 
         <div class="leaderimg">
@@ -60,7 +62,7 @@
 
 
      <!-- <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
-   <h2>Gebruikersgegevens</h2>  
+   <h2>Gebruikersgegevens</h2>
     <p>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</p> -->
 
         <div horizontal layout start wrap>
@@ -114,13 +116,6 @@
 
   <script>
 
-function colorthief(){
-  var colorThief = new ColorThief();
-  var avatar = document.getElementById('avatar');
-  console.log(avatar);
-  var colorT = colorThief.getColor(avatar);
-  console.log('colorthief: ', colorT);
-}
     Polymer({
 
       ready: function() {
@@ -128,14 +123,14 @@ function colorthief(){
       	console.log('profiel app loaded.');
 
         this.addEventListener('keypress', function(e) {
-          
+
           if (e.keyCode == 13) {
-              
+
               //that.enter();
               //ajax.go();
               this.loginSubmit();
           };
-          
+
         });
 
 

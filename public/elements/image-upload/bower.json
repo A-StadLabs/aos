@@ -1,0 +1,27 @@
+{
+  "name": "image-upload",
+  "version": "0.0.0",
+  "authors": [
+    "King Flurkel <mikethuy@gmail.com>"
+  ],
+  "description": "Choose image, rotate and scale, return DataURL.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed"
+  ],
+  "main": "image-upload.html",
+  "license": "MIT",
+  "homepage": "https://github.com/kingflurkel/seed-element/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.4.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^0.7.3"
+  }
+}

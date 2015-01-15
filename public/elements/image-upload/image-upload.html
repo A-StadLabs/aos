@@ -1,0 +1,186 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
+
+<polymer-element name="image-upload" attributes="dataurl maxw maxh label">
+  <template>
+  <script type="text/javascript" src="exif.js"></script>
+  <script type="text/javascript" src="megapix-image.js"></script>
+  <style>
+  #file {
+    display: none;
+  }
+  </style>
+    <div vertical layout>
+      <core-icon-button icon="add" on-click="{{selectFile}}">{{label}}</core-icon-button>
+      <div><input type="file" name="File" id="file" on-change="{{setFiles}}">
+      <img src="{{dataurl}}" hidden?="{{beeldtonen}}"></div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      var orientation;
+
+      Polymer({
+
+        // publish: {
+        //   dataurl: {
+        //     value: true,
+        //     reflect: true
+        //   }
+        // },
+
+        ready: function(){
+          this.beeldtonen = true;
+        },
+
+        selectFile: function() {
+          //console.log('clicked');
+        this.$.file.click(); // wow this works?
+      },
+
+
+        setFiles: function(){
+          // neem de image uit de file upload
+          this.fileInput = this.$.file.files[0];
+          this.imageType = /image.*/;
+
+          // als het beeld aan de voorwaarden voldoet:
+          if (this.fileInput.type.match(this.imageType)) {
+
+            // Haal de metadata op (orienatation)
+            EXIF.getData(this.fileInput, function() {
+              orientation = EXIF.getTag(this, "Orientation");
+              console.log(orientation);
+            });
+
+
+            // Creeer een nieuwe filereader
+            var reader = new FileReader();
+
+            var that = this;
+
+
+            // Wanneer het beeld volledig is ingeladen:
+            reader.onloadend = function(e) {
+              this.blob = reader.result;
+              //console.log(reader.result);
+              // Start een nieuwe datareader die de blob leest als DataURL
+              var dataReader = new FileReader;
+              dataReader.readAsDataURL(that.fileInput);
+
+              dataReader.onloadend = function(e){
+                console.log('dataReader: ', e.target.result);
+                var img = document.createElement("img");
+                var canvas = document.createElement("canvas");
+                img.src = e.target.result;
+
+                var ctx = canvas.getContext("2d");
+
+                //ctx.drawImage(img, 0, 0);
+
+                var MAX_WIDTH = that.maxw;
+                var MAX_HEIGHT = that.maxh;
+                var iwidth = img.width;
+                var iheight = img.height;
+
+                if (iwidth > iheight) {
+                  if (iwidth > MAX_WIDTH) {
+                    iheight *= MAX_WIDTH / iwidth;
+                    iwidth = MAX_WIDTH;
+                  }
+                } else {
+                  if (iheight > MAX_HEIGHT) {
+                    iwidth *= MAX_HEIGHT / iheight;
+                    iheight = MAX_HEIGHT;
+                  }
+                }
+
+                 var ctx = canvas.getContext('2d');
+                 var width = canvas.width;
+                 var height = canvas.height;
+
+                  if (orientation > 4) {
+                      canvas.width = iheight;
+                      canvas.height = iwidth;
+                  } else {
+                      canvas.width = iwidth;
+                      canvas.height = iheight;
+                  }
+
+                 console.log('w: ',width,' h: ', height);
+
+                //ctx.translate(width * 0.5, height * 0.5);
+
+                switch (orientation) {
+        case 2:
+            // horizontal flip
+            ctx.translate(iwidth, 0);
+            ctx.scale(-1, 1);
+            break;
+        case 3:
+            // 180° rotate left
+            ctx.translate(iwidth, iheight);
+            ctx.rotate(Math.PI);
+            break;
+        case 4:
+            // vertical flip
+            ctx.translate(0, iheight);
+            ctx.scale(1, -1);
+            break;
+        case 5:
+            // vertical flip + 90 rotate right
+            ctx.rotate(0.5 * Math.PI);
+            ctx.scale(1, -1);
+            break;
+        case 6:
+            // 90° rotate right
+            ctx.rotate(0.5 * Math.PI);
+            ctx.translate(0, -iheight);
+            break;
+        case 7:
+            // horizontal flip + 90 rotate right
+            ctx.rotate(0.5 * Math.PI);
+            ctx.translate(iwidth, -iheight);
+            ctx.scale(-1, 1);
+            break;
+        case 8:
+            // 90° rotate left
+            ctx.rotate(-0.5 * Math.PI);
+            ctx.translate(-iwidth, 0);
+            break;
+        }
+
+
+
+                //ctx.drawImage(img, 0, 0, iwidth, iheight);
+             var mpImg = new MegaPixImage(img);
+             //mpImg.transformCoordinate(canvas, ctx, iwidth, iheight, orientation);
+            mpImg.render(canvas, { width: iwidth, height: iheight, orientation: orientation });
+
+
+
+                // Maak van de canvas een dataurl
+                var dataurl1 = canvas.toDataURL("image/png");
+                console.log('einde: ', dataurl1);
+                that.dataurl = dataurl1;
+                that.beeldtonen = false;
+              };
+
+            }
+
+            // Activeer de reader (BLOB)
+
+            reader.readAsBinaryString(this.fileInput);
+
+          }
+
+          //end polymer function
+        }
+
+      });
+
+    })();
+  </script>
+</polymer-element>
