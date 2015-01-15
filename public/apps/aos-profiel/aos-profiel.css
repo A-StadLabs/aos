@@ -2,16 +2,19 @@
 	display: block;
 	background-color: white;
 	padding-bottom: 10%;
+	min-height: 100%;
+
 }
 
 
 
-
-#inlog {
-	background-color: red;
-	width: 100%;
-	height: 100%;
+.canvas {
+	width: 76%;
+	padding: 4% 12% 0px 12%;
+	background-color: white;
 }
+
+
 
 
 
@@ -40,8 +43,6 @@ p {
 	font-size: 14px;
 	padding: 0px;
 	margin: 5px;
-
-
 }
 
 small {
@@ -54,7 +55,13 @@ small {
 
 
 
-
+.bovenlabel {
+	margin: 5px 0px 5px 5px;
+	font-size: 0.55em;
+	color: #cccccc;
+	font-weight: 400;
+	text-transform: uppercase;
+}
 
 
 .leaderboard {
@@ -133,74 +140,11 @@ box-shadow: 0px 0px 52px 0px rgba(0,0,0,0.15);
 
 
 
-@media only screen and (max-width: 401px) {
-
-.basicprof h1 {
-	font-size: 22px;
-}
-
-}
-
-
-
-@media only screen and (min-width: 1081px) {
-
-.basicprof h1 {
-	font-size: 44px;
-	    margin: 0px 0px 0px 25px; 
-
-}
-/*
-.leaderboard {
-	width: 100%;
-	height: 20vw;
-	max-height: 200px;
-}
-
-
-
-.leaderimg {
-	background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1));
-	width: 100%;
-	height: 20vw;
-	max-height: 200px;
-	overflow: hidden;
-		z-index: 0;
-}
-*/
-
-
-}
-
-
-.canvas {
-/*	background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(http://fc02.deviantart.net/fs71/i/2011/274/6/f/ocean__sky__stars__and_you_by_muddymelly-d4bg1ub.png);*/
-	width: 76%;
-	margin: 0px 12% 0px 12%;
-	padding: 45px 0px 0px 0px;
-}
-
-.stralendeA {
-	width: 4%;
-	min-width: 50px;
-	background-color: rgba(0,0,0,0.1);
-	padding: 10px;
-	margin: 0px;
-}
 
 
 
 
-.logoutbtn {
-	margin-top: 0;
-	background-color: white;
-	width: 100%;
-	border-bottom: 1px solid #EBEBEB;
-	color: #219dc8;
-	text-align: right;
-	padding-right: 20px;
-	text-decoration: underline;
-}
+
 
 input {
 	width: 30vw;
@@ -234,13 +178,73 @@ button {
 
 
 
+/* 1st SCREEN / TABS STUFF*/
+
+#inlog {
+	background-color: red;
+	width: 100%;
+	height: 100%;
+}
+
+
+
 .notloggedin {
 	background-color: #D9D9D9;
 	width: 100%;
 	height: 100%;
 }
 
+.toptabs {
+	margin: 0px;
+	padding: 10px 0px 0px 0px;
+/*	background-color: #F5F5F5;*/
+	width: 100%;
+/*	height: 70px;
+*/	border-bottom: 1px solid #EBEBEB;
+}
 
+
+.tabscont {
+	width: 70%;
+	margin: 0px;
+}
+
+paper-tabs {
+	width: 45%;
+	z-index: 2;
+}
+
+
+paper-tab {
+}
+
+
+paper-tab.core-selected {
+	background-color: white;
+/*	border-top: 1px solid #EBEBEB;
+	border-left: 1px solid #EBEBEB;
+	border-right: 1px solid #EBEBEB;
+	border-bottom: 1px solid white;*/
+
+}
+
+paper-tabs::shadow #selectionBar {
+  background-color: #333333;
+  height: 1px;
+}
+
+.logoutbtn {
+	color: #219dc8;
+	background-color: white;
+	text-align: right;
+	padding-right: 10px;
+	text-decoration: underline;
+	margin: 0px;
+}
+
+
+
+/* STYLING BASIC INFO*/
 
 .column {
 	background-color: white;
@@ -251,5 +255,96 @@ button {
 
 
 
+
+
+
+
+/* STYLING APP_FAVORITES */
+
+.applist {
+	background-color: rgba(0,0,0,0.05);
+	width: 223px;
+	padding: 12px 20px 10px 20px;
+	margin: 0px 10px 10px 0px;
+	height: 42px;
+}
+
+
+.applist p {
+	width: 160px;
+	text-align: left;
+	color: #333333;
+	height: 20px;
+	font-size: 14px;
+	padding: 0px;
+	overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    display:inline-block;
+ }
+
+.applist img {
+	height: 20px;
+	width: 20px;
+	border-radius: 30px;
+	background-color: white;
+	margin: 0px 20px 2px 0px;
+	padding: 5px;
+}
+
+.apptile {
+	background-color: rgba(0,0,0,0.05);
+	width: 180px;
+	height: 120px;
+	padding: 30px 10px 20px 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+
+.apptile:active {
+	background-color: #EBEBEB;
+}
+
+
+.apptile p {
+	width: 160px;
+	margin: 10px 10px 14px 10px;
+	text-align: center;
+	color: #333333;
+	font-size: 14px;
+}
+
+.apptile img {
+	height: 40px;
+	width: 40px;
+	border-radius: 60px;
+	background-color: white;
+	margin: 0px 55px 10px 55px;
+	padding: 10px;
+	opacity: 0.8;
+}
+
+.apptile img:hover {
+	opacity: 1;
+}
+
+
+
+
+
+/* MOBILE EXCEPTIONS */
+
+
+
+@media only screen and (min-width: 1081px) {
+
+.basicprof h1 {
+	font-size: 44px;
+	    margin: 0px 0px 0px 25px; 
+
+}
+
+}
 
 

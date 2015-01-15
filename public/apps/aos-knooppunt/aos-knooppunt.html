@@ -16,7 +16,7 @@
 <div id="container" vertical layout start center-justified>
 
 <div horizontal layout center start-justified class="grouptitle">
-<img class="avataricon" src="{{$.globals.values.user.data.avatarUrl}}">
+  <div class="avatarbox"><img src="{{$.globals.values.user.data.avatarUrl}}"></div>
   <div flex><h1>Favorieten</h1></div>
   <div class="switcher" end-justified>
   <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>

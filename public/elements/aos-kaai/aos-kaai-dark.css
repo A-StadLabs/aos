@@ -86,8 +86,8 @@ core-field {
 }
 
 .kaaibtns {
-	width: 24px;
-	height: 24px;
+	width: 26px;
+	height: 26px;
 	margin: 0px 8px 0px 8px;
 	padding: 0px;
 
@@ -110,7 +110,7 @@ core-field {
 	padding-right: 2vw; 
 }
 
-
+/*
 .avatardesktop {
 	width: 24px;
 	height: 24px;
@@ -127,6 +127,25 @@ core-field {
 	margin: 2px 8px 2px 8px;
 	padding: 0px;
 }
+
+*/
+
+.avatarbox {
+	width: 4.5vw;
+	height: 4.5vw;
+	max-width: 26px;
+	max-height: 26px;
+	overflow: hidden;
+	border-radius: 50%;
+	margin: 0px 8px 0px 8px;
+}
+
+.avatarbox img {
+ 	width: 100%;
+ 	min-height: 26px;
+ }
+
+
 
 
 /*.lan {

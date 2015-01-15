@@ -60,11 +60,32 @@ button {
 
 }
 
+
+
 .avataricon {
 	height: 30px;
 	margin: 4px 15px 0px 0px;
 	border-radius: 50%;
 }
+
+
+
+.avatarbox {
+	width: 5vw;
+	height: 5vw;
+	max-width: 30px;
+	max-height: 30px;
+	overflow: hidden;
+	border-radius: 50%;
+	margin: 0px 15px 0px 0px;
+}
+
+.avatarbox img {
+ 	width: 100%;
+ 	min-height: 30px;
+ }
+
+
 
 
 /* TILE desktop !!!!!!!!!!! */

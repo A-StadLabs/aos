@@ -1,8 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-field/core-field.html">
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 
 <link rel="import" href="../../elements/image-upload/image-upload.html">
 
@@ -10,98 +12,118 @@
 
   <template>
   <link rel="stylesheet" href="aos-profiel.css" />
-    <aos-globals id="globals"></aos-globals>
+  <aos-globals id="globals"></aos-globals>
 
   <template if="{{!$.globals.values.user}}" id="inlog">
 
     <div vertical layout center center-justified id="canvas" class="notloggedin" fit>
-    <h1>Aanmelden</h1>
-    <p>Met A-profiel of AD account.</p>
-    <small>{{error}}</small>
-    <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
-    <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
-    <h3 hidden?="{{!loading}}">Laden...</h3>
-    <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button><br>
-    <small>Gegevens vergeten?</small>
-   <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
-   </core-ajax>
-     </div>
+      <h1>Aanmelden</h1>
+      <p>Met A-profiel of AD account.</p>
+      <small>{{error}}</small>
+      <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
+      <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
+      <h3 hidden?="{{!loading}}">Laden...</h3>
+      <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button><br>
+      <small>Gegevens vergeten?</small>
+     <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
+     </core-ajax>
+    </div>
 
    </template>
 
+
    <template if="{{$.globals.values.user.data}}">
-
-
    <div class="leaderboard">
-
-        <div horizontal layout center class="basicprof" fit>
-
+      <div horizontal layout center class="basicprof" fit>
           <div class="avatarbox">
             <img id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
           </div>
-
           <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
-          <image-upload id="img1" dataurl="{{showme1}}" label="Upload een achtergrondfoto" fit></image-upload>
+          <image-upload id="img1" dataurl="{{showme1}}" label="Upload een achtergrondfoto"></image-upload>
         </div>
-
-        <div class="leaderimg">
+      <div class="leaderimg">
           <img src="images/header-twitter-color.jpg">
-        </div>
-
+      </div>
     </div>
 
-        <div horizontal layout center end-justified>
-         <button on-tap="{{logout}}" class="logoutbtn">{{$.globals.values.user.data.username}} afmelden</button>
-        </div>
+    <div horizontal layout center center-justified class="toptabs">
+      <div vertical layout center class="tabscont">
+        <paper-tabs selected="{{tabby}}" noink id="tabs">
+          <paper-tab>Favorieten</paper-tab>
+          <paper-tab>Instellingen</paper-tab>
+          <paper-tab>Publiek</paper-tab>
 
-
-
-       <div class="canvas">
-
-
-
-
-     <!-- <h1 on-tap="{{colorthief}}">{{$.globals.values.user.data.firstName}}</h1>
-   <h2>Gebruikersgegevens</h2>
-    <p>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</p> -->
-
-        <div horizontal layout start wrap>
-
-          <div class="column">
-            <h2>Persoonlijke info</h2>
-
-            <p>{{$.globals.values.user.data.username}}</p>
-            <p>{{$.globals.values.user.data.phone}}</p>
-            <p>{{$.globals.values.user.data.birthDate}}</p>
-            <p>{{$.globals.values.user.data.birthPlace}}</p>
-            <p>{{$.globals.values.user.data.gender}}</p>
-            <p>{{$.globals.values.user.data.maritalStatus}}</p>
-<br>
-            <h2>Email adressen</h2>
-                        <p>{{$.globals.values.user.data.email}}</p>
-
-            <template repeat="{{ i in $.globals.values.user.data.secondaryEmails}}">
-              <p>{{i.email}}</p>
-            </template>
-          </div>
-
-          <div vertical layout start start-justified class="column">
-            <h2>Rollen:</h2>
-            <template repeat="{{ i in $.globals.values.user.data.roles}}">
-              <p>{{i}}</p>
-            </template>
-          </div>
+        </paper-tabs>
+      </div>
+      <button on-tap="{{logout}}" class="logoutbtn">{{$.globals.values.user.data.username}} afmelden</button>
+    </div>
 
 
 
 
-<!--     <h3>JSON userobject</h3>
+
+
+<core-animated-pages id="tabscenes" selected="{{tabby}}">
+<section>
+<div class="canvas">
+
+  <div id="container" vertical layout start center-justified>
+
+    <div id="group" horizontal layout wrap start start-justified>
+      <core-drag-drop></core-drag-drop>
+      <a href="/#/info" class="apptile" horizontal layout center start-justified wrap>
+        <img src="images/appicons/icon-infocenter.svg">
+        <p>Informatie opzoeken</p>
+      </a>
+      <a href="/#/babbles/home/?sort=votes" class="apptile" horizontal layout center start-justified wrap>
+        <img src="images/appicons/icon-babbelbox.svg">
+        <p>Babbles</p>
+      </a>
+      <a href="/#/chat" class="apptile" horizontal layout center start-justified wrap>
+        <img src="images/appicons/icon-babbelbox.svg">
+        <p>Chat (early)</p>
+      </a>
+    </div>
+
+  </div>
+  </div>
+
+</section>
+<section>
+  <div horizontal layout start wrap class="canvas">
+
+    <div class="column" vertical layout start>
+      <h2>Persoonlijke info</h2>
+      <p>{{$.globals.values.user.data.username}}</p>
+      <p>{{$.globals.values.user.data.phone}}</p>
+      <p>{{$.globals.values.user.data.birthDate}}</p>
+      <p>{{$.globals.values.user.data.birthPlace}}</p>
+      <p>{{$.globals.values.user.data.gender}}</p>
+      <p>{{$.globals.values.user.data.maritalStatus}}</p>
+      <br>
+      <h2>Email adressen</h2>
+      <p>{{$.globals.values.user.data.email}}</p>
+      <template repeat="{{ i in $.globals.values.user.data.secondaryEmails}}">
+        <p>{{i.email}}</p>
+      </template>
+    </div>
+
+    <div vertical layout start start-justified class="column">
+      <h2>Rollen:</h2>
+      <template repeat="{{ i in $.globals.values.user.data.roles}}">
+       <p>{{i}}</p>
+      </template>
+    </div>
+
+
+
+
+    <h2>JSON userobject</h2>
     <p>{{$.globals.values.userJSON}}</p>
-    <h3>CRS gegevens</h3>
+    <h2>CRS gegevens</h2>
     <p>{{$.globals.values.crsuserJSON}}</p>
-    <h3>CRS medewerker gegevens</h3>
-    <p>{{$.globals.values.crsmedewerkerJSON}}</p> -->
-   </template>
+    <h2>CRS medewerker gegevens</h2>
+    <p>{{$.globals.values.crsmedewerkerJSON}}</p>
 
    <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
 
@@ -109,7 +131,10 @@
 
    <core-ajax method="GET" id="getCRSmedewerker" handleAs="json" url="/crs-medewerker" response="{{responseCRSmedewerker}}" on-core-response="{{handleResponseCRSmedewerker}}">
    </div>
-</div>
+</section>
+</core-animated-pages>
+
+   </template>
 
 
   </template>
@@ -121,6 +146,8 @@
       ready: function() {
 
       	console.log('profiel app loaded.');
+        this.tabby = 0;
+
 
         this.addEventListener('keypress', function(e) {
 
@@ -135,6 +162,7 @@
 
 
         },
+
 
         logout: function(){
           delete this.$.globals.values;
@@ -203,9 +231,6 @@
           };
         },
 
-        colorthief: function(){
-          colorthief();
-        }
 
     });
 
