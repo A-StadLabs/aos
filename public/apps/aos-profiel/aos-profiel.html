@@ -17,24 +17,6 @@
 
   <aos-globals id="globals"></aos-globals>
 
-  <template if="{{!$.globals.values.user}}" id="inlog">
-
-    <div vertical layout center center-justified id="canvas" class="notloggedin" fit>
-      <h1>Aanmelden</h1>
-      <p>Met A-profiel of AD account.</p>
-      <small>{{error}}</small>
-      <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
-      <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
-      <h3 hidden?="{{!loading}}">Laden...</h3>
-      <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button><br>
-      <small>Gegevens vergeten?</small>
-     <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
-     </core-ajax>
-    </div>
-
-   </template>
-
-   <template if="{{$.globals.values.user.data}}">
    <div class="leaderboard">
       <div horizontal layout center class="basicprof" fit>
           <div class="avatarbox">
@@ -123,9 +105,6 @@
       </template>
     </div>
 
-
-
-
     <h2>JSON userobject</h2>
     <p>{{$.globals.values.userJSON}}</p>
     <h2>CRS gegevens</h2>
@@ -140,7 +119,7 @@
    <core-ajax method="GET" id="getCRSmedewerker" handleAs="json" url="/crs-medewerker" response="{{responseCRSmedewerker}}" on-core-response="{{handleResponseCRSmedewerker}}">
    </div>
 </section>
-<<<<<<< Updated upstream
+
 <section>
   <div class="canvas">
 
@@ -163,11 +142,9 @@
 
 </section>
 
-=======
->>>>>>> Stashed changes
 </core-animated-pages>
 
-   </template>
+
 
 
   </template>

@@ -17,7 +17,6 @@
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../elements/aos-login/aos-login.html">
 
-
 <!-- <link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html"> -->
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
 
@@ -74,9 +73,6 @@
     </div>
 
     </template>
-
-
-
 
     <template if="{{$.globals.values.user}}">
 
@@ -214,7 +210,6 @@
         </a>
     </div>
 
-
       <div class="tools" horizontal layout>
           <a href="/#/search">
             <img class="kaaibtns" src="images/kaai-searchloop.svg">
@@ -232,10 +227,14 @@
     </template>
 
   </template>
-
-  <div fit>
-    <aos-login></aos-login>
+  <!-- // Dit is den login panel -->
+  <div id="paneBar" fit horizontal layout end-justified>
+    <aos-login class="aanmelden"></aos-login>
   </div>
+  <!-- // Dit is den app panel -->
+  <!-- // Dit is den notificaties panel -->
+
+
 
   </template>
 
