@@ -52,9 +52,11 @@
     <div horizontal layout center center-justified class="toptabs">
       <div vertical layout center class="tabscont">
         <paper-tabs selected="{{tabby}}" noink id="tabs">
-          <paper-tab>Favorieten</paper-tab>
-          <paper-tab>Instellingen</paper-tab>
+          <paper-tab>Home</paper-tab>
           <paper-tab>Publiek profiel</paper-tab>
+          <paper-tab>Favoriete toepassingen</paper-tab>
+          <paper-tab>Mijn gegevens</paper-tab>
+          <paper-tab>Permissies</paper-tab>
         </paper-tabs>
       </div>
       <!-- <button on-tap="{{logout}}" class="logoutbtn">{{$.globals.values.user.data.username}} afmelden</button> -->
@@ -63,6 +65,21 @@
 
 
 <core-animated-pages id="tabscenes" selected="{{tabby}}">
+<section>
+  <div class="canvas">
+    Hier komt juicy tiles met vanalles dat ik volg, maar ook een POST vakje om nieuwe dingen te posten naar mijn kringen.
+  </div>
+</section>
+<section>
+  <div horizontal layout start wrap class="canvas">
+    <p>
+      Wie mag jouw profiel zien?
+    </p>
+    <p>
+      0 Niemand<br />0 Iedereen met aan A-profiel<br />0 Enkel mensen die ik toevoeg als vriend
+    </p>
+  </div>
+</section>
 <section>
 <div class="canvas">
 
@@ -80,6 +97,7 @@
   </div>
 
 </section>
+
 <section>
   <div horizontal layout start wrap class="canvas">
 
@@ -121,15 +139,27 @@
    </div>
 </section>
 <section>
-  <div horizontal layout start wrap class="canvas">
-    <p>
-      Wie mag jouw profiel zien?
-    </p>
-    <p>
-      0 Niemand<br />0 Iedereen met aan A-profiel<br />0 Enkel mensen die ik toevoeg als vriend
-    </p>
+  <div class="canvas">
+
+    <div id="container" vertical layout start center-justified>
+
+      <div id="group" horizontal layout wrap start start-justified>
+
+        <h1>Permissies die ik aan andere apps heb gegeven</h1>
+        <p>
+          Antwerpen Bereikbaar (www.antwerpenbereikbaar.be)
+        </p>
+        <p>
+          Gate15 (www.gate15.be)
+        </p>
+
+      </div>
+
+    </div>
   </div>
+
 </section>
+
 </core-animated-pages>
 
    </template>
