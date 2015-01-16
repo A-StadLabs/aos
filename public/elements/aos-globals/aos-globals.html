@@ -4,6 +4,14 @@
     var values = {};
 
     Polymer({
+
+      publish: {
+        values: {
+          value: true,
+          reflect: true
+        }
+      },
+      
        ready: function() {
          this.values = values;
          for (var i = 0; i < this.attributes.length; ++i) {

@@ -106,9 +106,6 @@
       </template>
     </div>
 
-
-
-
     <h2>JSON userobject</h2>
     <p>{{$.globals.values.userJSON}}</p>
     <h2>CRS gegevens</h2>
@@ -122,6 +119,16 @@
 
    <core-ajax method="GET" id="getCRSmedewerker" handleAs="json" url="/crs-medewerker" response="{{responseCRSmedewerker}}" on-core-response="{{handleResponseCRSmedewerker}}">
    </div>
+</section>
+<section>
+  <div horizontal layout start wrap class="canvas">
+    <p>
+      Wie mag jouw profiel zien?
+    </p>
+    <p>
+      0 Niemand<br />0 Iedereen met aan A-profiel<br />0 Enkel mensen die ik toevoeg als vriend
+    </p>
+  </div>
 </section>
 </core-animated-pages>
 
