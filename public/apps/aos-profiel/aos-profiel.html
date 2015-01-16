@@ -10,31 +10,13 @@
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../../elements/aos-apptile/aos-apptile.html">
 
-<polymer-element name="aos-profiel" attributes="yoyo return">
+<polymer-element name="aos-profiel" attributes="tabby">
 
   <template>
   <link rel="stylesheet" href="aos-profiel.css" />
 
   <aos-globals id="globals"></aos-globals>
 
-  <template if="{{!$.globals.values.user}}" id="inlog">
-
-    <div vertical layout center center-justified id="canvas" class="notloggedin" fit>
-      <h1>Aanmelden</h1>
-      <p>Met A-profiel of AD account.</p>
-      <small>{{error}}</small>
-      <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
-      <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
-      <h3 hidden?="{{!loading}}">Laden...</h3>
-      <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button><br>
-      <small>Gegevens vergeten?</small>
-     <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
-     </core-ajax>
-    </div>
-
-   </template>
-
-   <template if="{{$.globals.values.user.data}}">
    <div class="leaderboard">
       <div horizontal layout center class="basicprof" fit>
           <div class="avatarbox">
@@ -54,7 +36,6 @@
         <paper-tabs selected="{{tabby}}" noink id="tabs">
           <paper-tab>Home</paper-tab>
           <paper-tab>Publiek profiel</paper-tab>
-          <paper-tab>Favoriete toepassingen</paper-tab>
           <paper-tab>Mijn gegevens</paper-tab>
           <paper-tab>Permissies</paper-tab>
         </paper-tabs>
@@ -108,9 +89,6 @@
       </template>
     </div>
 
-
-
-
     <h2>JSON userobject</h2>
     <p>{{$.globals.values.userJSON}}</p>
     <h2>CRS gegevens</h2>
@@ -125,7 +103,7 @@
    <core-ajax method="GET" id="getCRSmedewerker" handleAs="json" url="/crs-medewerker" response="{{responseCRSmedewerker}}" on-core-response="{{handleResponseCRSmedewerker}}">
    </div>
 </section>
-<<<<<<< Updated upstream
+
 <section>
   <div class="canvas">
 
@@ -148,11 +126,9 @@
 
 </section>
 
-=======
->>>>>>> Stashed changes
 </core-animated-pages>
 
-   </template>
+
 
 
   </template>
@@ -164,7 +140,7 @@
       ready: function() {
 
       	console.log('profiel app loaded.');
-        this.tabby = 0;
+        if(!this.tabby){ this.tabby = 0 };
 
 
         var that = this;
@@ -192,8 +168,31 @@
         });
 
 
+        document.addEventListener("user-changed", function(){
+          //console.log(that.$.globals.values.user.data.id);
+          var userapps = [];
+          var userId = that.$.globals.values.user.data.id;
+
+          var userApps = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+userId+"/favapp/");
+          var userAppsResp = userApps.on("child_added", function(snap){
+            //console.log(snap.key());
+            userapps.push({ 'id': snap.key() });
+          });
+
+          that.userapps = userapps;
+
+          //console.log(userapps);
+
+        });
 
 
+        },
+
+        tabbyChanged: function(){
+          var tab = this.tabby;
+          //console.log('new tab is: ', tab);
+          var newUrl = '/#/profiel/'+tab+'/';
+          window.history.pushState('', '', newUrl);
         },
 
 

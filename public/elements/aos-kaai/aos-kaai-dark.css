@@ -6,9 +6,6 @@
   padding: 0px;
 }
 
-
-
-
 a {
 	color: white;
 	text-decoration: none;
@@ -28,9 +25,6 @@ core-dropdown-menu {
 	font-weight: 600;
 	color: #808080;
 }
-
-
-
 
 core-dropdown {
 	background-color: #333333;
@@ -57,11 +51,6 @@ core-field {
 	color: white;
 }
 
-
-
-
-
-
 #kaai {
 	background-color: #333333;
 	width: 100%;
@@ -72,7 +61,6 @@ core-field {
 	-moz-transition: height 0.35s;
 	transition: height 0.35s;
 }
-
 
 #mobilekaai {
 	background-color:  #333333;
@@ -92,7 +80,7 @@ core-field {
 	padding: 0px;
 
 }
- 
+
 .mobilekaaibtns {
 	width: 28px;
 	height: 28px;
@@ -107,7 +95,7 @@ core-field {
 
 
 .tools {
-	padding-right: 2vw; 
+	padding-right: 2vw;
 }
 
 /*
@@ -145,37 +133,22 @@ core-field {
  	min-height: 26px;
  }
 
-
-
-
-/*.lan {
-	margin: 0px 0px 0px 0px;
-}
-*/
-
-/*
-.kaaipanes {
-	position: absolute;
-	width: 200px;
-	background-color: red;
-
-}
-*/
 #paneBar {
 	width: 100%;
 	position: absolute;
 	top: 60px;
-	background-color: green;
-	height: 100px;
+	height: 300px;
+  margin: 0px;
+  z-index: 99;
 }
 
-#aanmelden {
+.aanmelden {
+  position: relative;
+  z-index: 999;
+  background-color: red;
 	display: block;
-	margin-left:auto; 
-	margin-right:5vw;
 	padding: 10px;
 	width: 200px;
-	background-color: #333333;
+	/*background-color: #333333;*/
+  background-color: red;
 }
-
-
