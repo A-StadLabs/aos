@@ -11,14 +11,15 @@
 
     <aos-globals id="globals"></aos-globals>
 
-    <div vertical layout center center-justified id="canvas" class="notloggedin" fit hidden?="{{loggedin}}">
+    <div vertical layout center start-justified id="canvas" class="notloggedin" fit hidden?="{{loggedin}}">
       <h1>Aanmelden</h1>
       <p>Met A-profiel of AD account.</p>
       <small>{{error}}</small>
+      <br>
       <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
       <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
       <h3 hidden?="{{!loading}}">Laden...</h3>
-      <button hidden?="{{loading}}" id="buttons" center-justified icon="arrow-forward" on-tap="{{loginSubmit}}">Aanmelden</button><br>
+      <button class="aanafbtn" hidden?="{{loading}}" id="buttons" center-justified on-tap="{{loginSubmit}}">Aanmelden</button><br>
       <small>Gegevens vergeten?</small>
       <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
       </core-ajax>
@@ -26,12 +27,12 @@
       <core-ajax method="GET" id="getCRSmedewerker" handleAs="json" url="/crs-medewerker" response="{{responseCRSmedewerker}}" on-core-response="{{handleResponseCRSmedewerker}}">
     </div>
 
-    <div vertical layout center center-justified id="canvas" class="notloggedin" fit hidden?="{{!loggedin}}">
+    <div vertical layout start start-justified id="canvas" class="loggedin" fit hidden?="{{!loggedin}}">
       <a href="/#/profiel/0/">Thuis</a>
       <a href="/#/profiel/1/">Publiek profiel</a>
       <a href="/#/profiel/2/">Mijn gegevens</a>
       <a href="/#/profiel/3/">Permissies</a>
-      <button on-tap="{{logout}}">Afmelden</button>
+      <button self-center class="aanafbtn"  on-tap="{{logout}}">Afmelden</button>
       <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
     </div>
 

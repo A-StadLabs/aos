@@ -145,10 +145,8 @@ core-field {
 .aanmelden {
   position: relative;
   z-index: 999;
-  background-color: red;
 	display: block;
 	padding: 10px;
 	width: 200px;
-	/*background-color: #333333;*/
-  background-color: red;
+	background-color: #404040;
 }
