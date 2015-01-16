@@ -80,23 +80,7 @@
     </p>
   </div>
 </section>
-<section>
-<div class="canvas">
 
-  <div id="container" vertical layout start center-justified>
-
-    <div id="group" horizontal layout wrap start start-justified>
-
-      <template repeat="{{ a in userapps }}">
-        <aos-apptile key="{{a.id}}"></aos-apptile>
-      </template>
-
-    </div>
-
-  </div>
-  </div>
-
-</section>
 
 <section>
   <div horizontal layout start wrap class="canvas">
@@ -207,22 +191,7 @@
 
         });
 
-        document.addEventListener("user-changed", function(){
-          console.log(that.$.globals.values.user.data.id);
-          var userapps = [];
-          var userId = that.$.globals.values.user.data.id;
 
-          var userApps = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+userId+"/favapp/");
-          var userAppsResp = userApps.on("child_added", function(snap){
-            console.log(snap.key());
-            userapps.push({ 'id': snap.key() });
-          });
-
-          that.userapps = userapps;
-
-          console.log(userapps);
-
-        });
 
 
         },

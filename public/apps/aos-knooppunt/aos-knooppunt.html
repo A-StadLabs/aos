@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-drag-drop/core-drag-drop.html">
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
+<link rel="import" href="../../../../elements/aos-apptile/aos-apptile.html">
 
 <polymer-element name="aos-knooppunt" attributes="">
 
@@ -11,88 +12,34 @@
 
 
 <div id="favos">
-<template if="{{$.globals.values.userprefs.favorites}}">
-<div id="container" vertical layout start center-justified>
+<!-- <template if="{{$.globals.values.userprefs.favorites}}">
+ -->
 
-<div horizontal layout center start-justified class="grouptitle">
-  <div class="avatarbox"><img src="{{$.globals.values.user.data.avatarUrl}}"></div>
-  <div flex><h1>Favorieten</h1></div>
-  <div class="switcher" end-justified>
-  <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
-  <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
+
+<div class="canvas">
+
+  <div id="container" vertical layout start center-justified>
+
+    <div id="group" horizontal layout wrap start start-justified>
+
+      <template repeat="{{ a in userapps }}">
+      <aos-apptile key="{{a.id}}"></aos-apptile>
+      </template>
+
+<!--       <aos-apptile key="-JfhvWPX_5AJHaCrQ-s6"></aos-apptile>
+ -->
+    </div>
+
   </div>
-</div>
+  </div>
 
 
-  <div id="group" horizontal layout wrap start start-justified>
-
-  <core-drag-drop></core-drag-drop>
-
-  <a href="/" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-AntwerpenStartscherm.svg">
-    <p>Startscherm Antwerpen.be</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-infocenter.svg">
-    <p>Informatie opzoeken</p>
-  </a>
-
-  <a href="/#/babbles/home/?sort=votes" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-babbelbox.svg">
-    <p>Babbles</p>
-  </a>
-
-  <a href="/#/chat" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-babbelbox.svg">
-    <p>Chat (early)</p>
-  </a>
-
-  <!-- <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-aanvragen.svg">
-    <p>Documenten aanvragen</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/appicons/icon-probleem.svg">
-    <p class="appdescr">Een probleem melden</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/appicons/icon-contacteren.svg">
-    <p class="appdescr">Stad Antwerpen contacteren</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-afspraakmaken.svg">
-    <p>Afspraak maken</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-aanvragen.svg">
-    <p>Documenten aanvragen</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/appicons/icon-probleem.svg">
-    <p class="appdescr">Een probleem melden</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/appicons/icon-contacteren.svg">
-    <p class="appdescr">Stad Antwerpen contacteren</p>
-  </a>
-  </div> -->
-
-</div>
-</div>
+<!-- </template>
+ -->  
+  </div>
 
 
-</template>
-
-
-
-<div id="container" vertical layout start center-justified>
+<!-- <div id="container" vertical layout start center-justified>
 
 <div horizontal layout center start-justified class="grouptitle">
 
@@ -161,7 +108,7 @@
   </a>
   </div>
 
-</div>
+</div> -->
 
 
 
@@ -169,7 +116,7 @@
 
 
 
-<div id="container" vertical layout start center-justified>
+<!-- <div id="container" vertical layout start center-justified>
 
 <div horizontal layout center start-justified class="grouptitle">
 
@@ -200,7 +147,7 @@
   </div>
 
 </div>
-
+ -->
 
 
 
@@ -213,7 +160,28 @@
       ready: function() {
         this.tile = true;
         this.list = false;
+        this.userapps = [];
       	//console.log('Knooppunt app loaded.');
+
+        var that = this;
+
+        document.addEventListener("user-changed", function(){
+          console.log(that.$.globals.values.user.data.id);
+          var userapps = [];
+          var userId = that.$.globals.values.user.data.id;
+
+          var userApps = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+userId+"/favapp/");
+          var userAppsResp = userApps.on("child_added", function(snap){
+            console.log("dit is de snapkey", snap.key());
+            userapps.push({ 'id': snap.key() });
+          });
+
+          that.userapps = userapps;
+
+          console.log("deze aub", userapps);
+
+        });
+
 
         },
 
