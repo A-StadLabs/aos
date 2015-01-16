@@ -10,7 +10,7 @@
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../../elements/aos-apptile/aos-apptile.html">
 
-<polymer-element name="aos-profiel" attributes="yoyo return">
+<polymer-element name="aos-profiel" attributes="tabby">
 
   <template>
   <link rel="stylesheet" href="aos-profiel.css" />
@@ -156,7 +156,7 @@
       ready: function() {
 
       	console.log('profiel app loaded.');
-        this.tabby = 0;
+        if(!this.tabby){ this.tabby = 0 };
 
 
         var that = this;
@@ -184,23 +184,30 @@
         });
 
         document.addEventListener("user-changed", function(){
-          console.log(that.$.globals.values.user.data.id);
+          //console.log(that.$.globals.values.user.data.id);
           var userapps = [];
           var userId = that.$.globals.values.user.data.id;
 
           var userApps = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+userId+"/favapp/");
           var userAppsResp = userApps.on("child_added", function(snap){
-            console.log(snap.key());
+            //console.log(snap.key());
             userapps.push({ 'id': snap.key() });
           });
 
           that.userapps = userapps;
 
-          console.log(userapps);
+          //console.log(userapps);
 
         });
 
 
+        },
+
+        tabbyChanged: function(){
+          var tab = this.tabby;
+          //console.log('new tab is: ', tab);
+          var newUrl = '/#/profiel/'+tab+'/';
+          window.history.pushState('', '', newUrl);
         },
 
 

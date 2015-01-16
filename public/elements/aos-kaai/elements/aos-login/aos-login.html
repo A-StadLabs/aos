@@ -2,7 +2,7 @@
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 
-<polymer-element name="aos-login" attributes="">
+<polymer-element name="aos-login" attributes="tabby">
 
   <template>
 
@@ -27,7 +27,10 @@
     </div>
 
     <div vertical layout center center-justified id="canvas" class="notloggedin" fit hidden?="{{!loggedin}}">
-      <h1>Je bent aangemeld.</h1>
+      <a href="/#/profiel/0/">Thuis</a>
+      <a href="/#/profiel/1/">Publiek profiel</a>
+      <a href="/#/profiel/2/">Mijn gegevens</a>
+      <a href="/#/profiel/3/">Permissies</a>
       <button on-tap="{{logout}}">Afmelden</button>
       <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
     </div>

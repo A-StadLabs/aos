@@ -6,9 +6,6 @@
   padding: 0px;
 }
 
-
-
-
 a {
 	color: white;
 	text-decoration: none;
@@ -28,9 +25,6 @@ core-dropdown-menu {
 	font-weight: 600;
 	color: #808080;
 }
-
-
-
 
 core-dropdown {
 	background-color: #333333;
@@ -67,7 +61,6 @@ core-field {
 	-moz-transition: height 0.35s;
 	transition: height 0.35s;
 }
-
 
 #mobilekaai {
 	background-color:  #333333;
@@ -143,9 +136,10 @@ core-field {
 #paneBar {
 	width: 100%;
 	position: absolute;
-	top: 60px;
+	/*top: 60px;*/
 	height: 300px;
   margin: 0px;
+  z-index: 99;
 }
 
 .aanmelden {
