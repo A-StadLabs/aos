@@ -11,6 +11,10 @@
 <link rel="import" href="../../elements/aos-apptile/aos-apptile.html">
 <link rel="import" href="../../elements/aos-user/aos-user.html">
 
+<link rel="import" href="../aos-babbles/ba-elements/ba-data/ba-data.html">
+<link rel="import" href="../aos-babbles/ba-elements/ba-poster/ba-poster.html">
+<link rel="import" href="../aos-babbles/ba-elements/babbel-babbel/babbel-babbel.html">
+
 <polymer-element name="aos-profiel" attributes="tabby">
 
   <template>
@@ -51,6 +55,11 @@
 <section>
   <div class="canvas">
     Hier komt juicy tiles met vanalles dat ik volg, maar ook een POST vakje om nieuwe dingen te posten naar mijn kringen.
+    <ba-poster path="-Jdj7gsx2cp_kw4hBq0q" mode="parent" role="root"></ba-poster>
+    <ba-data key="-Jdj7gsx2cp_kw4hBq0q" response="{{messages}}" headline="{{head}}"></ba-data>
+    <template repeat="{{k in messages}}">
+    <babbel-babbel key="{{k.key}}" data="{{k}}" mode="parent" sort="{{sort}}"></babbel-babbel>
+    </template>
   </div>
 </section>
 <section>
