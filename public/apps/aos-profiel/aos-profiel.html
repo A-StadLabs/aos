@@ -9,6 +9,7 @@
 <link rel="import" href="../../elements/image-upload/image-upload.html">
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../../elements/aos-apptile/aos-apptile.html">
+<link rel="import" href="../../elements/aos-user/aos-user.html">
 
 <polymer-element name="aos-profiel" attributes="tabby">
 
@@ -16,6 +17,7 @@
   <link rel="stylesheet" href="aos-profiel.css" />
 
   <aos-globals id="globals"></aos-globals>
+  <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
 
    <div class="leaderboard">
       <div horizontal layout center class="basicprof" fit>
@@ -27,7 +29,7 @@
         </div>
 
         <div class="leaderimg">
-          <img src="{{$.globals.values.prefs.background}}">
+          <img src="{{aosuserobject.prefs.background}}">
         </div>
     </div>
 
@@ -152,7 +154,7 @@
           // save image in userobjact
           var setUserBg = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+userID+"/prefs/background/");
           var objectResp = setUserBg.set(bgImage);
-          that.$.globals.values.userprefs.background = bgImage;
+          that.aosuserobject.prefs.background = bgImage;
         });
 
 

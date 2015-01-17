@@ -1,19 +1,15 @@
 :host {
 	display: block;
-
 }
 
 
 .uploader {
 	opacity: 0;
 	background-color: rgba(0,0,0,0.5);
-	width: 100%;
-	height: 30vw;
 	max-height: 200px;
+	width: 30px;
+	height: 30px;
 }
-
-
-
 
 .uploader:hover {
 	opacity: 1;

@@ -1,0 +1,46 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../aos-globals/aos-globals.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+
+<polymer-element name="aos-user" attributes="key aosuser favapps">
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        // define element prototype here
+        keyChanged: function(){
+          var that = this;
+          //console.log('aos user: ', this.key);
+          var uid = this.key;
+          var aosuser;
+          var userCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
+          var userResp = userCheck.once("value", function(snapshot){
+            //console.log(snapshot.val().favapp);
+            that.aosuser = snapshot.val();
+            //that.favapps = snapshot.val().favapp;
+          });
+
+          var favapps = [];
+
+          var getApps = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/favapp/");
+          var getAppsResp = getApps.on("child_added", function(snap){
+            favapps.push({ 'key': snap.key() });
+          });
+          this.favapps = favapps;
+          //this.aosuser = aosuser;
+          //this.favapps = aosuser.favapp;
+        },
+
+        aosuserChanged: function(){
+          var uid = this.key;
+          var userUpdate = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
+          var userUpdateResp = userUpdate.set(this.aosuser);
+          //console.log('aos userobject: ', JSON.stringify(this.aosuser));
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>

@@ -24,11 +24,11 @@ body {
   width: 5px;
   height: 5px;
 }
-    
+
 paper-toast {
   right: 10px;
   left: auto;
-} 
+}
 
 .container {
 	display: inline-block;
@@ -49,3 +49,6 @@ core-toolbar {
 	height: 60px;
 }
 
+#kaai {
+  z-index: 9999;
+}

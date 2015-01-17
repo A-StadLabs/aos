@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-drag-drop/core-drag-drop.html">
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
+<link rel="import" href="../../../../elements/aos-user/aos-user.html">
 <link rel="import" href="../../../../elements/aos-apptile/aos-apptile.html">
 
 <polymer-element name="aos-knooppunt" attributes="">
@@ -8,8 +9,8 @@
   <template>
 
     <link rel="stylesheet" href="aos-knooppunt.css" />
-    <aos-globals id="globals"></aos-globals>
-
+    <aos-globals id="globals" values="{{globs}}"></aos-globals>
+    <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
 
 <div id="favos">
 <!-- <template if="{{$.globals.values.userprefs.favorites}}">
@@ -21,9 +22,8 @@
   <div id="container" vertical layout start center-justified>
 
     <div id="group" horizontal layout wrap start start-justified>
-
-      <template repeat="{{ a in userapps }}">
-      <aos-apptile key="{{a.id}}"></aos-apptile>
+      <template repeat="{{ a in favapps }}">
+        <aos-apptile key="{{a.key}}"></aos-apptile>
       </template>
 
 <!--       <aos-apptile key="-JfhvWPX_5AJHaCrQ-s6"></aos-apptile>
@@ -157,44 +157,27 @@
 
     Polymer({
 
+    
+
+      globsChanged: function(){
+        //this.userapps = this.globs.values.user.favapps;
+      },
+
       ready: function() {
         this.tile = true;
         this.list = false;
-        this.userapps = [];
-      	//console.log('Knooppunt app loaded.');
-
-        var that = this;
-
-        document.addEventListener("user-changed", function(){
-          console.log(that.$.globals.values.user.data.id);
-          var userapps = [];
-          var userId = that.$.globals.values.user.data.id;
-
-          var userApps = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+userId+"/favapp/");
-          var userAppsResp = userApps.on("child_added", function(snap){
-            console.log("dit is de snapkey", snap.key());
-            userapps.push({ 'id': snap.key() });
-          });
-
-          that.userapps = userapps;
-
-          console.log("deze aub", userapps);
-
-        });
-
-
-        },
+      },
 
         switchToList: function() {
         this.tile = false;
         this.list = true;
-        },
+      },
 
         switchToTile: function() {
         this.tile = true;
         this.list = false;
 
-        }
+      }
 
 
     });

@@ -1,6 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
+<link rel="import" href="../../../../elements/aos-user/aos-user.html">
 
 <polymer-element name="aos-login" attributes="tabby">
 
@@ -16,8 +17,10 @@
       <p>Met A-profiel of AD account.</p>
       <small>{{error}}</small>
       <br>
+      
       <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
       <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
+
       <h3 hidden?="{{!loading}}">Laden...</h3>
       <button class="aanafbtn" hidden?="{{loading}}" id="buttons" center-justified on-tap="{{loginSubmit}}">Aanmelden</button><br>
       <small>Gegevens vergeten?</small>
@@ -36,6 +39,8 @@
       <core-ajax method="GET" id="logoutAjax" handleAs="json" url="/logout" response="{{responseLogout}}" on-core-response="{{handleResponseLogout}}">
     </div>
 
+    <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}"></aos-user>
+
   </template>
 
   <script>
@@ -50,21 +55,30 @@
 
         document.addEventListener('user-changed', function(){
             that.getUserData();
-            console.log('got user');
+            //console.log('got user');
+            //that.userid = that.$.globals.values.user.data.id;
         });
 
+      },
+
+      aosuserobjectChanged: function(){ 
+        //console.log('ok here we are now', this.aosuserobject);
+        this.$.globals.values.user.data = this.aosuserobject.aosuser;
+        this.$.globals.values.user.prefs = this.aosuserobject.prefs;
+        this.$.globals.values.user.favapps = this.aosuserobject.favapp;
       },
 
       getUserData: function(){
         console.log('404 app loaded.');
         this.loggedin = true;
         var userValues = this.$.globals.values.user.data;
-        console.log('Ik heb een value: ', JSON.stringify(userValues));
+        //console.log('Ik heb een value: ', JSON.stringify(userValues));
       },
 
       logout: function(){
         delete this.$.globals.values;
         delete this.$.globals.values.user;
+        delete this.$.globals.values.prefs;
         delete this.username;
         delete this.password;
         this.$.logoutAjax.go();
@@ -82,49 +96,35 @@
 
         this.loggedin = false;
 
-        console.log('user resp:', this.responseUser.success);
+        //console.log('user resp:', this.responseUser.success);
         if(this.responseUser.success==true){
           this.loggedin = true;
           this.$.globals.values.user = this.responseUser;
           this.$.globals.values.userJSON = JSON.stringify(this.$.globals.values.user.data);
-          console.log('UID: ',this.responseUser.data.uid);
+          //console.log('UID: ',this.responseUser.data.uid);
           var uid = this.responseUser.data.id;
           var userobject = this.responseUser.data;
 
 
           // First check if we already have this user locally
-          var that = this;
-          var userCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
-          var userResp = userCheck.once("value", function(snapshot){
-            var objectSave = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/aosuser/");
-            var objectResp = objectSave.set(userobject);
-            console.log(snapshot.val().prefs);
-            that.$.globals.values.prefs = snapshot.val().prefs;
-          });
-
+          // Then we load the user's preferences in our globals object.
           // var that = this;
-          //
-          // // Then we load the user's preferences in our globals object.
-          // var prefCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
-          // var prefResp = prefCheck.once("value", function(snapshot){
-          //   //var userprefs = snapshot.val();
-          //   ///console.log(snapshot.val());
-          //   //this.$.globals.values.prefs = ;
+          // var userCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
+          // var userResp = userCheck.once("value", function(snapshot){
+          //   var objectSave = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/aosuser/");
+          //   var objectResp = objectSave.set(userobject);
+          //   console.log('our user: ',snapshot.val().prefs);
+          //   that.$.globals.values.prefs = snapshot.val().prefs;
           // });
-          //
-          // console.log(this.$.globals.values.prefs);
 
           this.$.getCRS.go();
-          if(this.responseUser.data.ADAccount){
-            this.$.getCRSmedewerker.go();
-          };
+            if(this.responseUser.data.ADAccount){
+              this.$.getCRSmedewerker.go();
+            };
           this.fire('show-toast', {bericht: 'Je bent aangemeld.'});
-          if(this.return){
-            this.fire('router-go', { naarwaar: this.return });
-          };
         };
         if(this.responseUser.success==false){
-          console.log('inlog error');
+          //console.log('inlog error');
           this.error = "Er ging iets fout bij het aanmelden.";
           //delete this.$.globals.values.user;
           delete this.username;
