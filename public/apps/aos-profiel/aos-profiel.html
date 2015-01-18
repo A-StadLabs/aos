@@ -24,17 +24,21 @@
   <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
 
    <div class="leaderboard">
-      <div horizontal layout center class="basicprof" fit>
-          <div class="avatarbox">
-            <img id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
-          </div>
-          <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
-          <image-upload id="img1" dataurl="{{showme1}}" label=""></image-upload>
+      <div horizontal layout center class="basicprof" style="background: url({{aosuserobject.prefs.background}});background-position: center center;
+    background-repeat: no-repeat;
+    
+    background-size: cover;
+    background-color: #464646;">
+        <div class="avatarbox">
+          <img id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
         </div>
+        <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
+        <image-upload id="img1" fit dataurl="{{showme1}}" label=""></image-upload>
+      </div>
 
-        <div class="leaderimg">
+        <!-- <div class="leaderimg">
           <img src="{{aosuserobject.prefs.background}}">
-        </div>
+        </div> -->
     </div>
 
     <div horizontal layout center center-justified class="toptabs">

@@ -69,8 +69,10 @@
 
   <!-- // Dit is den login panel -->
   <div id="paneBar" fit horizontal layout end-justified>
-    <aos-login class="aanmelden" hidden?="{{ paneId==0 && paneId!=1 }}"></aos-login>
-    <color-picker id="cp" width="200" height="200" hidden?="{{ paneId==0 && paneId!=2 }}" color="{{colorr}}"></color-picker>
+    <aos-login class="aanmelden" hidden id="loginPane"></aos-login>
+    <div hidden id="searchPane">
+    <color-picker id="cp" width="200" height="200"  color="{{colorr}}"></color-picker>
+    </div>
   </div>
   <!-- // Dit is den app panel -->
   <!-- // Dit is den notificaties panel -->
@@ -151,12 +153,14 @@
       },
 
       closeAll: function(){
-        this.paneId = 0;
+        this.$.searchPane.hidden = true;
+        this.$.loginPane.hidden = true;
         //this.$.toolsmenu.selected = -1;
       },
 
       toggleLogin: function(){
-        this.togglePane(1);
+        this.$.searchPane.hidden = true;
+        this.$.loginPane.hidden = !this.$.loginPane.hidden;
       },
 
       togglePane: function(pane){
@@ -172,7 +176,8 @@
       },
 
       toggleSearch: function(){
-        this.togglePane(2);
+        this.$.loginPane.hidden = true;
+        this.$.searchPane.hidden = !this.$.searchPane.hidden;
       },
 
       handleResponseUser: function(){
