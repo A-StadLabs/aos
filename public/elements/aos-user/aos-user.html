@@ -17,9 +17,9 @@
           var aosuser;
           var userCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
           var userResp = userCheck.once("value", function(snapshot){
-            //console.log(snapshot.val().favapp);
+          //console.log(snapshot.val().favapp);
             that.aosuser = snapshot.val();
-            //that.favapps = snapshot.val().favapp;
+          //that.favapps = snapshot.val().favapp;
           });
 
           var favapps = [];
