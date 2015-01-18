@@ -57,7 +57,7 @@ core-field {
 	padding: 0px;
 	margin: 0px;
 	height: 60px;
-			-webkit-transition: height 0.35s;
+	-webkit-transition: height 0.35s;
 	-moz-transition: height 0.35s;
 	transition: height 0.35s;
 }

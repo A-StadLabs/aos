@@ -14,8 +14,11 @@
 <link rel="import" href="../../bower_components/core-dropdown-menu/core-dropdown-menu.html">
 <link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
 <link rel="import" href="../../bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
+<link rel="import" href="../../bower_components/color-picker-element/dist/color-picker.html">
+
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="elements/aos-login/aos-login.html">
+<link rel="import" href="../aos-user/aos-user.html">
 
 <!-- <link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html"> -->
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
@@ -26,15 +29,15 @@
 <template>
     <link rel="stylesheet" href="aos-kaai-dark.css" />
 
-
     <core-ajax method="GET" id="checkUser" handleAs="json" url="/user" response="{{responseUser}}" on-core-response="{{handleResponseUserCheck}}" auto></core-ajax>
 
     <aos-globals id="globals"></aos-globals>
+    <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
 
-    <div id="kaai" horizontal center center-justified layout fit>
+    <div id="kaai" style="background-color: {{aosuserobject.prefs.kaaicolor}}" horizontal center center-justified layout fit>
+
       <div class="helpings" horizontal layout flex>
-
-         <core-dropdown-menu label="Taal" class="lan">
+         <core-dropdown-menu label="Taal" class="lan" hidden?="{{loggedin}}">
           <core-dropdown class="dropdown">
             <core-selector selected="0" id="lanselect" valueattr="label">
               <core-item label="NL"></core-item>
@@ -53,9 +56,9 @@
     </div>
 
       <div class="tools" horizontal layout>
-          <a href="/#/search">
-            <img class="kaaibtns" src="images/kaai-searchloop.svg">
-          </a>
+          
+            <img class="kaaibtns" src="images/kaai-searchloop.svg" on-tap="{{toggleSearch}}">
+          
           <a href="/#/knooppunt">
             <img class="kaaibtns" src="images/kaai-knooppunt.svg">
           </a>
@@ -67,6 +70,7 @@
   <!-- // Dit is den login panel -->
   <div id="paneBar" fit horizontal layout end-justified>
     <aos-login class="aanmelden" hidden?="{{ paneId==0 && paneId!=1 }}"></aos-login>
+    <color-picker id="cp" width="200" height="200" hidden?="{{ paneId==0 && paneId!=2 }}" color="{{colorr}}"></color-picker>
   </div>
   <!-- // Dit is den app panel -->
   <!-- // Dit is den notificaties panel -->
@@ -86,6 +90,17 @@
       },
 
       ready: function() {
+
+        var that = this;
+
+        this.$.cp.addEventListener('colorselected', function(e){
+          console.log(e.detail.hex);
+          // that.colorr = e.detail.hex;
+          that.aosuserobject.prefs.kaaicolor = e.detail.hex;
+          var uid = that.$.globals.values.user.data.id;
+          var userUpdate = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/prefs/kaaicolor/");
+          var userUpdateResp = userUpdate.set(e.detail.hex);
+        });
 
       // this.kaaimobile = false;
         this.paneId = 0;
@@ -111,8 +126,10 @@
         if(this.responseUser&&this.responseUser.status==='E'){
           //console.log('Sessie bestaat niet, user is leeg');
           delete this.$.globals.values.user;
+          this.loggedin = false;
         } else {
           this.$.globals.values.user = this.responseUser;
+          this.loggedin = true;
           //console.log('ik heb een user');
           this.fire('user-changed', this.responseUser);
         }
@@ -155,7 +172,7 @@
       },
 
       toggleSearch: function(){
-        
+        this.togglePane(2);
       },
 
       handleResponseUser: function(){
