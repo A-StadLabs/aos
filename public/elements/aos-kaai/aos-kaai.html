@@ -14,17 +14,15 @@
 <link rel="import" href="../../bower_components/core-dropdown-menu/core-dropdown-menu.html">
 <link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
 <link rel="import" href="../../bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
-<link rel="import" href="../../bower_components/color-picker-element/dist/color-picker.html">
-
+<!-- <link rel="import" href="../color-picker-element/dist/color-picker.html">
+ -->
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="elements/aos-login/aos-login.html">
 <link rel="import" href="../aos-user/aos-user.html">
 
-<!-- <link rel="import" href="../../bower_components/notification-elements/src/notification-elements.html"> -->
 <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800|Open+Sans+Condensed:300italic,700,300' rel='stylesheet' type='text/css'>
 
 <polymer-element name="aos-kaai" attributes="environment theme language notification user paneId">
-
 
 <template>
     <link rel="stylesheet" href="aos-kaai-dark.css" />
@@ -34,7 +32,9 @@
     <aos-globals id="globals"></aos-globals>
     <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
 
-    <div id="kaai" style="background-color: {{aosuserobject.prefs.kaaicolor}}" horizontal center center-justified layout fit>
+    <!-- <div id="kaai" style="background-color: {{aosuserobject.prefs.kaaicolor}}" horizontal center center-justified layout fit> -->
+
+    <div id="kaai" style="background-color: #333333" horizontal center center-justified layout fit>
 
       <div class="helpings" horizontal layout flex>
          <core-dropdown-menu label="Taal" class="lan" hidden?="{{loggedin}}">
@@ -49,30 +49,30 @@
         </core-dropdown-menu>
 
         <a href="/help" class="helpbtn" >
-<!--           <core-icon-button label="help" id="bthelp" src="images/kaai-help.svg">
-          </core-icon-button> -->
           <img class="kaaibtns" src="images/kaai-help.svg">
         </a>
     </div>
 
-      <div class="tools" horizontal layout>
-          
-            <img class="kaaibtns" src="images/kaai-searchloop.svg" on-tap="{{toggleSearch}}">
-          
-          <a href="/#/knooppunt">
-            <img class="kaaibtns" src="images/kaai-knooppunt.svg">
-          </a>
-            <div class="avatarbox">
-              <img src="{{$.globals.values.user.data.avatarUrl}}" on-tap="{{toggleLogin}}">
-            </div>
+    <div class="tools" horizontal layout>
+      <img class="kaaibtns" src="images/kaai-searchloop.svg" on-tap="{{toggleSearch}}">
+      <a href="/#/knooppunt">
+        <img class="kaaibtns" src="images/kaai-knooppunt.svg">
+      </a>
+      <div class="avatarbox" hidden?="{{!$.globals.values.user.data}}">
+        <img src="{{ $.globals.values.user.data.avatarUrl }}" on-tap="{{toggleLogin}}">
       </div>
+      <div class="avatarbox" hidden?="{{$.globals.values.user.data}}">
+        <img src="images/kaai-profiel2.svg" on-tap="{{toggleLogin}}">
+      </div>
+    </div>
 
   <!-- // Dit is den login panel -->
-  <div id="paneBar" fit horizontal layout end-justified>
-    <aos-login class="aanmelden" hidden id="loginPane"></aos-login>
-    <div hidden id="searchPane">
-    <color-picker id="cp" width="200" height="200"  color="{{colorr}}"></color-picker>
-    </div>
+    <div id="paneBar" fit horizontal layout end-justified>
+      <aos-login class="aanmelden" hidden id="loginPane"></aos-login>
+      <div hidden id="searchPane">
+<!--       <color-picker id="cp" width="200" height="200"  color="{{colorr}}"></color-picker>
+ -->    </div>
+
   </div>
   <!-- // Dit is den app panel -->
   <!-- // Dit is den notificaties panel -->
@@ -93,20 +93,21 @@
 
       ready: function() {
 
+        this.loggedin = false;
+
         var that = this;
 
-        this.$.cp.addEventListener('colorselected', function(e){
-          console.log(e.detail.hex);
-          // that.colorr = e.detail.hex;
-          that.aosuserobject.prefs.kaaicolor = e.detail.hex;
-          var uid = that.$.globals.values.user.data.id;
-          var userUpdate = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/prefs/kaaicolor/");
-          var userUpdateResp = userUpdate.set(e.detail.hex);
-        });
+        // this.$.cp.addEventListener('colorselected', function(e){
+        //   console.log(e.detail.hex);
+        //   // that.colorr = e.detail.hex;
+        //   that.aosuserobject.prefs.kaaicolor = e.detail.hex;
+        //   var uid = that.$.globals.values.user.data.id;
+        //   var userUpdate = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/prefs/kaaicolor/");
+        //   var userUpdateResp = userUpdate.set(e.detail.hex);
+        // });
 
       // this.kaaimobile = false;
         this.paneId = 0;
-
         // Localisation voorlopig
         this.locusername = 'Gebruikersnaam';
         this.locsearch = 'Zoeken';

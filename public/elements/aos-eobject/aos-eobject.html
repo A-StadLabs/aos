@@ -1,0 +1,91 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
+
+<polymer-element name="aos-eobject" attributes="key parent type item">
+  <template>
+    <link rel="stylesheet" href="aos-eobject.css">
+    <h1>{{item.object}}<content></content></h1>
+      <img src="../aos-eniversum/images/magnet.svg" width="30" height="30">
+<template repeat="{{ o in objectTypes}}">
+        <i on-tap="{{select}}" me="{{o.key}}">{{ o.naam }}, </i> 
+    </template>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        // define element prototype here
+        ready: function(){
+
+          var that = this;
+
+        },
+
+        select: function(e, detail, sender){
+         
+        },
+
+        keyChanged: function(){
+          var that = this;
+          var key = this.key;
+
+          var getItem = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/");
+          var respItem = getItem.once('value', function(snap){
+            console.log(snap.val());
+            that.item = snap.val();
+          });
+
+          var getEObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+
+          var objectTypes = [];
+
+          var respEObjects = getEObjects.on("child_added", function(snap){
+            objectTypes.push({'naam':snap.val().naam, 'key': snap.key()});
+            //console.log('naam',snap.val().object, 'icoon', snap.val().icon, ' key', snap.key());
+          });
+
+          this.objectTypes = objectTypes;
+        },
+
+        saveObject: function(){
+
+          var naam = this.objectNaam;
+          var parent = this.key;
+          var postObject = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/");
+          var respObject = postObject.push({"object":naam, "parent":parent, "icon": "imagesrc", "time":Firebase.ServerValue.TIMESTAMP});
+          var newObjectKey = respObject.key();
+          console.log('Saved as ',newObjectKey);
+
+          delete this.objectNaam;
+
+          // var attraction = 'root';
+
+          // var postAttracted = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+newObjectKey+"/attractedTo/"+attraction+"/");
+          // var respAttracted = postAttracted.set(true);
+        },
+
+        // keyChanged: function(){
+        //   var key = this.key;
+        //   var that = this;
+        //   var getItem = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/");
+        //   var respItem = getItem.once('value', function(snap){
+        //     console.log(snap.val());
+        //     that.item = snap.val();
+        //   });
+
+        // },
+
+        toggleInfo: function(){
+          this.info = !this.info;
+        },
+
+        toggleAdd: function(){
+          this.addIets = !this.addIets;
+        }
+      });
+
+    })();
+  </script>
+</polymer-element>

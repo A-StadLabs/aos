@@ -52,6 +52,17 @@
         this.loggedin = false;
 
         var that = this;
+        
+        this.addEventListener('keypress', function(e) {
+
+          if (e.keyCode == 13) {
+
+              //that.enter();
+              //ajax.go();
+              this.loginSubmit();
+          };
+
+        });
 
         document.addEventListener('user-changed', function(){
             that.getUserData();

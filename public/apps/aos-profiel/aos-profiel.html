@@ -10,10 +10,9 @@
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../../elements/aos-apptile/aos-apptile.html">
 <link rel="import" href="../../elements/aos-user/aos-user.html">
+<link rel="import" href="../../elements/aos-eniversum/aos-eniversum.html">
 
-<link rel="import" href="../aos-babbles/ba-elements/ba-data/ba-data.html">
-<link rel="import" href="../aos-babbles/ba-elements/ba-poster/ba-poster.html">
-<link rel="import" href="../aos-babbles/ba-elements/babbel-babbel/babbel-babbel-poster.html">
+<link rel="import" href="../../elements/image-upload/image-upload.html">
 
 <polymer-element name="aos-profiel" attributes="tabby">
 
@@ -33,14 +32,13 @@
           <img id="avatar" src="{{$.globals.values.user.data.avatarUrl}}">
         </div>
         <h1>{{$.globals.values.user.data.firstName}} {{$.globals.values.user.data.lastName}}</h1>
-        <image-upload id="img1" fit dataurl="{{showme1}}" label=""></image-upload>
+        <image-upload id="img1" fit dataurl="{{showme1}}" label="test"></image-upload>
       </div>
 
         <!-- <div class="leaderimg">
           <img src="{{aosuserobject.prefs.background}}">
         </div> -->
     </div>
-
     <div horizontal layout center center-justified class="toptabs">
       <div vertical layout center class="tabscont">
         <paper-tabs selected="{{tabby}}" noink id="tabs">
@@ -53,23 +51,17 @@
       <!-- <button on-tap="{{logout}}" class="logoutbtn">{{$.globals.values.user.data.username}} afmelden</button> -->
     </div>
 
-
-
 <core-animated-pages id="tabscenes" selected="{{tabby}}">
 <section>
   <div class="canvas">
-    Hier komt juicy tiles met vanalles dat ik volg, maar ook een POST vakje om nieuwe dingen te posten naar mijn kringen.
-    <ba-poster path="-Jdj7gsx2cp_kw4hBq0q" mode="parent" role="root"></ba-poster>
-    <ba-data key="-Jdj7gsx2cp_kw4hBq0q" response="{{messages}}" headline="{{head}}"></ba-data>
-    <template repeat="{{k in messages}}">
-    <babbel-babbel key="{{k.key}}" data="{{k}}" mode="parent" sort="{{sort}}"></babbel-babbel>
-    </template>
+    <aos-eniversum></aos-eniversum>
   </div>
 </section>
 <section>
   <div horizontal layout start wrap class="canvas">
     <p>
       Wie mag jouw profiel zien?
+
     </p>
     <p>
       0 Niemand<br />0 Iedereen met aan A-profiel<br />0 Enkel mensen die ik toevoeg als vriend
@@ -154,6 +146,7 @@
 
       ready: function() {
 
+        
       	console.log('profiel app loaded.');
         if(!this.tabby){ this.tabby = 0 };
 
@@ -171,16 +164,7 @@
         });
 
 
-        this.addEventListener('keypress', function(e) {
-
-          if (e.keyCode == 13) {
-
-              //that.enter();
-              //ajax.go();
-              this.loginSubmit();
-          };
-
-        });
+        
 
 
         document.addEventListener("user-changed", function(){
