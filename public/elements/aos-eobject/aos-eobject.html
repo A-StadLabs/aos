@@ -7,7 +7,7 @@
     <h1>{{item.object}}<content></content></h1>
       <img src="../aos-eniversum/images/magnet.svg" width="30" height="30">
 <template repeat="{{ o in objectTypes}}">
-        <i on-tap="{{select}}" me="{{o.key}}">{{ o.naam }}, </i> 
+        <i class="delete" on-tap="{{select}}" me="{{o.key}}">{{ o.naam }}, </i> 
     </template>
   </template>
   <script>
@@ -24,7 +24,12 @@
         },
 
         select: function(e, detail, sender){
-         
+          var parentItem = this.key;
+          var key = sender.attributes.me.value;
+          var remChild = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+parentItem+"/children/"+key+"/");
+          var respChild = remChild.remove();
+          console.log(respChild);
+          this.keyChanged();
         },
 
         keyChanged: function(){
