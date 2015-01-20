@@ -77,17 +77,7 @@
           });
           this.objectTypes = objectTypes;
 
-          var getProperties = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/properties/");
-          var properTypes = [];
-          var respProper = getProperties.on("child_added", function(snap){
-            properTypes.push({'naam':snap.val().naam, 'key': snap.key()});
-            console.log('naam',snap.val().object, 'icoon', snap.val().icon, ' key', snap.key());
-          });
-          this.properTypes = properTypes;
-
           var that = this;
-          // Nieuwe eloket concept stuff
-        // this.objectTypes = ['partner', 'dochter', 'zoon', 'papa', 'mama', 'man', 'vrouw', 'auto', 'fiets', 'identiteitskaart (eID)', 'A-kaart'];
 
         this.$.newObject.addEventListener('keypress', function(e) {
           if (e.keyCode == 13) {
