@@ -18,9 +18,6 @@
 
         // define element prototype here
         ready: function(){
-
-          var that = this;
-
         },
 
         select: function(e, detail, sender){
@@ -52,43 +49,9 @@
           });
 
           this.objectTypes = objectTypes;
-        },
-
-        saveObject: function(){
-
-          var naam = this.objectNaam;
-          var parent = this.key;
-          var postObject = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/");
-          var respObject = postObject.push({"object":naam, "parent":parent, "icon": "imagesrc", "time":Firebase.ServerValue.TIMESTAMP});
-          var newObjectKey = respObject.key();
-          console.log('Saved as ',newObjectKey);
-
-          delete this.objectNaam;
-
-          // var attraction = 'root';
-
-          // var postAttracted = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+newObjectKey+"/attractedTo/"+attraction+"/");
-          // var respAttracted = postAttracted.set(true);
-        },
-
-        // keyChanged: function(){
-        //   var key = this.key;
-        //   var that = this;
-        //   var getItem = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/");
-        //   var respItem = getItem.once('value', function(snap){
-        //     console.log(snap.val());
-        //     that.item = snap.val();
-        //   });
-
-        // },
-
-        toggleInfo: function(){
-          this.info = !this.info;
-        },
-
-        toggleAdd: function(){
-          this.addIets = !this.addIets;
         }
+
+       
       });
 
     })();
