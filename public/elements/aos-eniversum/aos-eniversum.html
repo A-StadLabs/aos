@@ -43,37 +43,16 @@
 
       Polymer({
         // define element prototype here
-        select: function(e, detail, sender){
-          console.log(sender.attributes.me.value);
-          this.selectedItem = sender.attributes.me.value;
-        },
-
-        addChild: function(e, detail, sender){
-          var parentItem = this.selectedItem;
-          var key = sender.attributes.me.value;
-          var naam = sender.attributes.naam.value;
-          var setChild = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+parentItem+"/children/");
-          var respChild = setChild.push({ "childKey": key, "naam": naam });
-          console.log(respChild);
-        },
-
-        rootMe: function(){
-          this.selectedItem = 'root';
-        },
-
         ready: function(){
 
           this.selectedItem = 'root';
 
-          var that = this;
-
-      
+          var that = this;      
 
           var getEObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/");
           var objectTypes = [];
           var respEObjects = getEObjects.on("child_added", function(snap){
             objectTypes.push({'naam':snap.val().object, 'key': snap.key()});
-            //console.log('naam',snap.val().object, 'icoon', snap.val().icon, ' key', snap.key());
           });
           this.objectTypes = objectTypes;
 
@@ -87,16 +66,21 @@
           };
         });
 
-        // this.$.newProp.addEventListener('keypress', function(e) {
-        //   if (e.keyCode == 13) {
-        //       that.async(function() {
-        //       that.saveProp();
-        //       });
-        //   };
-        // });
-
+        },
+        select: function(e, detail, sender){
+          console.log(sender.attributes.me.value);
+          this.selectedItem = sender.attributes.me.value;
         },
 
+        addChild: function(e, detail, sender){
+          var parentItem = this.selectedItem;
+          var key = sender.attributes.me.value;
+          var naam = sender.attributes.naam.value;
+          var setChild = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+parentItem+"/children/");
+          var respChild = setChild.push({ "childKey": key, "naam": naam });
+          console.log(respChild);
+        },
+    
         saveObject: function(){
 
           var naam = this.objectNaam;
@@ -111,22 +95,8 @@
 
           // var postAttracted = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+newObjectKey+"/attractedTo/"+attraction+"/");
           // var respAttracted = postAttracted.set(true);
-        },
-        saveProp: function(){
-
-          var naam = this.propNaam;
-          var postProp = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/properties/");
-          var respProp = postProp.push({"naam":naam, "parent": "root", "icon": "imagesrc", "time":Firebase.ServerValue.TIMESTAMP});
-          var newPropKey = respProp.key();
-          console.log('Saved as ',newPropKey);
-
-          delete this.propNaam;
-
-          // var attraction = 'root';
-
-          // var postAttracted = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+newObjectKey+"/attractedTo/"+attraction+"/");
-          // var respAttracted = postAttracted.set(true);
         }
+        
       });
 
     })();
