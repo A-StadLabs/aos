@@ -11,7 +11,7 @@
      
       <h2>Objecten</h2>
      <template repeat="{{ o in objectTypes }}">
-        <i on-tap="{{select}}" me="{{o.key}}">{{ o.naam }}, </i> 
+        <i on-tap="{{selectitem}}" me="{{o.key}}">{{ o.naam }}, </i> 
     </template>
 
     <input placeholder="Titel" value="{{objectNaam}}" name="text" id="newObject" />
@@ -67,7 +67,7 @@
         });
 
         },
-        select: function(e, detail, sender){
+        selectitem: function(e, detail, sender){
           console.log(sender.attributes.me.value);
           this.selectedItem = sender.attributes.me.value;
         },
