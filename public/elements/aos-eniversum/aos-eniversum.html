@@ -22,8 +22,9 @@
     <aos-eobject key="{{selectedItem}}"></aos-eobject>
 
     <p>Klik op items om ze toe te voegen als kinderen.</p>
-<template repeat="{{ o in objectTypes }}">
-        <i on-tap="{{addChild}}" me="{{o.key}}" naam="{{o.naam}}">{{ o.naam }}, </i>  
+    
+    <template repeat="{{ o in objectTypes }}">
+      <i on-tap="{{addChild}}" me="{{o.key}}" naam="{{o.naam}}">{{ o.naam }}, </i>  
     </template>
 
     </div>
