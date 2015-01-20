@@ -5,12 +5,14 @@
 <polymer-element name="aos-eobject" attributes="key parent type item">
   <template>
     <link rel="stylesheet" href="aos-eobject.css">
+    <div>
     <h1>{{item.object}}<content></content></h1>
     <image-upload label="add icoon"></image-upload>
       <img src="../aos-eniversum/images/magnet.svg" width="30" height="30">
 <template repeat="{{ o in objectTypes}}">
         <i class="delete" on-tap="{{select}}" me="{{o.key}}">{{ o.naam }}, </i> 
     </template>
+  </div>
   </template>
   <script>
     (function () {
