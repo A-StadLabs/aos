@@ -12,7 +12,7 @@
         // define element prototype here
         keyChanged: function(){
           var that = this;
-          console.log('aos user: ', this.key);
+          //console.log('aos user: ', this.key);
           var uid = this.key;
           var aosuser;
           var userCheck = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
@@ -37,7 +37,7 @@
           var uid = this.key;
           var userUpdate = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+uid+"/");
           var userUpdateResp = userUpdate.set(this.aosuser);
-          console.log('aos userobject: ', JSON.stringify(this.aosuser));
+          //console.log('aos userobject: ', JSON.stringify(this.aosuser));
         }
       });
 

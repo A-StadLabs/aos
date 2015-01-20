@@ -1,0 +1,56 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../../../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../../../../elements/aos-apersoon/aos-apersoon.html">
+
+<polymer-element name="aos-render" attributes="type key value">
+  <template>
+    <link rel="stylesheet" href="aos-render.css" />
+    <template bind if="{{ item.object == 'A-Persoon' }}">
+    	<aos-apersoon value="{{value}}" type="{{type}}" key="{{key}}"></aos-apersoon>
+    </template>
+    <template bind if="{{ item.object == 'A-Profiel' }}">
+    	<aos-aprofiel value="{{value}}" type="{{type}}" key="{{key}}"></aos-aprofiel>
+    </template>
+    <!-- <p>{{value}}</p> -->
+    <core-icon-button icon="add" on-tap="{{showMagnets}}"></core-icon-button>
+    <div hidden?="{{openDial}}">
+    <template repeat="{{ o in objectMagnets}}">
+        <i me="{{o.key}}">{{ o.naam }}, </i> 
+    </template>
+    </div>
+</template>
+<script>
+    Polymer({
+    	ready: function(){
+    		this.openDial = false;
+    	},
+
+    	typeChanged: function(){
+    		var that = this;
+        	var key = this.type;
+
+        	var getItem = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/");
+        	var respItem = getItem.once('value', function(snap){
+            	console.log(snap.val());
+            	that.item = snap.val();
+          	});
+    	},
+
+    	showMagnets: function(){
+    		var key = this.type;
+    		var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+    		var objectMagnets = [];
+
+          var respObjects = getMagnets.on("child_added", function(snap){
+            objectMagnets.push({'naam':snap.val().naam, 'key': snap.key()});
+            //console.log('naam',snap.val().object, 'icoon', snap.val().icon, ' key', snap.key());
+          });
+
+          this.objectMagnets = objectMagnets;
+          this.openDial = !this.openDial;
+    	}
+
+    });
+</script>
+</polymer-element>

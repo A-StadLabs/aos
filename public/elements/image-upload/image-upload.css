@@ -3,7 +3,7 @@
 }
 
 
-.uploader {
+/*.uploader {
 	opacity: 0;
 	background-color: rgba(0,0,0,0.5);
 	max-height: 200px;
@@ -20,8 +20,7 @@
 h3 {
 	color: white;
 	font-weight: 300;
-/*	background-color: rgba(0,0,0,0.85);
-*/	padding: 2px 5px 2px 5px;
+	padding: 2px 5px 2px 5px;
 
 }
 
@@ -30,3 +29,4 @@ h3 {
 	width: 28px;
 	margin-right: 10px;
 }
+*/

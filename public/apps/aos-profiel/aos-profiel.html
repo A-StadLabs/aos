@@ -10,7 +10,7 @@
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../../elements/aos-apptile/aos-apptile.html">
 <link rel="import" href="../../elements/aos-user/aos-user.html">
-<link rel="import" href="../../elements/aos-eniversum/aos-eniversum.html">
+<link rel="import" href="../../elements/aos-useruniverse/aos-useruniverse.html">
 
 <link rel="import" href="../../elements/image-upload/image-upload.html">
 
@@ -57,7 +57,7 @@
 <core-animated-pages id="tabscenes" selected="{{tabby}}">
 <section>
   <div class="canvas">
-    
+    <aos-useruniverse key="{{$.globals.values.user.data.id}}"></aos-useruniverse>
   </div>
 </section>
 <section>

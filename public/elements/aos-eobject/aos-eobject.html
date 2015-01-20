@@ -1,10 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../image-upload/image-upload.html">
 
 <polymer-element name="aos-eobject" attributes="key parent type item">
   <template>
     <link rel="stylesheet" href="aos-eobject.css">
     <h1>{{item.object}}<content></content></h1>
+    <image-upload label="add icoon"></image-upload>
       <img src="../aos-eniversum/images/magnet.svg" width="30" height="30">
 <template repeat="{{ o in objectTypes}}">
         <i class="delete" on-tap="{{select}}" me="{{o.key}}">{{ o.naam }}, </i> 

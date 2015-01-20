@@ -1,0 +1,56 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../../../elements/aos-render/aos-render.html">
+
+<polymer-element name="aos-useruniverse" attributes="key">
+  <template bind
+  >
+    <link rel="stylesheet" href="aos-useruniverse.css" />
+    <h1>{{key}}</h1>
+    <p>dit is een heel nieuwe manier om blablaba. Wil je starten?</p>
+    <button on-tap="{{activate}}">activeer nieuwe filosofie</button>
+    nieuw component dat toelaat om te zien welke items ik kan koppelen aan dit item.
+    <!-- hier komt het coponent dat de root laat zien + mogelijke children -->
+    <template repeat="{{u in userObjects}}">
+    	<aos-render type="{{u.type}}" key="{{u.key}}" value="{{u.value}}"></aos-render>
+    </template>
+</template>
+<script>
+    Polymer({
+
+    	ready: function(){
+    		this.userObjects = [];
+    		this.getObjects();
+    	},
+
+    	keyChanged: function(){
+    		//this.getObjects();
+    		//console.log('key changed');
+    	},
+
+    	getObjects: function(){
+    		var that = this;
+    		var key = this.key;
+    		var getObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/"+key+"/things/");
+    		var userObjects = [];
+    		var respObjects = getObjects.on("child_added", function(snap){
+    			console.log(snap.val());
+            	userObjects.push({'type':snap.val().type, 'value': snap.val().val, 'key': snap.key()});
+            	console.log(userObjects);
+            	that.userObjects = userObjects;
+            	console.log(that.userObjects);
+          	});
+    	},
+
+    	activate: function(){
+    		var key = this.key;
+    		var startUniverse = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/"+key+"/things/");
+
+    		var respUniverse = startUniverse.push({"type": "-Jg37Ge2AKqbM0RjGGWs", "val": key});
+    		var newKey = respUniverse.key();
+    		console.log(newKey);
+    	}
+
+    });
+</script>
+</polymer-element>

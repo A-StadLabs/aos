@@ -1,0 +1,34 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+
+<polymer-element name="aos-aprofiel" attributes="type key value">
+  <template>
+    <link rel="stylesheet" href="aos-aprofiel.css" />
+    
+    <template repeat="{{ o in objectTypes }}">
+    	<p>{{o.naam}}</p>
+    </template>
+    
+</template>
+<script>
+    Polymer({
+
+    	typeChanged: function(){
+    		console.log('keuu changed');
+    		var key = this.type;
+    		//console.log('type komt door in a-apersoon: ',this.type);
+    		var getEObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+
+          var objectTypes = [];
+
+          var respEObjects = getEObjects.on("child_added", function(snap){
+          	console.log(snap.val());
+            objectTypes.push({'naam':snap.val().naam, 'key': snap.key()});
+          });
+
+          this.objectTypes = objectTypes;
+    	}
+
+    });
+</script>
+</polymer-element>

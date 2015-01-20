@@ -1,0 +1,45 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+
+<polymer-element name="aos-apersoon" attributes="type key value">
+  <template>
+    <link rel="stylesheet" href="aos-apersoon.css" />
+    <h1>A-Persoon</h1>
+    <template repeat="{{ o in objectTypes }}">
+    	<button addto="{{key}}" me="{{o.key}}" on-tap="{{addChild}}">{{o.naam}}</button>
+    </template>
+
+</template>
+<script>
+    Polymer({
+
+    	addChild: function(e, detail, sender){
+    		var me = sender.attributes.me.value;
+    		var addto = sender.attributes.addto.value;
+    		var userid = this.value;
+
+    		console.log('im about to add '+me+'to '+addto);
+    		var fb = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/"+userid+"/things/"+addto+"/children/");
+    		var doit = fb.push({"type": me, "value": ""});
+    		console.log(doit.key());
+    	},
+
+    	typeChanged: function(){
+    		console.log('keuu changed');
+    		var key = this.type;
+    		//console.log('type komt door in a-apersoon: ',this.type);
+    		var getEObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+
+          var objectTypes = [];
+
+          var respEObjects = getEObjects.on("child_added", function(snap){
+          	console.log(snap.val());
+            objectTypes.push({'naam':snap.val().naam, 'key': snap.key()});
+          });
+
+          this.objectTypes = objectTypes;
+    	}
+
+    });
+</script>
+</polymer-element>
