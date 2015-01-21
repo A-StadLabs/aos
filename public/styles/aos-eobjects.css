@@ -4,15 +4,23 @@
 
 .object {
 	padding: 10px;
-	border: 1px solid black;
-	background-color: red;
+	background-color: rgba(0,0,0,0.05);
 }
 
-circle {
+.object circle {
 	fill:blue;
 }
 
-circle:hover {
+.object circle:hover {
 	fill:black;
+}
 
+.object svg {
+	width:59px;
+	height:59px;
+}
+
+
+.object h1 {
+	font-weight: 300;
 }
