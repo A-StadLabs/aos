@@ -3,7 +3,7 @@
 <link rel="import" href="../../../../bower_components/core-icon-button/core-icon-button.html">
 <link rel="import" href="../../../../elements/aos-apersoon/aos-apersoon.html">
 <link rel="import" href="../../../../elements/aos-aprofiel/aos-aprofiel.html">
-<link rel="import" href="../../../../elements/aos-email/aos-email.html">
+<link rel="import" href="../../../../elements/aos-text/aos-text.html">
 
 <polymer-element name="aos-render" attributes="type userid mode">
   <template>
@@ -14,9 +14,8 @@
     <template bind if="{{ item.object == 'A-Profiel' }}">
     	<aos-aprofiel type="{{type}}" userid="{{userid}}" on-tap="{{selectitem}}"></aos-aprofiel>
     </template>
-    
     <template bind>
-        <aos-email type="{{type}}" userid="{{userid}}" on-tap="{{selectitem}}">{{item.object}}: </aos-email>
+        <aos-text type="{{type}}" userid="{{userid}}" on-tap="{{selectitem}}">{{item.object}}: </aos-text>
     </template>
     <!-- children hier zetten -->
     <!-- <p>{{item.object}}</p> -->
