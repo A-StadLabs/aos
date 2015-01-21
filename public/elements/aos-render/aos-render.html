@@ -18,12 +18,15 @@
         <aos-text type="{{type}}" userid="{{userid}}">{{item.object}}: </aos-text>
     </template>
 
-    <div hidden?="{{ mode == 'child' }}"
+
+    <div hidden?="{{ mode == 'child' }}">
+
     <core-icon-button icon="add" on-tap="{{showMagnets}}" hidden?="{{ magnets }}"></core-icon-button>
     <div hidden?="{{openDial}}">
     <template repeat="{{ o in objectMagnets}}">
         <button me="{{o.key}}" on-tap="{{addTo}}">{{ o.naam }}</button> 
     </template>
+    </div>
     </div>
 
 

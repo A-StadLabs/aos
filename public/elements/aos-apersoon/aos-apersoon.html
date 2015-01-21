@@ -5,9 +5,25 @@
 <polymer-element name="aos-apersoon" attributes="type userid">
   <template>
     <link rel="stylesheet" href="aos-apersoon.css" />
+
     <h1 on-tap="{{toggleEdit}}">A-Persoon</h1>
     <aos-edit userid="{{userid}}" value="{{value}}" type="{{type}}" hidden?="{{!editmode}}"></aos-edit>
     <div hidden?="{{editmode}}" on-tap="{{toggleEdit}}">{{value}}</div>
+
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<circle fill="#1D1D1B" cx="15" cy="15" r="15"/>
+<path fill="#FFFFFF" d="M14.991,14.274c1.974,0,3.571-1.619,3.571-3.613c0-1.993-1.598-3.612-3.571-3.612
+    c-1.971,0-3.566,1.621-3.566,3.614C11.426,12.656,13.021,14.274,14.991,14.274"/>
+<path fill="#FFFFFF" d="M18.517,15.098c-0.979,0.744-2.201,1.188-3.522,1.188c-1.32,0-2.539-0.444-3.521-1.185
+    c-2.965,2.01-2.881,6.656-2.881,6.685c0,0,0,0,0,0.002c0,0.407,2.871,0.739,6.408,0.739c3.536,0,6.406-0.333,6.406-0.739
+    c0,0,0,0,0-0.002C21.406,21.757,21.491,17.104,18.517,15.098"/>
+</svg>
+
+
+
+
+
 	</template>
 <script>
     Polymer({
