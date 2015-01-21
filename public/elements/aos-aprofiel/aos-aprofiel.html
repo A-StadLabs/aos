@@ -1,33 +1,28 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="aos-aprofiel" attributes="type key value">
+<polymer-element name="aos-aprofiel" attributes="type key value userid">
   <template>
     <link rel="stylesheet" href="aos-aprofiel.css" />
     
-    <template repeat="{{ o in objectTypes }}">
-    	<p>{{o.naam}}</p>
-    </template>
+    <h1>A-Profiel</h1>
+    <input value="{{value}}">
     
 </template>
 <script>
     Polymer({
 
-    	typeChanged: function(){
-    		console.log('keuu changed');
-    		var key = this.type;
-    		//console.log('type komt door in a-apersoon: ',this.type);
-    		var getEObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
-
-          var objectTypes = [];
-
-          var respEObjects = getEObjects.on("child_added", function(snap){
-          	console.log(snap.val());
-            objectTypes.push({'naam':snap.val().naam, 'key': snap.key()});
-          });
-
-          this.objectTypes = objectTypes;
-    	}
+    useridChanged: function(){
+        var that = this;
+        var userid = this.userid;
+        var type = this.type;
+        var getValue = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/values/"+type+"/");
+        getValue.once("value", function(snap){
+          console.log(snap.val());
+          that.value = snap.val();
+        });
+      },
+      
 
     });
 </script>
