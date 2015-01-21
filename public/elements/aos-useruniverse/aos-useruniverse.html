@@ -14,14 +14,14 @@
 
     <h1>{{selectedObject}}</h1>
     
-    <p>dit is een heel nieuwe manier om blablaba. Wil je starten?</p>
+    <!-- <p>dit is een heel nieuwe manier om blablaba. Wil je starten?</p>
     <button on-tap="{{activate}}">activeer nieuwe filosofie</button>
-    nieuw component dat toelaat om te zien welke items ik kan koppelen aan dit item.
+    nieuw component dat toelaat om te zien welke items ik kan koppelen aan dit item. -->
     <!-- hier komt het coponent dat de root laat zien + mogelijke children -->
-    	<aos-render type="{{selectedObject}}" userid="{{aosuserobject.aosuser.id}}" mode="parent"></aos-render>
+    	<aos-render type="{{selectedObject}}" userid="{{aosuserobject.aosuser.id}}"></aos-render>
 
     <template repeat="{{k in userObjects}}">
-    	<aos-render type="{{k.type}}" userid="{{aosuserobject.aosuser.id}}" mode="child"></aos-render>
+    	<aos-render type="{{k.type}}" userid="{{aosuserobject.aosuser.id}}"></aos-render>
     </template>
 </template>
 <script>
@@ -29,6 +29,7 @@
 
     	ready: function(){
             var that = this;
+
 
     		this.userObjects = [];
     		
@@ -74,22 +75,21 @@
           	});
     	},
 
-    	activate: function(){
-    		var key = this.selectedObject;
-            var userid = this.aosuserobject.aosuser.id;
-    		var startUniverse = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/values/-Jg37Ge2AKqbM0RjGGWs/");
-
-    		var respUniverse = startUniverse.set(userid);
-
-    		var startRoot = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/things/");
-    		startRoot.push({'type':'-Jg37Ge2AKqbM0RjGGWs'});
-    	},
-
         aosuserobjectChanged: function(){
-            console.log('i has user', this.aosuserobject.aosuser.id);
-        }
+            //console.log('ahahahahahahA!!!!!!', this.aosuserobject.aosuser.id);
+            this.key = this.aosuserobject.aosuser.id;
+            this.getObjects();
+        },
 
+    	activate: function(){
+    		var key = this.key;
+    		var startUniverse = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+key+"/values/-Jg37Ge2AKqbM0RjGGWs/");
 
+    		var respUniverse = startUniverse.set(key);
+
+    		var startRoot = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+key+"/things/");
+    		startRoot.push({'type':'-Jg37Ge2AKqbM0RjGGWs'});
+    	}
 
     });
 </script>

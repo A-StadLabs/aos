@@ -9,17 +9,15 @@
   <template>
     <link rel="stylesheet" href="aos-render.css" />
     <template bind if="{{ item.object == 'A-Persoon' }}">
-    	<aos-apersoon type="{{type}}" userid="{{userid}}" on-tap="{{selectitem}}"></aos-apersoon>
+    	<aos-apersoon type="{{type}}" userid="{{userid}}"></aos-apersoon>
     </template>
     <template bind if="{{ item.object == 'A-Profiel' }}">
-    	<aos-aprofiel type="{{type}}" userid="{{userid}}" on-tap="{{selectitem}}"></aos-aprofiel>
+    	<aos-aprofiel type="{{type}}" userid="{{userid}}"></aos-aprofiel>
     </template>
     <template bind>
-        <aos-text type="{{type}}" userid="{{userid}}" on-tap="{{selectitem}}">{{item.object}}: </aos-text>
+        <aos-text type="{{type}}" userid="{{userid}}">{{item.object}}: </aos-text>
     </template>
-    <!-- children hier zetten -->
-    <!-- <p>{{item.object}}</p> -->
-    <!-- <p>{{value}}</p> -->
+
     <div hidden?="{{ mode == 'child' }}"
     <core-icon-button icon="add" on-tap="{{showMagnets}}" hidden?="{{ magnets }}"></core-icon-button>
     <div hidden?="{{openDial}}">

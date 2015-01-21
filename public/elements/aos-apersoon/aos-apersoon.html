@@ -1,14 +1,25 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../aos-edit/aos-edit.html">
 
 <polymer-element name="aos-apersoon" attributes="type userid">
   <template>
     <link rel="stylesheet" href="aos-apersoon.css" />
-    <h1>A-Persoon</h1>
-    <input value="{{value}}">
+    <h1 on-tap="{{toggleEdit}}">A-Persoon</h1>
+    <aos-edit userid="{{userid}}" value="{{value}}" type="{{type}}" hidden?="{{!editmode}}"></aos-edit>
+    <div hidden?="{{editmode}}" on-tap="{{toggleEdit}}">{{value}}</div>
 	</template>
 <script>
     Polymer({
+
+        ready: function(){
+            this.editmode = false;
+        },
+
+        toggleEdit: function(){
+        console.log('edit mode: ', this.editmode);
+        this.editmode = !this.editmode;
+      },
 
     	useridChanged: function(){
     		var that = this;
