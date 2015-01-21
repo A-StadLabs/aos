@@ -75,14 +75,21 @@
     	},
 
     	activate: function(){
-    		var key = this.key;
-    		var startUniverse = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+key+"/values/-Jg37Ge2AKqbM0RjGGWs/");
+    		var key = this.selectedObject;
+            var userid = this.aosuserobject.aosuser.id;
+    		var startUniverse = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/values/-Jg37Ge2AKqbM0RjGGWs/");
 
-    		var respUniverse = startUniverse.set(key);
+    		var respUniverse = startUniverse.set(userid);
 
-    		var startRoot = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+key+"/things/");
+    		var startRoot = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/things/");
     		startRoot.push({'type':'-Jg37Ge2AKqbM0RjGGWs'});
-    	}
+    	},
+
+        aosuserobjectChanged: function(){
+            console.log('i has user', this.aosuserobject.aosuser.id);
+        }
+
+
 
     });
 </script>
