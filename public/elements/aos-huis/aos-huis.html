@@ -1,18 +1,28 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
-<link rel="import" href="../aos-edit/aos-edit.html">
 
-<polymer-element name="aos-aprofiel" attributes="type key value userid">
+<polymer-element name="aos-huis" attributes="type key value userid">
   <template>
-    <link rel="stylesheet" href="aos-aprofiel.css" />
-    
-    <h1 on-tap="{{toggleEdit}}">A-Profiel</h1>
+           <link rel="stylesheet" href="../../styles/aos-eobjects.css" />
 
-    <!-- EDIT MODE (dit moet in een nieuwe component "aos-edit" ) -->
-    <aos-edit userid="{{userid}}" value="{{value}}" type="{{type}}" hidden?="{{!editmode}}"></aos-edit>
-    <div hidden?="{{editmode}}" on-tap="{{toggleEdit}}">{{value}}</div>
-    <!-- hier moet een knopke bijkomen "CANCEL" om terug UIT de edit mode te gaan zonder wijzigen, 
-    of "SUBMIT" om de nieuwe waarde op te slaan. -->
+<div class="object persoon" on-tap="{{toggleEdit}}" vertical layout center>
+    <!-- <h1>A-Persoon</h1> -->
+    <!-- <div hidden?="{{editmode}}" on-tap="{{toggleEdit}}">{{value}}</div> -->
+    <div class="objecticon">
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<g id="Laag_2">
+  <g>
+    <path fill="#FFFFFF" d="M23.273,14.981l-3.101-3.1v-4.65h-2.067v2.583l-3.1-3.1L6.74,14.981v0.517h2.067v5.167h5.167v-3.101h2.066
+      v3.101h5.167v-5.167h2.066V14.981z"/>
+  </g>
+</g>
+</svg>
+</div>
+    
+
+</div>
+
     
 </template>
 <script>
@@ -20,6 +30,7 @@
 
       ready: function(){
         this.editmode = false;
+        var that = this;
       },
 
       toggleEdit: function(){

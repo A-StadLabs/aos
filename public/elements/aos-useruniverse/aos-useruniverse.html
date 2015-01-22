@@ -2,27 +2,51 @@
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../../../../elements/aos-user/aos-user.html">
 
+<link rel="import" href="../../../../bower_components/core-overlay/core-overlay.html">
 
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../../../../elements/aos-render/aos-render.html">
 
-<polymer-element name="aos-useruniverse" attributes="key userid">
+<polymer-element name="aos-useruniverse" attributes="key userid selectedObject">
   <template>
     <link rel="stylesheet" href="aos-useruniverse.css" />
     <aos-globals id="globals"></aos-globals>
     <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
 
-    <h1>{{selectedObject}}</h1>
-    
+<!--     <h1>{{selectedObject}}</h1>
+ -->    
     <!-- <p>dit is een heel nieuwe manier om blablaba. Wil je starten?</p>
     <button on-tap="{{activate}}">activeer nieuwe filosofie</button>
     nieuw component dat toelaat om te zien welke items ik kan koppelen aan dit item. -->
     <!-- hier komt het coponent dat de root laat zien + mogelijke children -->
-    	<aos-render type="{{selectedObject}}" userid="{{aosuserobject.aosuser.id}}"></aos-render>
 
-    <template repeat="{{k in userObjects}}">
-    	<aos-render type="{{k.type}}" userid="{{aosuserobject.aosuser.id}}"></aos-render>
+
+    <div class="canvas" vertical layout center center-justified>
+
+    <div>
+    <div class="avatarbox"><img src="{{$.globals.values.user.data.avatarUrl}}"></div>
+    <core-icon-button class="plusbtn" icon="add" on-tap="{{showMagnets}}"></core-icon-button>
+
+            <core-overlay id="dial" opened="{{openDial}}" layered backdrop transition="core-transition-center">
+            <div class="openDial">
+                <template repeat="{{ o in objectMagnets}}">
+                    <button me="{{o.key}}" on-tap="{{addTo}}">{{ o.naam }}</button><br />
+                </template>
+            </div>
+        </core-overlay>
+
+        <!-- als er een object geselecteerd is -->
+
+        <template bind if="{{ selectedObject != '-Jg37Ge2AKqbM0RjGGWs' }}">
+    <aos-render type="{{selectedObject}}" userid="{{aosuserobject.aosuser.id}}" mode="parent" instance="{{selectedInstance}}" hidden?="{{selectedItem}}"></aos-render>
     </template>
+    </div>
+    <div id="kinderen" horizontal layout start>
+    <template repeat="{{k, i in userObjects}}">
+    	<aos-render type="{{k.type}}" userid="{{aosuserobject.aosuser.id}}" mode="child" instance="{{k.key}}"></aos-render>
+    </template>
+    </div>
+    </div>
 </template>
 <script>
     Polymer({
@@ -30,44 +54,71 @@
     	ready: function(){
             var that = this;
 
+            this.openDial = false;
 
     		this.userObjects = [];
     		
-    		this.selectedObject = "-Jg37Ge2AKqbM0RjGGWs";
+    		this.selectedObject = '-Jg37Ge2AKqbM0RjGGWs';
 
-    		this.getObjects();
+    		//this.getObjects();
 
             var that = this;
 
             this.addEventListener('item-select', function(e){
                 that.selectedObject = e.detail.msg;
-                console.log('heard you: ', e.detail.msg);
+                that.selectedInstance = e.detail.instance;
+                //console.log('heard you, you winer&: ', e.detail.msg, ' instance: ', e.detail.instance);
             });
 
            
 
     	},
 
+        showMagnets: function(){
+            this.openDial = !this.openDial;
+        },
+
+        getMagnets: function(){
+            var key = '-Jg37Ge2AKqbM0RjGGWs';
+            var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+            var objectMagnets = [];
+
+          var respObjects = getMagnets.on("child_added", function(snap){
+            objectMagnets.push({'naam':snap.val().naam, 'key': snap.val().childKey});
+            //console.log('naam',snap.val().object, 'icoon', snap.val().icon, 'key', snap.key());
+          });
+
+          this.objectMagnets = objectMagnets;
+
+          this.magnets = true;
+
+          //if(objectMagnets.length<0){ this.magnets = false };
+          console.log('magnets: ', this.magnets);    
+          
+        },
+
         selectitem: function(e, detail, sender){
-          console.log(sender.attributes.type.value);
+          //console.log(sender.attributes.type.value);
           this.selectedItem = sender.attributes.type.value;
         },
 
     	selectedObjectChanged: function(){
-    		this.getObjects();
+    		//this.getObjects();
     		//console.log('key changed');
     	},
 
     	getObjects: function(){
     		// Get kids
+            console.log('starting to get kids');
     		var that = this;
     		var key = this.key;
+            //var key = this.aosuserobject.aosuser.id;
             var selectedObject = this.selectedObject;
     		//var getObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+selectedObject+"/children/");
             var getObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+key+"/things/"+selectedObject+"/children/");
     		var userObjects = [];
     		var respObjects = getObjects.on("child_added", function(snap){
-    			console.log(snap.val());
+    			console.log(snap.val(), snap.key());
             	userObjects.push({'type':snap.val().type, 'key': snap.key()});
             	console.log(userObjects);
             	that.userObjects = userObjects;
@@ -76,9 +127,12 @@
     	},
 
         aosuserobjectChanged: function(){
-            //console.log('ahahahahahahA!!!!!!', this.aosuserobject.aosuser.id);
+            //if(this.aosuserobject.aosuser.id){
+            console.log('ahahahahahahA!!!!!!', this.aosuserobject.aosuser.id);
             this.key = this.aosuserobject.aosuser.id;
             this.getObjects();
+            this.getMagnets();
+
         },
 
     	activate: function(){

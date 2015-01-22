@@ -136,8 +136,8 @@ core-field {
 #paneBar {
 	width: 100%;
 	position: absolute;
-	top: 60px;
-	height: 60px;
+	top: 0px;
+	height: 10px;
   margin: 0px;
   z-index: 99;
 }

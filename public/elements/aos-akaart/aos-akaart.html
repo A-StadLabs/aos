@@ -1,0 +1,56 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+
+<polymer-element name="aos-akaart" attributes="type key value userid instance">
+  <template>
+           <link rel="stylesheet" href="../../styles/aos-eobjects.css" />
+
+<div class="object persoon" on-tap="{{toggleEdit}}" vertical layout center>
+    <!-- <h1>A-Persoon</h1> -->
+    <!-- <div hidden?="{{editmode}}" on-tap="{{toggleEdit}}">{{value}}</div> -->
+    <div class="objecticon">
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<rect x="6.222" y="9.547" transform="matrix(-0.9686 0.2486 -0.2486 -0.9686 33.2598 25.7974)" fill="#FFFFFF" width="17.557" height="10.903"/>
+<g>
+  <path d="M14.815,16.641l-0.033,1.689l-1.439,0.369l0.301-6.625l1.823-0.468l3.48,5.654l-1.493,0.385l-0.879-1.455L14.815,16.641z
+     M16.107,15.202l-0.717-1.205c-0.204-0.336-0.429-0.765-0.614-1.105l-0.019,0.004c0.002,0.388,0.031,0.876,0.021,1.257l-0.03,1.397
+    L16.107,15.202z"/>
+</g>
+</svg>
+
+</div>
+    
+
+</div>
+
+    
+</template>
+<script>
+    Polymer({
+
+      ready: function(){
+        this.editmode = false;
+        var that = this;
+      },
+
+      toggleEdit: function(){
+        console.log('edit mode: ', this.editmode);
+        this.editmode = !this.editmode;
+      },
+
+      useridChanged: function(){
+        var that = this;
+        var userid = this.userid;
+        var type = this.type;
+        var getValue = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/values/"+type+"/");
+        getValue.once("value", function(snap){
+          console.log(snap.val());
+          that.value = snap.val();
+        });
+      },
+      
+
+    });
+</script>
+</polymer-element>

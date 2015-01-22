@@ -1,45 +1,105 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../../../../bower_components/core-icon-button/core-icon-button.html">
+
+<link rel="import" href="../../../../bower_components/core-overlay/core-overlay.html">
+
 <link rel="import" href="../../../../elements/aos-apersoon/aos-apersoon.html">
 <link rel="import" href="../../../../elements/aos-aprofiel/aos-aprofiel.html">
+<link rel="import" href="../../../../elements/aos-kind/aos-kind.html">
+<link rel="import" href="../../../../elements/aos-akaart/aos-akaart.html">
+<link rel="import" href="../../../../elements/aos-appartement/aos-appartement.html">
+<link rel="import" href="../../../../elements/aos-aprofielcollectie/aos-aprofielcollectie.html">
+<link rel="import" href="../../../../elements/aos-bouwgrond/aos-bouwgrond.html">
+<link rel="import" href="../../../../elements/aos-eid/aos-eid.html">
+<link rel="import" href="../../../../elements/aos-gebeurtenis/aos-gebeurtenis.html">
+<link rel="import" href="../../../../elements/aos-huis/aos-huis.html">
+<link rel="import" href="../../../../elements/aos-school/aos-school.html">
+<link rel="import" href="../../../../elements/aos-stadsmedewerker/aos-stadsmedewerker.html">
+<link rel="import" href="../../../../elements/aos-text/aos-text.html">
+<link rel="import" href="../../../../elements/aos-vereniging/aos-vereniging.html">
+<link rel="import" href="../../../../elements/aos-werk/aos-werk.html">
 <link rel="import" href="../../../../elements/aos-text/aos-text.html">
 
-<polymer-element name="aos-render" attributes="type userid mode">
+<link rel="import" href="../../../../elements/aos-edit/aos-edit.html">
+
+<polymer-element name="aos-render" attributes="type userid mode instance">
   <template>
     <link rel="stylesheet" href="aos-render.css" />
-    <template bind if="{{ item.object == 'A-Persoon' }}">
-    	<aos-apersoon type="{{type}}" userid="{{userid}}"></aos-apersoon>
-    </template>
-    <template bind if="{{ item.object == 'A-Profiel' }}">
-    	<aos-aprofiel type="{{type}}" userid="{{userid}}"></aos-aprofiel>
-    </template>
-    <template bind>
+    <div class="objectje" horizontal layout center wrap on-tap="{{selectitem}}">
+
+        <template if="{{ item.object == 'A-Persoon' }}">
+            <aos-apersoon type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-apersoon>
+        </template>
+        <template if="{{ item.object == 'A-Profiel' }}">
+            <aos-aprofiel type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-aprofiel>
+        </template>
+        <template if="{{ item.object == 'kind' }}">
+            <aos-kind type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-kind>
+        </template>
+        <template if="{{ item.object == 'huis' }}">
+            <aos-huis type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-huis>
+        </template>
+        <template if="{{ item.object == 'appartement' }}">
+            <aos-appartement type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-appartement>
+        </template>
+        <template if="{{ item.object == 'A-Kaart' }}">
+            <aos-akaart type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-akaart>
+        </template>
+        <template if="{{ item.object == 'Gebeurtenis' }}">
+            <aos-gebeurtenis type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-gebeurtenis>
+        </template>
+        <template if="{{ item.object == 'Vereniging' }}">
+            <aos-vereniging type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-vereniging>
+        </template>
+        <template if="{{ item.object == 'stadsmedewerker' }}">
+            <aos-stadsmedewerker type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-stadsmedewerker>
+        </template>
+        <template if="{{ item.object == 'eID' }}">
+            <aos-eid type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-eid>
+        </template>
+        <template if="{{ item.object == 'werk' }}">
+            <aos-werk type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-werk>
+        </template>
+        <template if="{{ item.object == 'vrienden' }}">
+            <aos-aprofielcollectie type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-aprofielcollectie>
+        </template>
+        <template if="{{ item.object == 'school' }}">
+            <aos-school type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-school>
+        </template>
+    </div>
+    <!-- <template bind>
         <aos-text type="{{type}}" userid="{{userid}}">{{item.object}}: </aos-text>
-    </template>
-
-
-    <div hidden?="{{ mode == 'child' }}">
-
-    <core-icon-button icon="add" on-tap="{{showMagnets}}" hidden?="{{ magnets }}"></core-icon-button>
-    <div hidden?="{{openDial}}">
-    <template repeat="{{ o in objectMagnets}}">
-        <button me="{{o.key}}" on-tap="{{addTo}}">{{ o.naam }}</button> 
-    </template>
+    </template> -->
+    
+    
+    <div hidden?="{{ mode == 'child' }}" vertical layout center>
+    <aos-edit id="editor" userid="{{userid}}" value="{{value}}" type="{{type}}" hidden?="{{!editmode}}" instance="{{instance}}" hidden?="{{editmode}}"></aos-edit>
+    <core-icon-button class="plusbtn" icon="add" on-tap="{{showMagnets}}"></core-icon-button>
+    <core-icon-button class="plusbtn" icon="edit" on-tap="{{showEdit}}"></core-icon-button>
+        <core-overlay id="dial" opened="{{openDial}}" layered backdrop transition="core-transition-center">
+            <div class="openDial">
+                <template repeat="{{ o in objectMagnets}}">
+                    <button me="{{o.key}}" on-tap="{{addTo}}">{{ o.naam }}</button><br />
+                </template>
+            </div>
+        </core-overlay>
     </div>
-    </div>
-
-
 </template>
 <script>
     Polymer({
-    	ready: function(){
-    		this.openDial = false;
+        ready: function(){
+            this.openDial = false;
+            this.editmode = false;
     	},
+
+        showEdit: function(){
+            this.editmode = !this.editmode;
+        },
 
         selectitem: function(e, detail, sender){
           //console.log(sender.attributes.me.value);
-          this.fire('item-select', {msg: this.type});
+          this.fire('item-select', {msg: this.type, instance: this.instance});
         },
 
         useridChanged: function(){
@@ -54,6 +114,7 @@
         	var respItem = getItem.once('value', function(snap){
             	console.log(snap.val());
             	that.item = snap.val();
+                //that.instance = snap.key();
           	});
 
             this.getMagnets()
@@ -63,7 +124,7 @@
     		var me = sender.attributes.me.value;
     		var type = this.type;
     		var userid = this.userid;
-    		console.log('add: ', me, ' to ',type,' for user ',userid);
+    		//console.log('add: ', me, ' to ',type,' for user ',userid);
     		var addToFb = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/things/"+type+"/children/");
     		addToFb.push({"type":me});
     	},
@@ -83,7 +144,7 @@
           this.magnets = true;
 
           if(objectMagnets.length<0){ this.magnets = false };
-          console.log('magnets: ', objectMagnets.length, this.magnets);    
+          //console.log('magnets: ', objectMagnets.length, this.magnets);    
           
     	},
 

@@ -1,11 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="aos-edit" attributes="value userid type">
+<polymer-element name="aos-edit" attributes="value userid type instance">
   <template>
     <link rel="stylesheet" href="aos-edit.css">
-    <input value="{{value}}" />
-    <button>cancel</button>
-    <button>save</button>
+    <p>{{instance}}</p>
+    <input value="{{value}}" /><br />
+    <button on-tap="{{cancel}}">cancel</button>
+    <button on-tap="{{save}}">save</button>
   </template>
   <script>
     (function () {
@@ -13,6 +14,19 @@
 
       Polymer({
         // define element prototype here
+        cancel: function(){
+          this.fire('cancel', { msg: this.type });
+        },
+
+        save: function(){
+          var userid = this.userid;
+          var value = this.value;
+          var type = this.type;
+          var instance = this.instance;
+          var saveFB = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/uservalues/"+type+"/"+instance+"/");
+          var respFB = saveFB.set({"type": type, "value": value, "instance": instance});
+          console.log(respFB.key());
+        }
       });
 
     })();

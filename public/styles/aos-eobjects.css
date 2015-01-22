@@ -2,25 +2,48 @@
 	display: block;
 }
 
+
+/* GENERAL */
+
 .object {
-	padding: 10px;
-	background-color: rgba(0,0,0,0.05);
+	display: inline-block;
+	width: 100px;
+	border: 1px solid blue;
+
 }
 
-.object circle {
-	fill:blue;
+.objecticon {
+	padding: 5px;
+	margin-right: 20px;
+	border-radius: 50%;
 }
 
-.object circle:hover {
-	fill:black;
+.kidbg {
+	background-color: rgba(255,255,255,0.2);
 }
 
-.object svg {
-	width:59px;
-	height:59px;
+.parbg {
+	background-color: #219dc8;
+}
+
+.objecticon svg {
+	width: 60px;
+	height: 60px;
+}
+
+.object:hover  {
 }
 
 
 .object h1 {
 	font-weight: 300;
 }
+
+
+
+/* PERSOON */
+/*
+.persoon svg {
+	width:59px;
+	height:59px;
+}*/
