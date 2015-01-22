@@ -1,5 +1,6 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+<<<<<<< HEAD
 
 <polymer-element name="aos-kind" attributes="type key value userid mode">
   <template>
@@ -32,6 +33,21 @@
 
 </div>
 
+=======
+<link rel="import" href="../aos-edit/aos-edit.html">
+
+<polymer-element name="aos-aprofiel" attributes="type key value userid">
+  <template>
+    <link rel="stylesheet" href="aos-aprofiel.css" />
+    
+    <h1 on-tap="{{toggleEdit}}">A-Profiel</h1>
+
+    <!-- EDIT MODE (dit moet in een nieuwe component "aos-edit" ) -->
+    <aos-edit userid="{{userid}}" value="{{value}}" type="{{type}}" hidden?="{{!editmode}}"></aos-edit>
+    <div hidden?="{{editmode}}" on-tap="{{toggleEdit}}">{{value}}</div>
+    <!-- hier moet een knopke bijkomen "CANCEL" om terug UIT de edit mode te gaan zonder wijzigen, 
+    of "SUBMIT" om de nieuwe waarde op te slaan. -->
+>>>>>>> FETCH_HEAD
     
 </template>
 <script>
@@ -39,8 +55,11 @@
 
       ready: function(){
         this.editmode = false;
+<<<<<<< HEAD
         var that = this;
 
+=======
+>>>>>>> FETCH_HEAD
       },
 
       toggleEdit: function(){
