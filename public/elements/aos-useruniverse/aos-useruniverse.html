@@ -37,7 +37,7 @@
 
         <!-- als er een object geselecteerd is -->
 
-        <template bind if="{{ selectedObject != '-Jg37Ge2AKqbM0RjGGWs' }}">
+        <template bind if="{{ selectedObject =! '-Jg37Ge2AKqbM0RjGGWs' }}">
     <aos-render type="{{selectedObject}}" userid="{{aosuserobject.aosuser.id}}" mode="parent" instance="{{selectedInstance}}" hidden?="{{selectedItem}}"></aos-render>
     </template>
     </div>
