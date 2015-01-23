@@ -13,6 +13,7 @@
     <aos-globals id="globals"></aos-globals>
     <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
 
+
 <!--     <h1>{{selectedObject}}</h1>
  -->    
     <!-- <p>dit is een heel nieuwe manier om blablaba. Wil je starten?</p>
@@ -105,6 +106,8 @@
     	selectedObjectChanged: function(){
     		//this.getObjects();
     		//console.log('key changed');
+            this.getObjects();
+            this.getMagnets();
     	},
 
     	getObjects: function(){
