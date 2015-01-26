@@ -2,6 +2,8 @@
 <link rel="import" href="../aos-globals/aos-globals.html">
 <link rel="import" href="../aos-user/aos-user.html">
 <link rel="import" href="../aos-dial/aos-dial.html">
+<link rel="import" href="../aos-apersoon/aos-apersoon.html">
+
 <link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
 
 <link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
@@ -26,38 +28,11 @@
 
 
     <div class="canvas" horizontal layout start start-justified wrap>
-       <div horizontal layout start start-justified class="profilebox">
-        <div horizontal layout center flex>
-            <div class="avatarbox">
-                <img src="{{$.globals.values.user.data.avatarUrl}}">
-            </div>  
-            <h1 hidden?="{{editmode}}">Ben Adriaenssen</h1>
 
-             <aos-edit id="editor" opened="{{editmode}}" userid="{{userid}}" value="{{value}}" type="{{type}}" instance="{{instance}}" flex></aos-edit>      
-        </div>
+<aos-apersoon></aos-apersoon>
 
 
-        <div horizontal layout hidden?="{{editmode}}">
-            <button class="btn" on-tap="{{showEdit}}">
-                <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
-                <path d="M14.942,29.084c-3.74,0-7.255-1.456-9.899-4.102c-2.645-2.644-4.102-6.16-4.102-9.898
-                    S2.398,7.83,5.043,5.185c2.644-2.645,6.16-4.101,9.899-4.101c3.74,0,7.254,1.457,9.899,4.101c2.646,2.645,4.101,6.16,4.101,9.899
-                    c0,3.739-1.455,7.255-4.101,9.898C22.197,27.628,18.682,29.084,14.942,29.084z M14.942,2.158c-3.452,0-6.699,1.344-9.14,3.786
-                    c-2.441,2.441-3.786,5.688-3.786,9.14c0,3.452,1.345,6.699,3.786,9.141c2.441,2.44,5.688,3.786,9.14,3.786
-                    c3.452,0,6.699-1.343,9.14-3.786c2.442-2.441,3.786-5.688,3.786-9.141c0-3.453-1.344-6.699-3.786-9.14
-                    C21.64,3.501,18.396,2.158,14.942,2.158z"/>
-                <path d="M12.118,19.947c-0.628-0.397-1.281-0.702-1.935-0.919L9.954,23.41l3.811-2.117
-                    C13.293,20.797,12.74,20.342,12.118,19.947z"/>
-                <path d="M19.951,7.59c-0.997-0.633-1.981-0.835-1.981-0.835l-6.946,10.941c0.659,0.238,1.305,0.556,1.922,0.946
-                    c0.612,0.386,1.17,0.832,1.665,1.32L21.553,9.03C21.552,9.028,20.948,8.223,19.951,7.59z"/>
-                </svg>
-            </button>
 
-        </div>
-
-
-    </div>
             <button class="plus" on-tap="{{showMagnets}}" vertical layout center center-justified>
                 <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      width="60px" height="60px" viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve">
@@ -109,11 +84,6 @@
                 that.selectedInstance = e.detail.instance;
                 //console.log('heard you, you winer&: ', e.detail.msg, ' instance: ', e.detail.instance);
             });
-
-            this.$.editor.addEventListener('cancel', function(){
-                that.showEdit();
-            }); 
-
 
         },
 

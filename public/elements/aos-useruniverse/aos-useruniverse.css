@@ -24,61 +24,6 @@
 	background-color: blue;
 }
 
-.avatarbox {
-	width: 60px;
-	height: 60px;
-	overflow: hidden;
-	border-radius: 30px;
-}
-
-.avatarbox img {
- 	width: 100%;
- 	min-height: 60px;
- }
-
-
-.openDial {
-	width: 50%;
-	height: 50%;
-	background-color: red;
-	border: 1px solid yellow;
-}
-
-
-
-
-
-.btn {
-	background-color: transparent;
-	color: white;
-	padding: 0px 5px 0px 5px;
-	outline: 0;
-	border: none;
-   	-webkit-appearance: none;
-   	 fill: #FFFFFF;
-}
-
-.btn:hover {
-	background-color: transparent;
-	color: white;
-	padding: 0px 5px 0px 5px;
-	outline: 0;
-	border: none;
-   	-webkit-appearance: none;
-   	 fill: #FFFFFF;
-}
-
-
-.btn svg {
-   	opacity: 0.5;
-}
-
-
-.btn svg:hover {
-   	opacity: 1;
-}
-
-
 .plus {
 	outline: 0;
 	border: none;
@@ -102,21 +47,4 @@
 	background-color: #219dc8;
 	border: 2px solid #219dc8;
 
-}
-
-
-
-.profilebox {
-	background-color: #ED4747;
-	padding: 20px 20px 20px 20px;
-	width: 400px;
-}
-
-
-.profilebox h1 {
-	margin-left: 20px;
-	font-weight: 300;
-	font-size: 28px;
-	color: white;
-	margin: 0px 0px 0px 20px;
 }
