@@ -8,7 +8,7 @@
 
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../aos-render/aos-render.html">
- 
+
 <link rel="import" href="../aos-edit/aos-edit.html">
 
 <polymer-element name="aos-useruniverse" attributes="key userid selectedObject">
@@ -23,6 +23,7 @@
     <button on-tap="{{activate}}">activeer nieuwe filosofie</button>
     nieuw component dat toelaat om te zien welke items ik kan koppelen aan dit item. -->
     <!-- hier komt het coponent dat de root laat zien + mogelijke children -->
+
 
     <div class="canvas" horizontal layout start start-justified wrap>
        <div horizontal layout start start-justified class="profilebox">
@@ -72,7 +73,6 @@
     <!-- en hier komt dan nog de "dial" -->
     <aos-dial key="{{selectedObject}}" opened="{{openDial}}"></aos-dial>
        
-
     <template bind if="{{ selectedObject != '-JgME4mVsCnPEDxM4K1e' }}">
         <aos-render type="{{selectedObject}}" userid="{{aosuserobject.aosuser.id}}" mode="parent" instance="{{selectedInstance}}" hidden?="{{selectedItem}}"></aos-render>
     </template>
