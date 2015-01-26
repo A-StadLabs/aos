@@ -1,27 +1,27 @@
-<link rel="import" href="../../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
-<link rel="import" href="../../../../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
 
-<link rel="import" href="../../../../bower_components/core-overlay/core-overlay.html">
+<link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
 
-<link rel="import" href="../../../../elements/aos-apersoon/aos-apersoon.html">
-<link rel="import" href="../../../../elements/aos-aprofiel/aos-aprofiel.html">
-<link rel="import" href="../../../../elements/aos-kind/aos-kind.html">
-<link rel="import" href="../../../../elements/aos-akaart/aos-akaart.html">
-<link rel="import" href="../../../../elements/aos-appartement/aos-appartement.html">
-<link rel="import" href="../../../../elements/aos-aprofielcollectie/aos-aprofielcollectie.html">
-<link rel="import" href="../../../../elements/aos-bouwgrond/aos-bouwgrond.html">
-<link rel="import" href="../../../../elements/aos-eid/aos-eid.html">
-<link rel="import" href="../../../../elements/aos-gebeurtenis/aos-gebeurtenis.html">
-<link rel="import" href="../../../../elements/aos-huis/aos-huis.html">
-<link rel="import" href="../../../../elements/aos-school/aos-school.html">
-<link rel="import" href="../../../../elements/aos-stadsmedewerker/aos-stadsmedewerker.html">
-<link rel="import" href="../../../../elements/aos-text/aos-text.html">
-<link rel="import" href="../../../../elements/aos-vereniging/aos-vereniging.html">
-<link rel="import" href="../../../../elements/aos-werk/aos-werk.html">
-<link rel="import" href="../../../../elements/aos-text/aos-text.html">
+<link rel="import" href="../aos-apersoon/aos-apersoon.html">
+<link rel="import" href="../aos-aprofiel/aos-aprofiel.html">
+<link rel="import" href="../aos-kind/aos-kind.html">
+<link rel="import" href="../aos-akaart/aos-akaart.html">
+<link rel="import" href="../aos-appartement/aos-appartement.html">
+<link rel="import" href="../aos-aprofielcollectie/aos-aprofielcollectie.html">
+<link rel="import" href="../aos-bouwgrond/aos-bouwgrond.html">
+<link rel="import" href="../aos-eid/aos-eid.html">
+<link rel="import" href="../aos-gebeurtenis/aos-gebeurtenis.html">
+<link rel="import" href="../aos-huis/aos-huis.html">
+<link rel="import" href="../aos-school/aos-school.html">
+<link rel="import" href="../aos-stadsmedewerker/aos-stadsmedewerker.html">
+<link rel="import" href="../aos-text/aos-text.html">
+<link rel="import" href="../aos-vereniging/aos-vereniging.html">
+<link rel="import" href="../aos-werk/aos-werk.html">
+<link rel="import" href="../aos-text/aos-text.html">
 
-<link rel="import" href="../../../../elements/aos-edit/aos-edit.html">
+<link rel="import" href="../aos-edit/aos-edit.html">
 
 <polymer-element name="aos-render" attributes="type userid mode instance">
   <template>
@@ -68,37 +68,16 @@
             <aos-school type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-school>
         </template>
     </div>
-    <!-- <template bind>
-        <aos-text type="{{type}}" userid="{{userid}}">{{item.object}}: </aos-text>
-    </template> -->
-    
-    
-    <div hidden?="{{ mode == 'child' }}" vertical layout center>
-    <aos-edit id="editor" userid="{{userid}}" value="{{value}}" type="{{type}}" hidden?="{{!editmode}}" instance="{{instance}}" hidden?="{{editmode}}"></aos-edit>
-    <core-icon-button class="plusbtn" icon="add" on-tap="{{showMagnets}}"></core-icon-button>
-    <core-icon-button class="plusbtn" icon="edit" on-tap="{{showEdit}}"></core-icon-button>
-        <core-overlay id="dial" opened="{{openDial}}" layered backdrop transition="core-transition-center">
-            <div class="openDial">
-                <template repeat="{{ o in objectMagnets}}">
-                    <button me="{{o.key}}" on-tap="{{addTo}}">{{ o.naam }}</button><br />
-                </template>
-            </div>
-        </core-overlay>
-    </div>
+
+
 </template>
 <script>
     Polymer({
         ready: function(){
-            this.openDial = false;
-            this.editmode = false;
+            this.openDial = false;            
     	},
 
-        showEdit: function(){
-            this.editmode = !this.editmode;
-        },
-
         selectitem: function(e, detail, sender){
-          //console.log(sender.attributes.me.value);
           this.fire('item-select', {msg: this.type, instance: this.instance});
         },
 
@@ -122,11 +101,12 @@
 
     	addTo: function(e, detail, sender){
     		var me = sender.attributes.me.value;
+            var icon = sender.attributes.icon.value;
     		var type = this.type;
     		var userid = this.userid;
     		//console.log('add: ', me, ' to ',type,' for user ',userid);
     		var addToFb = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/things/"+type+"/children/");
-    		addToFb.push({"type":me});
+    		addToFb.push({"type":me, "icon": icon});
     	},
 
     	getMagnets: function(){
@@ -135,7 +115,7 @@
     		var objectMagnets = [];
 
           var respObjects = getMagnets.on("child_added", function(snap){
-            objectMagnets.push({'naam':snap.val().naam, 'key': snap.val().childKey});
+            objectMagnets.push({'naam':snap.val().naam, 'icon':snap.val().icon, 'key': snap.val().childKey});
             //console.log('naam',snap.val().object, 'icoon', snap.val().icon, ' key', snap.key());
           });
 

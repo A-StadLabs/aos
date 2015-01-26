@@ -15,6 +15,12 @@
 	width: 50%;
 }
 
+.magnet img {
+	width: 60px;
+	height: 60px;
+	border: 1px solid yellow;
+	background-color: blue;
+}
 
 .avatarbox {
 	width: 10vw;
@@ -31,3 +37,51 @@
  }
 
 
+.openDial {
+	width: 50%;
+	height: 50%;
+	background-color: red;
+	border: 1px solid yellow;
+}
+
+button {
+	background-color: red;
+}
+
+
+.plusbtn {
+	margin-top: -10px;
+	background-color: #595959;
+	border:dotted 2px white;
+	-moz-border-radius-topleft: 75px;
+	-moz-border-radius-topright:75px;
+	-moz-border-radius-bottomleft:75px;
+	-moz-border-radius-bottomright:75px;
+	-webkit-border-top-left-radius:75px;
+	-webkit-border-top-right-radius:75px;
+	-webkit-border-bottom-left-radius:75px;
+	-webkit-border-bottom-right-radius:75px;
+	border-top-left-radius:75px;
+	border-top-right-radius:75px;
+	border-bottom-left-radius:75px;
+	border-bottom-right-radius:75px;
+	color: white;
+}
+
+
+.infobtn {
+	color: white;
+	padding: 0px;
+	margin: 0px;
+	opacity: 0.25;
+	width: 20px;
+
+}
+
+.infobtn:hover {
+	color: white;
+	padding: 0px;
+	margin: 0px;
+	opacity: 1;
+
+}

@@ -6,19 +6,13 @@
   <script type="text/javascript" src="exif.js"></script>
   <script type="text/javascript" src="megapix-image.js"></script>
     <link rel="stylesheet" href="image-upload.css" />
-
-  <style>
-  
-  #file {
+<style>
+#file {
     display: none;
   };
-
-  :host {
-    
-  };
-
-  </style>
-    <div vertical layout center center-justified class="uploader" fit>
+</style>
+  
+    <div vertical layout start class="uploader">
       <div horizontal layout center><img class="camicon" src="images/fileupload.svg" on-click="{{selectFile}}"><h3>{{label}}</h3></div>
       <div><input type="file" name="File" id="file" on-change="{{setFiles}}">
     </div>
@@ -174,7 +168,7 @@
                 console.log('einde: ', dataurl1);
                 that.dataurl = dataurl1;
                 that.beeldtonen = false;
-                that.fire("image-ready", { img: that.dataurl1});
+                that.fire("image-ready", { img: dataurl1});
               };
 
             }

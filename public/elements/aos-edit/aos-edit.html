@@ -1,12 +1,14 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<polymer-element name="aos-edit" attributes="value userid type instance">
+<polymer-element name="aos-edit" attributes="value userid type instance opened">
   <template>
     <link rel="stylesheet" href="aos-edit.css">
+    <div hidden?="{{!opened}}">
     <p>{{instance}}</p>
-    <input value="{{value}}" /><br />
+    <input value="{{value}}" autofocus /><br />
     <button on-tap="{{cancel}}">cancel</button>
     <button on-tap="{{save}}">save</button>
+    </div>
   </template>
   <script>
     (function () {

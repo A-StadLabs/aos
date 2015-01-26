@@ -17,14 +17,12 @@
     <input placeholder="Titel" value="{{objectNaam}}" name="text" id="newObject" />
 
     <hr><div horizontal layout>
-      <div>
-      
-    <aos-eobject key="{{selectedItem}}"></aos-eobject>
-    
-    <p>Klik op items om ze toe te voegen als kinderen.</p>
+    <div>
+      <aos-eobject key="{{selectedItem}}"></aos-eobject>
+      <p>Klik op items om ze toe te voegen als kinderen.</p>
     
     <template repeat="{{ o in objectTypes }}">
-      <i on-tap="{{addChild}}" me="{{o.key}}" naam="{{o.naam}}">{{ o.naam }}, </i>  
+      <i on-tap="{{addChild}}" me="{{o.key}}" naam="{{o.naam}}" icon="{{o.icon}}">{{ o.naam }}, </i>  
     </template>
 
     </div>
@@ -52,7 +50,7 @@
           var getEObjects = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/");
           var objectTypes = [];
           var respEObjects = getEObjects.on("child_added", function(snap){
-            objectTypes.push({'naam':snap.val().object, 'key': snap.key()});
+            objectTypes.push({'naam':snap.val().naam, 'icon':snap.val().icon, 'key': snap.key()});
           });
           this.objectTypes = objectTypes;
 
@@ -76,8 +74,10 @@
           var parentItem = this.selectedItem;
           var key = sender.attributes.me.value;
           var naam = sender.attributes.naam.value;
+          var icon = sender.attributes.icon.value;
+          console.log('key: ', key, 'naam: ', naam, 'icon', icon);
           var setChild = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+parentItem+"/children/");
-          var respChild = setChild.push({ "childKey": key, "naam": naam });
+          var respChild = setChild.push({ "childKey": key, "naam": naam, "icon": icon });
           console.log(respChild);
         },
     
@@ -85,7 +85,7 @@
 
           var naam = this.objectNaam;
           var postObject = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/");
-          var respObject = postObject.push({"object":naam, "parent": "root", "icon": "imagesrc", "time":Firebase.ServerValue.TIMESTAMP});
+          var respObject = postObject.push({"naam":naam, "parent": "root", "icon": "imagesrc", "time":Firebase.ServerValue.TIMESTAMP});
           var newObjectKey = respObject.key();
           console.log('Saved as ',newObjectKey);
 

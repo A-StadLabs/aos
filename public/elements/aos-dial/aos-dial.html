@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
+
+<polymer-element name="aos-dial" attributes="key opened">
+  <template>
+     <core-overlay id="dial" opened="{{opened}}" layered backdrop transition="core-transition-center">
+     <link rel="stylesheet" href="aos-dial.css">
+              <div class="openDial" horizontal layout >
+                <template repeat="{{ o in objectMagnets}}">
+                    <div class="magnet">
+                        <img me="{{o.key}}" on-tap="{{addTo}}" src="{{ o.icon }}">
+                    </div>
+                </template>
+            </div>
+        </core-overlay>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        // define element prototype here
+        keyChanged: function(){
+        var key = this.key;
+
+        var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+        var objectMagnets = [];
+
+          var respObjects = getMagnets.on("child_added", function(snap){
+            objectMagnets.push({'naam':snap.val().naam, 'icon':snap.val().icon, 'key': snap.val().childKey});
+            console.log('naam',snap.val().object, 'icoon', snap.val().icon, ' key', snap.key());
+          });
+
+          this.objectMagnets = objectMagnets;
+
+          this.magnets = true;
+
+          if(objectMagnets.length<0){ this.magnets = false };
+          //console.log('magnets: ', objectMagnets.length, this.magnets);    
+          
+      },
+      });
+
+    })();
+  </script>
+</polymer-element>

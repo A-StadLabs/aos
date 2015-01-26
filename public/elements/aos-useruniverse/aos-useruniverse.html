@@ -1,18 +1,21 @@
-<link rel="import" href="../../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
-<link rel="import" href="../../../../elements/aos-user/aos-user.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../aos-globals/aos-globals.html">
+<link rel="import" href="../aos-user/aos-user.html">
+<link rel="import" href="../aos-dial/aos-dial.html">
+<link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
 
-<link rel="import" href="../../../../bower_components/core-overlay/core-overlay.html">
+<link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
 
-<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
-<link rel="import" href="../../../../elements/aos-render/aos-render.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../aos-render/aos-render.html">
+
+<link rel="import" href="../aos-edit/aos-edit.html">
 
 <polymer-element name="aos-useruniverse" attributes="key userid selectedObject">
   <template>
     <link rel="stylesheet" href="aos-useruniverse.css" />
     <aos-globals id="globals"></aos-globals>
     <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
-
 
 <!--     <h1>{{selectedObject}}</h1>
  -->    
@@ -21,47 +24,57 @@
     nieuw component dat toelaat om te zien welke items ik kan koppelen aan dit item. -->
     <!-- hier komt het coponent dat de root laat zien + mogelijke children -->
 
-
     <div class="canvas" vertical layout center center-justified>
 
-    <div>
-    <div class="avatarbox"><img src="{{$.globals.values.user.data.avatarUrl}}"></div>
-    <core-icon-button class="plusbtn" icon="add" on-tap="{{showMagnets}}"></core-icon-button>
 
-            <core-overlay id="dial" opened="{{openDial}}" layered backdrop transition="core-transition-center">
-            <div class="openDial">
-                <template repeat="{{ o in objectMagnets}}">
-                    <button me="{{o.key}}" on-tap="{{addTo}}">{{ o.naam }}</button><br />
-                </template>
+
+    <div horizontal layout start start-justified>
+        <div vertical layout center center-justified>
+            <div class="avatarbox">
+                <img src="{{$.globals.values.user.data.avatarUrl}}">
             </div>
-        </core-overlay>
+            <core-icon-button class="plusbtn" icon="add" on-tap="{{showMagnets}}"></core-icon-button>
 
-        <!-- als er een object geselecteerd is -->
+        </div>
+            <core-icon-button class="infobtn" icon="create" on-tap="{{showEdit}}" ></core-icon-button>
 
-        <template bind if="{{ selectedObject != '-Jg37Ge2AKqbM0RjGGWs' }}">
-    <aos-render type="{{selectedObject}}" userid="{{aosuserobject.aosuser.id}}" mode="parent" instance="{{selectedInstance}}" hidden?="{{selectedItem}}"></aos-render>
-    </template>
     </div>
+
+    <aos-edit id="editor" opened="{{editmode}}" userid="{{userid}}" value="{{value}}" type="{{type}}" instance="{{instance}}"></aos-edit>
+
+
+    <!-- en hier komt dan nog de "dial" -->
+    <aos-dial key="{{selectedObject}}" opened="{{openDial}}"></aos-dial>
+       
+
+    <template bind if="{{ selectedObject != '-JgME4mVsCnPEDxM4K1e' }}">
+        <aos-render type="{{selectedObject}}" userid="{{aosuserobject.aosuser.id}}" mode="parent" instance="{{selectedInstance}}" hidden?="{{selectedItem}}"></aos-render>
+    </template>
+    
     <div id="kinderen" horizontal layout start>
-    <template repeat="{{k, i in userObjects}}">
-    	<aos-render type="{{k.type}}" userid="{{aosuserobject.aosuser.id}}" mode="child" instance="{{k.key}}"></aos-render>
-    </template>
+    
+        <template repeat="{{k, i in userObjects}}">
+            <aos-render type="{{k.type}}" userid="{{aosuserobject.aosuser.id}}" mode="child" instance="{{k.key}}"></aos-render>
+        </template>
+
     </div>
-    </div>
+</div>
 </template>
 <script>
     Polymer({
 
-    	ready: function(){
+        ready: function(){
             var that = this;
 
             this.openDial = false;
 
-    		this.userObjects = [];
-    		
-    		this.selectedObject = '-Jg37Ge2AKqbM0RjGGWs';
+            this.editmode = false;
 
-    		//this.getObjects();
+            this.userObjects = [];
+            
+            this.selectedObject = '-JgMNM0jZQWX6QJZ9tLD';
+
+            //this.getObjects();
 
             var that = this;
 
@@ -69,24 +82,26 @@
                 that.selectedObject = e.detail.msg;
                 that.selectedInstance = e.detail.instance;
                 //console.log('heard you, you winer&: ', e.detail.msg, ' instance: ', e.detail.instance);
-            });
+            });          
+        },
 
-           
-
-    	},
+        showEdit: function(){
+            this.editmode = !this.editmode;
+        },
 
         showMagnets: function(){
             this.openDial = !this.openDial;
         },
 
         getMagnets: function(){
-            var key = '-Jg37Ge2AKqbM0RjGGWs';
-            var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+            //var key = '-JgME4mVsCnPEDxM4K1e';
+            var selectedObject = this.selectedObject;
+            var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+selectedObject+"/children/");
             var objectMagnets = [];
 
           var respObjects = getMagnets.on("child_added", function(snap){
-            objectMagnets.push({'naam':snap.val().naam, 'key': snap.val().childKey});
-            //console.log('naam',snap.val().object, 'icoon', snap.val().icon, 'key', snap.key());
+            objectMagnets.push({'naam':snap.val().naam, 'icon':snap.val().icon, 'key': snap.val().childKey});
+            //console.log('naam',snap.val().naam, 'icoon', snap.val().icon, 'key', snap.key());
           });
 
           this.objectMagnets = objectMagnets;
@@ -94,7 +109,7 @@
           this.magnets = true;
 
           //if(objectMagnets.length<0){ this.magnets = false };
-          console.log('magnets: ', this.magnets);    
+          //console.log('magnets: ', this.magnets);    
           
         },
 
@@ -103,16 +118,16 @@
           this.selectedItem = sender.attributes.type.value;
         },
 
-    	selectedObjectChanged: function(){
-    		//this.getObjects();
-    		//console.log('key changed');
+        selectedObjectChanged: function(){
+            //this.getObjects();
+            //console.log('key changed');
             this.getObjects();
             this.getMagnets();
     	},
 
     	getObjects: function(){
     		// Get kids
-            console.log('starting to get kids');
+            //console.log('starting to get kids');
     		var that = this;
     		var key = this.key;
             //var key = this.aosuserobject.aosuser.id;
@@ -131,7 +146,7 @@
 
         aosuserobjectChanged: function(){
             //if(this.aosuserobject.aosuser.id){
-            console.log('ahahahahahahA!!!!!!', this.aosuserobject.aosuser.id);
+            //console.log('ahahahahahahA!!!!!!', this.aosuserobject.aosuser.id);
             this.key = this.aosuserobject.aosuser.id;
             this.getObjects();
             this.getMagnets();
@@ -140,12 +155,14 @@
 
     	activate: function(){
     		var key = this.key;
-    		var startUniverse = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+key+"/values/-Jg37Ge2AKqbM0RjGGWs/");
+            var selectedObject = this.selectedObject;
+
+    		var startUniverse = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+key+"/values/"+selectedObject+"/");
 
     		var respUniverse = startUniverse.set(key);
 
     		var startRoot = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+key+"/things/");
-    		startRoot.push({'type':'-Jg37Ge2AKqbM0RjGGWs'});
+    		startRoot.push({'type':selectedObject});
     	}
 
     });
