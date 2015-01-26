@@ -40,6 +40,17 @@
           //console.log('magnets: ', objectMagnets.length, this.magnets);    
           
       },
+
+      addTo: function(e, detail, sender){
+        var me = sender.attributes.me.value;
+            var icon = sender.attributes.icon.value;
+        var type = this.type;
+        var userid = this.userid;
+        //console.log('add: ', me, ' to ',type,' for user ',userid);
+        var addToFb = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/things/"+type+"/children/");
+        addToFb.push({"type":me, "icon": icon});
+      },
+      
       });
 
     })();
