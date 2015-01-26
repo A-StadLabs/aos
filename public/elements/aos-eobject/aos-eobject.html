@@ -6,10 +6,12 @@
   <template>
     <link rel="stylesheet" href="aos-eobject.css">
     <div>
+    <img src="{{item.icon}}" width="30" height="30" />
     <h1>{{item.object}}<content></content></h1>
-<!--     <image-upload label="add icoon"></image-upload>
- -->      <img src="../aos-eniversum/images/magnet.svg" width="30" height="30">
-<template repeat="{{ o in objectTypes}}">
+
+    <image-upload label="add icoon" id="image"></image-upload>
+      <img src="../aos-eniversum/images/magnet.svg" width="30" height="30">
+<template repeat="{{ o in objectTypes }}">
         <i class="delete" on-tap="{{select}}" me="{{o.key}}">{{ o.naam }}, </i> 
     </template>
   </div>
@@ -22,6 +24,14 @@
 
         // define element prototype here
         ready: function(){
+          var that = this;
+          this.$.image.addEventListener('image-ready', function(e){
+            var parentItem = that.key;
+            var imageUrl = e.detail.img;
+            console.log('parent: ',parentItem);
+            var addIcon = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+parentItem+"/icon/");
+            var respIcon = addIcon.set(imageUrl);
+          });
         },
 
         select: function(e, detail, sender){
