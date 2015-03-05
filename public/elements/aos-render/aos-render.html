@@ -144,10 +144,32 @@
             //this.typeChanged();
         },
 
+<<<<<<< HEAD
         toggleEdit: function(){
             console.log('edit mode: ', this.editmode);
             this.editmode = !this.editmode;
         },
+=======
+    	typeChanged: function(){
+    		var that = this;
+        	var key = this.type;
+
+        	var getItem = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/");
+        	var respItem = getItem.once('value', function(snap){
+            	console.log(snap.val());
+            	that.item = snap.val();
+                //that.instance = snap.key();
+          	});
+
+            this.getMagnets()
+    	},
+
+
+    	getMagnets: function(){
+    		var key = this.type;
+    		var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+    		var objectMagnets = [];
+>>>>>>> FETCH_HEAD
 
         handleRepsonse: function(){
             console.log('getting the kids: ', this.keys, ' getting the kids data: ', this.data);
