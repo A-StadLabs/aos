@@ -5,75 +5,62 @@
 
 
 .avatarbox {
-	width: 60px;
-	height: 60px;
+	width: 80px;
+	height: 80px;
 	overflow: hidden;
-	border-radius: 30px;
+	border-radius: 40px;
 }
 
 .avatarbox img {
  	width: 100%;
- 	min-height: 60px;
+ 	min-height: 80px;
  }
 
-
+/*
 .openDial {
 	width: 50%;
 	height: 50%;
 	background-color: red;
 	border: 1px solid yellow;
 }
+*/
 
 
 
 
 
-.btn {
-	background-color: transparent;
-	color: white;
-	padding: 0px 5px 0px 5px;
-	outline: 0;
-	border: none;
-   	-webkit-appearance: none;
-   	 fill: #FFFFFF;
-}
 
-.btn:hover {
-	background-color: transparent;
-	color: white;
-	padding: 0px 5px 0px 5px;
-	outline: 0;
-	border: none;
-   	-webkit-appearance: none;
-   	 fill: #FFFFFF;
+
+
+
+
+.objectbox {
+	background-color: rgba(255,255,255,0.1);
+/*	background-color: red;*/
+	padding: 10px;
+	border-radius: 50%; 
+	width: 50px;
+	height: 50px;
+	display: block;
+	margin: 10px;
 }
 
 
-.btn svg {
-   	opacity: 0.5;
-}
-
-
-.btn svg:hover {
-   	opacity: 1;
-}
-
-
-
-
-
-
-.profilebox {
-	background-color: #ED4747;
-	padding: 20px 20px 20px 20px;
-	width: 400px;
-}
-
-
-.profilebox h1 {
+.objectbox h1 {
 	margin-left: 20px;
 	font-weight: 300;
 	font-size: 28px;
 	color: white;
 	margin: 0px 0px 0px 20px;
+}
+
+/*.kind {
+	background-color: red;
+}*/
+
+
+.profile {
+	border-radius: 0px; 
+	padding: 20px;
+	margin: 0px;
 }

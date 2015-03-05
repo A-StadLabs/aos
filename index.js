@@ -233,3 +233,21 @@ app.get('/notificatie', function(req, res){
       console.log(body);
   });
 });
+
+// Highscore opslaan
+app.get('/highscore', function(req, res){
+  //console.log(val);
+  var naam = req.query.naam;
+  var score = req.query.score;
+
+  request.post({
+    headers: {'Content-Type' : 'application/json'},
+    method: 'post',
+    url: 'https://sorteergame.firebaseio.com/.json', 
+    json: {naam: naam, // welke app verzend het
+    score: score},
+    }, function(error, response, body){
+      res.send(body);
+      console.log(body);
+  });
+});

@@ -2,14 +2,14 @@
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 <link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
 
-<polymer-element name="aos-dial" attributes="key opened">
+<polymer-element name="aos-dial" attributes="opened userid selectedobject">
   <template>
      <core-overlay id="dial" opened="{{opened}}" layered backdrop transition="core-transition-center">
      <link rel="stylesheet" href="aos-dial.css">
-              <div class="openDial" horizontal layout >
+              <div class="openDial" horizontal layout center center-justified wrap>
                 <template repeat="{{ o in objectMagnets}}">
-                    <div class="magnet">
-                        <img me="{{o.key}}" on-tap="{{addTo}}" src="{{ o.icon }}">
+                    <div class="magnet" vertical layout center center-justified>
+                      <img me="{{o.key}}" on-tap="{{addTo}}" src="{{ o.icon }}">
                     </div>
                 </template>
             </div>
@@ -21,25 +21,34 @@
 
       Polymer({
         // define element prototype here
-        keyChanged: function(){
-        var key = this.key;
+        selectedobjectChanged: function(){
+        var selectedobject = this.selectedobject;
 
-        var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
+        var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+selectedobject+"/children/");
         var objectMagnets = [];
 
           var respObjects = getMagnets.on("child_added", function(snap){
             objectMagnets.push({'naam':snap.val().naam, 'icon':snap.val().icon, 'key': snap.val().childKey});
-            console.log('naam',snap.val().object, 'icoon', snap.val().icon, ' key', snap.key());
+            console.log('naam',snap.val().naam, 'icoon', snap.val().icon, ' key', snap.key());
           });
 
           this.objectMagnets = objectMagnets;
 
           this.magnets = true;
 
-          if(objectMagnets.length<0){ this.magnets = false };
-          //console.log('magnets: ', objectMagnets.length, this.magnets);    
+          console.log('magnets: ', objectMagnets.length, this.magnets);    
           
-      },
+        },
+
+        addTo: function(e, detail, sender){
+          var userid = this.userid;
+          var selectedobject = this.selectedobject;
+          var child = sender.attributes.me.value;
+          console.log('add to key: ',selectedobject, 'this child: ',child);
+          var addFB = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/things/"+selectedobject+"/children/");
+          var addFBresp = addFB.push({"type": child, "parent": selectedobject });
+          console.log('resp: ', addFBresp.key());
+        }
       });
 
     })();

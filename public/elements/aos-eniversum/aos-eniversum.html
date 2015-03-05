@@ -26,13 +26,25 @@
     </template>
 
     </div>
-    <!-- <div>
-      <h2>Eigenschappen</h2>
+    <div>
+      <h2>Eigenschappen voor {{selectedItem}}</h2>
       <input placeholder="Eigenschap" value="{{propNaam}}" name="text" id="newProp" />
+      <input placeholder="Placeholder" value="{{propDefault}}" name="text2" id="newPropDefault" />
+      <core-dropdown-menu label="Type">
+        <core-dropdown class="dropdown">
+          <core-menu on-core-select="{{selectAction}}">
+              <core-item value="email">email</core-item>
+              <core-item value="tekst">tekst</core-item>
+              <core-item value="nummer">nummer</core-item>
+              <core-item value="wachtwoord">wachtwoord</core-item>
+          </core-menu>
+        </core-dropdown>
+      </core-dropdown-menu>
+
       <template repeat="{{ p in properTypes }}">
-        <i on-tap="{{select}}" me="{{p.key}}">{{ p.naam }}, </i> 
+        <p on-tap="{{select}}" me="{{p.key}}">{{ p.key }} <i>{{ p.type }}</i></p> 
     </template>
-    </div> -->
+    </div>
     </div>
   </template>
   <script>
@@ -41,6 +53,15 @@
 
       Polymer({
         // define element prototype here
+        selectAction: function(e, detail) {
+          var that = this;
+          if (detail.isSelected) {
+            var selectedProp = detail.item.attributes["value"].value;
+            that.selectedProp = selectedProp;
+            console.log(selectedProp);
+          }
+        },
+
         ready: function(){
 
           this.selectedItem = 'root';
@@ -56,18 +77,28 @@
 
           var that = this;
 
-        this.$.newObject.addEventListener('keypress', function(e) {
-          if (e.keyCode == 13) {
-              that.async(function() {
-              that.saveObject();
-              });
-          };
-        });
+          this.$.newObject.addEventListener('keypress', function(e) {
+            if (e.keyCode == 13) {
+                that.async(function() {
+                that.saveObject();
+                });
+            };
+          });
+
+          this.$.newProp.addEventListener('keypress', function(e) {
+            if (e.keyCode == 13) {
+                that.async(function() {
+                that.saveProp();
+                });
+            };
+          });
 
         },
+
         selectitem: function(e, detail, sender){
           console.log(sender.attributes.me.value);
           this.selectedItem = sender.attributes.me.value;
+          this.getProperties();
         },
 
         addChild: function(e, detail, sender){
@@ -95,6 +126,28 @@
 
           // var postAttracted = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+newObjectKey+"/attractedTo/"+attraction+"/");
           // var respAttracted = postAttracted.set(true);
+        },
+
+        saveProp: function(){
+          var property = this.propNaam;
+          var selectedItem = this.selectedItem;
+          var type = this.selectedProp;
+          var placeholder = this.propDefault;
+          var postProp = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+selectedItem+"/properties/"+property+"/");
+          var postPropresp = postProp.set({"type": type, "placeholder": placeholder});
+        },
+
+        getProperties: function(){
+          console.log('getting props');
+          var selectedItem = this.selectedItem;
+          var getProps = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+selectedItem+"/properties/");
+          var properTypes = [];
+          var respProps = getProps.on("child_added", function(snap){
+            console.log('prop found', snap.val());
+            properTypes.push({'type':snap.val().type, 'key':snap.key(), 'default': snap.val().placeholder});
+          });
+          this.properTypes = properTypes;
+          console.log(properTypes);
         }
         
       });

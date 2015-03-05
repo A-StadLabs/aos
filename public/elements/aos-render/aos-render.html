@@ -24,49 +24,104 @@
 <link rel="import" href="../aos-edit/aos-edit.html">
 
 <polymer-element name="aos-render" attributes="type userid mode instance">
-  <template>
-    <link rel="stylesheet" href="aos-render.css" />
-    <div class="objectje" horizontal layout center wrap on-tap="{{selectitem}}">
 
-        <template if="{{ item.object == 'A-Persoon' }}">
-            <aos-apersoon type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-apersoon>
+  <template>
+
+    <link rel="stylesheet" href="aos-render.css" />
+
+    <firebase-element location="https://blazing-fire-6426.firebaseio.com/eobjects/things/{{type}}/" data="{{data}}" keys="{{keys}}" id="fbeobjects" on-data-change="{{handleRepsonse}}" log></firebase-element>
+
+    <div class="objectje">
+        <template if="{{ data.naam == 'A-Persoon' }}">
+            <div class="renderings"  on-tap="{{selectitem}}">
+                <aos-apersoon type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-apersoon>
+            </div>
         </template>
-        <template if="{{ item.object == 'A-Profiel' }}">
-            <aos-aprofiel type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-aprofiel>
+        <template if="{{ data.naam == 'A-Profiel' }}">
+            <div class="renderings"  on-tap="{{selectitem}}">
+                <aos-aprofiel type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-aprofiel>
+        </div>
         </template>
-        <template if="{{ item.object == 'kind' }}">
+        <template if="{{ data.naam == 'kind' }}">
+         <div class="renderings"  on-tap="{{selectitem}}">
             <aos-kind type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-kind>
+         </div>
         </template>
-        <template if="{{ item.object == 'huis' }}">
+        <template if="{{ data.naam == 'huis' }}">
+         <div class="renderings"  on-tap="{{selectitem}}">
             <aos-huis type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-huis>
+         </div>
         </template>
-        <template if="{{ item.object == 'appartement' }}">
+        <template if="{{ data.naam == 'appartement' }}">
+         <div class="renderings"  on-tap="{{selectitem}}">
             <aos-appartement type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-appartement>
+         </div>
+
         </template>
-        <template if="{{ item.object == 'A-Kaart' }}">
+        <template if="{{ data.naam == 'A-Kaart' }}">
+        <div class="renderings"  on-tap="{{selectitem}}">
             <aos-akaart type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-akaart>
+            </div>
         </template>
-        <template if="{{ item.object == 'Gebeurtenis' }}">
+        <template if="{{ data.naam == 'Gebeurtenis' }}">
+        <div class="renderings"  on-tap="{{selectitem}}">
             <aos-gebeurtenis type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-gebeurtenis>
+            </div>
         </template>
-        <template if="{{ item.object == 'Vereniging' }}">
+        <template if="{{ data.naam == 'Vereniging' }}">
+        <div class="renderings"  on-tap="{{selectitem}}">
             <aos-vereniging type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-vereniging>
+            </div>
         </template>
-        <template if="{{ item.object == 'stadsmedewerker' }}">
+        <template if="{{ data.naam == 'stadsmedewerker' }}">
+        <div class="renderings"  on-tap="{{selectitem}}">
             <aos-stadsmedewerker type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-stadsmedewerker>
+            </div>
         </template>
-        <template if="{{ item.object == 'eID' }}">
+        <template if="{{ data.naam == 'eID' }}">
+        <div class="renderings"  on-tap="{{selectitem}}">
             <aos-eid type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-eid>
+            </div>
         </template>
-        <template if="{{ item.object == 'werk' }}">
+        <template if="{{ data.naam == 'werk' }}">
+        <div class="renderings"  on-tap="{{selectitem}}">
             <aos-werk type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-werk>
+            </div>
         </template>
-        <template if="{{ item.object == 'vrienden' }}">
+        <template if="{{ data.naam == 'vrienden' }}">
+        <div class="renderings"  on-tap="{{selectitem}}">
             <aos-aprofielcollectie type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-aprofielcollectie>
+            </div>
         </template>
-        <template if="{{ item.object == 'school' }}">
+        <template if="{{ data.naam == 'school' }}">
+        <div class="renderings"  on-tap="{{selectitem}}">
             <aos-school type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-school>
+            </div>
         </template>
+        <template if="{{ mode == 'parent' }}">
+
+        <div hidden?="{{editmode}}">
+            <button class="btn" on-tap="{{toggleEdit}}">
+                <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+                <path d="M14.942,29.084c-3.74,0-7.255-1.456-9.899-4.102c-2.645-2.644-4.102-6.16-4.102-9.898
+                    S2.398,7.83,5.043,5.185c2.644-2.645,6.16-4.101,9.899-4.101c3.74,0,7.254,1.457,9.899,4.101c2.646,2.645,4.101,6.16,4.101,9.899
+                    c0,3.739-1.455,7.255-4.101,9.898C22.197,27.628,18.682,29.084,14.942,29.084z M14.942,2.158c-3.452,0-6.699,1.344-9.14,3.786
+                    c-2.441,2.441-3.786,5.688-3.786,9.14c0,3.452,1.345,6.699,3.786,9.141c2.441,2.44,5.688,3.786,9.14,3.786
+                    c3.452,0,6.699-1.343,9.14-3.786c2.442-2.441,3.786-5.688,3.786-9.141c0-3.453-1.344-6.699-3.786-9.14
+                    C21.64,3.501,18.396,2.158,14.942,2.158z"/>
+                <path d="M12.118,19.947c-0.628-0.397-1.281-0.702-1.935-0.919L9.954,23.41l3.811-2.117
+                    C13.293,20.797,12.74,20.342,12.118,19.947z"/>
+                <path d="M19.951,7.59c-0.997-0.633-1.981-0.835-1.981-0.835l-6.946,10.941c0.659,0.238,1.305,0.556,1.922,0.946
+                    c0.612,0.386,1.17,0.832,1.665,1.32L21.553,9.03C21.552,9.028,20.948,8.223,19.951,7.59z"/>
+                </svg>
+            </button>
+        </div>
+
+        <aos-edit id="editor" opened="{{editmode}}" userid="{{userid}}" value="{{value}}" type="{{type}}" instance="{{instance}}" flex></aos-edit>   
+
+
+    </template>
     </div>
 
 
@@ -74,7 +129,11 @@
 <script>
     Polymer({
         ready: function(){
-            this.openDial = false;            
+            this.openDial = false;   
+            var that = this;
+            this.$.editor.addEventListener('cancel', function(){
+                that.toggleEdit();
+            });          
     	},
 
         selectitem: function(e, detail, sender){
@@ -82,55 +141,33 @@
         },
 
         useridChanged: function(){
-            this.typeChanged();
+            //this.typeChanged();
         },
 
-    	typeChanged: function(){
-    		var that = this;
-        	var key = this.type;
+        toggleEdit: function(){
+            console.log('edit mode: ', this.editmode);
+            this.editmode = !this.editmode;
+        },
 
-        	var getItem = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/");
-        	var respItem = getItem.once('value', function(snap){
-            	console.log(snap.val());
-            	that.item = snap.val();
-                //that.instance = snap.key();
-          	});
-
-            this.getMagnets()
-    	},
-
-    	addTo: function(e, detail, sender){
-    		var me = sender.attributes.me.value;
-            var icon = sender.attributes.icon.value;
-    		var type = this.type;
-    		var userid = this.userid;
-    		//console.log('add: ', me, ' to ',type,' for user ',userid);
-    		var addToFb = new Firebase("https://blazing-fire-6426.firebaseio.com/universe/user/"+userid+"/things/"+type+"/children/");
-    		addToFb.push({"type":me, "icon": icon});
-    	},
-
-    	getMagnets: function(){
-    		var key = this.type;
-    		var getMagnets = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/children/");
-    		var objectMagnets = [];
-
-          var respObjects = getMagnets.on("child_added", function(snap){
-            objectMagnets.push({'naam':snap.val().naam, 'icon':snap.val().icon, 'key': snap.val().childKey});
-            //console.log('naam',snap.val().object, 'icoon', snap.val().icon, ' key', snap.key());
-          });
-
-          this.objectMagnets = objectMagnets;
-
-          this.magnets = true;
-
-          if(objectMagnets.length<0){ this.magnets = false };
-          //console.log('magnets: ', objectMagnets.length, this.magnets);    
-          
-    	},
-
-        showMagnets: function(){
-            this.openDial = !this.openDial;
+        handleRepsonse: function(){
+            console.log('getting the kids: ', this.keys, ' getting the kids data: ', this.data);
+            this.item = this.data;
         }
+
+    	// typeChanged: function(){
+    	// 	var that = this;
+     //    	var key = this.type;
+
+     //    	var getItem = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/");
+     //    	var respItem = getItem.once('value', function(snap){
+     //        	console.log('item gevonden: ',snap.val());
+     //        	that.item = snap.val();
+     //            //that.instance = snap.key();
+     //      	});
+
+     //        this.getMagnets()
+    	// },
+
 
 
 

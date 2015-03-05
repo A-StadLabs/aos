@@ -7,10 +7,7 @@
 	max-width: 100px;
 }*/
 .objectje {
-	margin-right: 20px;
-	width: 100%;
-/*	background-color: rgba(205,205,205,0.5);
-*/
+	display: block;
 }
 
 .openDial {
@@ -36,11 +33,45 @@
 	color: white;
 }
 
-
+.renderings {
+	min-width: 50px;
+}
 
 .tester {
 	border: 2px solid yellow;
 	width: 150px;
 	height: 20px;
 	margin-right: 10px;
+}
+
+
+
+.btn {
+	background-color: transparent;
+	color: white;
+	padding: 0px 5px 0px 5px;
+	outline: 0;
+	border: none;
+   	-webkit-appearance: none;
+   	 fill: #FFFFFF;
+}
+
+.btn:hover {
+	background-color: transparent;
+	color: white;
+	padding: 0px 5px 0px 5px;
+	outline: 0;
+	border: none;
+   	-webkit-appearance: none;
+   	 fill: #FFFFFF;
+}
+
+
+.btn svg {
+   	opacity: 0.5;
+}
+
+
+.btn svg:hover {
+   	opacity: 1;
 }
