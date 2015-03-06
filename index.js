@@ -239,6 +239,7 @@ app.get('/highscore', function(req, res){
   //console.log(val);
   var naam = req.query.naam;
   var score = req.query.score;
+  var score = parseInt(score);
 
   request.post({
     headers: {'Content-Type' : 'application/json'},
@@ -254,16 +255,18 @@ app.get('/highscore', function(req, res){
 
 // Highscore weergeven
 app.get('/get-highscore', function(req, res){
-  //console.log(val);
-
-
-  // request.post({
-  //   headers: {'Content-Type' : 'application/json'},
-  //   method: 'post',
-  //   url: 'https://sorteergame.firebaseio.com/.json', 
-  //   json: {naam: naam, // welke app verzend het
-  //   score: score},
-  //   }, function(error, response, body){
-      res.send("kingflurkel");
-      //console.log(body);
+      var highscores = [];
+      var highscorestring = "";
+      var getScores = new Firebase("https://sorteergame.firebaseio.com");
+      var position = 1;
+      getScores.orderByChild("score").limitToFirst(10).on("child_added", function(snapshot) {
+        highscores.push({ "naam": snapshot.val().naam, "score": snapshot.val().score });
+      });
+      //highscores.reverse();
+      for (var i = highscores.length - 1; i >= 0; i--) {
+        //highscores[i];
+        highscorestring = highscorestring+position+"\t"+highscores[i].naam + "\t" +highscores[i].score + "\n"; 
+        position++;//console.log(highscores);
+      };
+      res.send(highscorestring);
   });
