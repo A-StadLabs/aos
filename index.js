@@ -267,4 +267,3 @@ app.get('/get-highscore', function(req, res){
       res.send("kingflurkel");
       //console.log(body);
   });
-});
