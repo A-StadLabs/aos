@@ -251,3 +251,20 @@ app.get('/highscore', function(req, res){
       console.log(body);
   });
 });
+
+// Highscore weergeven
+app.get('/get-highscore', function(req, res){
+  //console.log(val);
+
+
+  // request.post({
+  //   headers: {'Content-Type' : 'application/json'},
+  //   method: 'post',
+  //   url: 'https://sorteergame.firebaseio.com/.json', 
+  //   json: {naam: naam, // welke app verzend het
+  //   score: score},
+  //   }, function(error, response, body){
+      res.send("kingflurkel");
+      //console.log(body);
+  });
+});
