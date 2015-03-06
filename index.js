@@ -259,14 +259,18 @@ app.get('/get-highscore', function(req, res){
       var highscorestring = "";
       var getScores = new Firebase("https://sorteergame.firebaseio.com");
       var position = 1;
-      getScores.orderByChild("score").limitToFirst(10).on("child_added", function(snapshot) {
+      getScores.orderByChild("score").on("child_added", function(snapshot) {
         highscores.push({ "naam": snapshot.val().naam, "score": snapshot.val().score });
       });
       //highscores.reverse();
+      var limitto = 10;
       for (var i = highscores.length - 1; i >= 0; i--) {
         //highscores[i];
-        highscorestring = highscorestring+position+"\t"+highscores[i].naam + "\t" +highscores[i].score + "\n"; 
-        position++;//console.log(highscores);
+        if(limitto>0){
+          highscorestring = highscorestring+position+"\t"+highscores[i].naam + "\t" +highscores[i].score + "\n"; 
+          position++;//console.log(highscores);
+          limitto--;
+        };
       };
       res.send(highscorestring);
   });
