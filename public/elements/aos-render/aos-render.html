@@ -31,6 +31,7 @@
 
     <firebase-element location="https://blazing-fire-6426.firebaseio.com/eobjects/things/{{type}}/" data="{{data}}" keys="{{keys}}" id="fbeobjects" on-data-change="{{handleRepsonse}}" log></firebase-element>
 
+<<<<<<< Updated upstream
     <div class="objectje">
         <template if="{{ data.naam == 'A-Persoon' }}">
             <div class="renderings"  on-tap="{{selectitem}}">
@@ -41,6 +42,25 @@
             <div class="renderings"  on-tap="{{selectitem}}">
                 <aos-aprofiel type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-aprofiel>
         </div>
+=======
+
+   
+
+
+    <div class="objectje">
+
+    {{data.naam}}
+
+        <template if="{{ data.naam == 'A-Persoon' }}">
+         <div class="renderings"  on-tap="{{selectitem}}">
+            <aos-apersoon type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-apersoon>
+         </div>
+        </template>
+        <template if="{{ data.naam == 'A-Profiel' }}">
+         <div class="renderings"  on-tap="{{selectitem}}">
+            <aos-aprofiel type="{{type}}" userid="{{userid}}" mode="{{mode}}" instance="{{instance}}"></aos-aprofiel>
+         </div>
+>>>>>>> Stashed changes
         </template>
         <template if="{{ data.naam == 'kind' }}">
          <div class="renderings"  on-tap="{{selectitem}}">
@@ -130,7 +150,13 @@
     Polymer({
         ready: function(){
             this.openDial = false;   
+<<<<<<< Updated upstream
             var that = this;
+=======
+
+            var that = this;
+
+>>>>>>> Stashed changes
             this.$.editor.addEventListener('cancel', function(){
                 that.toggleEdit();
             });          
@@ -144,6 +170,7 @@
             //this.typeChanged();
         },
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         toggleEdit: function(){
             console.log('edit mode: ', this.editmode);
@@ -187,6 +214,24 @@
      //            //that.instance = snap.key();
      //      	});
 
+=======
+      toggleEdit: function(){
+        console.log('edit mode: ', this.editmode);
+        this.editmode = !this.editmode;
+      },
+
+    	// typeChanged: function(){
+    	// 	var that = this;
+     //    	var key = this.type;
+
+     //    	var getItem = new Firebase("https://blazing-fire-6426.firebaseio.com/eobjects/things/"+key+"/");
+     //    	var respItem = getItem.once('value', function(snap){
+     //        	console.log('item gevonden: ',snap.val());
+     //        	that.item = snap.val();
+     //            //that.instance = snap.key();
+     //      	});
+
+>>>>>>> Stashed changes
      //        this.getMagnets()
     	// },
 
