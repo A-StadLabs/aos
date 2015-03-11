@@ -12,17 +12,18 @@
 
     <aos-globals id="globals"></aos-globals>
 
-    <div vertical layout center start-justified id="canvas" class="notloggedin" fit hidden?="{{loggedin}}">
+    <div vertical layout center start-justified id="canvas" class="notloggedin"  hidden?="{{loggedin}}">
       <h1>Aanmelden</h1>
       <p>Met A-profiel of AD account.</p>
       <small>{{error}}</small>
       <br>
-      
+      <div>
       <input name="username" placeholder="Gebruikersnaam" required  value="{{username}}"></input>
       <input name="password" placeholder="Wachtwoord" type="password" required value="{{password}}"></input>
 
       <h3 hidden?="{{!loading}}">Laden...</h3>
       <button class="aanafbtn" hidden?="{{loading}}" id="buttons" center-justified on-tap="{{loginSubmit}}">Aanmelden</button><br>
+      </div>
       <small>Gegevens vergeten?</small>
       <core-ajax method="GET" id="loginAjax" handleAs="json" url="/login" response="{{responseUser}}" loading="{{loading}}" on-core-response="{{handleResponseUser}}">
       </core-ajax>

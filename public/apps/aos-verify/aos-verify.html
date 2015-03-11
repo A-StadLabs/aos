@@ -1,0 +1,131 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../elements/aos-globals/aos-globals.html">
+
+<polymer-element name="aos-verify" attributes="">
+
+  <template>
+
+
+    <link rel="stylesheet" href="aos-verify.css" />
+
+    <aos-globals id="globals" values="{{globs}}"></aos-globals>
+
+    <paper-tabs selected="{{selected}}">
+      <paper-tab>Dit ben ik</paper-tab>
+      <paper-tab>Mijn getuigen</paper-tab>
+      <paper-tab>Ik ben getuige van</paper-tab>
+    </paper-tabs>
+
+    <core-animated-pages selected="{{selected}}" transitions="">
+      <section>
+        <h1>Ik ben {{verifiedStatus}}.</h1>
+        <input type="text" value="{{eidId}}" placeholder="Identiteitskaartnummer" />
+        <br />
+        <core-icon-button icon="add" on-tap="{{startVerification}}">Ik wil geverifieerd worden</core-icon-button>
+        <div id="codegenerator">
+          <h2>{{code}}</h2>
+          <p>Ga naar iemand die al een geverifieerd A-profiel heeft en toon deze code.</p>
+        </div>
+      </section>
+      <section>
+        <h1>Mijn getuigen</h1>
+        <core-icon-button icon="add">Iemand toevoegen</core-icon-button>
+      </section>
+      <section>
+        <h1>Ik ben getuige van</h1>
+        <core-icon-button icon="add">Iemand toevoegen</core-icon-button>
+        <br />
+        <input type="text" placeholder="Code?" value="{{ambCode}}" /><br />
+        <core-icon-button icon="next" on-tap="{{resolveCode}}">Verzenden</core-icon-button>
+        <h2>{{eidVer.eidnr}}</h2>
+        <p>Klopt de eid nummer?</p>
+        <button on-tap="{{confirmEid}}">JA</button> <button on-tap="{{declineEid}}">NEE</button>
+        <hr>
+        <p>lijstje</p>
+      </section>
+    </core-animated-pages>
+
+  </template>
+
+  <script>
+Polymer({
+
+        ready: function(){
+          var that = this;
+          this.bauser = 'wachten';
+          document.addEventListener('user-changed', function(e){
+                that.checkUser();
+            });
+        },
+
+        childAdded: function(){
+            //console.log('child');
+          },
+
+        checkUser: function(){
+          //console.log('ik heb globals.');
+          var userid = this.$.globals.values.user.data.id;
+          var ref = new Firebase('https://blazing-fire-6426.firebaseio.com/verify/users/'+userid+'/');
+          var that = this;
+        ref.once('value', function(snap) {
+          var result = snap.val();
+            if(result===null){
+              that.createUser(); 
+            } else {
+              if(result.verified){
+                that.verifiedStatus = "geverifieerd";
+              };
+              if(!result.verified){
+                that.verifiedStatus = "nog niet geverifieerd";
+              };
+              
+              that.bauser = true;
+            };
+        }); 
+        },
+
+          
+
+        createUser: function(){
+          var userid = this.$.globals.values.user.data.id;
+          var roles = this.$.globals.values.user.data.roles;
+          var userFB = new Firebase("https://blazing-fire-6426.firebaseio.com/verify/users/"+userid+'/');
+          userFB.set(true);
+          userFB.set({"roles": roles});
+          userFB.set({"verified": false});
+          //this.$.FBuser.requery();
+        },
+
+        startVerification: function(){
+          var userid = this.$.globals.values.user.data.id;
+          var code = Math.floor(Math.random() * 900000) + 100000;
+          this.code = code;
+          var eidnr = this.eidId;
+          var codeFB = new Firebase("https://blazing-fire-6426.firebaseio.com/verify/pending/"+code+"/");
+          codeFB.set({"userid": userid, "eidnr": eidnr, "time":Firebase.ServerValue.TIMESTAMP });
+          this.verifiedStatus = "aan het verifieren";
+        },
+
+        resolveCode: function(){
+          var that = this;
+          var code = this.ambCode;
+          var getCode = new Firebase("https://blazing-fire-6426.firebaseio.com/verify/pending/"+code+"/");
+          getCode.once('value', function(snap) {
+            console.log(snap.val());
+            that.eidVer = snap.val();
+          });
+
+        }
+
+
+
+
+
+      });
+
+  </script>
+
+</polymer-element>

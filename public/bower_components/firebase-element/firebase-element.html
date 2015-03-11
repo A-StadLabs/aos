@@ -138,6 +138,13 @@ Example:
        */
 
       /**
+       * Fired when the remote location has been read, whether or not data
+       * has been returned.
+       *
+       * @event data-ready
+       */
+
+      /**
        * Fired when an error occurs on an interaction with Firebase.  The
        * `details.error` property contains the `Error` object provided by
        * the Firebase API.
@@ -197,15 +204,21 @@ Example:
       /**
        * Specify to order by key the set of records reflected on the client.
        * @attribute orderByKey
-       * @type Any
+       * @type Boolean
        */
-      orderByKey: null,
+      orderByKey: false,
       /**
        * Specify to order by priority the set of records reflected on the client.
        * @attribute orderByPriority
-       * @type Any
+       * @type Boolean
        */
-      orderByPriority: null,
+      orderByPriority: false,
+      /**
+       * Specify to order by value the set of records reflected on the client.
+       * @attribute orderByValue
+       * @type Boolean
+       */
+      orderByValue: false,
       /**
        * Specify to create a query which includes children which match the specified value. The argument type depends on which orderBy*() function was used in this query. Specify a value that matches the orderBy*() type.
        * @attribute equalTo
@@ -250,7 +263,7 @@ Example:
       log: false
     },
     observe: {
-      'ref limit start end': 'requery'
+      'ref limit start end limitToFirst limitToLast equalTo': 'requery'
     },
     locationChanged: function() {
       // shut-down previous observers (if any)
@@ -295,6 +308,9 @@ Example:
         if (this.orderByPriority) {
           query = query.orderByPriority();
         }
+        if (this.orderByValue) {
+          query = query.orderByValue();
+        }
         if (this.equalTo) {
           query = query.equalTo(this.equalTo);
         }
@@ -309,7 +325,7 @@ Example:
       this.valueLoading = true;
       this.query.once('value', this.valueLoaded, this.errorHandler, this);
       // observe server-side data
-      this.observeQuery();
+      this.job('observeQuery', this.observeQuery, 0);
     },
     valueLoaded: function(snapshot) {
       this.valueLoading = false;
@@ -320,6 +336,7 @@ Example:
       this.log && console.log('acquired value ' + this.location);
       this.dataReady = true;
       this._setData(snapshot.val());
+      this.fire('data-ready', this.data);
       if (this.data) {
         this.dataChange();
       }
@@ -341,7 +358,10 @@ Example:
     },
     closeQuery: function() {
       if (this.query) {
-        this.query.off();
+        this.query.off('child_added', this.childAdded, this);
+        this.query.off('child_changed', this.childChanged, this);
+        this.query.off('child_moved', this.childMoved, this);
+        this.query.off('child_removed', this.childRemoved, this);
       }
     },
     //
@@ -440,7 +460,7 @@ Example:
       var key = snapshot.key();
       if (this.data instanceof Array) {
         this.data.splice(key, 1);
-        if (data.length == 0) {
+        if (this.data.length == 0) {
           this._setData(null);
         }
       } else if (this.data) {
@@ -452,9 +472,7 @@ Example:
     },
     dataChange: function() {
       //this.job('change', function() {
-        if (this.data) {
-          this.keys = this.data ? Object.keys(this.data) : [];
-        }
+        this.keys = this.data ? Object.keys(this.data) : [];
         this.fire('data-change');
       //});
     },

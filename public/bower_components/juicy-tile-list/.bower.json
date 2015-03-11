@@ -23,11 +23,11 @@
   "dependencies": {
     "polymer": "<0.8.0"
   },
-  "_release": "a92d898c10",
+  "_release": "dbe68b6398",
   "_resolution": {
     "type": "branch",
     "branch": "gh-pages",
-    "commit": "a92d898c10972f83c986f6e7c074514ae46f7cb6"
+    "commit": "dbe68b6398e5ec9289436859ea9be6cb6af102ee"
   },
   "_source": "git://github.com/Juicy/juicy-tile-list.git",
   "_target": "gh-pages",
