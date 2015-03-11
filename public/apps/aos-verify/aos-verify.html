@@ -136,9 +136,14 @@ Polymer({
         confirmEid: function(){
           console.log(this.eidVer);
           UserID = this.eidVer.userid;
+          code = this.ambCode;
           myUserId = this.$.globals.values.user.data.id;
+          
           var verFB = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+UserID+"/vouchers/"+myUserId+"/");
           verFB.set(true);
+          // Delete token
+          var tokenFB = new Firebase("https://blazing-fire-6426.firebaseio.com/verify/pending/"+code+"/");
+          tokenFB.remove();
         }
 
 
