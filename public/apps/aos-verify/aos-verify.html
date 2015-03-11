@@ -2,13 +2,12 @@
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../bower_components/qr-code/src/qr-code.html">
 <link rel="import" href="../../elements/aos-globals/aos-globals.html">
 
 <polymer-element name="aos-verify" attributes="">
 
   <template>
-
-
     <link rel="stylesheet" href="aos-verify.css" />
 
     <aos-globals id="globals" values="{{globs}}"></aos-globals>
@@ -25,7 +24,7 @@
         <input type="text" value="{{eidId}}" placeholder="Identiteitskaartnummer" />
         <br />
         <core-icon-button icon="add" on-tap="{{startVerification}}">Ik wil geverifieerd worden</core-icon-button>
-        <div id="codegenerator">
+        <div id="codegenerator" hidden>
           <h2>{{code}}</h2>
           <p>Ga naar iemand die al een geverifieerd A-profiel heeft en toon deze code.</p>
         </div>
@@ -33,6 +32,9 @@
       <section>
         <h1>Mijn getuigen</h1>
         <core-icon-button icon="add">Iemand toevoegen</core-icon-button>
+        <template repeat="{{i in vouchers}}">
+          <p>- {{i}}</p>
+        </template>
       </section>
       <section>
         <h1>Ik ben getuige van</h1>
@@ -54,6 +56,7 @@
 Polymer({
 
         ready: function(){
+          this.code = "niets";
           var that = this;
           this.bauser = 'wachten';
           document.addEventListener('user-changed', function(e){
@@ -81,6 +84,14 @@ Polymer({
               if(!result.verified){
                 that.verifiedStatus = "nog niet geverifieerd";
               };
+
+              // Get vouchers
+              that.vouchers = [];
+              vouchFB = new Firebase('https://blazing-fire-6426.firebaseio.com/user/'+userid+'/vouchers/');
+              vouchFB.on('child_added', function(snap) {
+                that.vouchers.push(snap.key());
+                //console.log(snap.key());
+              });
               
               that.bauser = true;
             };
@@ -100,9 +111,11 @@ Polymer({
         },
 
         startVerification: function(){
+          this.$.codegenerator.hidden = false;
           var userid = this.$.globals.values.user.data.id;
           var code = Math.floor(Math.random() * 900000) + 100000;
           this.code = code;
+          
           var eidnr = this.eidId;
           var codeFB = new Firebase("https://blazing-fire-6426.firebaseio.com/verify/pending/"+code+"/");
           codeFB.set({"userid": userid, "eidnr": eidnr, "time":Firebase.ServerValue.TIMESTAMP });
@@ -118,6 +131,14 @@ Polymer({
             that.eidVer = snap.val();
           });
 
+        },
+
+        confirmEid: function(){
+          console.log(this.eidVer);
+          UserID = this.eidVer.userid;
+          myUserId = this.$.globals.values.user.data.id;
+          var verFB = new Firebase("https://blazing-fire-6426.firebaseio.com/user/"+UserID+"/vouchers/"+myUserId+"/");
+          verFB.set(true);
         }
 
 
