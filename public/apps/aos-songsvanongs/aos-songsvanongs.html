@@ -1,0 +1,178 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<!-- Let's bring in some elements. -->
+<link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../../bower_components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../../bower_components/core-icons/av-icons.html">
+<link rel="import" href="../../bower_components/core-overlay/core-overlay.html">
+<link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+
+
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="elements/asl-songadder/asl-songadder.html">
+<link rel="import" href="elements/asl-songs/asl-songs.html">
+<link rel="import" href="elements/our-playbutton/our-playbutton.html">
+<link href='//fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Lato:100,200,300,600,900' rel='stylesheet' type='text/css'>
+
+<!-- Get Polymer element started. -->
+<polymer-element name="aos-songsvanongs" attributes="">
+  <template>
+    <link rel="stylesheet" href="aos-songsvanongs.css">
+    <audio id="audioElement" autoplay="true" controls flex src=""></audio>
+    <core-drawer-panel id="panel">
+      <div drawer class="drawer">
+          <div class="drawerinside" vertical layout>
+      
+      <h1 class="white">Songs<br />&nbsp;&nbsp;v<span class="red">a</span>n Ongs</h1>
+      <h4 class="css3-blink">Een A-StadLabs Experiment</h4>
+      <hr>
+
+            <p class="red intro">Antwerpse bands, MC's en andere stadsgeluiden.</p>
+
+            <h2 class="withicon1">1 x volledig beluisterd<br> = <span class="withicon2"> 1 <img class="listeniconBIG" src="images/songsvanongs-03.svg"></h2>
+
+      
+       <!-- <p class="white"><a class="white" href="/#editor">Voeg jouw song toe</a></p> -->
+      <core-overlay id="collapse" layered backdrop transition="core-transition-center">
+       <asl-songadder></asl-songadder>
+        </core-overlay>
+<!--       <hr>
+ -->            <div class="upload-btn" on-tap="{{toggleSongupload}}" > Jouw song in deze lijst?</div>
+      <hr>
+      <div >
+      <p class="grey">Feedback? <a class="grey" href="https://www.twitter.com/astadlabs">@astadlabs</a></span></p>
+
+
+      <a href="https://github.com/A-StadLabs/arad-xmix3" target="blank"><img class="github" src="images/GitHub-Mark-Light-32px.png" border="0"></a>
+
+    </div>
+    </div>
+      </div>
+      <div main>
+        <core-header-panel mode="seamed">
+          <core-toolbar>
+            <core-icon-button class="button" src="../../images/svo-btn.svg" on-tap="{{togglePanel}}"></core-icon-button>
+            
+            <h1 flex></h1>
+            <our-playbutton
+      id="playButton" 
+      playingSong="{{ playingSong }}"
+      on-stop="{{ stopButtonHandler }}"
+      on-play="{{ playButtonHandler }}"></our-playbutton>
+            <core-icon-button icon="av:fast-forward" on-tap="{{nextToggle}}"></core-icon-button>
+          </core-toolbar>
+          <!-- 'pages' -->
+          <flatiron-director route="{{route}}" autoHash></flatiron-director>
+          <core-animated-pages selected="{{route}}" valueattr="route">
+            <section route="">
+              <asl-songs id="songplaylist" currentSongID=""></asl-songs>
+            </section>
+            <section route="editor">
+              <asl-songadder></asl-songadder>
+            </section>
+          </core-animated-pages>
+          <!-- :'pages' -->
+        </core-header-panel>
+      </div>
+    </core-drawer-panel>
+  </template>
+  <script>
+
+
+
+    (function () {
+      'use strict';
+
+      Polymer('aos-songsvanongs',{
+        ready: function(){
+
+
+
+        this.route = '';
+
+        var that = this;
+
+        that.playingSong = false;
+
+        this.$.songplaylist.addEventListener('setSong', function(e){
+          that.$.audioElement.src = e.detail.msg.songurl;
+          console.log('kan ik iets in ios console zien?');
+        });
+
+        this.$.audioElement.addEventListener('can-play', function(){
+            console.log('ok kan starten.');
+        });
+
+        this.$.audioElement.addEventListener('ended', function(){
+          console.log('het liedje is gedaan: ', that.$.songplaylist.currentSongID);
+
+          var addPlay = new Firebase('https://songsvanongs.firebaseio.com/songs/'+that.$.songplaylist.currentSongID+'/plays');
+
+            addPlay.transaction(function(currentRank) {
+                   // If /users/fred/rank has never been set, currentRank will be null.
+                  return currentRank+1;
+                });
+            that.nextToggle();
+        });
+
+        this.$.audioElement.addEventListener('playing', function(){
+          that.playingSong = true;
+          console.log('nu speelt: ',that.$.songplaylist.currentSongID);
+        });
+
+        this.$.audioElement.addEventListener('pause', function(){
+          that.playingSong = false;
+        });
+
+      },
+
+      toggleSongupload: function(){
+          this.$.collapse.toggle();
+        },
+
+        togglePanel: function(){
+          this.$.panel.togglePanel();
+        },
+
+        nextToggle: function(){
+          this.$.songplaylist.nextSong();
+        },
+
+        // playPauseToggle: function(){
+        //   var that = this;
+        //   that.$.audioElement.play();
+          
+        //   if(that.playingSong == true){
+        //   //this.$.audioElement.play();
+        //   that.$.audioElement.pause();
+        // } else {
+        //   that.$.audioElement.play();
+        // };
+        // }
+
+        playButtonHandler: function(){
+      if(this.playingSong==false){
+      this.$.audioElement.play();
+      this.playingSong = true;
+    } 
+    },
+
+    stopButtonHandler: function(){
+      if(!this.playingSong) return;
+    this.playingSong  = false;
+    this.$.audioElement.pause();
+
+    },
+
+
+
+      });
+
+    })();
+  </script>
+</polymer-element>

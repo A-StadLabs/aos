@@ -1,0 +1,33 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-item/core-item.html">
+
+<polymer-element name="our-playitem" attributes="song songid active">
+  <template>
+  	<link rel="stylesheet" href="our-playitem.css">
+    
+
+    <core-item>
+    <div vertical layout start class="breed">
+  <div class="plays" flex self-end>{{ song.plays }} <img class="listenicon" src="../../images/songsvanongs-02.svg"></div>
+    <div class="title" > {{ song.songtitle }} </div>  
+    <div class="artist">{{ song.songartist }}</div>
+
+    </div>
+    </core-item>
+
+  </template>
+  <script>
+    Polymer('our-playitem', {
+
+      ready: function() { 
+       
+      }
+
+    });
+  </script>
+
+
+  
+</polymer-element>
+
+

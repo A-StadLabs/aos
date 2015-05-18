@@ -1,0 +1,88 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/core-field/core-field.html">
+<link rel="import" href="../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../file-upload/file-upload.html">
+
+<polymer-element name="asl-songadder" attributes="">
+  <template>
+    <link rel="stylesheet" href="asl-songadder.css">
+
+    <core-ajax method="POST" on-core-response="{{response}}" id="songPost" handleAs="json" data url="https://songsvanongs.firebaseio.com/songs/.json"></core-ajax>
+<div vertical layout center center-justified class="canvas">
+<!--   <core-icon-button end-justified on-tap="" icon="close"></core-icon-button>
+ -->
+    <h1>JOUW SONG IN DEZE LIJST?</h1>
+    <input class="inputfield" placeholder="De titel van jouw song" required stretch value="{{songtitle}}"></input>
+    <input class="inputfield" placeholder="De naam van jouw band" required value="{{songartist}}"></input>
+    <file-upload imgval="{{songurl}}"></file-upload>
+    <paper-checkbox id="check" required label="Ik heb toestemming van de uitvoerder om {{songtitle}} van {{songartist}} in Songs van Ongs te plaatsen."></paper-checkbox>
+    <div id="buttons" class="submit" center-justified icon="arrow-forward" on-tap="{{submit}}">deze song toevoegen</div>
+
+
+          
+<!--       
+<div class="inputfield" vertical layout center>
+      <input placeholder="Artiest" required value="{{songartist}}"></input>
+</div>
+      <div class="upload" >
+      <file-upload imgval="{{songurl}}"></file-upload>
+</div>
+<div class="permission">
+      <paper-checkbox id="check" required label="Ik heb toestemming van de uitvoerder om {{songtitle}} van {{songartist}} in Songs van Ongs te plaatsen."></paper-checkbox>
+</div>
+    <div id="buttons" class="submit" center-justified icon="arrow-forward" on-tap="{{submit}}">Toevoegen </div>
+
+
+<div>
+      <p>Jouw song werd toegevoegd aan Songs van Ongs.</p>
+      <h1>{{songid}}</h1>
+      <paper-button id="button" center-justified icon="arrow-forward" on-tap="{{newentry}}">Nog een song toevoegen</paper-button>
+</div> -->
+
+</div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        ready: function(){
+          this.songtitle = '';
+          this.songartist = '';
+          //this.$.button.disabled = true;
+        },
+
+        submit: function(){
+          this.$.buttons.disabled = true;
+          var that = this;
+          this.body = { 'songtitle': this.songtitle, 'songartist': this.songartist, 'songurl': this.songurl, 'plays': 0 };
+          this.body = JSON.stringify(this.body);
+          that.$.songPost.body = this.body;
+          that.$.songPost.go();
+        },
+
+        response: function(e){
+          console.log('response: ', e.detail.response.name);
+          this.songid = e.detail.response.name;
+          this.$.pages.selected++;
+        },
+
+        newentry: function(){
+          this.$.buttons.disabled = false;
+          var that = this;
+          this.songtitle = '';
+          this.songartist = '';
+          this.songurl = '';
+          that.$.check.checked = false;
+          that.$.pages.selected--;
+        }
+        // define element prototype here
+      });
+
+    })();
+  </script>
+</polymer-element>

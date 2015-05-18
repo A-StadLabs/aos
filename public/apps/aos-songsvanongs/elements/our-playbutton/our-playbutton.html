@@ -1,0 +1,37 @@
+<link rel="import" href="../../../../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../../../../bower_components/core-icons/av-icons.html">
+
+
+<polymer-element name="our-playbutton" attributes="playingSong">
+  <template>
+    <style>
+    :host {
+      display: block;
+
+    }
+
+    core-icon-button {
+     
+    }
+    </style>
+
+    <core-icon-button icon="{{ playingSong ? 'av:pause' : 'av:play-arrow'}}" on-click="{{playPauseHandler}}"></core-icon-button>
+
+  </template>
+  <script>
+    Polymer('our-playbutton', {
+      /**
+        Handles the play/pause button click
+
+        @method playPauseHandler
+      */
+      playPauseHandler: function(){
+        if(this.playingSong){
+          this.fire('stop');
+        } else {
+          this.fire('play');
+        }
+      }
+    });
+  </script>
+</polymer-element>

@@ -1,0 +1,169 @@
+:host {
+  display: block;
+   	height: 100%;
+ 	margin: 0;
+	font-family: 'Lato', sans-serif;
+	text-transform: uppercase;
+  letter-spacing: normal;
+}
+
+html, body {
+height: 100%;
+}
+
+core-drawer-panel[narrow] .button {
+        display: inline;
+      }
+
+core-drawer-panel .button {
+        display: none;
+      }
+
+body {
+font-family: sans-serif;
+color: #FFF;
+margin: 0;
+}
+
+core-header-panel {
+height: 100%;	
+}
+
+[drawer] {
+background-color: #333333;
+}
+
+core-toolbar {
+background-color: #333333;
+color: white;
+}
+
+[main] {
+height: 100%;
+background-color: #e55253;
+}
+
+
+core-drawer-panel[narrow] button {
+display: inline-block;
+
+}
+
+
+.drawer {
+	background-color: #444444;
+
+}
+
+.drawer h1 {
+	line-height: 90%;
+    margin: 0px 0px 0px 0px;
+
+}
+
+.drawer h4 {
+	line-height: 0%;
+
+/*  font-size: 20px;
+*/}
+
+.white {
+	color: white;
+}
+
+
+.red {
+  color: #e55253;
+}
+
+.intro {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.grey {
+  color: #808080;
+  font-weight: 300;
+}
+
+
+.grey a:hover{
+  color:white;
+}
+
+
+.drawerinside {
+	margin: 20px;
+}
+
+/*@-webkit-keyframes blinker {  
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}*/
+.css3-blink {
+  color: black;
+  font-weight: 600;
+  font-size: 12px;
+  margin-top: 20px;
+
+/*  -webkit-animation-name: blinker;  
+  -webkit-animation-iteration-count: infinite;  
+  -webkit-animation-timing-function: cubic-bezier(1.0,0,1.0,1.0);
+  -webkit-animation-duration: 0.5s; */
+}			
+
+
+.listeniconBIG {
+  margin: 0px 10px 0px 2px;
+  width: 28px;
+}
+
+
+.withicon1 {
+  font-weight: 600;
+  color: white;
+  font-size: 22px;
+  margin: 0px 0px 10px 0px;
+}
+
+.withicon2 {
+  font-weight: 600;
+
+}
+
+hr {
+  color: #595959;
+background-color: #595959;
+height: 1px;
+width: 100%;
+border:none;
+}
+
+.github {
+  opacity: 0.35;
+  width: 26px;
+/*  margin-top: 10px;
+*/}
+
+
+.github:hover {
+  opacity: 1;
+}
+
+
+
+.upload-btn {
+ background-color: #595959;
+ color: white;
+ font-size: 14px;
+ font-weight: 600;
+ text-align: center;
+ padding: 10px;
+  margin: 15px 0px 15px 0px;
+}
+
+
+.upload-btn:hover {
+ background-color: #e55253;
+}

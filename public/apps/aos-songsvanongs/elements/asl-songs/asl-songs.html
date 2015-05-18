@@ -1,0 +1,71 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/firebase-element/firebase-element.html">
+<link rel="import" href="../../../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../our-playitem/our-playitem.html">
+<polymer-element name="asl-songs" attributes="currentSongID">
+  <template>
+    <firebase-element id="base" on-data-change="{{handleResponse}}" keys="{{keys}}" data="{{data}}" location="https://songsvanongs.firebaseio.com/songs" log></firebase-element>
+    <link rel="stylesheet" href="asl-songs.css">
+    <core-selector valueattr="song" id="songselector">
+    <template repeat="{{key in keys}}" id="songlist">
+      <our-playitem song="{{data[key]}}" songid="{{key}}" active?="{{selected}}"></our-playitem>
+    </template>
+    </core-selector>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      var appInit = 0;
+
+      Polymer({
+
+        ready: function(){
+
+          var that = this;
+
+
+          this.$.songselector.addEventListener('core-select', function(e){
+            this.fire('setSong', { msg: this.selected });
+            that.currentSongID = e.detail.item.songid;
+
+          });
+        },
+
+        shuffleThis: function(array) {
+          var currentIndex = array.length, temporaryValue, randomIndex ;
+
+          while (0 !== currentIndex) {
+
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+          }
+
+        return array;
+        },
+
+        nextSong: function(){
+          this.$.songselector.selectNext();
+        },
+
+        handleResponse: function(e){
+
+          if(appInit==0){
+            this.keys = this.shuffleThis(this.keys);
+            appInit = 1;
+          }; 
+
+          var t = this.$.songlist;
+          t.model = {keys: this.keys};
+
+        }
+
+      });
+
+    })();
+  </script>
+</polymer-element>

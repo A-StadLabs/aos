@@ -1,9 +1,10 @@
 :host {
-  display: inline-block;
+  display:inline-table;
   overflow: hidden;
   margin: 0px auto;
   font-family: "Open Sans";
   font-weight: 300;
+  height: auto;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   background-color: white;

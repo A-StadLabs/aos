@@ -13,6 +13,7 @@
     <aos-globals id="globals"></aos-globals>
 
     <div vertical layout center start-justified id="canvas" class="notloggedin"  hidden?="{{loggedin}}">
+      <div on-tap="{{close}}">x</div>
       <h1>Aanmelden</h1>
       <p>Met A-profiel of AD account.</p>
       <small>{{error}}</small>
@@ -32,6 +33,7 @@
     </div>
 
     <div vertical layout start start-justified id="canvas" class="loggedin" fit hidden?="{{!loggedin}}">
+    <a on-tap="{{close}}">x</a>
       <a href="/#/profiel/0/">Thuis</a>
       <a href="/#/profiel/1/">Publiek profiel</a>
       <a href="/#/profiel/2/">Mijn gegevens</a>
@@ -71,6 +73,10 @@
             //that.userid = that.$.globals.values.user.data.id;
         });
 
+      },
+
+      close: function(){
+        this.fire('closepane');
       },
 
       aosuserobjectChanged: function(){ 

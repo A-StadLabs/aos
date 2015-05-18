@@ -1,0 +1,48 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+
+<polymer-element name="file-upload" attributes="imgval ">
+
+  <template>
+<link rel="stylesheet" href="file-upload.css">
+      <input type="file" name="File" id="file" on-change="{{setFiles}}">
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        publish: {
+          imgval: {
+          value: false,
+          reflect: true
+        }
+
+        },
+
+        created: function(){
+          this.imgval = '';
+        },
+
+        setFiles: function(){
+          console.log('Set files started');
+          this.fileInput = this.$.file.files[0];
+          //this.imageType = /image.*/;
+          var that = this;
+          // if (this.fileInput.type.match(this.imageType)) {
+            console.log('das godver een goeie image jong');
+            var reader = new FileReader();
+            console.log('reader: ', reader);
+            reader.onload = function(e) {
+              console.log(reader.result);
+              that.imgval = reader.result;
+            }
+            reader.readAsDataURL(this.fileInput);
+          // }
+
+        }
+        
+      });
+
+    })();
+  </script>
+</polymer-element>

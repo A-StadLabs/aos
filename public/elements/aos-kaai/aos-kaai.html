@@ -122,6 +122,12 @@
           //console.log(e.detail.item.label);
           this.language = e.detail.item.label;
         });
+
+        var that = this;
+
+        this.$.loginPane.addEventListener('closepane', function(){
+          that.closeAll();
+        });
       },
 
       handleResponseUserCheck: function(){

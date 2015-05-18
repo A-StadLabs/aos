@@ -4,10 +4,16 @@
 }
 
 
-#container {
+/*#container {
 	width: 100vw;
 	margin: 0vw;
+}*/
+
+#container {
+	width: 100vw;
+	margin: 0px 10vw 0px 10vw;
 }
+
 
 ordered-columns {
 	width: 100vw;
