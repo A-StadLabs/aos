@@ -1,6 +1,5 @@
 node_modules
 test/temp
 .sass-cache
-public/bower_components
 .tmp
 test/bower_components/
