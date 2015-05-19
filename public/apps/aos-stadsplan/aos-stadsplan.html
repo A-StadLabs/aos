@@ -1,5 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/leaflet-map/leaflet-map.html">
+<link rel="import" href="../../bower_components/leaflet-map-component/leaflet-map-component.html">
 
 <polymer-element name="aos-stadsplan" attributes="">
 
@@ -8,9 +8,9 @@
 
     <link rel="stylesheet" href="aos-stadsplan.css" />
  
-    <leaflet-map id="leaflet" fit latitude="78.8" longitude="-96" zoom="5" maxZoom="6"></leaflet-map>
+    <leaflet-map longitude="77.2" latitude="28.4" zoom="12" fit tileServer="http://a.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg">
+    </leaflet-map>
     
-
   </template>
 
   <script>
@@ -19,7 +19,7 @@
 
       ready: function() {
 
-      	console.log('404 app loaded.'); 
+      	//console.log('404 app loaded.'); 
 
         }
 
