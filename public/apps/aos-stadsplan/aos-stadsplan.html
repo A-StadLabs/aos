@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/leaflet-map/leaflet-map.html">
+
+<polymer-element name="aos-stadsplan" attributes="">
+
+  <template>
+
+
+    <link rel="stylesheet" href="aos-stadsplan.css" />
+ 
+    <leaflet-map id="leaflet" fit latitude="78.8" longitude="-96" zoom="5" maxZoom="6"></leaflet-map>
+    
+
+  </template>
+
+  <script>
+
+    Polymer({
+
+      ready: function() {
+
+      	console.log('404 app loaded.'); 
+
+        }
+
+
+    });
+
+  </script>
+
+</polymer-element>
