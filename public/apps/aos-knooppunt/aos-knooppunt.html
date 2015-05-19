@@ -26,11 +26,11 @@
         <aos-apptile key="{{a.key}}"></aos-apptile>
       </template>
 
-      <aos-apptile key="-JfhvXQCXbU6V-v0lsgB"></aos-apptile>
+      <!-- <aos-apptile key="-JfhvXQCXbU6V-v0lsgB"></aos-apptile>
       <aos-apptile key="-JfhvWPX_5AJHaCrQ-s6"></aos-apptile>
       <aos-apptile key="-JfhvYMUN3HcyoIHpe1y"></aos-apptile>
       <aos-apptile key="-Jpd4g0pANnpqW2VSiY1"></aos-apptile>
-      <aos-apptile key="-JpfixujEWJFoDi7y0C2"></aos-apptile>
+      <aos-apptile key="-JpfixujEWJFoDi7y0C2"></aos-apptile> -->
       
 
     </div>
@@ -62,55 +62,55 @@
 
   <div id="group" horizontal layout wrap start start-justified>
 
-  <a href="/#/babbles/home/?sort=votes" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-afspraakmaken.svg">
-    <p>Babbles</p>
+  <a href="/" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-AntwerpenStartscherm.svg">
+    <p>Antwerpen.be</p>
   </a>
 
   <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
     <img src="images/appicons/icon-infocenter.svg">
-    <p>Informatie opzoeken</p>
+    <p>Informatie</p>
   </a>
 
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+  <a href="/#/stadsplan" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-AntwerpenStartscherm.svg">
+    <p>Stadsplan</p>
+  </a>
+
+  </div>
+
+
+<div horizontal layout center start-justified class="grouptitle">
+
+  <div flex horizontal layout start start-justified >
+    <img class="groupicon" src="images/astadlabs.svg">
+    <a href="/">A-Stad Labs</a>
+  </div>
+
+  <div class="switcher" end-justified>
+  <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
+  <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
+  </div>
+
+</div>
+
+  <div id="group" horizontal layout wrap start start-justified>
+
+  <a href="/#/babbles/home/?sort=votes" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-babbelbox.svg">
+    <p>Babbles</p>
+  </a>
+
+  <a href="/#/songsvanongs" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-infocenter.svg">
+    <p>Songs van Ongs</p>
+  </a>
+
+  <a href="/#/stadsplan" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
     <img src="images/appicons/icon-afspraakmaken.svg">
-    <p>Afspraak maken</p>
+    <p>Stadsplan</p>
   </a>
 
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-aanvragen.svg">
-    <p>Documenten aanvragen</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/appicons/icon-probleem.svg">
-    <p class="appdescr">Een probleem melden</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/appicons/icon-contacteren.svg">
-    <p class="appdescr">Stad Antwerpen contacteren</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-afspraakmaken.svg">
-    <p>Afspraak maken</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-aanvragen.svg">
-    <p>Documenten aanvragen</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/appicons/icon-probleem.svg">
-    <p class="appdescr">Een probleem melden</p>
-  </a>
-
-  <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img class="appicon" src="images/appicons/icon-contacteren.svg">
-    <p class="appdescr">Stad Antwerpen contacteren</p>
-  </a>
   </div>
 
 </div>

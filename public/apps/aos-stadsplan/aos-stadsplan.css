@@ -7,3 +7,24 @@
 	width: 100%;
 	height: 100%;
 }
+
+.leaderboard {
+	width: 76vw;
+	padding: 0vw 12vw 20px 12vw;
+	background-color: #C0C9CF;
+	margin: 0px auto 0px auto;
+	display: inline-block;
+}
+
+.stralendeA {
+	width: 4vw;
+	min-width: 60px;
+	padding: 0px;
+}
+
+
+.searchbox {
+	margin: 0px 0px 0px 10px;
+	padding: 0px;
+	border: none;
+}

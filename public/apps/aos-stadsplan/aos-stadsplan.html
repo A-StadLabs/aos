@@ -12,13 +12,36 @@
 
     <geo-location longitude="{{lon}}" latitude="{{lat}}"></geo-location>
 
+    <div class="leaderboard">
+    <img class="stralendeA" src="/elements/aos-homebabbelbox/images/a-rgb.svg">
+    <div horizontal layout wrap center start-justified>
+      <div horizontal layout wrap center start-justified flex>
+        <img class="appicon" src="images/infocenter.svg">
+        <h1>Info Center</h1><input type="text" on-keyup="{{filter}}" class="searchbox">
+      </div>
+
+        <core-ajax 
+        url="/infofichecats"
+        method="GET" 
+        auto 
+        handleAs="json" 
+        response="{{categories}}"
+        on-core-response="{{handleResponse}}">
+        </core-ajax>
+
+    </div>
+  </div>
+
+  <div>
+
     <template bind if="{{lat}}">
- 
     <leaflet-map longitude="{{lon}}" latitude="{{lat}}" zoom="14" fit tileServer="https://api.tiles.mapbox.com/v4/kingflurkel.gh3642e3/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoia2luZ2ZsdXJrZWwiLCJhIjoiT3VwdHJzNCJ9.BxS8Ogtc7_W8qg3MpS1iNw">
     </leaflet-map>
 
 
     </template>
+
+    </div>
     
   </template>
 
