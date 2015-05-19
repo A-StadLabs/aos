@@ -3,3 +3,4 @@ test/temp
 .sass-cache
 .tmp
 test/bower_components/
+public/bower_components/

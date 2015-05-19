@@ -4,7 +4,8 @@
   "description": "A sample Node.js app using Express 4",
   "main": "index.js",
   "scripts": {
-    "start": "npm start index.js"
+    "start": "npm start index.js",
+    "postinstall": "bower install"
   },
   "dependencies": {
     "bower": "^1.4.1",
