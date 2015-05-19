@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "postinstall": "bower install"
+    "postinstall": "bower update && gulp serve"
   },
   "dependencies": {
     "bower": "^1.4.1",
