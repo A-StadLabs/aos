@@ -3,69 +3,44 @@
 <link rel="import" href="../../../../elements/aos-globals/aos-globals.html">
 <link rel="import" href="../../../../elements/aos-user/aos-user.html">
 <link rel="import" href="../../../../elements/aos-apptile/aos-apptile.html">
+<link rel="import" href="../../../../elements/aos-listtile/aos-listtile.html">
 
 <polymer-element name="aos-knooppunt" attributes="">
-
-  <template>
-
-    <link rel="stylesheet" href="aos-knooppunt.css" />
-    <aos-globals id="globals" values="{{globs}}"></aos-globals>
-    <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
-
-<div id="favos">
-<!-- <template if="{{$.globals.values.userprefs.favorites}}">
- -->
-
-
-<div class="canvas">
-
+<template>
+  <link rel="stylesheet" href="aos-knooppunt.css" />
+  <aos-globals id="globals" values="{{globs}}"></aos-globals>
+  <aos-user key="{{$.globals.values.user.data.id}}" aosuser="{{aosuserobject}}" favapps="{{favapps}}"></aos-user>
   <div id="container" vertical layout start center-justified>
 
-    <div id="group" horizontal layout wrap start start-justified>
-      <template repeat="{{ a in favapps }}">
-        <aos-apptile key="{{a.key}}"></aos-apptile>
-      </template>
-
-      <!-- <aos-apptile key="-JfhvXQCXbU6V-v0lsgB"></aos-apptile>
-      <aos-apptile key="-JfhvWPX_5AJHaCrQ-s6"></aos-apptile>
-      <aos-apptile key="-JfhvYMUN3HcyoIHpe1y"></aos-apptile>
-      <aos-apptile key="-Jpd4g0pANnpqW2VSiY1"></aos-apptile>
-      <aos-apptile key="-JpfixujEWJFoDi7y0C2"></aos-apptile> -->
-      
-
+    <div horizontal layout center start-justified class="grouptitle">
+      <div flex horizontal layout start start-justified >
+        <img class="groupicon" src="images/a-rgb.svg">
+        <a href="/">Stad Antwerpen</a>
+      </div>
     </div>
 
-  </div>
-  </div>
+    <div id="group" horizontal layout wrap start start-justified>
 
+    <!-- hier start een knop -->
 
-<!-- </template>
- -->  
-  </div>
-
-
-<div id="container" vertical layout start center-justified>
-
-<div horizontal layout center start-justified class="grouptitle">
-
-  <div flex horizontal layout start start-justified >
-    <img class="groupicon" src="images/a-rgb.svg">
-    <a href="/">Stad Antwerpen</a>
-  </div>
-
-  <div class="switcher" end-justified>
-  <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
-  <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
-  </div>
-
-</div>
-
-  <div id="group" horizontal layout wrap start start-justified>
-
-  <a href="/" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
-    <img src="images/appicons/icon-AntwerpenStartscherm.svg">
-    <p>Antwerpen.be</p>
-  </a>
+    <aos-listtile titel="Antwerpen.be"></aos-listtile>
+      <div>
+        <a href="/" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+        <img src="images/appicons/icon-AntwerpenStartscherm.svg">
+        <p>Antwerpen.be</p>
+        </a>
+        <div class="favbutton">
+          <svg version="1.1" id="Isolatiemodus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+             y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+          <path d="M8.012,0c0.744,1.107,1.692,2.956,2.589,4.987c2.18,0.23,4.178,0.522,5.423,0.833
+            c-0.927,1.132-2.264,2.579-3.89,4.055c0.408,2.097,0.671,3.931,0.829,5.364c-1.474-0.752-3.083-1.46-4.951-2.462
+            c-1.868,1.001-3.477,1.71-4.952,2.461c0.158-1.433,0.421-3.267,0.829-5.364C2.263,8.4,0.926,6.952,0,5.82
+            c1.244-0.312,3.242-0.603,5.423-0.833C6.32,2.956,7.267,1.107,8.012,0"/>
+          </path>
+          </svg>
+        </div>
+      </div>
+    <!-- // hier stopt de knop -->
 
   <a href="/#/info" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
     <img src="images/appicons/icon-infocenter.svg">
@@ -83,14 +58,59 @@
 <div horizontal layout center start-justified class="grouptitle">
 
   <div flex horizontal layout start start-justified >
-    <img class="groupicon" src="images/astadlabs.svg">
-    <a href="/">A-Stad Labs</a>
+    <img class="groupicon" src="images/appicons/icon-AntwerpenStartscherm.svg">
+    <a href="/">A-Stad Pro</a>
   </div>
 
-  <div class="switcher" end-justified>
+</div>
+
+  <div id="group" horizontal layout wrap start start-justified>
+
+  <a href="/#/babbles/home/?sort=votes" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-babbelbox.svg">
+    <p>Tickets</p>
+  </a>
+
+  <a href="/#/songsvanongs" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-infocenter.svg">
+    <p>A-Kaart balietoepassing</p>
+
+  </a>
+
+  <a href="/#/stadsplan" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-afspraakmaken.svg">
+    <p>IT Meldingen</p>
+  </a>
+
+  <a href="/#/babbles/home/?sort=votes" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-babbelbox.svg">
+    <p>Tijdsregistratie</p>
+  </a>
+
+  <a href="/#/songsvanongs" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-infocenter.svg">
+    <p>Waarderingsronde</p>
+
+  </a>
+
+  <a href="/#/stadsplan" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
+    <img src="images/appicons/icon-afspraakmaken.svg">
+    <p>Babbelbox</p>
+  </a>
+
+  </div>
+
+  <div horizontal layout center start-justified class="grouptitle">
+
+  <div flex horizontal layout start start-justified >
+    <img class="groupicon" src="images/astadlabs.svg">
+    <a href="/">A-StadLabs</a>
+  </div>
+
+<!--   <div class="switcher" end-justified>
   <button class="switcherbtn" on-tap="{{switchToTile}}"><img class="{{ {activated: tile} | tokenList}}{{ {notactivated: list} | tokenList}}" src="images/tile.svg"></button>
   <button class="switcherbtn"  on-tap="{{switchToList}}" src="images/list.svg" ><img class="{{ {activated: list} | tokenList}}{{ {notactivated: tile} | tokenList}}" src="images/list.svg"></button>
-  </div>
+  </div> -->
 
 </div>
 
@@ -104,6 +124,7 @@
   <a href="/#/songsvanongs" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
     <img src="images/appicons/icon-infocenter.svg">
     <p>Songs van Ongs</p>
+
   </a>
 
   <a href="/#/stadsplan" class="{{ {apptile: tile} | tokenList}}{{ {applist: list} | tokenList}}" horizontal layout center start-justified wrap>
@@ -114,7 +135,6 @@
   </div>
 
 </div>
-
 
 
 
@@ -135,8 +155,8 @@
       },
 
       ready: function() {
-        this.tile = true;
-        this.list = false;
+        this.tile = false;
+        this.list = true;
       },
 
         switchToList: function() {

@@ -1,0 +1,88 @@
+:host {
+  display: block;
+}
+
+/* TILE desktop !!!!!!!!!!! */
+
+.apptile {
+	background-color: rgba(0,0,0,0.05);
+	width: 180px;
+	height: 120px;
+	padding: 30px 10px 20px 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.icon {
+	height: 20px;
+	width: 20px;
+	border-radius: 30px;
+	background-color: white;
+	margin: 0px 20px 2px 0px;
+	padding: 5px;
+}
+
+.apptile:active {
+	background-color: #EBEBEB;
+}
+
+
+a {
+	text-decoration: none;
+}
+
+.apptile p {
+	width: 160px;
+	margin: 10px 10px 14px 10px;
+	text-align: center;
+	color: #333333;
+	font-size: 14px;
+}
+
+
+
+/* LIST desktop !!!!!!!!!!! */
+
+
+.applist {
+	background-color: rgba(0,0,0,0.05);
+	width: 223px;
+	padding: 12px 20px 10px 20px;
+	margin: 0px 10px 10px 0px;
+	height: 42px;
+}
+
+
+.applist p {
+	width: 160px;
+	text-align: left;
+	color: #333333;
+	height: 20px;
+	font-size: 14px;
+	padding: 0px;
+	overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    display:inline-block;
+ }
+
+
+
+.favbutton {
+	width: 16px;
+	height: 16px;
+}
+
+.favbutton svg {
+  fill: rgba(0,0,0,0.1);
+}
+
+.favbutton svg:hover {
+  fill: rgba(0,0,0,0.6);
+}
+
+
+.favedbutton svg {
+  fill: #219dc8;
+}
+

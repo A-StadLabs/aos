@@ -13,10 +13,30 @@ button {
 	background-color: white;
 }
 
+.favbutton {
+	width: 16px;
+	height: 16px;
+}
+
+.favbutton svg {
+  fill: rgba(0,0,0,0.1);
+}
+
+.favbutton svg:hover {
+  fill: rgba(0,0,0,0.6);
+}
+
+
+.favedbutton svg {
+  fill: #219dc8;
+}
+
+
 
 #container {
 	width: 76vw;
-	margin: 40px 12vw 0px 12vw;
+	margin: 0px 12vw 0px 12vw;
+	padding-top: 40px;
 }
 
 /* GROUP !!!!!!!!!!! */

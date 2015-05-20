@@ -140,6 +140,7 @@ core-field {
 	height: 10px;
   margin: 0px;
   z-index: 99;
+  margin-top: 60px;
 }
 
 .aanmelden {
@@ -147,7 +148,7 @@ core-field {
   z-index: 999;
 	display: block;
 	padding: 0px;
-	width: 200px;
+	width: 250px;
 	margin: 0px;
 	background-color: #404040;
 }
